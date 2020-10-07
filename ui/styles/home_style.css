@@ -1,0 +1,32 @@
+body{
+	font-family: verdana;
+	margin: 0px;
+	background-image: url("img/wallpaper.jpeg");
+	background-position: 50% 50%;
+}
+.button{
+	outline: none;
+	width: 200px;
+	height: 200px;
+	color: #F8F8FF;
+	font-weight: bold;
+	font-size: 20px;
+	border: groove 1em #008B8B;  
+  	border-radius: 1em;
+	background-color: #008B8B; 
+}
+#quickAccess { 
+    border: none;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+    flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.button:hover{
+	color: #F8F8FF;
+	border: groove 1em #20B2AA; 
+	background-color: #20B2AA; 
+	text-decoration: none;
+}

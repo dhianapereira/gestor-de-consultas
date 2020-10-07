@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Unidade de Saúde | Cadastro</title>
+		<meta charset="utf-8">
+        <link rel="shortcut icon" href="#">
+		<link rel="stylesheet" type="text/css" href="../../styles/form_style.css">
+		<link rel="stylesheet" type="text/css" href="../../styles/style.css">
+	</head>
+	<header>
+		<h1 class="title">Cadastrar Paciente</h1>
+		<div class="menu">
+			<a href="../index.html">Home |</a>
+			<a href="../symptom/questionnaire.html">Questionário |</a>
+			<a href="registration_form.html">Cadastrar Paciente |</a>
+			<a href="list_page.php">Lista de Pacientes</a>
+		</div>
+	</header>
+	<body>
+		<div class="content">
+			<div class="box">
+				<h2 class="title">Dados Pessoais</h2>
+				<form  method="POST" action="result_page.php">
+					<label class="title">Nome Completo:</label>
+					<input type="text" name="full_name" required="Preencha este campo!">
+					<label class="title">CPF:</label>
+					<input type="text" name="cpf" required="Preencha este campo!">
+					<label class="title">Nome da mãe:</label>
+					<input id="personalData" type="text" name="mother_name" required="Preencha este campo!">
+					<label class="title">Data de nascimento:</label>
+					<input type="text" name="date_of_birth" required="Preencha este campo!">
+					<label class="title">Brasileiro(a)</label>
+					<input type="radio" name="naturalness" value="Brasileiro(a)"> 
+					<label class="title">Estrangeiro(a)</label>
+					<input type="radio" name="naturalness" value="Estrangeiro(a)">
+					<label class="title">Feminino</label>
+					<input type="radio" name="genre" value="Feminino">
+					<label class="title">Masculino</label>
+					<input type="radio" name="genre" value="Masculino">
+
+					<button class="button">Enviar</button>
+				</form>
+				<br>
+			</div>
+		</div>
+	</body>
+</html>

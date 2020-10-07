@@ -1,0 +1,30 @@
+.content{
+	width: 100vw;
+	height: 100vh;
+	background: #F8F8FF;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.box{
+	width: 500px;
+	height: 400px;
+	padding: 10px 8em 10px 4em;
+	background:#008B8B;
+}
+form{
+	display: grid;
+	grid-template-columns: repeat(4, 1fr); 
+	grid-gap: 10px 8px;
+	grid-auto-rows: 50px;
+	padding: 20px 10px;
+}
+input{
+    outline: none;
+	margin: 0 auto;
+	padding: 10px;
+    border: none;
+	margin-bottom: 10px;
+    border-radius: 50px;
+}
