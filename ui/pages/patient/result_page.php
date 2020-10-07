@@ -25,36 +25,53 @@
 
             $patient_bloc = new PatientBloc();
 
-            $cpf = $_POST["cpf"];
-            $full_name = $_POST["full_name"];
-            $genre = $_POST["genre"]; 
-            $date_of_birth = $_POST["date_of_birth"];
-            $mother_name = $_POST["mother_name"];
+            $cpf = addslashes($_POST["cpf"]);
+            $full_name = addslashes($_POST["full_name"]);
+            $genre = $_POST["genre"];
+            $date_of_birth = addslashes($_POST["date_of_birth"]);
+            $mother_name = addslashes($_POST["mother_name"]);
             $naturalness = $_POST["naturalness"];
 
-            $result = $patient_bloc->registerPatient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
-
-            if(!is_object($result)){
+            if(!isset($cpf) || !isset($full_name)
+             || !isset($genre) || !isset($date_of_birth) 
+             || !isset($mother_name) || !isset($naturalness)){
         ?>
-            <div id='info'>
-                <br>
-                <br>
-               <?php echo "$result" ?>  
-                <br>
-                <br>
-            </div>    
-        <?php 
-            } 
+                <div id='info'>
+                    <br>
+                    <br>
+                    Você precisa preencher todos os campos para realizar esta operação!
+                    <br>
+                    <br>
+                </div> 
+        <?php
+            }
             else{
+
+                $result = $patient_bloc->registerPatient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
+
+                if(!is_object($result)){
         ?>
-            <div id='info'>
-                <br>
-                <br>
-                Seu cadastro foi realizado com sucesso!
-                <br>
-                <br>
-            </div>    
-        <?php }
+                    <div id='info'>
+                        <br>
+                        <br>
+                        <?php echo "$result" ?>  
+                        <br>
+                        <br>
+                    </div>    
+        <?php 
+                } 
+                else{
+        ?>
+                    <div id='info'>
+                        <br>
+                        <br>
+                        Seu cadastro foi realizado com sucesso!
+                        <br>
+                        <br>
+                    </div>    
+        <?php 
+                }
+            }
         ?>
     </body>
 </html>

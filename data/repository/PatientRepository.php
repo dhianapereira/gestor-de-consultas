@@ -19,18 +19,28 @@
                     die("ERROR: Falha na conexão" . mysqli_connect_error());
                 }
 
-                $sql = "INSERT INTO patient (cpf, full_name, 
-                genre, date_of_birth, mother_name, naturalness
-                ) VALUES ('$cpf', '$full_name','$genre', 
-                '$date_of_birth', '$mother_name', '$naturalness');";
+                $sql = "INSERT INTO patient (cpf, full_name, genre, date_of_birth, 
+                mother_name, naturalness) VALUES (?, ?, ?, ?, ?, ?)";
 
-                if (!mysqli_query($this->link, $sql)){
-                    $response = "Não foi possível realizar o cadastro do paciente. Verifique se os campos foram inseridos corretamente ou tente mais tarde.";
+                $stmt = mysqli_prepare($this->link, $sql);
+
+                if($stmt){
+                    mysqli_stmt_bind_param($stmt, "ssssss", $cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
+                    
+                    if (!mysqli_stmt_execute($stmt)){
+                        echo "erro 1";
+                        $response = "Não foi possível realizar o cadastro do paciente. Tente mais tarde.";
+                        return $response;
+                    }
+
+                    mysqli_stmt_close($stmt);
+
+                    $patient = new Patient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
+                    return $patient;
+                }else{
+                    $response = "Não foi possível realizar o cadastro do paciente. Tente mais tarde.";
                     return $response;
-                } 
-
-                $patient = new Patient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
-                return $patient;
+                }
             } catch (Exception $e) {
                 return "Não foi possível realizar o cadastro do paciente. Tente mais tarde.";
             }finally{
