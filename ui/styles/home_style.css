@@ -1,32 +1,46 @@
-body{
-	font-family: verdana;
-	margin: 0px;
-	background-image: url("img/wallpaper.jpeg");
-	background-position: 50% 50%;
-}
-.button{
-	outline: none;
-	width: 200px;
-	height: 200px;
-	color: #F8F8FF;
-	font-weight: bold;
-	font-size: 20px;
-	border: groove 1em #008B8B;  
-  	border-radius: 1em;
-	background-color: #008B8B; 
-}
-#quickAccess { 
-    border: none;
-	width: 100vw;
-	height: 100vh;
+#content{
+	padding: 3.2rem 2.4rem;
+	background: #ebf2f5;
+	text-align: center;
+	min-height: 50vh;
+  
 	display: flex;
-    flex-direction: row;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 }
-.button:hover{
-	color: #F8F8FF;
-	border: groove 1em #20B2AA; 
-	background-color: #20B2AA; 
-	text-decoration: none;
+#quick-access {
+	margin: auto;
+	width: min(90%, 112rem);
+	
+	align-items: center;
+	justify-content: center;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 2rem;
+	row-gap: 2rem;
+}
+a .home-button{
+	flex: 1;
+	height: 10rem;
+	width: 100%;
+	font: 700 2rem/1 'Nunito', sans-serif;
+	outline: none;
+	border: 0;
+	background: #36cf82;
+	color: white;
+  
+	cursor: pointer;
+  
+	border-radius: 2rem;
+	padding: 1.5rem 2rem;
+  
+	overflow: hidden;
+  
+	opacity: 1;
+  
+	transition: opacity 0.2s;
+}
+a .home-button:hover{
+	opacity: .8;
 }

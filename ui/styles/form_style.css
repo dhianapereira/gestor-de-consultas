@@ -1,30 +1,60 @@
-.content{
-	width: 100vw;
-	height: 100vh;
-	background: #F8F8FF;
+#register-form{
+	padding: 3.2rem 2.4rem;
+	min-height: 50vh;
+
+	 
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.box{
+	margin: auto;
+	width: min(70%, 50rem);
+	padding: 3.2rem 2.4rem;
+	background:#36cf82;
+
+	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.box{
-	width: 500px;
-	height: 400px;
-	padding: 10px 8em 10px 4em;
-	background:#008B8B;
-}
-form{
+
+.box form {
+	margin-top: 1.5rem;
+	flex: 1;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr); 
-	grid-gap: 10px 8px;
-	grid-auto-rows: 50px;
-	padding: 20px 10px;
+	grid-template-columns: repeat(1, 1fr);
+	column-gap: 2rem;
+	row-gap: 2rem;
 }
-input{
+.box form input{
     outline: none;
 	margin: 0 auto;
-	padding: 10px;
+	padding: 1rem;
     border: none;
-	margin-bottom: 10px;
-    border-radius: 50px;
+	margin-bottom: .1rem;
+    border-radius: 2rem;
+}
+
+form .form-button{
+	height: 8rem;
+	width: 50%;
+	font: 700 2rem/1 'Nunito', sans-serif;
+	outline: none;
+	border: 0;
+	background: gray;
+	color: white;
+  
+	cursor: pointer;
+  
+	border-radius: 2rem;
+	padding: 1.5rem 2rem;
+  
+	overflow: hidden;
+  
+	opacity: 1;
+  
+	transition: opacity 0.2s;
+}
+form .form-button:hover{
+	opacity: .8;
 }

@@ -6,16 +6,7 @@ header{
 	justify-content: center;
 	align-items: center;
 }
-.menu{
-	padding: 10px 4em 10px 4em;
-}
-.menu a{
-	color: #F8F8FF;
-	font-size: 25px;
-	text-align: center;	
-	text-decoration: none;
-	text-shadow: 1px 1px 2px #696969; 
-}
+
 .menu a:hover{
 	color: #F8F8FF;
 	text-decoration: none;
