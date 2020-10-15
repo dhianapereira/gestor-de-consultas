@@ -1,21 +1,20 @@
 <?php
-    namespace data;
-    use data\repository\PatientRepository;
-    
-    class Facade{
-        
-        private $patient_repository;
+namespace data;
+use data\repository\PatientRepository;
 
-        public function __construct()
-        {
-            $this->patient_repository = new PatientRepository();
-        }
+class Facade {
 
-        public function register($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness){
-            $result = $this->patient_repository->registerPatient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
+    private $patient_repository;
 
-            return $result;
-        }
-
+    public function __construct() {
+        $this->patient_repository = new PatientRepository();
     }
+
+    public function register( $cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness ) {
+        $result = $this->patient_repository->registerPatient( $cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness );
+
+        return $result;
+    }
+
+}
 ?>
