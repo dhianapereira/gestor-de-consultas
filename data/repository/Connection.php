@@ -1,21 +1,19 @@
 <?php
 namespace data\repository;
 
-class Connection {
+define( 'HOST', 'localhost' );
+define( 'USER', 'root' );
+define( 'PASS', '' );
+define( 'DBNAME', 'health_unit' );
 
+class Connection{
     private $connection;
-
     public function __construct() {
-        $this->connection = new PDO('mysql:host=localhost;dbname=health_unit', 'root', '' );
+        $this->connection = new \PDO( 'mysql:host=' . HOST . ';dbname=' . DBNAME, USER, PASS);
     }
-
-    public function connect () {
+    
+    public function connect(){
         return $this->connection;
     }
-
-    public function close () {
-        $this->connection = null;
-    }
-
 }
 ?>
