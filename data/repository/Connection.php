@@ -1,30 +1,19 @@
 <?php
-    namespace data\repository;
-    
-    class Connection{
+namespace data\repository;
 
-        private $localname;
-        private $user;
-        private $password;
-        private $database;
-        private $link;
+define( 'HOST', 'localhost' );
+define( 'USER', 'root' );
+define( 'PASS', '' );
+define( 'DBNAME', 'health_unit' );
 
-        public function __construct()
-        {
-            $this->localname = "localhost";
-            $this->user = "root";
-            $this->password = "";
-            $this->database = "health_unit";
-            $this->link = mysqli_connect($this->localname, $this->user, $this->password, $this->database);
-        }
-        
-        public function getLink (){
-            return $this->link;
-        }
-
-        public function getClose (){
-            return mysqli_close($this->link);
-        }
-    
+class Connection{
+    private $connection;
+    public function __construct() {
+        $this->connection = new \PDO( 'mysql:host=' . HOST . ';dbname=' . DBNAME, USER, PASS);
     }
+    
+    public function connect(){
+        return $this->connection;
+    }
+}
 ?>

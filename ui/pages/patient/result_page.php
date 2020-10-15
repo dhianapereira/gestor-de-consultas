@@ -2,20 +2,25 @@
 	<head>
 		<title>Unidade de Saúde | Cadastro</title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="#">
-		<link rel="stylesheet" type="text/css" href="../../styles/form_style.css">
-		<link rel="stylesheet" type="text/css" href="../../styles/style.css">
+		<link rel="stylesheet" type="text/css" href="../../styles/main.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/form_style.css">
+        
+        <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
+        rel="stylesheet"
+        />
 	</head>
-	<header>
-		<h1 class="title">Cadastrar Paciente</h1>
-		<div class="menu">
-			<a href="../index.html">Home |</a>
-			<a href="../symptom/questionnaire.html">Questionário |</a>
-			<a href="registration_form.html">Cadastrar Paciente |</a>
-			<a href="list_page.php">Lista de Pacientes</a>
-		</div>
-    </header>
     <body>
+        <header>
+            <div class="menu">
+                <a href="../index.html">Home |</a>
+                <a href="#">Questionário |</a>
+                <a href="registration_form.html">Cadastrar Paciente |</a>
+                <a href="#">Lista de Pacientes</a>
+            </div>
+        </header>
         <?php
 
             include_once('../../../core/utils/autoload.php');
@@ -37,11 +42,7 @@
              || !isset($mother_name) || !isset($naturalness)){
         ?>
                 <div id='info'>
-                    <br>
-                    <br>
-                    Você precisa preencher todos os campos para realizar esta operação!
-                    <br>
-                    <br>
+                   <p>Você precisa preencher todos os campos para realizar esta operação!</p>
                 </div> 
         <?php
             }
@@ -52,22 +53,14 @@
                 if(!is_object($result)){
         ?>
                     <div id='info'>
-                        <br>
-                        <br>
-                        <?php echo "$result" ?>  
-                        <br>
-                        <br>
+                        <p><?php echo "$result" ?></p>
                     </div>    
         <?php 
                 } 
                 else{
         ?>
                     <div id='info'>
-                        <br>
-                        <br>
-                        Seu cadastro foi realizado com sucesso!
-                        <br>
-                        <br>
+                       <p>Seu cadastro foi realizado com sucesso!</p>
                     </div>    
         <?php 
                 }
