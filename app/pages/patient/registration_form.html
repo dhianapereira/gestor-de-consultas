@@ -67,9 +67,67 @@
             <input id="date_of_birth" name="date_of_birth" required />
           </div>
 
+          <div class="input-block">
+            <label for="genre">Gênero</label>
+            <input
+              type="hidden"
+              name="genre"
+              id="genre"
+              value="Feminino"
+              required
+            />
+
+            <div class="button-select">
+              <button
+                data-value="Feminino"
+                onclick="toggleGenre(event)"
+                type="button"
+                class="active-genre"
+              >
+                Feminino
+              </button>
+              <button
+                data-value="Masculino"
+                onclick="toggleGenre(event)"
+                type="button"
+              >
+                Masculino
+              </button>
+            </div>
+          </div>
+          <div class="input-block">
+            <label for="naturalness">Nacionalidade</label>
+            <input
+              type="hidden"
+              name="naturalness"
+              id="naturalness"
+              value="Brasileiro(a)"
+              required
+            />
+
+            <div class="button-select">
+              <button
+                data-value="Brasileiro(a)"
+                onclick="toggleNaturalness(event)"
+                type="button"
+                class="active-naturalness"
+              >
+                Brasileiro(a)
+              </button>
+              <button
+                data-value="Estrangeiro(a)"
+                onclick="toggleNaturalness(event)"
+                type="button"
+              >
+                Estrangeiro(a)
+              </button>
+            </div>
+          </div>
+
           <button type="submit" class="primary-button">Confirmar</button>
         </form>
       </main>
     </div>
+    <script src="../../../public/scripts/register_patient.js"></script>
   </body>
 </html>
