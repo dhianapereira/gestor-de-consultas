@@ -1,5 +1,5 @@
 <?php
-    namespace core\models;
+    namespace app\models;
     class Patient{
 	    private $cpf;
         private $full_name;

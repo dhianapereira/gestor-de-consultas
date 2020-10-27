@@ -1,8 +1,8 @@
 <?php
-    namespace ui\bloc;
-    use services\PatientService;
+    namespace app\controllers;
+    use src\services\PatientService;
     
-    class PatientBloc{
+    class PatientController{
         private $patient_service;
 
         public function __construct()

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Unidade de Saúde | Cadastro</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/main.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/register_patient.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/buttons.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/sidebar.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/form.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="register-patient">
+      <aside class="animate-right sidebar">
+        <footer>
+          <button onclick="history.back()">
+            <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
+          </button>
+        </footer>
+      </aside>
+      <main class="animate-appear with-sidebar">
+        <form method="POST" action="result_page.php">
+          <fieldset>
+            <legend>Dados Pessoais</legend>
+            <div class="input-block">
+              <label for="name">Nome</label>
+              <input id="name" name="name" required />
+            </div>
+          </fieldset>
+          <div class="input-block">
+            <label for="cpf">CPF</label>
+            <input id="cpf" name="cpf" required />
+          </div>
+
+          <div class="input-block">
+            <label for="mother_name">Nome da mãe</label>
+            <input id="mother_name" name="mother_name" required />
+          </div>
+          <div class="input-block">
+            <label>Data de nascimento</label>
+            <input id="date_of_birth" name="date_of_birth" required />
+          </div>
+
+          <button type="submit" class="primary-button">Confirmar</button>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>

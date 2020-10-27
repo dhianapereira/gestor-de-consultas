@@ -1,6 +1,6 @@
 <?php
-    namespace services;
-    use data\Facade;
+    namespace src\services;
+    use src\data\Facade;
     
     class PatientService{
 

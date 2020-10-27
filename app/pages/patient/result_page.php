@@ -22,13 +22,9 @@
             </div>
         </header>
         <?php
+            use app\controllers\PatientController;
 
-            include_once('../../../core/utils/autoload.php');
-
-            
-            use ui\bloc\PatientBloc;
-
-            $patient_bloc = new PatientBloc();
+            $patient_controller = new PatientController();
 
             $cpf = addslashes($_POST["cpf"]);
             $full_name = addslashes($_POST["full_name"]);
@@ -48,7 +44,7 @@
             }
             else{
 
-                $result = $patient_bloc->registerPatient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
+                $result = $patient_controller->registerPatient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
 
                 if(!is_object($result)){
         ?>

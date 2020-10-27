@@ -1,5 +1,5 @@
 <?php
-namespace data\repository;
+namespace src\data\repository;
 
 define( 'HOST', 'localhost' );
 define( 'USER', 'root' );

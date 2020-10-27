@@ -1,6 +1,6 @@
 <?php
-namespace data;
-use data\repository\PatientRepository;
+namespace src\data;
+use src\data\repository\PatientRepository;
 
 class Facade {
 

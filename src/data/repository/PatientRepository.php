@@ -1,7 +1,7 @@
 <?php
-namespace data\repository;
-use data\repository\Connection;
-use core\models\Patient;
+namespace src\data\repository;
+use src\data\repository\Connection;
+use app\models\Patient;
 class PatientRepository {
 
     private $conn;
