@@ -13,7 +13,6 @@
     />
   </head>
   <body>
-    <?php include_once('./utils/autoload.php');?>
     <div id="page-landing">
       <div id="container">
         <header>

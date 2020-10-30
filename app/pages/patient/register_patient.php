@@ -7,6 +7,8 @@
 	</head>
     <body>
         <?php
+            include_once('../../utils/autoload.php');
+
             use app\controllers\PatientController;
 
             $patient_controller = new PatientController();
