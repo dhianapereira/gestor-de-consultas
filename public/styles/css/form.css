@@ -39,6 +39,7 @@ fieldset legend {
 
 .input-block input {
   width: 100%;
+  padding: 1.5rem;
 
   background: #f5f8fa;
   border: 1px solid #d3e2e5;
