@@ -13,21 +13,21 @@
     />
   </head>
   <body>
+    <?php include_once('./utils/autoload.php');?>
     <div id="page-landing">
       <div id="container">
-        <?php include_once('./utils/autoload.php');?>
         <header>
           <h1>Unidade de Saúde</h1>
         </header>
         <main>
           <section id="quick-access">
-            <a href="#" title="Home">
+            <a href="index.php" title="Home">
               <button class="home-button" type="button">Home</button>
             </a>
             <a href="#" title="Questionário">
               <button class="home-button" type="button">Questionário</button>
             </a>
-            <a href="../app/pages/patient/registration_form.html" title="Cadastrar paciente">
+            <a href="../app/pages/patient/register_page.html" title="Cadastrar paciente">
               <button class="home-button" type="button">
                 Cadastrar Paciente
               </button>
