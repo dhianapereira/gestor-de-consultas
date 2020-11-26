@@ -23,6 +23,11 @@
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
             rel="stylesheet"
         />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../../public/styles/css/animations.css"
+        />
 	</head>
     <body>
         <div id="register-patient">
