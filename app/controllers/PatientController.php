@@ -10,9 +10,11 @@
             $this->patient_service =  new PatientService();
         }
         
-        public function registerPatient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness){
+        public function registerPatient($cpf, $full_name, $genre, $date_of_birth, 
+        $mother_name, $companion, $address, $naturalness){
             try {
-              $result = $this->patient_service->registrationService($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
+              $result = $this->patient_service->registrationService($cpf, $full_name, $genre, 
+              $date_of_birth, $mother_name, $companion, $address, $naturalness);
                 
               return $result;
             } catch (Exception $e) {

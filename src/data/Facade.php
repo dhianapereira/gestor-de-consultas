@@ -10,8 +10,11 @@ class Facade {
         $this->patient_repository = new PatientRepository();
     }
 
-    public function register( $cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness ) {
-        $result = $this->patient_repository->registerPatient( $cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness );
+    public function register( $cpf, $full_name, $genre, $date_of_birth, 
+    $mother_name, $companion, $address, $naturalness ) {
+        
+        $result = $this->patient_repository->registerPatient( $cpf, $full_name, $genre, 
+        $date_of_birth, $mother_name, $companion, $address, $naturalness );
 
         return $result;
     }

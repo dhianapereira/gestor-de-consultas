@@ -51,11 +51,14 @@
                     $genre = $_POST["genre"];
                     $date_of_birth = addslashes($_POST["date_of_birth"]);
                     $mother_name = addslashes($_POST["mother_name"]);
+                    $companion = addslashes($_POST["companion"]);
+                    $address = addslashes($_POST["address"]);
                     $naturalness = $_POST["naturalness"];
 
                     if(!isset($cpf) || !isset($full_name)
                     || !isset($genre) || !isset($date_of_birth) 
-                    || !isset($mother_name) || !isset($naturalness)){
+                    || !isset($mother_name) || !isset($address)
+                    || !isset($naturalness)){
                 ?>
                         <div class='info'>
                         <p>Você precisa preencher todos os campos para realizar esta operação!</p>
@@ -64,7 +67,9 @@
                     }
                     else{
 
-                        $result = $patient_controller->registerPatient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $naturalness);
+                        $result = $patient_controller->registerPatient($cpf, $full_name, 
+                        $genre, $date_of_birth, $mother_name, $companion, $address,
+                        $naturalness);
 
                         if(!is_object($result)){
                 ?>
