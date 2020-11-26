@@ -21,15 +21,3 @@ textarea,
 label {
   font: 400 1.8rem/1 "Nunito", sans-serif;
 }
-
-.info {
-  background: #36cf82;
-  margin: auto;
-  width: 100%;
-  padding: 3.2rem 2.4rem;
-  height: clamp(10rem, 10vw, 30rem);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

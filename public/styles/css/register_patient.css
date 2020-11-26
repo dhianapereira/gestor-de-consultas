@@ -1,8 +1,34 @@
 #register-patient {
   display: flex;
   min-height: 100vh;
+  margin: auto;
+}
+
+#register-page{
+  display: flex;
+  min-height: 100vh;
 }
 
 main {
   flex: 1;
+}
+
+.info {
+  background: white;
+  border: 1px solid #d3e2e5;
+  color: #5c8599;
+
+  margin: 6.4rem auto;
+  padding: 8rem;
+
+  width: 70rem;
+
+  border-radius: 2rem;
+  overflow: hidden;
+  
+  font: 600 1.8rem/1 "Nunito", sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
