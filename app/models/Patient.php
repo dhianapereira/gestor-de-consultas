@@ -8,7 +8,7 @@
         private $mother_name;
         private $naturalness;
         private $companion;
-        private $address;
+        private $patient_address;
 
 
         public function getCpf (){
@@ -40,18 +40,18 @@
         }
 
         public function getAddress (){
-            return $this->address;
+            return $this->patient_address;
         }
         
         public function __construct ($cpf, $full_name, $genre, $date_of_birth, 
-        $mother_name, $companion, $address, $naturalness){
+        $mother_name, $companion, $patient_address, $naturalness){
 		    $this->cpf = $cpf;
             $this->full_name = $full_name;
             $this->genre = $genre;
             $this->date_of_birth = $date_of_birth;
 		    $this->mother_name = $mother_name;
 		    $this->companion = $companion;
-		    $this->address = $address;
+		    $this->patient_address = $patient_address;
 		    $this->naturalness = $naturalness;
 	    }
     }

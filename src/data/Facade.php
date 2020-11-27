@@ -11,10 +11,10 @@ class Facade {
     }
 
     public function register( $cpf, $full_name, $genre, $date_of_birth, 
-    $mother_name, $companion, $address, $naturalness ) {
+    $mother_name, $companion, $patient_address, $naturalness ) {
         
         $result = $this->patient_repository->registerPatient( $cpf, $full_name, $genre, 
-        $date_of_birth, $mother_name, $companion, $address, $naturalness );
+        $date_of_birth, $mother_name, $companion, $patient_address, $naturalness );
 
         return $result;
     }

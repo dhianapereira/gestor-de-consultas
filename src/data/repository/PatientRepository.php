@@ -11,12 +11,15 @@ class PatientRepository {
     }
 
     public function registerPatient( $cpf, $full_name, $genre, $date_of_birth, 
-    $mother_name, $companion, $address, $naturalness ) {
+    $mother_name, $companion, $patient_address, $naturalness ) {
         try {
-            $sql = "INSERT INTO patient (cpf, full_name, genre, date_of_birth, 
-                mother_name, $companion, $address, naturalness) VALUES (:cpf, :full_name, 
-                :genre, :date_of_birth, :mother_name, :companion, :patient_address,
-                :naturalness)";
+            $sql = 'INSERT INTO patient (
+                    cpf, full_name, genre, date_of_birth, 
+                    mother_name, companion, patient_address, naturalness
+                ) VALUES (
+                    :cpf, :full_name, :genre, :date_of_birth, 
+                    :mother_name, :companion, :patient_address, :naturalness
+                )';
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -27,18 +30,20 @@ class PatientRepository {
                 ':date_of_birth' => $date_of_birth,
                 ':mother_name' => $mother_name,
                 ':companion' => $companion,
-                ':patient_address' => $address,
-                ':naturalness' => $naturalness
+                ':patient_address' => $patient_address,
+                ':naturalness' => $naturalness,
             ) );
 
             if ( $success ) {
                 $patient = new Patient( $cpf, $full_name, $genre, $date_of_birth, 
-                $mother_name, $companion, $address, $naturalness);
+                $mother_name, $companion, $patient_address, $naturalness);
 
 
                 return $patient;
             }
-            $response = 'Não foi possível realizar o cadastro do paciente. Verifique sua conexão com a internet ou tente mais tarde.';
+
+            $response = 'Não foi possível realizar o cadastro do paciente.
+            Verifique sua conexão com a internet ou tente mais tarde.';
             return $response;
         } catch(Exception $e){
             return 'Não foi possível realizar o cadastro do paciente. Tente mais tarde.';
