@@ -7,19 +7,19 @@
         <link
             rel="stylesheet"
             type="text/css"
-            href="./styles/css/main.css"
+            href="../styles/css/main.css"
         /> 
         <link
             rel="stylesheet"
             type="text/css"
-            href="./styles/css/sidebar.css"
+            href="../styles/css/sidebar.css"
         />
         <link
             rel="stylesheet"
             type="text/css"
-            href="./styles/css/animations.css"
+            href="../styles/css/animations.css"
         />
-        <link rel="stylesheet" type="text/css" href="./styles/css/login.css" />
+        <link rel="stylesheet" type="text/css" href="../styles/css/login.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
             rel="stylesheet"
@@ -30,13 +30,13 @@
             <aside class="animate-right sidebar">
                 <footer>
                     <button onclick="history.back()">
-                        <img src="./styles/img/arrow-back.svg" alt="Voltar" />
+                        <img src="../styles/img/arrow-back.svg" alt="Voltar" />
                     </button>
                 </footer>
             </aside> 
             <main class="animate-appear with-sidebar">
                 <?php
-                    include_once('../app/utils/autoload.php');
+                    include_once('../../app/utils/autoload.php');
 
                     use src\data\repository\Connection;
 
@@ -71,8 +71,7 @@
                         </div> 
                 <?php
                     }else{
-                        echo 'teste';
-                        header('Location:index.html');
+                        header('Location:../../app/pages/home_page.html');
                     }
                 ?>
             </main> 
