@@ -34,3 +34,12 @@ CREATE TABLE `medical_record` (
   CONSTRAINT `medical_record_fk` FOREIGN KEY (`cpf_patient_fk`)
   REFERENCES `patient` (`cpf`)
 );
+
+CREATE TABLE `user` ( 
+  `id` INT(11) NOT NULL AUTO_INCREMENT, 
+  `name` VARCHAR(100) NOT NULL,
+  `username` VARCHAR(100) NOT NULL,
+  `user_password` VARCHAR(100) NOT NULL, 
+  `responsibility` VARCHAR(50) NOT NULL, 
+  CONSTRAINT `user_pk` PRIMARY KEY (`id`) 
+);
