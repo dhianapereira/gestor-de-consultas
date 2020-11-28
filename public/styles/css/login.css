@@ -6,3 +6,14 @@
   align-items: center;
   justify-content: center;
 }
+
+#login-php{
+  display: flex;
+
+  min-height: 100vh;
+  margin: auto;
+}
+
+main{
+  flex: 1;
+}
