@@ -19,5 +19,11 @@ class Facade {
         return $result;
     }
 
+    public function allPatients() {
+        $result = $this->patient_repository->allPatients();
+
+        return $result;
+    }
+
 }
 ?>

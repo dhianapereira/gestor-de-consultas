@@ -19,5 +19,12 @@
 
             return $result;
         }
+
+
+        public function allPatients(){
+            $result = $this->facade->allPatients();
+
+            return $result;
+        }
     }
 ?>

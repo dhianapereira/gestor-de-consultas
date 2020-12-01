@@ -12,15 +12,16 @@
         
         public function registerPatient($cpf, $full_name, $genre, $date_of_birth, 
         $mother_name, $companion, $patient_address, $naturalness){
-            try {
-              $result = $this->patient_service->registrationService($cpf, $full_name, $genre, 
-              $date_of_birth, $mother_name, $companion, $patient_address, $naturalness);
+            $result = $this->patient_service->registrationService($cpf, $full_name, $genre, 
+            $date_of_birth, $mother_name, $companion, $patient_address, $naturalness);
+              
+            return $result;
+        }
+
+        public function allPatients(){
+            $result = $this->patient_service->allPatients();
                 
-              return $result;
-            } catch (Exception $e) {
-                return "Não foi possível realizar o cadastro do paciente.
-                Tente mais tarde.";
-            }
+            return $result;
         }
     }
 ?>

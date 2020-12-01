@@ -52,5 +52,30 @@ class PatientRepository {
             $this->conn  = null;
         }
     }
+
+    public function allPatients() {
+        try {
+            $sql = 'SELECT * FROM patient';
+
+            $stmt = $this->conn->connect()->prepare( $sql );
+
+            $stmt->execute();
+
+            $list = $stmt->fetchAll();
+
+            if ( $list!=null ) {
+
+                return $list;
+            }
+
+            $response = 'Não foi possível trazer a lista de pacientes';
+            return $response;
+        } catch(Exception $e){
+            return 'Exception: Não foi possível trazer a lista de pacientes';
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 }
 ?>

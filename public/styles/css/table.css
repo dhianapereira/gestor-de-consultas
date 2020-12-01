@@ -1,0 +1,17 @@
+table {
+  font: 400 1.8rem/1 "Nunito", sans-serif;
+  color: #000;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 0.8rem;
+}
+
+tr:nth-child(even) {
+  background-color: #36cf82;
+}
