@@ -42,11 +42,12 @@ class PatientRepository {
                 return $patient;
             }
 
-            $response = 'Não foi possível realizar o cadastro do paciente.
-            Verifique sua conexão com a internet ou tente mais tarde.';
+            $response = "Não foi possível realizar o cadastro do paciente.
+            Verifique sua conexão com a internet ou tente mais tarde.";
+            
             return $response;
         } catch(Exception $e){
-            return 'Não foi possível realizar o cadastro do paciente. Tente mais tarde.';
+            return "Exception: $e";
         }
         finally {
             $this->conn  = null;
@@ -68,10 +69,11 @@ class PatientRepository {
                 return $list;
             }
 
-            $response = 'Não foi possível trazer a lista de pacientes';
+            $response = "Não foi possível trazer a lista de pacientes";
             return $response;
         } catch(Exception $e){
-            return 'Exception: Não foi possível trazer a lista de pacientes';
+
+            return "Exception: $e";
         }
         finally {
             $this->conn  = null;

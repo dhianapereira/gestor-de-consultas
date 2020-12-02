@@ -12,7 +12,8 @@
         
         public function registerPatient($cpf, $full_name, $genre, $date_of_birth, 
         $mother_name, $companion, $patient_address, $naturalness){
-            $result = $this->patient_service->registrationService($cpf, $full_name, $genre, 
+            
+            $result = $this->patient_service->registerPatient($cpf, $full_name, $genre, 
             $date_of_birth, $mother_name, $companion, $patient_address, $naturalness);
               
             return $result;
