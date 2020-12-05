@@ -1,0 +1,9 @@
+#symptom-page {
+  display: flex;
+  min-height: 100vh;
+  margin: auto;
+}
+
+main {
+  flex: 1;
+}

@@ -9,7 +9,7 @@
       rel="stylesheet"
       type="text/css"
       href="../../../public/styles/css/main.css"
-    /> 
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -57,88 +57,88 @@
               <label for="full_name">Nome</label>
               <input id="full_name" name="full_name" required />
             </div>
+            <div class="input-block">
+              <label for="cpf">CPF</label>
+              <input id="cpf" name="cpf" required />
+            </div>
+
+            <div class="input-block">
+              <label for="mother_name">Nome da mãe</label>
+              <input id="mother_name" name="mother_name" required />
+            </div>
+
+            <div class="input-block">
+              <label for="companion">Acompanhante</label>
+              <input id="companion" name="companion" required />
+            </div>
+
+            <div class="input-block">
+              <label>Data de nascimento</label>
+              <input id="date_of_birth" name="date_of_birth" required />
+            </div>
+
+            <div class="input-block">
+              <label for="patient_address">Endereço</label>
+              <input id="patient_address" name="patient_address" required />
+            </div>
+
+            <div class="input-block">
+              <label for="genre">Gênero</label>
+              <input
+                type="hidden"
+                name="genre"
+                id="genre"
+                value="Feminino"
+                required
+              />
+
+              <div class="button-select">
+                <button
+                  data-value="Feminino"
+                  onclick="toggleGenre(event)"
+                  type="button"
+                  class="active-genre"
+                >
+                  Feminino
+                </button>
+                <button
+                  data-value="Masculino"
+                  onclick="toggleGenre(event)"
+                  type="button"
+                >
+                  Masculino
+                </button>
+              </div>
+            </div>
+            <div class="input-block">
+              <label for="naturalness">Nacionalidade</label>
+              <input
+                type="hidden"
+                name="naturalness"
+                id="naturalness"
+                value="Brasileiro(a)"
+                required
+              />
+
+              <div class="button-select">
+                <button
+                  data-value="Brasileiro(a)"
+                  onclick="toggleNaturalness(event)"
+                  type="button"
+                  class="active-naturalness"
+                >
+                  Brasileiro(a)
+                </button>
+                <button
+                  data-value="Estrangeiro(a)"
+                  onclick="toggleNaturalness(event)"
+                  type="button"
+                >
+                  Estrangeiro(a)
+                </button>
+              </div>
+            </div>
           </fieldset>
-          <div class="input-block">
-            <label for="cpf">CPF</label>
-            <input id="cpf" name="cpf" required />
-          </div>
-
-          <div class="input-block">
-            <label for="mother_name">Nome da mãe</label>
-            <input id="mother_name" name="mother_name" required />
-          </div>
-          
-          <div class="input-block">
-            <label for="companion">Acompanhante</label>
-            <input id="companion" name="companion" required/>
-          </div>
-          
-          <div class="input-block">
-            <label>Data de nascimento</label>
-            <input id="date_of_birth" name="date_of_birth" required />
-          </div>
-
-          <div class="input-block">
-            <label for="patient_address">Endereço</label>
-            <input id="patient_address" name="patient_address" required/>
-          </div>
-
-          <div class="input-block">
-            <label for="genre">Gênero</label>
-            <input
-              type="hidden"
-              name="genre"
-              id="genre"
-              value="Feminino"
-              required
-            />
-
-            <div class="button-select">
-              <button
-                data-value="Feminino"
-                onclick="toggleGenre(event)"
-                type="button"
-                class="active-genre"
-              >
-                Feminino
-              </button>
-              <button
-                data-value="Masculino"
-                onclick="toggleGenre(event)"
-                type="button"
-              >
-                Masculino
-              </button>
-            </div>
-          </div>
-          <div class="input-block">
-            <label for="naturalness">Nacionalidade</label>
-            <input
-              type="hidden"
-              name="naturalness"
-              id="naturalness"
-              value="Brasileiro(a)"
-              required
-            />
-
-            <div class="button-select">
-              <button
-                data-value="Brasileiro(a)"
-                onclick="toggleNaturalness(event)"
-                type="button"
-                class="active-naturalness"
-              >
-                Brasileiro(a)
-              </button>
-              <button
-                data-value="Estrangeiro(a)"
-                onclick="toggleNaturalness(event)"
-                type="button"
-              >
-                Estrangeiro(a)
-              </button>
-            </div>
-          </div>
 
           <button type="submit" class="primary-button">Confirmar</button>
         </form>

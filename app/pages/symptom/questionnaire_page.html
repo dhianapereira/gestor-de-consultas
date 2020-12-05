@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Unidade de Saúde | Questionário</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/main.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/checkbox.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/symptom_page.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/animations.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/buttons.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/sidebar.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../../public/styles/css/form.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="symptom-page">
+      <aside class="animate-right sidebar">
+        <footer>
+          <button onclick="history.back()">
+            <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
+          </button>
+        </footer>
+      </aside>
+      <main class="animate-appear with-sidebar">
+        <form method="POST" action="questionnaire.php">
+          <fieldset>
+            <legend>Dados Pessoais</legend>
+            <div class="input-block">
+              <label for="cpf">CPF</label>
+              <input id="cpf" name="cpf" required />
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Sintomas</legend>
+            <div class="control-group">
+              <label class="control control-checkbox">
+                Dor abdominal intensa e contínua, ou dor quando o abdome é
+                tocado;
+                <input type="checkbox" />
+                <div class="control_indicator"></div>
+              </label>
+              <label class="control control-checkbox">
+                Vômitos persistentes;
+                <input type="checkbox" />
+                <div class="control_indicator"></div>
+              </label>
+              <label class="control control-checkbox">
+                Acúmulo de líquidos;
+                <input type="checkbox" />
+                <div class="control_indicator"></div>
+              </label>
+              <label class="control control-checkbox">
+                Sangramento de mucosas (principalmente nariz e gengivas);
+                <input type="checkbox" />
+                <div class="control_indicator"></div>
+              </label>
+              <label class="control control-checkbox">
+                Letargia (perda de sensibilidade e movimentos) ou
+                irritabilidade;
+                <input type="checkbox" />
+                <div class="control_indicator"></div> </label
+              ><label class="control control-checkbox">
+                Hipotensão postural (tontura e queda de pressão em determinadas
+                posições);
+                <input type="checkbox" />
+                <div class="control_indicator"></div>
+              </label>
+              <label class="control control-checkbox">
+                Hepatomegalia (aumento do fígado) maior do que 2 cm;
+                <input type="checkbox" />
+                <div class="control_indicator"></div>
+              </label>
+              <label class="control control-checkbox">
+                Aumento progressivo do hematócrito (porcentagem de glóbulos
+                vermelhos ou hemácias no sangue);
+                <input type="checkbox" />
+                <div class="control_indicator"></div>
+              </label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="primary-button">Confirmar</button>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
