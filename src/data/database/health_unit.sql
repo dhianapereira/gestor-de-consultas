@@ -24,14 +24,14 @@ CREATE TABLE `symptom` (
 );
 
 
-CREATE TABLE `medical_record` (
+CREATE TABLE `medical_records` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `cpf_patient_fk` VARCHAR(14) NOT NULL,
   `result` FLOAT NOT NULL,
   `gravity` VARCHAR(50) NOT NULL,
   `start_date` VARCHAR(10) NOT NULL,
-  CONSTRAINT `medical_record_pk` PRIMARY KEY (`id`),
-  CONSTRAINT `medical_record_fk` FOREIGN KEY (`cpf_patient_fk`)
+  CONSTRAINT `medical_records_pk` PRIMARY KEY (`id`),
+  CONSTRAINT `medical_records_fk` FOREIGN KEY (`cpf_patient_fk`)
   REFERENCES `patient` (`cpf`)
 );
 
