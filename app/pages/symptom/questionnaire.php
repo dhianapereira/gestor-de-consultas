@@ -12,11 +12,6 @@
         <link
             rel="stylesheet"
             type="text/css"
-            href="../../../public/styles/css/symptom_page.css"
-        />  
-        <link
-            rel="stylesheet"
-            type="text/css"
             href="../../../public/styles/css/sidebar.css"
         />
         <link
@@ -30,7 +25,7 @@
         />
 	</head>
     <body>
-        <div id="questionnaire-php">
+        <div class="page-pattern">
             <aside class="animate-right sidebar">
                 <footer>
                 <button onclick="history.back()">
@@ -49,8 +44,6 @@
                     $patient_cpf = $_POST["patient_cpf"];
                     $start_date = $_POST["start_date"];
                     $symptoms = $_POST["symptom"];
-
-                    echo(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$symptom[0]");
 
                     if(!isset($patient_cpf) || !isset($start_date)){
                 ?>

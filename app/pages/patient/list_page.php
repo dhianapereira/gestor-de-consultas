@@ -35,7 +35,7 @@
         />
 	</head>
     <body>
-        <div id="patient-list">
+        <div class="page-pattern">
             <aside class="animate-right sidebar">
                 <footer>
                 <button onclick="history.back()">
@@ -44,7 +44,7 @@
                 </footer>
             </aside>
             <main class="animate-appear with-sidebar">
-                <div class="list-container">
+                <div id="list-container">
                     <?php
                         include_once('../../utils/autoload.php');
                         

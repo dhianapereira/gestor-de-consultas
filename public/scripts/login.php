@@ -19,14 +19,13 @@
             type="text/css"
             href="../styles/css/animations.css"
         />
-        <link rel="stylesheet" type="text/css" href="../styles/css/login.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
             rel="stylesheet"
         />
 	</head>
     <body>
-        <div id="login-php">
+        <div class="page-pattern">
             <aside class="animate-right sidebar">
                 <footer>
                     <button onclick="history.back()">

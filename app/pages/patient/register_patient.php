@@ -8,11 +8,6 @@
             rel="stylesheet"
             type="text/css"
             href="../../../public/styles/css/main.css"
-        /> 
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="../../../public/styles/css/register_patient.css"
         />
         <link
             rel="stylesheet"
@@ -30,7 +25,7 @@
         />
 	</head>
     <body>
-        <div id="register-patient">
+        <div class="page-pattern">
             <aside class="animate-right sidebar">
                 <footer>
                 <button onclick="history.back()">

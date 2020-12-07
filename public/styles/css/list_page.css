@@ -1,14 +1,4 @@
-#patient-list {
-  display: flex;
-  min-height: 100vh;
-  margin: auto;
-}
-
-main {
-  flex: 1;
-}
-
-.list-container {
+#list-container {
   background: white;
   border: 1px solid #d3e2e5;
   color: #5c8599;

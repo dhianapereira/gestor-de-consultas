@@ -4,10 +4,20 @@
   box-sizing: border-box;
 }
 
+.page-pattern{
+  display: flex;
+  min-height: 100vh;
+  margin: auto;
+}
+
 body {
   height: 100vh;
   color: white;
   background: #ebf2f5;
+}
+
+main{
+  flex: 1;
 }
 
 :root {
