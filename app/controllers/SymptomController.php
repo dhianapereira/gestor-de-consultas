@@ -10,10 +10,10 @@
             $this->symptom_service =  new SymptomService();
         }
         
-        public function addSymptoms($patient_cpf, $symptoms){
+        public function addSymptoms($patient_cpf, $symptoms, $start_date){
             
-            $result = $this->symptom_service->addSymptoms($patient_cpf, $symptoms);
-              
+            $result = $this->symptom_service->addSymptoms($patient_cpf, $symptoms, $start_date);
+            
             return $result;
         }
     }

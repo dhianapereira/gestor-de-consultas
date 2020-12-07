@@ -11,9 +11,9 @@
             $this->facade =  new Facade();
         }
 
-        public function addSymptoms($patient_cpf, $symptoms){
+        public function addSymptoms($patient_cpf, $symptoms, $start_date){
 
-            $result = $this->facade->addSymptoms($patient_cpf, $symptoms);
+            $result = $this->facade->addSymptoms($patient_cpf, $symptoms, $start_date);
 
             return $result;
         }

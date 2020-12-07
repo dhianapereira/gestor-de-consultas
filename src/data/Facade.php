@@ -2,15 +2,18 @@
 namespace src\data;
 use src\data\repository\PatientRepository;
 use src\data\repository\SymptomRepository;
+use src\data\repository\MedicalRecordsRepository;
 
 class Facade {
 
     private $patient_repository;
     private $symptom_repository;
+    private $medical_records_repository;
 
     public function __construct() {
         $this->patient_repository = new PatientRepository();
         $this->symptom_repository = new SymptomRepository();
+        $this->medical_records_repository = new MedicalRecordsRepository();
     }
 
     public function registerPatient( $cpf, $full_name, $genre, $date_of_birth, 
@@ -28,11 +31,18 @@ class Facade {
         return $result;
     }
 
-    public function addSymptoms($patient_cpf, $symptoms){
+    public function addSymptoms($patient_cpf, $symptoms, $start_date){
 
         $result = $this->symptom_repository->addSymptoms($patient_cpf, $symptoms);
 
-        return $result;
+        if(is_bool($result)){
+            $response = $this->medical_records_repository->addMedicalRecords($patient_cpf, 
+            count($symptoms), $start_date);
+
+            return $response;
+        }else{
+            return $result;
+        }
     }
 
 }

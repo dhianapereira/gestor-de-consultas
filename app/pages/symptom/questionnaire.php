@@ -8,7 +8,8 @@
             rel="stylesheet"
             type="text/css"
             href="../../../public/styles/css/main.css"
-        /> 
+        />
+        <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" /> 
         <link
             rel="stylesheet"
             type="text/css"
@@ -54,7 +55,7 @@
                     }
                     else{
 
-                        $result = $symptom_controller->addSymptoms($patient_cpf, $symptoms);
+                        $result = $symptom_controller->addSymptoms($patient_cpf, $symptoms, $start_date);
 
                         if(!is_bool($result)){
                 ?>
@@ -64,7 +65,18 @@
                 <?php 
                         } 
                         else{
-                            header('Location:../home_page.html');
+                ?>
+                            <div class='info'>
+                                <p>O prontuário médico do paciente de CPF: <?php echo "$patient_cpf" ?> está pronto!</p>
+                                <br>
+                                <br>
+                                <a href="../medical_records/medical_records_page.php">
+                                    <button type="button" class="home-button">
+                                        Visualizar Prontuários
+                                    </button>
+                                </a>
+                            </div> 
+                <?php
                         }
                     }
                 ?>
