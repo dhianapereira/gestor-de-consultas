@@ -17,7 +17,7 @@ CREATE TABLE `patient` (
 CREATE TABLE `symptom` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `cpf_patient_fk` VARCHAR(14) NOT NULL,
-  `name` VARCHAR(100) NOT NULL,
+  `symptom_name` VARCHAR(100) NOT NULL,
    CONSTRAINT `symptom_pk` PRIMARY KEY (`id`),
    CONSTRAINT `symptom_fk` FOREIGN KEY (`cpf_patient_fk`)
    REFERENCES `patient` (`cpf`)
