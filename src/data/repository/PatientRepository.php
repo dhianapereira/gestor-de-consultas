@@ -62,9 +62,26 @@ class PatientRepository {
 
             $stmt->execute();
 
-            $list = $stmt->fetchAll();
+            $result = $stmt->fetchAll();
 
-            if ( $list!=null ) {
+            if ( $result!=null ) {
+                $list = [];
+
+                foreach($result as $row){
+                    $cpf = $row['cpf'];
+                    $full_name = $row['full_name'];
+                    $genre = $row['genre'];
+                    $date_of_birth = $row['date_of_birth'];
+                    $mother_name = $row['mother_name'];
+                    $companion = $row['companion'];
+                    $patient_address = $row['patient_address'];
+                    $naturalness = $row['naturalness'];
+    
+                    $patient = new Patient($cpf, $full_name, $genre, $date_of_birth,
+                    $mother_name, $companion, $patient_address, $naturalness);
+
+                    array_push($list, $patient);
+                }
 
                 return $list;
             }

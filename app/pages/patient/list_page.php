@@ -52,9 +52,9 @@
 
                         $patient_controller = new PatientController();
 
-                        $result = $patient_controller->allPatients();
+                        $patient_list = $patient_controller->allPatients();
 
-                        if($result!=null && is_array($result)){
+                        if($patient_list!=null && is_array($patient_list)){
 
                     ?>
                             <table>
@@ -69,17 +69,17 @@
                                     <th>Naturalidade</th>
                             </tr>
                     <?php
-                        foreach ($result as $row) {
+                        foreach ($patient_list as $patient) {
                     ?>
                             <tr>
-                                <td><?php echo $row['cpf'];?></td>
-                                <td><?php echo $row['full_name'];?></td>
-                                <td><?php echo $row['genre'];?></td>
-                                <td><?php echo $row['date_of_birth'];?></td>
-                                <td><?php echo $row['mother_name'];?></td>
-                                <td><?php echo $row['companion'];?></td>
-                                <td><?php echo $row['patient_address'];?></td>
-                                <td><?php echo $row['naturalness'];?></td>
+                                <td><?php echo ($patient->getCpf());?></td>
+                                <td><?php echo ($patient->getName());?></td>
+                                <td><?php echo ($patient->getGenre());?></td>
+                                <td><?php echo ($patient->getDateOfBirth());?></td>
+                                <td><?php echo ($patient->getMotherName());?></td>
+                                <td><?php echo ($patient->getCompanion());?></td>
+                                <td><?php echo ($patient->getAddress());?></td>
+                                <td><?php echo ($patient->getNaturalness());?></td>
                             </tr>
                     <?php
                         }

@@ -146,10 +146,10 @@
                       <fieldset>
                         <legend>Sintomas</legend>
         <?php
-                        foreach ($symptoms as $row) {
+                        foreach ($symptoms as $symptom) {
         ?>
                           <ul>
-                            <li><?php echo $row->getName();?></li>
+                            <li><?php echo $$symptom->getName();?></li>
                           </ul>
         <?php
                         }
