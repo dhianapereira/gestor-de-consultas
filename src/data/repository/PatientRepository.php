@@ -82,7 +82,7 @@ class PatientRepository {
 
     public function fetchPatient($cpf) {
         try {
-            $sql = 'SELECT full_name, date_of_birth, genre, naturalness FROM patient WHERE cpf = :cpf';
+            $sql = 'SELECT * FROM patient WHERE cpf = :cpf';
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -94,11 +94,16 @@ class PatientRepository {
 
             if ( $result!=null ) {
                 $full_name = $result[0]['full_name'];
-                $date_of_birth = $result[0]['date_of_birth'];
                 $genre = $result[0]['genre'];
+                $date_of_birth = $result[0]['date_of_birth'];
+                $mother_name = $result[0]['mother_name'];
+                $companion = $result[0]['companion'];
+                $patient_address = $result[0]['patient_address'];
                 $naturalness = $result[0]['naturalness'];
 
-                $patient = new Patient('', $full_name, $genre, $date_of_birth, '', '', '', $naturalness);
+
+                $patient = new Patient($cpf, $full_name, $genre, $date_of_birth,
+                $mother_name, $companion, $patient_address, $naturalness);
 
                 return $patient;
             }

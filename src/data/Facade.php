@@ -57,5 +57,11 @@ class Facade {
         return $result;
     }
 
+    public function fetchSymptoms($cpf) {
+        $result = $this->symptom_repository->fetchSymptoms($cpf);
+
+        return $result;
+    }
+
 }
 ?>

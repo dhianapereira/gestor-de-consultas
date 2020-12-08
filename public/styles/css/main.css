@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.page-pattern{
+.page-pattern {
   display: flex;
   min-height: 100vh;
   margin: auto;
@@ -16,7 +16,7 @@ body {
   background: #ebf2f5;
 }
 
-main{
+main {
   flex: 1;
 }
 
@@ -27,9 +27,15 @@ main{
 body,
 input,
 button,
-textarea,
-label {
+label,
+ul,
+li {
   font: 400 1.8rem/1 "Nunito", sans-serif;
+}
+
+ul,
+li {
+  color: #095379;
 }
 
 .info {

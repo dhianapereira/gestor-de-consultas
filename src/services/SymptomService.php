@@ -17,5 +17,12 @@
 
             return $result;
         }
+
+        public function fetchSymptoms($cpf){
+
+            $result = $this->facade->fetchSymptoms($cpf);
+
+            return $result;
+        }
     }
 ?>

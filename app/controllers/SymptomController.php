@@ -16,5 +16,12 @@
             
             return $result;
         }
+
+        public function fetchSymptoms($cpf){
+            
+            $result = $this->symptom_service->fetchSymptoms($cpf);
+            
+            return $result;
+        }
     }
 ?>
