@@ -11,7 +11,16 @@ aside.sidebar {
   align-items: center;
 }
 
-aside.sidebar footer button {
+img{
+  filter: contrast(200%);
+  filter: drop-shadow(-1px 0px 8px #fff);
+}
+
+.sidebar-buttons + .sidebar-buttons {
+  margin-top: 2.4rem;
+}
+
+aside.sidebar footer .sidebar-buttons {
   width: 48px;
   height: 48px;
   border: none;
@@ -30,7 +39,12 @@ aside.sidebar footer button {
   transition: opacity 0.2s;
 }
 
-aside.sidebar footer button:hover {
+aside.sidebar footer .sidebar-buttons img{
+  width: 30px;
+  height: 30px;
+}
+
+aside.sidebar footer .sidebar-buttons:hover {
   opacity: 0.8;
 }
 

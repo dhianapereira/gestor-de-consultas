@@ -28,7 +28,7 @@
         <div class="page-pattern">
             <aside class="animate-right sidebar">
                 <footer>
-                    <button onclick="history.back()">
+                    <button class="sidebar-buttons" onclick="history.back()">
                         <img src="../styles/img/arrow-back.svg" alt="Voltar" />
                     </button>
                 </footer>

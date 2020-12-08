@@ -29,9 +29,18 @@
         <div class="page-pattern">
             <aside class="animate-right sidebar">
                 <footer>
-                <button onclick="history.back()">
-                    <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
-                </button>
+                    <a class="sidebar-buttons" href="./questionnaire_page.html" title="Questionário">
+                        <img src="../../../public/styles/img/questionnaire.svg" alt="Questionário" />
+                    </a>
+                    <a class="sidebar-buttons" href="../patient/register_page.html" title="Cadastrar um novo paciente">
+                        <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
+                    </a>
+                    <a class="sidebar-buttons" href="../patient/list_page.php" title="Lista de pacientes">
+                        <img src="../../../public/styles/img/list.svg" alt="Lista de pacientes" />
+                    </a>
+                    <a class="sidebar-buttons" href="../medical_records/search_medical_records.html" title="Visualizar prontuários">
+                        <img src="../../../public/styles/img/file-search.png" alt="Visualizar prontuários" />
+                    </a>
                 </footer>
             </aside>
             <main class="animate-appear with-sidebar">
