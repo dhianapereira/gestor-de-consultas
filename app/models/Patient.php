@@ -53,6 +53,6 @@
 		    $this->companion = $companion;
 		    $this->patient_address = $patient_address;
 		    $this->naturalness = $naturalness;
-	    }
+        }
     }
 ?>

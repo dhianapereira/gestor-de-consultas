@@ -26,5 +26,11 @@
 
             return $result;
         }
+
+        public function fetchPatient($cpf){
+            $result = $this->facade->fetchPatient($cpf);
+
+            return $result;
+        }
     }
 ?>

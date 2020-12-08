@@ -60,11 +60,11 @@ class MedicalRecordsRepository {
             if ( $result!=null ) {
                 $id = $result[0]['id'];
                 $patient_cpf = $result[0]['cpf_patient_fk'];
-                $result = $result[0]['result'];
+                $percentage = $result[0]['result'];
                 $gravity = $result[0]['gravity'];
                 $start_date = $result[0]['start_date'];
 
-                $medical_records = new MedicalRecords($id, $patient_cpf, $result, $gravity, $start_date);
+                $medical_records = new MedicalRecords($id, $patient_cpf, $percentage, $gravity, $start_date);
 
                 return $medical_records;
             }

@@ -24,5 +24,12 @@
                 
             return $result;
         }
+
+        public function fetchPatient($cpf){
+            
+            $result = $this->patient_service->fetchPatient($cpf);
+            
+            return $result;
+        }
     }
 ?>

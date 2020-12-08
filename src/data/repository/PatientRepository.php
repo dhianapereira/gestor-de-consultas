@@ -79,5 +79,39 @@ class PatientRepository {
             $this->conn  = null;
         }
     }
+
+    public function fetchPatient($cpf) {
+        try {
+            $sql = 'SELECT full_name, date_of_birth, genre, naturalness FROM patient WHERE cpf = :cpf';
+
+            $stmt = $this->conn->connect()->prepare( $sql );
+
+            $stmt->execute(array(
+                ':cpf' => $cpf,
+            ));
+
+            $result = $stmt->fetchAll();
+
+            if ( $result!=null ) {
+                $full_name = $result[0]['full_name'];
+                $date_of_birth = $result[0]['date_of_birth'];
+                $genre = $result[0]['genre'];
+                $naturalness = $result[0]['naturalness'];
+
+                $patient = new Patient('', $full_name, $genre, $date_of_birth, '', '', '', $naturalness);
+
+                return $patient;
+            }
+
+            $response = "Não foi possível trazer o paciente escolhido.";
+            return $response;
+        } catch(Exception $e){
+
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 }
 ?>

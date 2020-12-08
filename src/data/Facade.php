@@ -51,5 +51,11 @@ class Facade {
         return $result;
     }
 
+    public function fetchPatient($cpf) {
+        $result = $this->patient_repository->fetchPatient($cpf);
+
+        return $result;
+    }
+
 }
 ?>
