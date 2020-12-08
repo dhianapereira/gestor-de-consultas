@@ -70,7 +70,7 @@
                                 <p>O prontuário médico do paciente de CPF: <?php echo "$patient_cpf" ?> está pronto!</p>
                                 <br>
                                 <br>
-                                <a href="../medical_records/search_medical_records.php">
+                                <a href="../medical_records/search_medical_records.html">
                                     <button type="button" class="home-button">
                                         Visualizar Prontuários
                                     </button>
