@@ -44,5 +44,40 @@ class MedicalRecordsRepository {
             $this->conn  = null;
         }
     }
+
+    public function fetchMedicalRecords($cpf) {
+        try {
+            $sql = 'SELECT * FROM medical_records WHERE cpf_patient_fk = :cpf_patient_fk';
+
+            $stmt = $this->conn->connect()->prepare( $sql );
+
+            $stmt->execute(array(
+                ':cpf_patient_fk' => $cpf,
+            ));
+
+            $result = $stmt->fetchAll();
+
+            if ( $result!=null ) {
+                $id = $result[0]['id'];
+                $patient_cpf = $result[0]['cpf_patient_fk'];
+                $result = $result[0]['result'];
+                $gravity = $result[0]['gravity'];
+                $start_date = $result[0]['start_date'];
+
+                $medical_records = new MedicalRecords($id, $patient_cpf, $result, $gravity, $start_date);
+
+                return $medical_records;
+            }
+
+            $response = "Não foi possível trazer o prontuário escolhido.";
+            return $response;
+        } catch(Exception $e){
+
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 }
 ?>

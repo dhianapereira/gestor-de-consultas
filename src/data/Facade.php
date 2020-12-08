@@ -45,5 +45,11 @@ class Facade {
         }
     }
 
+    public function fetchMedicalRecords($cpf) {
+        $result = $this->medical_records_repository->fetchMedicalRecords($cpf);
+
+        return $result;
+    }
+
 }
 ?>
