@@ -1,6 +1,9 @@
 <?php
     function gravityCalculation($percentage){
-        if($percentage <= 25){
+        if($percentage==0){
+            return "Inexistente";
+        }
+        else if($percentage <= 25 && $percentage > 0){
             return "Baixa";
         }
         else if($percentage > 25 && $percentage <= 50){
