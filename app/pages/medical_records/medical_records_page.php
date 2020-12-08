@@ -137,7 +137,7 @@
                       <span class="line">
                         <span class="input-block">
                           <label for="result">Resultado (%): </label>
-                          <input id="result"  value="<?php echo ($medical_records->getResult()) ?>"  disabled/>
+                          <input id="result"  value="<?php echo (number_format($medical_records->getResult(), 2)) ?>"  disabled/>
                         </span>
                           <span class="input-block">
                             <label for="gravity">Gravidade: </label>

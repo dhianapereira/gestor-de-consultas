@@ -48,7 +48,9 @@
                     include_once('../../utils/autoload.php');
 
                     use app\controllers\SymptomController;
+                    use app\controllers\PatientController;
 
+                    $patient_controller = new PatientController();
                     $symptom_controller = new SymptomController();
 
                     $patient_cpf = $_POST["patient_cpf"];
@@ -63,31 +65,39 @@
                 <?php
                     }
                     else{
+                        $patient = $patient_controller->fetchPatient($patient_cpf);
 
-                        $result = $symptom_controller->addSymptoms($patient_cpf, $symptoms, $start_date);
-
-                        if(!is_bool($result)){
+                        if(is_object($patient)){
+                            $result = $symptom_controller->addSymptoms($patient_cpf, $symptoms, $start_date);
+                            if(!is_bool($result)){
                 ?>
-                            <div class='info'>
-                                <p><?php echo "$result" ?></p>
-                            </div>    
+                                <div class='info'>
+                                    <p><?php echo "$result" ?></p>
+                                </div>    
                 <?php 
-                        } 
-                        else{
+                            } 
+                            else{
+                ?>
+                                <div class='info'>
+                                    <p>O prontuário médico do paciente de CPF: <?php echo ("$patient_cpf") ?> está pronto!</p>
+                                    <br>
+                                    <br>
+                                    <a href="../medical_records/search_medical_records.html">
+                                        <button type="button" class="home-button">
+                                            Visualizar Prontuários
+                                        </button>
+                                    </a>
+                                </div> 
+                <?php
+                            }
+                        }else{
                 ?>
                             <div class='info'>
-                                <p>O prontuário médico do paciente de CPF: <?php echo "$patient_cpf" ?> está pronto!</p>
-                                <br>
-                                <br>
-                                <a href="../medical_records/search_medical_records.html">
-                                    <button type="button" class="home-button">
-                                        Visualizar Prontuários
-                                    </button>
-                                </a>
-                            </div> 
+                                <p>O paciente de CPF: <?php echo ("$patient_cpf") ?> não existe!</p>
+                            </div>
                 <?php
-                        }
-                    }
+                        }  
+                    }  
                 ?>
             </main>
         </div>
