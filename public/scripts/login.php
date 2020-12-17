@@ -41,8 +41,8 @@
 
                     $conn = new Connection();
 
-                    $username = addslashes($_POST["username"]);
-                    $user_password = addslashes($_POST["password"]);
+                    $username = $_POST["username"];
+                    $user_password = $_POST["password"];
                     
                     $sql = 'SELECT * FROM user WHERE username = :username 
                             AND user_password = :user_password';
