@@ -42,7 +42,10 @@
           <button class="sidebar-buttons" onclick="history.back()" title="Voltar">
             <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
           </button>
-          <a class="sidebar-buttons" href="./list_page.php" title="Lista de pacientes">
+          <a class="sidebar-buttons" href="../patient/register_page.html" title="Cadastrar um novo paciente">
+            <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
+          </a>
+          <a class="sidebar-buttons" href="../patient/list_page.php" title="Lista de pacientes">
             <img src="../../../public/styles/img/list.svg" alt="Lista de pacientes" />
           </a>
           <a class="sidebar-buttons" href="../symptom/questionnaire_page.html" title="Questionário">
@@ -54,36 +57,16 @@
         </footer>
       </aside>
       <main class="animate-appear with-sidebar">
-        <form method="POST" action="register_patient.php">
+        <form method="POST" action="register_doctor.php">
           <fieldset>
-            <legend>Dados Pessoais</legend>
+            <legend>Cadastrar Médico(a)</legend>
             <div class="input-block">
-              <label for="full_name">Nome</label>
-              <input id="full_name" name="full_name" required />
+              <label for="name">Nome</label>
+              <input id="name" name="name" required />
             </div>
             <div class="input-block">
-              <label for="cpf">CPF</label>
-              <input id="cpf" name="cpf" required />
-            </div>
-
-            <div class="input-block">
-              <label for="mother_name">Nome da mãe</label>
-              <input id="mother_name" name="mother_name" required />
-            </div>
-
-            <div class="input-block">
-              <label for="companion">Acompanhante</label>
-              <input id="companion" name="companion" required />
-            </div>
-
-            <div class="input-block">
-              <label for="date_of_birth">Data de nascimento</label>
-              <input id="date_of_birth" name="date_of_birth" required />
-            </div>
-
-            <div class="input-block">
-              <label for="patient_address">Endereço</label>
-              <input id="patient_address" name="patient_address" required />
+              <label for="specialty">Especialidade</label>
+              <input id="specialty" name="specialty" required />
             </div>
 
             <div class="input-block">
@@ -111,34 +94,6 @@
                   type="button"
                 >
                   Masculino
-                </button>
-              </div>
-            </div>
-            <div class="input-block">
-              <label for="naturalness">Nacionalidade</label>
-              <input
-                type="hidden"
-                name="naturalness"
-                id="naturalness"
-                value="Brasileiro(a)"
-                required
-              />
-
-              <div class="button-select">
-                <button
-                  data-value="Brasileiro(a)"
-                  onclick="toggleNaturalness(event)"
-                  type="button"
-                  class="active-naturalness"
-                >
-                  Brasileiro(a)
-                </button>
-                <button
-                  data-value="Estrangeiro(a)"
-                  onclick="toggleNaturalness(event)"
-                  type="button"
-                >
-                  Estrangeiro(a)
                 </button>
               </div>
             </div>

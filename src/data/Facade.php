@@ -3,17 +3,20 @@ namespace src\data;
 use src\data\repository\PatientRepository;
 use src\data\repository\SymptomRepository;
 use src\data\repository\MedicalRecordsRepository;
+use src\data\repository\DoctorRepository;
 
 class Facade {
 
     private $patient_repository;
     private $symptom_repository;
     private $medical_records_repository;
+    private $doctor_repository;
 
     public function __construct() {
         $this->patient_repository = new PatientRepository();
         $this->symptom_repository = new SymptomRepository();
         $this->medical_records_repository = new MedicalRecordsRepository();
+        $this->doctor_repository = new DoctorRepository();
     }
 
     public function registerPatient( $cpf, $full_name, $genre, $date_of_birth, 
@@ -27,6 +30,12 @@ class Facade {
 
     public function allPatients() {
         $result = $this->patient_repository->allPatients();
+
+        return $result;
+    }
+
+    public function fetchPatient($cpf) {
+        $result = $this->patient_repository->fetchPatient($cpf);
 
         return $result;
     }
@@ -45,23 +54,23 @@ class Facade {
         }
     }
 
-    public function fetchMedicalRecords($cpf) {
-        $result = $this->medical_records_repository->fetchMedicalRecords($cpf);
-
-        return $result;
-    }
-
-    public function fetchPatient($cpf) {
-        $result = $this->patient_repository->fetchPatient($cpf);
-
-        return $result;
-    }
-
     public function fetchSymptoms($cpf) {
         $result = $this->symptom_repository->fetchSymptoms($cpf);
 
         return $result;
     }
 
+    public function registerDoctor($name, $genre, $specialty) {
+        
+        $result = $this->doctor_repository->register($name, $genre, $specialty);
+
+        return $result;
+    }
+
+    public function fetchMedicalRecords($cpf) {
+        $result = $this->medical_records_repository->fetchMedicalRecords($cpf);
+
+        return $result;
+    }
 }
 ?>
