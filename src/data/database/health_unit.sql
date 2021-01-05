@@ -39,7 +39,8 @@ CREATE TABLE `doctor` (
   `id` INT(11) NOT NULL AUTO_INCREMENT, 
   `name` VARCHAR(100) NOT NULL,
   `genre` VARCHAR(50) NOT NULL,
-  `specialty` VARCHAR(100) NOT NULL, 
+  `specialty` VARCHAR(100) NOT NULL,
+  `active` BOOLEAN NOT NULL, 
   CONSTRAINT `user_pk` PRIMARY KEY (`id`) 
 );
 
