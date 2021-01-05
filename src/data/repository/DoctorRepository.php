@@ -39,5 +39,51 @@ class DoctorRepository {
             $this->conn  = null;
         }
     }
+
+
+
+    public function allDoctors() {
+        try {
+            $sql = 'SELECT * FROM doctor';
+
+            $stmt = $this->conn->connect()->prepare( $sql );
+
+            $stmt->execute();
+
+            $result = $stmt->fetchAll();
+
+            if ( $result!=null ) {
+                $list = [];
+
+                foreach($result as $row){
+                    $id = $row['id'];
+                    $name = $row['name'];
+                    $genre = $row['genre'];
+                    $specialty = $row['specialty'];
+                    
+                    if($row['active']){
+                        $active = "Ativo";
+                    }else{
+                        $active = "Inativo";    
+                    }
+
+                    $doctor = new Doctor($id, $name, $genre, $specialty, $active);
+
+                    array_push($list, $doctor);
+                }
+
+                return $list;
+            }
+
+            $response = "Não foi possível trazer a lista de médicos";
+            return $response;
+        } catch(Exception $e){
+
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 }
 ?>

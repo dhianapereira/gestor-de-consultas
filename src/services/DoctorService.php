@@ -18,5 +18,11 @@
             return $result;
         }
 
+        public function allDoctors(){
+            $result = $this->facade->allDoctors();
+
+            return $result;
+        }
+
     }
 ?>

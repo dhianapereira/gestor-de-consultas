@@ -70,6 +70,12 @@ class Facade {
         return $result;
     }
 
+    public function allDoctors() {
+        $result = $this->doctor_repository->allDoctors();
+
+        return $result;
+    }
+
     public function fetchMedicalRecords($cpf) {
         $result = $this->medical_records_repository->fetchMedicalRecords($cpf);
 

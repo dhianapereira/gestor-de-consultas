@@ -1,6 +1,6 @@
 <html>
     <head>
-		<title>Unidade de Saúde | Lista</title>
+		<title>Unidade de Saúde | Lista de Pacientes</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="#"> 

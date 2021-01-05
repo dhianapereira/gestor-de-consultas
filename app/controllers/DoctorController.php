@@ -16,5 +16,11 @@
               
             return $result;
         }
+
+        public function allDoctors(){
+            $result = $this->doctor_service->allDoctors();
+                
+            return $result;
+        }
     }
 ?>

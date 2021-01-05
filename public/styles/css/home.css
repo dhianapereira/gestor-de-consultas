@@ -86,7 +86,7 @@ a .home-button:hover {
 
   #quick-access {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 1.6rem;
     row-gap: 1.6rem;
     align-items: center;
