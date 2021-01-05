@@ -12,8 +12,8 @@ class DoctorRepository {
 
     public function register($name, $genre, $specialty) {
         try {
-            $sql = 'INSERT INTO doctor (name, genre, specialty) 
-                VALUES (:name, :genre, :specialty)';
+            $sql = 'INSERT INTO doctor (name, genre, specialty, active) 
+                VALUES (:name, :genre, :specialty, :active)';
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -21,6 +21,7 @@ class DoctorRepository {
                 ':name' => $name,
                 ':genre' => $genre,
                 ':specialty' => $specialty,
+                ':active' => 1,
             ) );
 
             if ( $success ) {
