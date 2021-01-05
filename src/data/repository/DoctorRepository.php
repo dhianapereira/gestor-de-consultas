@@ -24,7 +24,7 @@ class DoctorRepository {
             ) );
 
             if ( $success ) {
-                return true;
+                return $success;
             }
 
             $response = "Não foi possível realizar o cadastro do médico(a).

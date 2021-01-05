@@ -11,11 +11,11 @@
             $this->facade =  new Facade();
         }
 
-        public function registerPatient($cpf, $full_name, $genre, $date_of_birth, 
-        $mother_name, $companion, $patient_address, $naturalness){
+        public function register($cpf, $full_name, $genre, $date_of_birth, 
+        $mother_name, $companion, $address, $naturalness){
 
             $result = $this->facade->registerPatient($cpf, $full_name, $genre, $date_of_birth, 
-            $mother_name, $companion, $patient_address, $naturalness);
+            $mother_name, $companion, $address, $naturalness);
 
             return $result;
         }

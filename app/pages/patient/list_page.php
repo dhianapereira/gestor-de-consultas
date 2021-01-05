@@ -95,6 +95,12 @@
                     ?>   
                             </table>
                     <?php
+                        }else{
+                    ?>
+                            <p>
+                                A lista de pacientes está vazia.
+                            </p> 
+                    <?php
                         }
                     ?> 
                 </div>

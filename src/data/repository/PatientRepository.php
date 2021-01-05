@@ -10,15 +10,15 @@ class PatientRepository {
         $this->conn = new Connection();
     }
 
-    public function registerPatient( $cpf, $full_name, $genre, $date_of_birth, 
-    $mother_name, $companion, $patient_address, $naturalness ) {
+    public function register( $cpf, $full_name, $genre, $date_of_birth, 
+    $mother_name, $companion, $address, $naturalness ) {
         try {
             $sql = 'INSERT INTO patient (
                     cpf, full_name, genre, date_of_birth, 
-                    mother_name, companion, patient_address, naturalness
+                    mother_name, companion, address, naturalness
                 ) VALUES (
                     :cpf, :full_name, :genre, :date_of_birth, 
-                    :mother_name, :companion, :patient_address, :naturalness
+                    :mother_name, :companion, :address, :naturalness
                 )';
 
             $stmt = $this->conn->connect()->prepare( $sql );
@@ -30,13 +30,13 @@ class PatientRepository {
                 ':date_of_birth' => $date_of_birth,
                 ':mother_name' => $mother_name,
                 ':companion' => $companion,
-                ':patient_address' => $patient_address,
+                ':address' => $address,
                 ':naturalness' => $naturalness,
             ) );
 
             if ( $success ) {
                 $patient = new Patient( $cpf, $full_name, $genre, $date_of_birth, 
-                $mother_name, $companion, $patient_address, $naturalness);
+                $mother_name, $companion, $address, $naturalness);
 
 
                 return $patient;
@@ -74,11 +74,11 @@ class PatientRepository {
                     $date_of_birth = $row['date_of_birth'];
                     $mother_name = $row['mother_name'];
                     $companion = $row['companion'];
-                    $patient_address = $row['patient_address'];
+                    $address = $row['address'];
                     $naturalness = $row['naturalness'];
     
                     $patient = new Patient($cpf, $full_name, $genre, $date_of_birth,
-                    $mother_name, $companion, $patient_address, $naturalness);
+                    $mother_name, $companion, $address, $naturalness);
 
                     array_push($list, $patient);
                 }
@@ -115,12 +115,12 @@ class PatientRepository {
                 $date_of_birth = $result[0]['date_of_birth'];
                 $mother_name = $result[0]['mother_name'];
                 $companion = $result[0]['companion'];
-                $patient_address = $result[0]['patient_address'];
+                $address = $result[0]['address'];
                 $naturalness = $result[0]['naturalness'];
 
 
                 $patient = new Patient($cpf, $full_name, $genre, $date_of_birth,
-                $mother_name, $companion, $patient_address, $naturalness);
+                $mother_name, $companion, $address, $naturalness);
 
                 return $patient;
             }

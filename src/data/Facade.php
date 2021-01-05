@@ -3,6 +3,7 @@ namespace src\data;
 use src\data\repository\PatientRepository;
 use src\data\repository\SymptomRepository;
 use src\data\repository\MedicalRecordsRepository;
+use src\data\repository\MedicalAppointmentRepository;
 use src\data\repository\DoctorRepository;
 
 class Facade {
@@ -10,20 +11,22 @@ class Facade {
     private $patient_repository;
     private $symptom_repository;
     private $medical_records_repository;
+    private $medical_appointment_repository;
     private $doctor_repository;
 
     public function __construct() {
         $this->patient_repository = new PatientRepository();
         $this->symptom_repository = new SymptomRepository();
         $this->medical_records_repository = new MedicalRecordsRepository();
+        $this->medical_appointment_repository = new MedicalAppointmentRepository();
         $this->doctor_repository = new DoctorRepository();
     }
 
     public function registerPatient( $cpf, $full_name, $genre, $date_of_birth, 
-    $mother_name, $companion, $patient_address, $naturalness ) {
+    $mother_name, $companion, $address, $naturalness ) {
         
-        $result = $this->patient_repository->registerPatient( $cpf, $full_name, $genre, 
-        $date_of_birth, $mother_name, $companion, $patient_address, $naturalness );
+        $result = $this->patient_repository->register( $cpf, $full_name, $genre, 
+        $date_of_birth, $mother_name, $companion, $address, $naturalness );
 
         return $result;
     }
@@ -69,6 +72,14 @@ class Facade {
 
     public function fetchMedicalRecords($cpf) {
         $result = $this->medical_records_repository->fetchMedicalRecords($cpf);
+
+        return $result;
+    }
+
+    public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time){
+
+        $result = $this->medical_appointment_repository->makeAnAppointment($patient_cpf, 
+        $genre, $specialty, $date, $time);
 
         return $result;
     }

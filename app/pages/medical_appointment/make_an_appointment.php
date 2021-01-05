@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Unidade de Saúde | Cadastro</title>
+		<title>Unidade de Saúde | Marcar consulta</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="#"> 
@@ -28,10 +28,16 @@
         <div class="page-pattern">
             <aside class="animate-right sidebar">
                 <footer>
-                    <a class="sidebar-buttons" href="./register_page.html" title="Cadastrar um novo paciente">
+                    <a class="sidebar-buttons" href="./consultation_page.html" title="Marcar uma nova consulta">
+                        <img src="../../../public/styles/img/plus.svg" alt="Marcar uma nova consulta" />
+                    </a>
+                    <a class="sidebar-buttons" href="../doctor/register_page.html" title="Cadastrar um novo médico(a)">
+                        <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo médico(a)" />
+                    </a>
+                    <a class="sidebar-buttons" href="../patient/register_page.html" title="Cadastrar um novo paciente">
                         <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
                     </a>
-                    <a class="sidebar-buttons" href="./list_page.php" title="Lista de pacientes">
+                    <a class="sidebar-buttons" href="../patient/list_page.php" title="Lista de pacientes">
                         <img src="../../../public/styles/img/list.svg" alt="Lista de pacientes" />
                     </a>
                     <a class="sidebar-buttons" href="../symptom/questionnaire_page.html" title="Questionário">
@@ -46,23 +52,18 @@
                 <?php
                     include_once('../../utils/autoload.php');
 
-                    use app\controllers\PatientController;
+                    use app\controllers\MedicalAppointmentController;
 
-                    $patient_controller = new PatientController();
+                    $medical_appointment_controller = new MedicalAppointmentController();
 
-                    $cpf = addslashes($_POST["cpf"]);
-                    $full_name = addslashes($_POST["full_name"]);
+                    $patient_cpf = $_POST["patient_cpf"];
+                    $specialty = $_POST["specialty"];
                     $genre = $_POST["genre"];
-                    $date_of_birth = addslashes($_POST["date_of_birth"]);
-                    $mother_name = addslashes($_POST["mother_name"]);
-                    $companion = addslashes($_POST["companion"]);
-                    $address = addslashes($_POST["address"]);
-                    $naturalness = $_POST["naturalness"];
-
-                    if(!isset($cpf) || !isset($full_name)
-                    || !isset($genre) || !isset($date_of_birth) 
-                    || !isset($mother_name) || !isset($companion)
-                    || !isset($address) || !isset($naturalness)){
+                    $date = $_POST["date"];
+                    $time = $_POST["time"];
+                    
+                    if(!isset($specialty) || !isset($patient_cpf) || !isset($genre)
+                    || !isset($date) || !isset($time)){
                 ?>
                         <div class='info'>
                         <p>Você precisa preencher todos os campos para realizar esta operação!</p>
@@ -71,11 +72,10 @@
                     }
                     else{
 
-                        $result = $patient_controller->register($cpf, $full_name, 
-                        $genre, $date_of_birth, $mother_name, $companion, $address,
-                        $naturalness);
+                        $result = $medical_appointment_controller->makeAnAppointment($patient_cpf, 
+                        $genre, $specialty, $date, $time);
 
-                        if(!is_object($result)){
+                        if(!is_bool($result)){
                 ?>
                             <div class='info'>
                                 <p><?php echo "$result" ?></p>
@@ -85,7 +85,7 @@
                         else{
                 ?>
                             <div class='info'>
-                            <p>O cadastro do paciente foi realizado com sucesso!</p>
+                            <p>A consulta foi marcada com sucesso!</p>
                             </div>    
                 <?php 
                         }

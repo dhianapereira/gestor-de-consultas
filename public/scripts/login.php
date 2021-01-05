@@ -42,16 +42,16 @@
                     $conn = new Connection();
 
                     $username = $_POST["username"];
-                    $user_password = $_POST["password"];
+                    $password = $_POST["password"];
                     
                     $sql = 'SELECT * FROM user WHERE username = :username 
-                            AND user_password = :user_password';
+                            AND password = :password';
 
                     $stmt = $conn->connect()->prepare($sql);
 
                     $stmt->execute(array(
                         ':username' => $username,
-                        ':user_password' => $user_password,
+                        ':password' => $password,
                     ));
 
                     $user = $stmt->fetchAll();

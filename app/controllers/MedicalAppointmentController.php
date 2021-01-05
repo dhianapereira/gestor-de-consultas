@@ -1,0 +1,22 @@
+<?php
+    namespace app\controllers;
+    use src\services\MedicalAppointmentService;
+    
+    class MedicalAppointmentController{
+        private $medical_appointment_service;
+
+        public function __construct()
+        {
+            $this->medical_appointment_service =  new MedicalAppointmentService();
+        }
+        
+        public function makeAnAppointment($patient_cpf, 
+        $genre, $specialty, $date, $time){
+            
+            $result = $this->medical_appointment_service->makeAnAppointment($patient_cpf, 
+            $genre, $specialty, $date, $time);
+              
+            return $result;
+        }
+    }
+?>

@@ -14,14 +14,14 @@ class SymptomRepository {
         try {
 
             foreach($symptoms as $symptom){
-                $sql = 'INSERT INTO symptom (cpf_patient_fk, symptom_name) 
-                        VALUES (:cpf_patient_fk, :symptom_name)';
+                $sql = 'INSERT INTO symptom (cpf_patient_fk, name) 
+                        VALUES (:cpf_patient_fk, :name)';
 
                 $stmt = $this->conn->connect()->prepare( $sql );
 
                 $stmt->execute( array(
                     ':cpf_patient_fk' => $patient_cpf,
-                    ':symptom_name' => $symptom,
+                    ':name' => $symptom,
                 ) );
             }
 
@@ -52,9 +52,9 @@ class SymptomRepository {
                 foreach($result as $row){
                     $id = $row['id'];
                     $cpf_patient_fk = $row['cpf_patient_fk'];
-                    $symptom_name = $row['symptom_name'];
+                    $name = $row['name'];
     
-                    $symptom = new Symptom($id, $cpf_patient_fk, $symptom_name);
+                    $symptom = new Symptom($id, $cpf_patient_fk, $name);
 
                     array_push($list, $symptom);
                 }
