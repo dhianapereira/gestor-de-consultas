@@ -28,9 +28,8 @@ class MedicalAppointmentRepository {
             if($doctor!=null){
                 $id_doctor = $doctor[0]['id'];
 
-                $sql = "INSERT INTO medical_appointment (cpf_patient_fk, id_doctor_fk, time, 
-                date, realized) 
-                    VALUES (:cpf_patient_fk, :id_doctor_fk, :time, :date, :realized)";
+                $sql = "INSERT INTO medical_appointment (cpf_patient_fk, id_doctor_fk, time, date) 
+                    VALUES (:cpf_patient_fk, :id_doctor_fk, :time, :date)";
 
                                 
                 $stmt2 = $this->conn->connect()->prepare( $sql );
@@ -40,7 +39,6 @@ class MedicalAppointmentRepository {
                     ':id_doctor_fk' => $id_doctor,
                     ':time' => $time,
                     ':date' => $date,
-                    ':realized' => 0,
                 ) );
 
                 if ( $success ) {
@@ -63,11 +61,14 @@ class MedicalAppointmentRepository {
 
     public function allMedicalAppointments() {
         try {
-            $sql = "SELECT P.full_name, D.name, MA.id, MA.time, 
-            MA.date, MA.arrival_time, MA.realized 
-            FROM patient AS P
-            INNER JOIN medical_appointment AS MA ON (MA.cpf_patient_fk = P.cpf)
-            INNER JOIN doctor AS D ON (MA.id_doctor_fk = D.id)";
+            $sql = "SELECT MA.id, P.full_name, D.name, MA.time, 
+                    MA.date, MA.arrival_time, MA.realized 
+                    FROM patient AS P
+                        INNER JOIN medical_appointment AS MA 
+                            ON (MA.cpf_patient_fk = P.cpf)
+                        INNER JOIN doctor AS D 
+                            ON (MA.id_doctor_fk = D.id)
+                        ORDER BY MA.arrival_time IS NULL, MA.arrival_time ASC";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -92,7 +93,7 @@ class MedicalAppointmentRepository {
                     }
 
                     if($row['arrival_time']!=null){
-                        $arrival_time = $row['arrival_time'];
+                        $arrival_time = $row['arrival_time'].'h';
                     }else{
                         $arrival_time = "-----";
                     }
