@@ -40,7 +40,7 @@ CREATE TABLE `doctor` (
   `name` VARCHAR(100) NOT NULL,
   `genre` VARCHAR(50) NOT NULL,
   `specialty` VARCHAR(100) NOT NULL,
-  `active` BOOLEAN NOT NULL, 
+  `active` BOOLEAN DEFAULT 1, 
   CONSTRAINT `user_pk` PRIMARY KEY (`id`) 
 );
 
@@ -50,8 +50,8 @@ CREATE TABLE `medical_appointment` (
   `id_doctor_fk` INT(11) NOT NULL,
   `time` VARCHAR(20) NOT NULL,
   `date` VARCHAR(10) NOT NULL,
-  `arrival_time` VARCHAR(20),
-  `realized` BOOLEAN NOT NULL,
+  `arrival_time` INT(11),
+  `realized` BOOLEAN DEFAULT 0,
   CONSTRAINT `medical_appointment_pk` PRIMARY KEY (`id`),
   CONSTRAINT `medical_appointment_fk1` FOREIGN KEY (`cpf_patient_fk`)
   REFERENCES `patient` (`cpf`), 
