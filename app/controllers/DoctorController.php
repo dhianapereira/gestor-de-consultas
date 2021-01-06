@@ -22,5 +22,12 @@
                 
             return $result;
         }
+
+        public function fetchDoctor($id){
+            
+            $result = $this->doctor_service->fetchDoctor($id);
+            
+            return $result;
+        }
     }
 ?>

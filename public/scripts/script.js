@@ -13,6 +13,22 @@ function toggleGenre(event) {
   console.log(input.value)
 }
 
+function toggleActive(event) {
+  document.querySelectorAll(".button-select button").forEach((button) => {
+    button.classList.remove("active-doctor");
+  });
+
+  const button = event.currentTarget;
+
+  button.classList.add("active-doctor");
+
+  const input = document.querySelector('[name="active"]');
+
+  input.value = button.dataset.value;
+
+  console.log(input.value)
+}
+
 function toggleNaturalness(event) {
   document.querySelectorAll(".button-select button").forEach((button) => {
     button.classList.remove("active-naturalness");

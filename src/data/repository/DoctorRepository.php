@@ -85,5 +85,39 @@ class DoctorRepository {
             $this->conn  = null;
         }
     }
+
+    public function fetchDoctor($id) {
+        try {
+            $sql = 'SELECT * FROM doctor WHERE id = :id';
+
+            $stmt = $this->conn->connect()->prepare( $sql );
+
+            $stmt->execute(array(
+                ':id' => $id,
+            ));
+
+            $result = $stmt->fetchAll();
+
+            if ( $result!=null ) {
+                $name = $result[0]['name'];
+                $genre = $result[0]['genre'];
+                $specialty = $result[0]['specialty'];
+                $active = $result[0]['active'];
+
+                $doctor = new Doctor($id, $name, $genre, $specialty, $active);
+
+                return $doctor;
+            }
+
+            $response = "Não foi possível trazer o médico(a) escolhido.";
+            return $response;
+        } catch(Exception $e){
+
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 }
 ?>

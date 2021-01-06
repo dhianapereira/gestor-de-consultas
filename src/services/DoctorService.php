@@ -24,5 +24,11 @@
             return $result;
         }
 
+        public function fetchDoctor($id){
+            $result = $this->facade->fetchDoctor($id);
+
+            return $result;
+        }
+
     }
 ?>
