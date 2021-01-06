@@ -99,6 +99,7 @@ a .home-button:hover {
 
   header label {
     font: 700 2rem/1 "Nunito", sans-serif;
+    background-color: #36cf82;
 
     float: right;
   }

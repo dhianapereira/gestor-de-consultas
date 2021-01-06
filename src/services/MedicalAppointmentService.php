@@ -19,5 +19,11 @@
             return $result;
         }
 
+        public function allMedicalAppointments(){
+            $result = $this->facade->allMedicalAppointments();
+
+            return $result;
+        }
+
     }
 ?>

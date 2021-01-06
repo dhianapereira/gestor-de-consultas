@@ -60,5 +60,62 @@ class MedicalAppointmentRepository {
             $this->conn  = null;
         }
     }
+
+    public function allMedicalAppointments() {
+        try {
+            $sql = "SELECT P.full_name, D.name, MA.id, MA.time, 
+            MA.date, MA.arrival_time, MA.realized 
+            FROM patient AS P
+            INNER JOIN medical_appointment AS MA ON (MA.cpf_patient_fk = P.cpf)
+            INNER JOIN doctor AS D ON (MA.id_doctor_fk = D.id)";
+
+            $stmt = $this->conn->connect()->prepare( $sql );
+
+            $stmt->execute();
+
+            $result = $stmt->fetchAll();
+
+            if ( $result!=null ) {
+                $list = [];
+
+                foreach($result as $row){
+                    $id = $row['id'];
+                    $patient = $row['full_name'];
+                    $doctor = $row['name'];
+                    $time = $row['time'];
+                    $date = $row['date'];
+
+                    if($row['realized']){
+                        $realized = "Sim";
+                    }else{
+                        $realized = "Não";
+                    }
+
+                    if($row['arrival_time']!=null){
+                        $arrival_time = $row['arrival_time'];
+                    }else{
+                        $arrival_time = "-----";
+                    }
+
+                    $medical_appointment = new MedicalAppointment ($id, $patient, $doctor, $date, 
+                    $time, $arrival_time, $realized);
+
+                    array_push($list, $medical_appointment);
+                }
+
+                return $list;
+            }
+
+            $response = "Não foi possível trazer a lista de consultas";
+
+            return $response;
+        } catch(Exception $e){
+
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 }
 ?>

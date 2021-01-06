@@ -18,5 +18,11 @@
               
             return $result;
         }
+
+        public function allMedicalAppointments(){
+            $result = $this->medical_appointment_service->allMedicalAppointments();
+                
+            return $result;
+        }
     }
 ?>
