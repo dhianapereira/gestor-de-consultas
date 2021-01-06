@@ -14,8 +14,8 @@ class SymptomRepository {
         try {
 
             foreach($symptoms as $symptom){
-                $sql = 'INSERT INTO symptom (cpf_patient_fk, name) 
-                        VALUES (:cpf_patient_fk, :name)';
+                $sql = "INSERT INTO symptom (cpf_patient_fk, name) 
+                        VALUES (:cpf_patient_fk, :name)";
 
                 $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -36,7 +36,7 @@ class SymptomRepository {
 
     public function fetchSymptoms($cpf) {
         try {
-            $sql = 'SELECT * FROM symptom WHERE cpf_patient_fk = :cpf_patient_fk';
+            $sql = "SELECT * FROM symptom WHERE cpf_patient_fk = :cpf_patient_fk";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 

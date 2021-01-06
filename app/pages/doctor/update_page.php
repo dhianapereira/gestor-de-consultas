@@ -74,12 +74,18 @@
         <?php 
             }else{
         ?>
-                <form>
+                <form method="POST" action="update_doctor.php">
                     <fieldset>
                         <legend>Dados do Médico(a)</legend>
                         <div class="input-block">
                             <label for="id">ID</label>
                             <input id="id" value="<?php echo ($doctor->getId()) ?>" disabled/>
+                            <input
+                                type="hidden"
+                                name="id"
+                                value="<?php echo ($doctor->getId()) ?>"
+                                required
+                            />
                         </div>
                         <div class="input-block">
                             <label for="name">Nome</label>
@@ -173,7 +179,7 @@
                         </div>
                     </fieldset>
                                 
-                    <button type="submit" class="primary-button">Confirmar</button>
+                    <button type="submit" class="primary-button">Salvar Alterações</button>
                 </form>
         <?php
             }

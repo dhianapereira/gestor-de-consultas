@@ -14,7 +14,7 @@ class MedicalAppointmentRepository {
     public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time) {
         try {
 
-            $select = 'SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty';
+            $select = "SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty";
 
             $stmt = $this->conn->connect()->prepare( $select );
 
@@ -28,9 +28,9 @@ class MedicalAppointmentRepository {
             if($doctor!=null){
                 $id_doctor = $doctor[0]['id'];
 
-                $sql = 'INSERT INTO medical_appointment (cpf_patient_fk, id_doctor_fk, time, 
+                $sql = "INSERT INTO medical_appointment (cpf_patient_fk, id_doctor_fk, time, 
                 date, realized) 
-                    VALUES (:cpf_patient_fk, :id_doctor_fk, :time, :date, :realized)';
+                    VALUES (:cpf_patient_fk, :id_doctor_fk, :time, :date, :realized)";
 
                                 
                 $stmt2 = $this->conn->connect()->prepare( $sql );

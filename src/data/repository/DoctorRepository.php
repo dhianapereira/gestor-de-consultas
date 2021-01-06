@@ -12,8 +12,8 @@ class DoctorRepository {
 
     public function register($name, $genre, $specialty) {
         try {
-            $sql = 'INSERT INTO doctor (name, genre, specialty, active) 
-                VALUES (:name, :genre, :specialty, :active)';
+            $sql = "INSERT INTO doctor (name, genre, specialty, active) 
+                VALUES (:name, :genre, :specialty, :active)";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -40,11 +40,40 @@ class DoctorRepository {
         }
     }
 
+    public function update($doctor) {
+        try {
+            $sql = "UPDATE doctor SET name = :name, genre = :genre, specialty = :specialty,
+                    active = :active WHERE id = :id";
+            
+            $stmt = $this->conn->connect()->prepare( $sql );
+            
+            $success = $stmt->execute( array(
+                ':id' => $doctor->getId(),
+                ':name' => $doctor->getName(),
+                ':genre' => $doctor->getGenre(),
+                ':specialty' => $doctor->getSpecialty(),
+                ':active' => $doctor->getActive(),
+            ) );
 
+            if ( $success ) {
+                return $success;
+            }
+
+            $response = "Não foi possível realizar o cadastro do médico(a).
+            Verifique sua conexão com a internet ou tente mais tarde.";
+            
+            return $response;
+        } catch(Exception $e){
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 
     public function allDoctors() {
         try {
-            $sql = 'SELECT * FROM doctor';
+            $sql = "SELECT * FROM doctor";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -88,7 +117,7 @@ class DoctorRepository {
 
     public function fetchDoctor($id) {
         try {
-            $sql = 'SELECT * FROM doctor WHERE id = :id';
+            $sql = "SELECT * FROM doctor WHERE id = :id";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 

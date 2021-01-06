@@ -17,6 +17,13 @@
             return $result;
         }
 
+        public function update($doctor){
+            
+            $result = $this->doctor_service->update($doctor);
+              
+            return $result;
+        }
+
         public function allDoctors(){
             $result = $this->doctor_service->allDoctors();
                 

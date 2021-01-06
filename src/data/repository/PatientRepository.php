@@ -13,13 +13,13 @@ class PatientRepository {
     public function register( $cpf, $full_name, $genre, $date_of_birth, 
     $mother_name, $companion, $address, $naturalness ) {
         try {
-            $sql = 'INSERT INTO patient (
+            $sql = "INSERT INTO patient (
                     cpf, full_name, genre, date_of_birth, 
                     mother_name, companion, address, naturalness
                 ) VALUES (
                     :cpf, :full_name, :genre, :date_of_birth, 
                     :mother_name, :companion, :address, :naturalness
-                )';
+                )";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -56,7 +56,7 @@ class PatientRepository {
 
     public function allPatients() {
         try {
-            $sql = 'SELECT * FROM patient';
+            $sql = "SELECT * FROM patient";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -99,7 +99,7 @@ class PatientRepository {
 
     public function fetchPatient($cpf) {
         try {
-            $sql = 'SELECT * FROM patient WHERE cpf = :cpf';
+            $sql = "SELECT * FROM patient WHERE cpf = :cpf";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 

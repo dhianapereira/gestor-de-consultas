@@ -18,8 +18,8 @@ class MedicalRecordsRepository {
             $result = ($symptoms/15)*100;
             $gravity = gravityCalculation($result);
 
-            $sql = 'INSERT INTO medical_records (cpf_patient_fk, result, gravity, start_date) 
-                        VALUES (:cpf_patient_fk, :result, :gravity, :start_date)';
+            $sql = "INSERT INTO medical_records (cpf_patient_fk, result, gravity, start_date) 
+                        VALUES (:cpf_patient_fk, :result, :gravity, :start_date)";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -47,7 +47,7 @@ class MedicalRecordsRepository {
 
     public function fetchMedicalRecords($cpf) {
         try {
-            $sql = 'SELECT * FROM medical_records WHERE cpf_patient_fk = :cpf_patient_fk';
+            $sql = "SELECT * FROM medical_records WHERE cpf_patient_fk = :cpf_patient_fk";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 

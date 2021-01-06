@@ -70,6 +70,13 @@ class Facade {
         return $result;
     }
 
+    public function updateDoctor($doctor){
+            
+        $result = $this->doctor_repository->update($doctor);
+          
+        return $result;
+    }
+
     public function allDoctors() {
         $result = $this->doctor_repository->allDoctors();
 

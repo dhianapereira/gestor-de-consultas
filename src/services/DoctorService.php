@@ -18,6 +18,13 @@
             return $result;
         }
 
+        public function update($doctor){
+            
+            $result = $this->facade->updateDoctor($doctor);
+              
+            return $result;
+        }
+
         public function allDoctors(){
             $result = $this->facade->allDoctors();
 
