@@ -25,5 +25,11 @@
             return $result;
         }
 
+        public function fetchMedicalAppointment($id){
+            $result = $this->facade->fetchMedicalAppointment($id);
+
+            return $result;
+        }
+
     }
 ?>

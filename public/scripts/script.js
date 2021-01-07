@@ -15,12 +15,12 @@ function toggleGenre(event) {
 
 function toggleActive(event) {
   document.querySelectorAll(".button-select button").forEach((button) => {
-    button.classList.remove("active-doctor");
+    button.classList.remove("active");
   });
 
   const button = event.currentTarget;
 
-  button.classList.add("active-doctor");
+  button.classList.add("active");
 
   const input = document.querySelector('[name="active"]');
 

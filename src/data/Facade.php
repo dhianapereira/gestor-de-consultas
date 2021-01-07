@@ -108,5 +108,11 @@ class Facade {
 
         return $result;
     }
+
+    public function fetchMedicalAppointment($id) {
+        $result = $this->medical_appointment_repository->fetchMedicalAppointment($id);
+
+        return $result;
+    }
 }
 ?>

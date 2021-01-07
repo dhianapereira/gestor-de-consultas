@@ -24,5 +24,12 @@
                 
             return $result;
         }
+
+        public function fetchMedicalAppointment($id){
+            
+            $result = $this->medical_appointment_service->fetchMedicalAppointment($id);
+            
+            return $result;
+        }
     }
 ?>

@@ -34,8 +34,8 @@
                     <a class="sidebar-buttons" href="./list_page.php" title="Lista de Atendimento">
                         <img src="../../../public/styles/img/medical-appointments-list.svg" alt="Lista de Atendimento" />
                     </a>
-                    <a class="sidebar-buttons" href="#" title="Atualizar Consulta">
-                        <img src="../../../public/styles/img/update-medical-appointment.svg" alt="Atualizar Consulta" />
+                    <a class="sidebar-buttons" href="./search_medical_appointment.html" title="Pesquisar Consulta">
+                        <img src="../../../public/styles/img/update-medical-appointment.svg" alt="Pesquisar Consulta" />
                     </a>
                     <a class="sidebar-buttons" href="../home_page.html" title="Home">
                         <img src="../../../public/styles/img/home.svg" alt="Home" />

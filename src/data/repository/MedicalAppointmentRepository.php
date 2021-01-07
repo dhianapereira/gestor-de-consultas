@@ -118,5 +118,56 @@ class MedicalAppointmentRepository {
             $this->conn  = null;
         }
     }
+
+    public function fetchMedicalAppointment($id) {
+        try {
+            $sql = "SELECT D.specialty, D.genre, D.name, MA.id, 
+                    MA.realized, MA.date, MA.cpf_patient_fk ,MA.time, MA.arrival_time
+                    FROM medical_appointment AS MA
+                        INNER JOIN doctor AS D ON (MA.id_doctor_fk = D.id)
+                    WHERE MA.id = :id
+                    GROUP BY D.specialty, D.genre, D.name, MA.id, 
+                        MA.realized, MA.date, MA.cpf_patient_fk ,
+                        MA.time, MA.arrival_time";
+
+            $stmt = $this->conn->connect()->prepare( $sql );
+
+            $stmt->execute(array(
+                ':id' => $id,
+            ));
+
+            $result = $stmt->fetchAll();
+
+            if ( $result!=null ) {
+                $name = $result[0]['name'];
+                $genre = $result[0]['genre'];
+                $specialty = $result[0]['specialty'];
+                $realized = $result[0]['realized'];
+                $date = $result[0]['date'];
+                $time = $result[0]['time'];
+                $patient_cpf = $result[0]['cpf_patient_fk'];
+
+                if($result[0]['arrival_time']!=null){
+                    $arrival_time = $result[0]['arrival_time'];
+                }else{
+                    $arrival_time = "-----";
+                }
+
+                $medical_appointment = new MedicalAppointment($id, $patient_cpf, 
+                [$name, $specialty, $genre], $date, $time, $arrival_time, $realized);
+
+                return $medical_appointment;
+            }
+
+            $response = "Não foi possível trazer o médico(a) escolhido.";
+            return $response;
+        } catch(Exception $e){
+
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 }
 ?>

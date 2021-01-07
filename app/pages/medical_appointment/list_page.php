@@ -44,8 +44,8 @@
                     <a class="sidebar-buttons" href="./consultation_page.html" title="Marcar Consulta">
                         <img src="../../../public/styles/img/make-an-appointment.svg" alt="Marcar Consulta" />
                     </a>
-                    <a class="sidebar-buttons" href="#" title="Atualizar Consulta">
-                        <img src="../../../public/styles/img/update-medical-appointment.svg" alt="Atualizar Consulta" />
+                    <a class="sidebar-buttons" href="./search_medical_appointment.html" title="Procurar Consulta">
+                        <img src="../../../public/styles/img/update-medical-appointment.svg" alt="Procurar Consulta" />
                     </a>
                 </footer>
             </aside>

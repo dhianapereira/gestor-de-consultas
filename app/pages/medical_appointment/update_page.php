@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Unidade de Saúde | Dados do Médico(a)</title>
+    <title>Unidade de Saúde | Dados da Consulta</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="#" />
@@ -42,11 +42,11 @@
           <button class="sidebar-buttons" onclick="history.back()" title="Voltar">
             <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
           </button>
-          <a class="sidebar-buttons" href="./register_page.html" title="Cadastrar Médico(a)">
-            <img src="../../../public/styles/img/add-doctor.svg" alt="Cadastrar Médico(a)" />
+          <a class="sidebar-buttons" href="./consultation_page.html" title="Marcar Consulta">
+            <img src="../../../public/styles/img/make-an-appointment.svg" alt="Marcar COnsulta" />
           </a>
-          <a class="sidebar-buttons" href="./list_page.php" title="Listar Médicos">
-            <img src="../../../public/styles/img/doctors-list.svg" alt="Listar Médicos" />
+          <a class="sidebar-buttons" href="./list_page.php" title="Lista de Atendimento">
+            <img src="../../../public/styles/img/medical-appointments-list.svg" alt="Lista de Atendimento" />
           </a>
         </footer>
       </aside>
@@ -54,43 +54,47 @@
         <?php
           include_once('../../utils/autoload.php');
 
-          use app\controllers\DoctorController;
+          use app\controllers\MedicalAppointmentController;
 
-          $doctor_controller = new DoctorController();
+          $medical_appointment_controller = new MedicalAppointmentController();
 
           $id = $_POST["id"];
 
           if(isset($id)){  
-            $doctor = $doctor_controller->fetchDoctor($id);    
+            $medical_appointment = $medical_appointment_controller->fetchMedicalAppointment($id);    
 
-            if($doctor == null || !is_object($doctor)){
+            if($medical_appointment == null || !is_object($medical_appointment)){
         ?>
             <div class='info'>
-              <p>Não há nenhum médico com o ID: <?php echo "$id" ?> </p>
+              <p>Não há nenhuma consulta com o ID: <?php echo "$id" ?> </p>
             </div>
         <?php 
             }else{
         ?>
-                <form method="POST" action="update_doctor.php">
+                <form method="POST" action="update_medical_appointment.php">
                     <fieldset>
-                        <legend>Dados do Médico(a)</legend>
+                        <legend>Dados da Consulta</legend>
                         <div class="input-block">
                             <label for="id">ID</label>
-                            <input id="id" value="<?php echo ($doctor->getId()) ?>" disabled/>
+                            <input id="id" value="<?php echo ($medical_appointment->getId()) ?>" disabled/>
                             <input
                                 type="hidden"
                                 name="id"
-                                value="<?php echo ($doctor->getId()) ?>"
+                                value="<?php echo ($medical_appointment->getId()) ?>"
                                 required
                             />
                         </div>
                         <div class="input-block">
-                            <label for="name">Nome</label>
-                            <input id="name" name="name" value="<?php echo ($doctor->getName()) ?>" required/>
+                            <label for="patient_cpf">Paciente</label>
+                            <input id="patient_cpf" name="patient_cpf" value="<?php echo ($medical_appointment->getPatientCpf()) ?>" required/>
+                        </div>
+                        <div class="input-block">
+                            <label for="doctor">Médico(a)</label>
+                            <input id="doctor" value="<?php echo ($medical_appointment->getIdDoctor()[0]) ?>" disabled/>
                         </div>
                         <div class="input-block">
                             <label for="specialty">Especialidade</label>
-                            <input id="specialty" name="specialty" value="<?php echo ($doctor->getSpecialty()) ?>" required/>
+                            <input id="specialty" name="specialty" value="<?php echo ($medical_appointment->getIdDoctor()[1]) ?>" required/>
                         </div>
                         <div class="input-block">
                             <label for="genre">Gênero</label>
@@ -98,7 +102,7 @@
                                 type="hidden"
                                 name="genre"
                                 id="genre"
-                                value="<?php echo ($doctor->getGenre()) ?>"
+                                value="<?php echo ($medical_appointment->getIdDoctor()[2]) ?>"
                                 required
                             />
 
@@ -108,7 +112,7 @@
                                 onclick="toggleGenre(event)"
                                 type="button"
                                 <?php
-                                    if($doctor->getGenre()=="Feminino"){
+                                    if($medical_appointment->getIdDoctor()[2]=="Feminino"){
                                 ?>
                                 class="active-genre"
                                 <?php
@@ -122,7 +126,7 @@
                                 onclick="toggleGenre(event)"
                                 type="button"
                                 <?php
-                                    if($doctor->getGenre()=="Masculino"){
+                                    if($medical_appointment->getIdDoctor()[2]=="Masculino"){
                                 ?>
                                 class="active-genre"
                                 <?php
@@ -133,13 +137,31 @@
                                 </button>
                             </div>
                         </div>
+                        <br>
+                        <br>
+                        <span class="line">
+                            <span class="input-block">
+                                <label for="date">Data: </label>
+                                <input id="date" name="date" value="<?php echo ($medical_appointment->getDate())?>" required />
+                            </span>
+                            <span class="input-block">
+                                <label for="time">Horário: </label>
+                                <input id="time" name="time" value="<?php echo ($medical_appointment->getTime())?>" required />
+                            </span>
+                        </span>
+                        <br>
+                        <br>
                         <div class="input-block">
-                            <label for="active">Status</label>
+                            <label for="arrival_time">Horário de Chegada: </label>
+                            <input id="arrival_time" name="arrival_time" value="<?php echo ($medical_appointment->getArrivalTime())?>" required />
+                        </div>
+                        <div class="input-block">
+                            <label for="realized">Consulta realizada?</label>
                             <input
                                 type="hidden"
                                 name="active"
-                                id="active"
-                                value="<?php echo ($doctor->getActive()) ?>"
+                                id="realized"
+                                value="<?php echo ($medical_appointment->getRealized()) ?>"
                                 required
                             />
 
@@ -149,28 +171,28 @@
                                 onclick="toggleActive(event)"
                                 type="button"
                                 <?php
-                                    if($doctor->getActive()==1){
+                                    if($medical_appointment->getRealized()==1){
                                 ?>
                                 class="active"
                                 <?php
                                     }
                                 ?>
                                 >
-                                Ativo
+                                Sim
                                 </button>
                                 <button
                                 data-value=0
                                 onclick="toggleActive(event)"
                                 type="button"
                                 <?php
-                                    if($doctor->getActive()==0){
+                                    if($medical_appointment->getRealized()==0){
                                 ?>
                                 class="active"
                                 <?php
                                     }
                                 ?>
                                 >
-                                Inativo
+                                Não
                                 </button>
                             </div>
                         </div>
@@ -183,7 +205,7 @@
           }else{
         ?>
                 <div class='info'>
-                  <p>Você precisa inserir um ID!</p>
+                  <p>Você precisa inserir o ID da consulta!</p>
                 </div> 
         <?php
             }
