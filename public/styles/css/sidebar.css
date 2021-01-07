@@ -13,7 +13,7 @@ aside.sidebar {
 
 img{
   filter: contrast(200%);
-  filter: drop-shadow(-1px 0px 8px #fff);
+  filter: drop-shadow(-1px 0px 8px #000);
 }
 
 .sidebar-buttons + .sidebar-buttons {

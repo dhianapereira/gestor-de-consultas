@@ -36,7 +36,7 @@
                         <img src="../../../public/styles/img/file-search.png" alt="Visualizar prontuários" />
                     </a>
                     <a class="sidebar-buttons" href="#" title="Listar Prontuários">
-                        <img src="../../../public/styles/img/list.svg" alt="Listar Prontuários" />
+                        <img src="../../../public/styles/img/medical-records-list.svg" alt="Listar Prontuários" />
                     </a>
                     <a class="sidebar-buttons" href="../home_page.html" title="Home">
                         <img src="../../../public/styles/img/home.svg" alt="Home" />

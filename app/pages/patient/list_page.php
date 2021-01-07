@@ -45,7 +45,7 @@
                         <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
                     </a>
                     <a class="sidebar-buttons" href="#" title="Atualizar Paciente">
-                        <img src="../../../public/styles/img/plus.svg" alt="Atualizar Paciente" />
+                        <img src="../../../public/styles/img/update-patient.svg" alt="Atualizar Paciente" />
                     </a>
                 </footer>
             </aside>
