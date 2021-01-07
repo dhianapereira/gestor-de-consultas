@@ -28,20 +28,17 @@
         <div class="page-pattern">
             <aside class="animate-right sidebar">
                 <footer>
-                    <a class="sidebar-buttons" href="./register_page.html" title="Cadastrar um novo médico(a)">
-                        <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo médico(a)" />
+                    <a class="sidebar-buttons" href="./register_page.html" title="Cadastrar Médico(a)">
+                        <img src="../../../public/styles/img/add-doctor.svg" alt="Cadastrar Médico(a)" />
                     </a>
-                    <a class="sidebar-buttons" href="../patient/register_page.html" title="Cadastrar um novo paciente">
-                        <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
+                    <a class="sidebar-buttons" href="./list_page.php" title="Listar Médicos">
+                        <img src="../../../public/styles/img/doctors-list.svg" alt="Listar Médicos" />
                     </a>
-                    <a class="sidebar-buttons" href="../patient/list_page.php" title="Lista de pacientes">
-                        <img src="../../../public/styles/img/list.svg" alt="Lista de pacientes" />
+                    <a class="sidebar-buttons" href="./search_doctor.html" title="Procurar Médico(a)">
+                        <img src="../../../public/styles/img/doctor.svg" alt="Procurar Médico(a)" />
                     </a>
-                    <a class="sidebar-buttons" href="../symptom/questionnaire_page.html" title="Questionário">
-                        <img src="../../../public/styles/img/questionnaire.svg" alt="Questionário" />
-                    </a>
-                    <a class="sidebar-buttons" href="../medical_records/search_medical_records.html" title="Visualizar prontuários">
-                        <img src="../../../public/styles/img/file-search.png" alt="Visualizar prontuários" />
+                    <a class="sidebar-buttons" href="../home_page.html" title="Home">
+                        <img src="../../../public/styles/img/home.svg" alt="Home" />
                     </a>
                 </footer>
             </aside>

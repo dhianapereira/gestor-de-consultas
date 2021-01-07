@@ -29,22 +29,16 @@
             <aside class="animate-right sidebar">
                 <footer>
                     <a class="sidebar-buttons" href="./consultation_page.html" title="Marcar uma nova consulta">
-                        <img src="../../../public/styles/img/plus.svg" alt="Marcar uma nova consulta" />
+                        <img src="../../../public/styles/img/make-an-appointment.svg" alt="Marcar uma nova consulta" />
                     </a>
-                    <a class="sidebar-buttons" href="../doctor/register_page.html" title="Cadastrar um novo médico(a)">
-                        <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo médico(a)" />
+                    <a class="sidebar-buttons" href="./list_page.php" title="Lista de Atendimento">
+                        <img src="../../../public/styles/img/medical-appointments-list.svg" alt="Lista de Atendimento" />
                     </a>
-                    <a class="sidebar-buttons" href="../patient/register_page.html" title="Cadastrar um novo paciente">
-                        <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
+                    <a class="sidebar-buttons" href="#" title="Atualizar Consulta">
+                        <img src="../../../public/styles/img/update-medical-appointment.svg" alt="Atualizar Consulta" />
                     </a>
-                    <a class="sidebar-buttons" href="../patient/list_page.php" title="Lista de pacientes">
-                        <img src="../../../public/styles/img/list.svg" alt="Lista de pacientes" />
-                    </a>
-                    <a class="sidebar-buttons" href="../symptom/questionnaire_page.html" title="Questionário">
-                        <img src="../../../public/styles/img/questionnaire.svg" alt="Questionário" />
-                    </a>
-                    <a class="sidebar-buttons" href="../medical_records/search_medical_records.html" title="Visualizar prontuários">
-                        <img src="../../../public/styles/img/file-search.png" alt="Visualizar prontuários" />
+                    <a class="sidebar-buttons" href="../home_page.html" title="Home">
+                        <img src="../../../public/styles/img/home.svg" alt="Home" />
                     </a>
                 </footer>
             </aside>

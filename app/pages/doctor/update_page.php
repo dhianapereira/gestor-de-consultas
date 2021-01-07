@@ -38,18 +38,15 @@
   <body>
     <div class="page-pattern">
     <aside class="animate-right sidebar">
-        <footer>
-          <a class="sidebar-buttons" href="./search_medical_records.html" title="Visualizar prontuários">
-            <img src="../../../public/styles/img/file-search.png" alt="Visualizar prontuários" />
+      <footer>
+          <button class="sidebar-buttons" onclick="history.back()" title="Voltar">
+            <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
+          </button>
+          <a class="sidebar-buttons" href="./register_page.html" title="Cadastrar Médico(a)">
+            <img src="../../../public/styles/img/add-doctor.svg" alt="Cadastrar Médico(a)" />
           </a>
-          <a class="sidebar-buttons" href="../patient/register_page.html" title="Cadastrar um novo paciente">
-            <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
-          </a>
-          <a class="sidebar-buttons" href="../patient/list_page.php" title="Lista de pacientes">
-            <img src="../../../public/styles/img/list.svg" alt="Lista de pacientes" />
-          </a>
-          <a class="sidebar-buttons" href="../symptom/questionnaire_page.html" title="Questionário">
-            <img src="../../../public/styles/img/questionnaire.svg" alt="Questionário" />
+          <a class="sidebar-buttons" href="./list_page.php" title="Listar Médicos">
+            <img src="../../../public/styles/img/doctors-list.svg" alt="Listar Médicos" />
           </a>
         </footer>
       </aside>

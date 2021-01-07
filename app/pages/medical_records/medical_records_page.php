@@ -36,14 +36,14 @@
           <a class="sidebar-buttons" href="./search_medical_records.html" title="Visualizar prontuários">
             <img src="../../../public/styles/img/file-search.png" alt="Visualizar prontuários" />
           </a>
-          <a class="sidebar-buttons" href="../patient/register_page.html" title="Cadastrar um novo paciente">
-            <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
-          </a>
-          <a class="sidebar-buttons" href="../patient/list_page.php" title="Lista de pacientes">
-            <img src="../../../public/styles/img/list.svg" alt="Lista de pacientes" />
+          <a class="sidebar-buttons" href="#" title="Listar Prontuários">
+            <img src="../../../public/styles/img/list.svg" alt="Listar Prontuários" />
           </a>
           <a class="sidebar-buttons" href="../symptom/questionnaire_page.html" title="Questionário">
             <img src="../../../public/styles/img/questionnaire.svg" alt="Questionário" />
+          </a>
+          <a class="sidebar-buttons" href="../home_page.html" title="Home">
+            <img src="../../../public/styles/img/home.svg" alt="Home" />
           </a>
         </footer>
       </aside>

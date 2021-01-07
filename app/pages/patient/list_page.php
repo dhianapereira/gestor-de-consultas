@@ -44,11 +44,8 @@
                     <a class="sidebar-buttons" href="./register_page.html" title="Cadastrar um novo paciente">
                         <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
                     </a>
-                    <a class="sidebar-buttons" href="../symptom/questionnaire_page.html" title="Questionário">
-                        <img src="../../../public/styles/img/questionnaire.svg" alt="Questionário" />
-                    </a>
-                    <a class="sidebar-buttons" href="../medical_records/search_medical_records.html" title="Visualizar prontuários">
-                        <img src="../../../public/styles/img/file-search.png" alt="Visualizar prontuários" />
+                    <a class="sidebar-buttons" href="#" title="Atualizar Paciente">
+                        <img src="../../../public/styles/img/plus.svg" alt="Atualizar Paciente" />
                     </a>
                 </footer>
             </aside>

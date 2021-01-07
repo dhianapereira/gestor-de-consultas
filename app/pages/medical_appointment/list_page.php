@@ -41,14 +41,11 @@
                     <button class="sidebar-buttons" onclick="history.back()" title="Voltar">
                         <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
                     </button>
-                    <a class="sidebar-buttons" href="./register_page.html" title="Cadastrar um novo paciente">
-                        <img src="../../../public/styles/img/plus.svg" alt="Cadastrar um novo paciente" />
+                    <a class="sidebar-buttons" href="./consultation_page.html" title="Marcar Consulta">
+                        <img src="../../../public/styles/img/make-an-appointment.svg" alt="Marcar Consulta" />
                     </a>
-                    <a class="sidebar-buttons" href="../symptom/questionnaire_page.html" title="Questionário">
-                        <img src="../../../public/styles/img/questionnaire.svg" alt="Questionário" />
-                    </a>
-                    <a class="sidebar-buttons" href="../medical_records/search_medical_records.html" title="Visualizar prontuários">
-                        <img src="../../../public/styles/img/file-search.png" alt="Visualizar prontuários" />
+                    <a class="sidebar-buttons" href="#" title="Atualizar Consulta">
+                        <img src="../../../public/styles/img/update-medical-appointment.svg" alt="Atualizar Consulta" />
                     </a>
                 </footer>
             </aside>
