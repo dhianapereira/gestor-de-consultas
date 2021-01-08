@@ -114,5 +114,12 @@ class Facade {
 
         return $result;
     }
+
+    public function updateMedicalAppointment($medical_appointment){
+            
+        $result = $this->medical_appointment_repository->update($medical_appointment);
+          
+        return $result;
+    }
 }
 ?>

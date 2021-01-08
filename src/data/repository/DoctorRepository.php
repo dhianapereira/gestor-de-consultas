@@ -58,7 +58,7 @@ class DoctorRepository {
                 return $success;
             }
 
-            $response = "Não foi possível realizar o cadastro do médico(a).
+            $response = "Não foi possível realizar as alterações desejadas.
             Verifique sua conexão com a internet ou tente mais tarde.";
             
             return $response;

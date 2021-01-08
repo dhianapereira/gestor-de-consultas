@@ -31,5 +31,12 @@
             return $result;
         }
 
+        public function update($medical_appointment){
+            
+            $result = $this->facade->updateMedicalAppointment($medical_appointment);
+              
+            return $result;
+        }
+
     }
 ?>

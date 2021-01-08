@@ -169,5 +169,57 @@ class MedicalAppointmentRepository {
             $this->conn  = null;
         }
     }
+
+    public function update($medical_appointment) {
+        try {
+
+            $select = "SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty";
+
+            $stmt = $this->conn->connect()->prepare( $select );
+
+            $stmt->execute(array(
+                ':specialty' => $medical_appointment->getIdDoctor()[0],
+                ':genre' => $medical_appointment->getIdDoctor()[1],
+            ));
+
+            $doctor = $stmt->fetchAll();
+
+            if($doctor!=null){
+                $id_doctor = $doctor[0]['id'];
+
+                $sql = "UPDATE medical_appointment SET cpf_patient_fk = :cpf_patient_fk,
+                id_doctor_fk = :id_doctor_fk, time = :time, date = :date,
+                arrival_time = :arrival_time, realized = :realized 
+                WHERE id = :id";
+            
+                $stmt = $this->conn->connect()->prepare( $sql );
+                
+                $success = $stmt->execute( array(
+                    ':id' => $medical_appointment->getId(),
+                    ':cpf_patient_fk' => $medical_appointment->getPatientCpf(),
+                    ':id_doctor_fk' => $id_doctor,
+                    ':time' => $medical_appointment->getTime(),
+                    ':date' => $medical_appointment->getDate(),
+                    ':arrival_time' => $medical_appointment->getArrivalTime(),
+                    ':realized' => $medical_appointment->getRealized(),
+                ) );
+
+                if ( $success ) {
+                    return $success;
+                }
+
+                $response = "Não foi possível realizar as alterações desejadas na consulta. Tente mais tarde";
+                
+                return $response;
+            }
+
+            return "Não há nenhum médico com essa descrição, por isso não foi possível realizar a alteração.";
+        } catch(Exception $e){
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 }
 ?>

@@ -89,7 +89,7 @@
           }else{
         ?>
                 <div class='info'>
-                  <p>Você precisa alterar alguma informação do médico para que a operação seja realizada.</p>
+                  <p>Você precisa alterar alguma informação para que a operação seja realizada.</p>
                 </div> 
         <?php
             }

@@ -31,5 +31,12 @@
             
             return $result;
         }
+
+        public function update($medical_appointment){
+            
+            $result = $this->medical_appointment_service->update($medical_appointment);
+              
+            return $result;
+        }
     }
 ?>
