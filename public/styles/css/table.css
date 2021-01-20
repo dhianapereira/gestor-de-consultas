@@ -1,8 +1,9 @@
 table {
-  font: 400 1.8rem/1 "Nunito", sans-serif;
+  width: 100%;
+
+  font-weight: 400;
   color: #000;
   border-collapse: collapse;
-  width: 100%;
 }
 
 td,

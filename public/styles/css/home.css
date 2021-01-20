@@ -1,5 +1,16 @@
+:root{
+  --dark-blue:#095379;
+  --green: #36cf82;
+  --dark-green: #448866;
+  --border-radius: 2rem;
+  --simple-border: 1px solid #d3e2e5;
+  --font-weight: 700;
+
+  --padding: 1.5rem 2rem;
+}
+
 #page-landing {
-  background: linear-gradient(329.54deg, #36cf82 0%, #26eb88 100%) no-repeat;
+  background: linear-gradient(329.54deg, var(--green) 0%, #26eb88 100%) no-repeat;
   text-align: center;
   min-height: 100vh;
 
@@ -21,8 +32,8 @@
 }
 
 header label {
-  font: 700 2rem/1 "Nunito", sans-serif;
-  padding:  1.5rem 2rem;
+  font-weight: var(--font-weight);
+  padding:  var(--padding);
 
   float: right;
 }
@@ -38,10 +49,10 @@ fieldset legend {
   font-size: 3.2rem;
   line-height: 1.5;
 
-  color: #095379;
-  font-weight: 700;
+  color: var(--dark-blue);
+  font-weight: var(--font-weight);
 
-  border-bottom: 1px solid #d3e2e5;
+  border-bottom: var(--simple-border);
   margin-bottom: 5rem;
   padding-bottom: 2.4rem;
 }
@@ -62,16 +73,18 @@ fieldset a .home-button{
 a .home-button {
   height: 10rem;
   width: 100%;
-  font: 700 2rem/1 "Nunito", sans-serif;
+
+  font-weight: var(--font-weight);
+
   outline: none;
   border: 0;
-  background: #448866;
-  color: white;
+  background: var(--dark-green);
+  color: #fff;
 
   cursor: pointer;
 
-  border-radius: 2rem;
-  padding: 1.5rem 2rem;
+  border-radius: var(--border-radius);
+  padding: var(--padding);
 
   overflow: hidden;
 
@@ -97,8 +110,9 @@ a .home-button:hover {
   }
 
   header label {
-    font: 700 2rem/1 "Nunito", sans-serif;
-    background-color: #36cf82;
+    font-weight: var(--font-weight);
+
+    background-color: var(--green);
 
     float: right;
   }
@@ -123,10 +137,10 @@ a .home-button:hover {
     font-size: 3.2rem;
     line-height: 1.5;
   
-    color: #095379;
-    font-weight: 700;
+    color: var(--dark-blue);
+    font-weight: var(--font-weight);
   
-    border-bottom: 1px solid #d3e2e5;
+    border-bottom: var(--simple-border);
     margin-bottom: 5rem;
     padding-bottom: 2.4rem;
   }
@@ -139,15 +153,17 @@ a .home-button:hover {
   a .home-button {
     height: 10rem;
     width: 100%;
-    font: 700 2rem/1 "Nunito", sans-serif;
+
+    font-weight: var(--font-weight);
+
     outline: none;
     border: 0;
-    background: #448866;
+    background: var(--dark-green);
     color: white;
 
     cursor: pointer;
 
-    border-radius: 2rem;
+    border-radius: var(--border-radius);
     padding: 1.5rem 2rem;
 
     overflow: hidden;
