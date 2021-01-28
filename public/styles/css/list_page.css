@@ -1,6 +1,6 @@
 #list-container {
   background: white;
-  border: 1px solid #d3e2e5;
+  border: var(--simple-border);
   color: #5c8599;
 
   margin: 6rem auto;
@@ -8,7 +8,7 @@
 
   width: 100rem;
 
-  border-radius: 2rem;
+  border-radius: var(--border-radius);
   overflow: hidden;
 
   display: flex;

@@ -90,30 +90,22 @@
                         <input id="full_name" value="<?php echo ($patient->getName()) ?>" disabled/>
                       </div>
                       <br>
-                      <span class="line">
-                        <span class="input-block">
-                          <label for="cpf">CPF: </label>
+                      <div class="input-block">
+                          <label for="cpf">CPF </label>
                           <input id="cpf"  value="<?php echo ($patient->getCpf()) ?>"  disabled />
-                        </span>
-                        <span class="input-block">
-                          <label  for="date_of_birth">Data de nascimento: </label>
+                      </div>
+                      <div class="input-block">
+                          <label  for="date_of_birth">Data de nascimento </label>
                           <input id="date_of_birth" value="<?php echo ($patient->getDateOfBirth()) ?>" disabled />
-                        </span>
-                      </span>
-                      <br>
-                      <br>
-                      <span class="line">
-                        <span class="input-block">
+                      </div>
+                      <div class="input-block">
                           <label for="genre">Gênero: </label>
                           <input id="genre" value="<?php echo ($patient->getGenre()) ?>" disabled />
-                        </span>
-                        <span class="input-block">
+                      </div>
+                      <div class="input-block">
                           <label for="naturalness">Naturalidade: </label>
                           <input id="naturalness" value="<?php echo ($patient->getNaturalness()) ?>" disabled />
-                        </span>
-                      </span>
-                      <br>
-                      <br>
+                      </div>
                       <div class="input-block">
                         <label for="mother_name">Nome da Mãe</label>
                         <input id="mother_name" value="<?php echo ($patient->getMotherName()) ?>" disabled/>
@@ -133,17 +125,14 @@
                         <label for="start_date">Data de início dos sintomas</label>
                         <input id="start_date"  value="<?php echo ($medical_records->getStartDate()) ?>"  disabled/>
                       </div>
-                      <br>
-                      <span class="line">
-                        <span class="input-block">
-                          <label for="result">Resultado (%): </label>
-                          <input id="result"  value="<?php echo (number_format($medical_records->getResult(), 2)) ?>"  disabled/>
-                        </span>
-                          <span class="input-block">
-                            <label for="gravity">Gravidade: </label>
-                            <input id="gravity"  value="<?php echo ($medical_records->getGravity()) ?>"  disabled/>
-                          </span>
-                        </span>
+                      <div class="input-block">
+                        <label for="result">Resultado (%) </label>
+                        <input id="result"  value="<?php echo (number_format($medical_records->getResult(), 2)) ?>"  disabled/>
+                      </div>
+                      <div class="input-block">
+                        <label for="gravity">Gravidade </label>
+                        <input id="gravity"  value="<?php echo ($medical_records->getGravity()) ?>"  disabled/>
+                      </div>
                     </fieldset>
                     <fieldset>
                       <legend>Sintomas</legend>

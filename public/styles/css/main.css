@@ -1,3 +1,15 @@
+:root{
+  --dark-blue:#095379;
+  --green: #36cf82;
+  --dark-green: #448866;
+  --border-radius: 2rem;
+  --simple-border: 1px solid #d3e2e5;
+  --font-weight: 700;
+  --padding: 1.5rem 2rem;
+
+  font-size: 62.5%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -20,10 +32,6 @@ main {
   flex: 1;
 }
 
-:root {
-  font-size: 62.5%;
-}
-
 body,
 input,
 button,
@@ -35,12 +43,12 @@ li {
 
 ul,
 li {
-  color: #095379;
+  color: var(--dark-blue);
 }
 
 .info {
   background: white;
-  border: 1px solid #d3e2e5;
+  border: var(--simple-border);
   color: #5c8599;
 
   margin: 6.4rem auto;
@@ -48,7 +56,7 @@ li {
 
   width: 70rem;
 
-  border-radius: 2rem;
+  border-radius: var(--border-radius);
   overflow: hidden;
 
   font: 600 1.8rem/1 "Nunito", sans-serif;
@@ -56,4 +64,17 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

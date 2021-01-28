@@ -35,7 +35,7 @@
                         <img src="../../../public/styles/img/list.svg" alt="Lista de pacientes" />
                     </a>
                     <a class="sidebar-buttons" href="#" title="Atualizar Paciente">
-                        <img src="../../../public/styles/img/list.svg" alt="Atualizar Paciente" />
+                        <img src="../../../public/styles/img/update-patient.svg" alt="Atualizar Paciente" />
                     </a>
                     <a class="sidebar-buttons" href="../home_page.html" title="Home">
                         <img src="../../../public/styles/img/home.svg" alt="Home" />

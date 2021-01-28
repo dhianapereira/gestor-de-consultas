@@ -1,14 +1,3 @@
-:root{
-  --dark-blue:#095379;
-  --green: #36cf82;
-  --dark-green: #448866;
-  --border-radius: 2rem;
-  --simple-border: 1px solid #d3e2e5;
-  --font-weight: 700;
-
-  --padding: 1.5rem 2rem;
-}
-
 #page-landing {
   background: linear-gradient(329.54deg, var(--green) 0%, #26eb88 100%) no-repeat;
   text-align: center;
