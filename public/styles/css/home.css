@@ -4,7 +4,7 @@ header {
   padding: 2rem 0 10rem;
 }
 
-#logo {
+.logo {
   color: #f0f2f5;
   font-weight: 800;
 }
@@ -15,7 +15,7 @@ header {
   margin: auto;
 }
 
-#quick-access {
+.quick-access {
   margin-top: -8rem;
 }
 
@@ -42,11 +42,9 @@ a.home-button:hover{
   color: #fff;
 }
 
-
-#content{
-  display: block;
-  width: 100%;
-  overflow-x: auto;
+a.home-button h3 img{
+  width: 48px;
+  height: 48px;
 }
 
 @media (min-width: 800px) {
@@ -54,7 +52,7 @@ a.home-button:hover{
     font-size: 90.5%;
   }
 
-  #quick-access {
+  .quick-access {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;

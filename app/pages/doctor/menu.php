@@ -14,10 +14,10 @@
 
 <body>
   <header>
-    <h3 id="logo">Unidade de Saúde</h3>
+    <h3 class="logo">Unidade de Saúde</h3>
   </header>
   <main class="container">
-    <section id="quick-access">
+    <section class="quick-access">
       <a href="./register_page.html" class="home-button">
         <h3>
           <p>Cadastrar Médico(a)</p>
@@ -28,6 +28,11 @@
         <h3>
           <p>Procurar Médico(a)</p>
           <img src="../../../public/styles/img/doctor.svg" alt="Imagem de pesquisa" />
+        </h3>
+      </a> <a href="../home_page.php" class="home-button">
+        <h3>
+          <p>Home</p>
+          <img src="../../../public/styles/img/home.svg" alt="Imagem de Home" />
         </h3>
       </a>
     </section>

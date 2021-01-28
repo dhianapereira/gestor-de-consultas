@@ -70,7 +70,7 @@
                         </div> 
                 <?php
                     }else{
-                        header('Location:../../app/pages/home_page.html');
+                        header('Location:../../app/pages/home_page.php');
                     }
                 ?>
             </main> 

@@ -1,64 +1,47 @@
-form {
-  width: 70rem;
-  margin: 6.4rem auto;
-  background: #fff;
-  border: var(--simple-border);
-
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  padding: 8rem;
+.box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-fieldset {
-  border: 0;
+.form{
+  background: #f0f2f5;
+  padding: 2.4rem;
+  width: 90%;
+  max-width: 500px;
+
+  display: block;
+  overflow-x: auto;
 }
 
-fieldset + fieldset {
-  margin-top: 8rem;
+.form h2{
+  margin-top: 0;
 }
 
-fieldset legend {
+form{
+  max-width: 500%;
+}
+
+input{
+  background: #f5f8fa;
+  border: none;
+  border-radius: .2rem;
+  padding: .8rem;
+  outline: none;
+
   width: 100%;
-
-  font-size: 3.2rem;
-
-  color: var(--dark-blue);
-  font-weight: 700;
-
-  border-bottom: var(--simple-border);
-  margin-bottom: 1.5rem;
-  padding-bottom: 2.4rem;
 }
 
-.input-block + .input-block {
-  margin-top: 2rem;
+.input-block{
+  margin-top: .8rem;
 }
 
-.line .input-block input{
+
+.line .input-block input {
   width: 48%;
   padding: 1rem;
 
   text-align: center;
-
-  background: #f5f8fa;
-  border: var(--simple-border);
-  border-radius: var(--border-radius);
-
-  color: var(--dark-blue);
-  outline: none;
-}
-
-.input-block label {
-  color: #8fa7b3;
-  margin-bottom: 1rem;
-  line-height: 2rem;
-
-  font-weight: 600;
-}
-
-.input-block input {
-  width: 100%;
-  padding: 1.5rem;
 
   background: #f5f8fa;
   border: var(--simple-border);

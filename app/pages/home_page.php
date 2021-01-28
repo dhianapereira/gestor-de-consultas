@@ -32,10 +32,10 @@
 
   <body>
     <header>
-      <h3 id="logo">Unidade de Saúde</h3>
+      <h3 class="logo">Unidade de Saúde</h3>
     </header>
     <main class="container">
-      <section id="quick-access">
+      <section class="quick-access">
         <a href="#" class="home-button">
           <h3>
             <p>Paciente</p>

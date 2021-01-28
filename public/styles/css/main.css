@@ -62,6 +62,9 @@ footer{
   white-space: nowrap;
   border-width: 0;
 }
+main{
+  flex: 1;
+}
 
 .page-pattern {
   display: flex;

@@ -1,30 +1,25 @@
-.card {
-  background: #fff;
-  padding: 1.5rem 2rem;
-  border-radius: 0.25rem;
+.card{
+    background: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 0.25rem;
 
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
 
-  color: var(--dark-blue);
+    color: var(--dark-blue);
 }
 
-.card h3 {
-  font-weight: normal;
-  font-size: 1rem;
+.card h3{
+    font-weight: normal;
+    font-size: 1rem;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.card p {
-  font-size: 2rem;
-  line-height: 3rem;
+.card p{
+    font-size: 2rem;
+    line-height: 3rem;
 
-  margin-top: 1rem;
-}
-
-.card.total {
-  background: #49aa26;
-  color: #fff;
+    margin-top: 1rem;
 }
