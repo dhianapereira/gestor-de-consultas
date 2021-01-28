@@ -45,7 +45,7 @@
             />
           </h3>
         </a>
-        <a href="#" class="home-button">
+        <a href="./doctor/menu.php" class="home-button">
           <h3>
             <p>Médico</p>
             <img
@@ -71,7 +71,7 @@
             /></h3
         ></a>
       </section>
-      <section id="medical-appointment-list">
+      <section class="table">
         <h2>Lista de Atendimento</h2>
         <?php
         include_once('../utils/autoload.php');

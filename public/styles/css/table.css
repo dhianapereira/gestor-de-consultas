@@ -1,9 +1,15 @@
+.table{
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
 table {
   width: 100%;
 
   font-weight: 400;
   color: #000;
-  
+
   border-collapse: collapse;
   background: #fff;
 }
