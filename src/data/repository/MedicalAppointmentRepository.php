@@ -14,13 +14,14 @@ class MedicalAppointmentRepository {
     public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time) {
         try {
 
-            $select = "SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty";
+            $select = "SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty AND active = :active";
 
             $stmt = $this->conn->connect()->prepare( $select );
 
             $stmt->execute(array(
                 ':genre' => $genre,
                 ':specialty' => $specialty,
+                ':active' => 1,
             ));
 
             $doctor = $stmt->fetchAll();
@@ -68,7 +69,7 @@ class MedicalAppointmentRepository {
                             ON (MA.cpf_patient_fk = P.cpf)
                         INNER JOIN doctor AS D 
                             ON (MA.id_doctor_fk = D.id)
-                        ORDER BY MA.arrival_time IS NULL, MA.arrival_time ASC";
+                        ORDER BY MA.realized != 0, MA.arrival_time IS NULL, MA.arrival_time ASC";
 
             $stmt = $this->conn->connect()->prepare( $sql );
 
@@ -93,7 +94,7 @@ class MedicalAppointmentRepository {
                     }
 
                     if($row['arrival_time']!=null){
-                        $arrival_time = $row['arrival_time'].'h';
+                        $arrival_time = $row['arrival_time'];
                     }else{
                         $arrival_time = "-----";
                     }
@@ -173,13 +174,14 @@ class MedicalAppointmentRepository {
     public function update($medical_appointment) {
         try {
 
-            $select = "SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty";
+            $select = "SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty AND active = :active";
 
             $stmt = $this->conn->connect()->prepare( $select );
 
             $stmt->execute(array(
                 ':specialty' => $medical_appointment->getIdDoctor()[0],
                 ':genre' => $medical_appointment->getIdDoctor()[1],
+                ':active' => 1, 
             ));
 
             $doctor = $stmt->fetchAll();

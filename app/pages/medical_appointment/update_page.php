@@ -142,11 +142,11 @@
                         <span class="line">
                             <span class="input-block">
                                 <label for="date" class="sr-only">Data</label>
-                                <input id="date" name="date" value="<?php echo ($medical_appointment->getDate())?>" required />
+                                <input type="date" id="date" name="date" value="<?php echo ($medical_appointment->getDate())?>" required />
                             </span>
                             <span class="input-block">
                                 <label for="time" class="sr-only">Horário</label>
-                                <input id="time" name="time" value="<?php echo ($medical_appointment->getTime())?>" required />
+                                <input type="time" id="time" name="time" value="<?php echo ($medical_appointment->getTime())?>" required />
                             </span>
                         </span>
                         <br>

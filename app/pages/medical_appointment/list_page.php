@@ -61,7 +61,6 @@
                         $medical_appointment_list = $medical_appointment_controller->allMedicalAppointments();
 
                         if($medical_appointment_list!=null && is_array($medical_appointment_list)){
-
                     ?>
                             <table>
                                 <tr>
@@ -79,7 +78,7 @@
                                 <td><?php echo ($medical_appointment->getId());?></td>
                                 <td><?php echo ($medical_appointment->getPatientCpf());?></td>
                                 <td><?php echo ($medical_appointment->getIdDoctor());?></td>
-                                <td><?php echo ($medical_appointment->getDate().' - '.$medical_appointment->getTime());?></td>
+                                <td><?php echo ($medical_appointment->getDate()." às ".$medical_appointment->getTime());?></td>
                                 <td><?php echo ($medical_appointment->getArrivalTime());?></td>
                                 <td><?php echo ($medical_appointment->getRealized());?></td>
                             </tr>
