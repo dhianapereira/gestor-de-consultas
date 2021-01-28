@@ -6,7 +6,7 @@ CREATE TABLE patient (
   cpf VARCHAR(14) NOT NULL,
   full_name VARCHAR(100) NOT NULL,
   genre VARCHAR(50) NOT NULL,
-  date_of_birth VARCHAR(10) NOT NULL,
+  date_of_birth DATE NOT NULL,
   mother_name VARCHAR(100) NOT NULL,
   companion VARCHAR(100) NOT NULL,
   address VARCHAR(100) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE medical_records (
   cpf_patient_fk VARCHAR(14) NOT NULL,
   result FLOAT NOT NULL,
   gravity VARCHAR(50) NOT NULL,
-  start_date VARCHAR(10) NOT NULL,
+  start_date DATE NOT NULL,
   CONSTRAINT medical_records_pk PRIMARY KEY (id),
   CONSTRAINT medical_records_fk FOREIGN KEY (cpf_patient_fk)
   REFERENCES patient (cpf)
@@ -48,9 +48,9 @@ CREATE TABLE medical_appointment (
   id INT(11) NOT NULL AUTO_INCREMENT,
   cpf_patient_fk VARCHAR(14) NOT NULL,
   id_doctor_fk INT(11) NOT NULL,
-  time VARCHAR(20) NOT NULL,
-  date VARCHAR(10) NOT NULL,
-  arrival_time INT(11),
+  time TIME NOT NULL,
+  date DATE NOT NULL,
+  arrival_time TIME,
   realized BOOLEAN DEFAULT 0,
   CONSTRAINT medical_appointment_pk PRIMARY KEY (id),
   CONSTRAINT medical_appointment_fk1 FOREIGN KEY (cpf_patient_fk)
