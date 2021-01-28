@@ -81,7 +81,7 @@
         ?>
           <div class="card">
             <h3>
-              <span>Operação Realizada</span>
+              <span>Operação realizada</span>
               <img src="../../../public/styles/img/success.svg" alt="Imagem de mensagem de sucesso">
             </h3>
             <p>As atualizações foram realizadas com sucesso!</p>
@@ -92,7 +92,7 @@
         ?>
         <div class="card">
           <h3>
-            <span>Mensagem de Erro</span>
+            <span>Não foi possível realizar esta operação</span>
             <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
           </h3>
           <p>Você precisa alterar alguma informação para que a operação seja realizada.</p>

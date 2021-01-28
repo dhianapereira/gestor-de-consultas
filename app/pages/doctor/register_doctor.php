@@ -43,24 +43,24 @@
                 </h3>
             </a>
         </section>
-        <?php
-        include_once('../../utils/autoload.php');
+        <section class="box">
+            <?php
+            include_once('../../utils/autoload.php');
 
-        use app\controllers\DoctorController;
+            use app\controllers\DoctorController;
 
-        $doctor_controller = new DoctorController();
+            $doctor_controller = new DoctorController();
 
-        $name = $_POST["name"];
-        $genre = $_POST["genre"];
-        $specialty = $_POST["specialty"];
+            $name = $_POST["name"];
+            $genre = $_POST["genre"];
+            $specialty = $_POST["specialty"];
 
-        if (!isset($specialty) || !isset($name) || !isset($genre)) {
-        ?>
-            <section class="box">
+            if (!isset($specialty) || !isset($name) || !isset($genre)) {
+            ?>
 
                 <div class="card">
                     <h3>
-                        <span>Mensagem de Erro</span>
+                        <span>Não foi possível realizar esta operação</span>
                         <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
                     </h3>
                     <p>Você precisa preencher todos os campos para realizar esta operação!</p>
@@ -93,7 +93,7 @@
                 }
             }
             ?>
-            </section>
+        </section>
     </main>
 
     <footer>

@@ -1,13 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 
 <head>
-    <title>Unidade de Saúde | Lista de Atendimento</title>
-    <meta charset="utf-8">
+    <title>Unidade de Saúde | Consultas</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../../../public/styles/img/doctors-list.svg" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/table.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
@@ -46,9 +46,10 @@
             $medical_appointment_controller = new MedicalAppointmentController();
 
             $medical_appointment_list = $medical_appointment_controller->allMedicalAppointments();
-
-            if ($medical_appointment_list != null && is_array($medical_appointment_list)) {
-            ?>
+            if (
+                $medical_appointment_list != null &&
+                is_array($medical_appointment_list)
+            ) { ?>
                 <table>
                     <tr>
                         <th>ID</th>
@@ -65,7 +66,10 @@
                             <td><?php echo ($medical_appointment->getId()); ?></td>
                             <td><?php echo ($medical_appointment->getPatientCpf()); ?></td>
                             <td><?php echo ($medical_appointment->getIdDoctor()); ?></td>
-                            <td><?php echo ($medical_appointment->getDate() . " às " . $medical_appointment->getTime()); ?></td>
+                            <td>
+                                <?php echo ($medical_appointment->getDate() . " às
+              " . $medical_appointment->getTime()); ?>
+                            </td>
                             <td><?php echo ($medical_appointment->getArrivalTime()); ?></td>
                             <td><?php echo ($medical_appointment->getRealized()); ?></td>
                         </tr>
@@ -76,19 +80,12 @@
             <?php
             } else {
             ?>
-                <div class="card">
-                    <h3>
-                        <span>A lista de atendimento está vazia</span>
-                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Ainda não há nenhuma consulta marcada.</p>
-                </div>
+                <p>A lista de atendimento está vazia.</p>
             <?php
             }
             ?>
         </section>
     </main>
-
     <footer>
         <p>2021 - Unidade de Saúde</p>
     </footer>

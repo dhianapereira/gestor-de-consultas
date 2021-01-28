@@ -54,9 +54,9 @@
             />
           </h3>
         </a>
-        <a href="#" class="home-button"
+        <a href="./medical_appointment/menu.php" class="home-button"
           ><h3>
-            <p>Marcar Consultas</p>
+            <p>Consultas</p>
             <img
               src="../../public/styles/img/make-an-appointment.svg"
               alt="Imagem de consulta"
