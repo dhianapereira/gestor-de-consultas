@@ -3,7 +3,9 @@ table {
 
   font-weight: 400;
   color: #000;
+  
   border-collapse: collapse;
+  background: #fff;
 }
 
 td,

@@ -1,167 +1,62 @@
-#page-landing {
-  background: linear-gradient(329.54deg, var(--green) 0%, #26eb88 100%) no-repeat;
+header {
+  background: var(--green);
   text-align: center;
-  min-height: 100vh;
+  padding: 2rem 0 10rem;
+}
+
+#logo {
+  color: #f0f2f5;
+  font-weight: 800;
+}
+
+.container {
+  width: min(90vw, 800px);
+
+  margin: auto;
+}
+
+#quick-access {
+  margin-top: -8rem;
+}
+
+a.home-button{
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 0.25rem;
+
+  margin-bottom: 2rem;
+
+  color: var(--dark-blue);
+
+  cursor: pointer;
+
+  text-decoration: none;
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#container {
-  margin: auto;
-
-  width: min(90%, 112rem);
-
-  display: grid;
-  grid-template-columns: repeat(1fr, 1fr);
-  column-gap: 2.6rem;
-  align-items: center;
-  justify-content: center;
-}
-
-header label {
-  font-weight: var(--font-weight);
-  padding:  var(--padding);
-
-  float: right;
-}
-
-fieldset {
-  border: 0;
-  margin-top: 1rem;
-}
-
-fieldset legend {
-  width: 50%;
-
-  font-size: 3.2rem;
-  line-height: 1.5;
-
-  color: var(--dark-blue);
-  font-weight: var(--font-weight);
-
-  border-bottom: var(--simple-border);
-  margin-bottom: 5rem;
-  padding-bottom: 2.4rem;
-}
-
-fieldset a .home-button{
-  margin-bottom: 1rem;
-}
-
-#quick-access {
-  display: grid;
-  grid-template-columns: repeat(1fr, 1fr);
-  column-gap: 0.6rem;
-  row-gap: 0.6rem;
-  align-items: center;
-  justify-content: center;
-}
-
-a .home-button {
-  height: 10rem;
-  width: 100%;
-
-  font-weight: var(--font-weight);
-
-  outline: none;
-  border: 0;
+a.home-button:hover{
   background: var(--dark-green);
   color: #fff;
-
-  cursor: pointer;
-
-  border-radius: var(--border-radius);
-  padding: var(--padding);
-
-  overflow: hidden;
-
-  opacity: 1;
-
-  transition: opacity 0.2s;
-}
-a .home-button:hover {
-  opacity: 0.8;
 }
 
-/*desktop version*/
 
-@media (min-width: 760px) {
-  #container {
-    margin: auto;
+#content{
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
 
-    width: min(90%, 112rem);
-
-    display: grid;
-    grid-template-columns: repeat(1fr, 1fr);
-    row-gap: 3rem;
-  }
-
-  header label {
-    font-weight: var(--font-weight);
-
-    background-color: var(--green);
-
-    float: right;
+@media (min-width: 800px) {
+  html {
+    font-size: 90.5%;
   }
 
   #quick-access {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    column-gap: 1rem;
-    row-gap: 1rem;
-    align-items: center;
-    justify-content: center;
-  }
-
-  fieldset {
-    border: 0;
-    margin-top: 1rem;
-  }
-  
-  fieldset legend {
-    width: 50%;
-  
-    font-size: 3.2rem;
-    line-height: 1.5;
-  
-    color: var(--dark-blue);
-    font-weight: var(--font-weight);
-  
-    border-bottom: var(--simple-border);
-    margin-bottom: 5rem;
-    padding-bottom: 2.4rem;
-  }
-
-  fieldset a .home-button{
-    margin-bottom: 1rem;
-  }
-  
-
-  a .home-button {
-    height: 10rem;
-    width: 100%;
-
-    font-weight: var(--font-weight);
-
-    outline: none;
-    border: 0;
-    background: var(--dark-green);
-    color: white;
-
-    cursor: pointer;
-
-    border-radius: var(--border-radius);
-    padding: 1.5rem 2rem;
-
-    overflow: hidden;
-
-    opacity: 1;
-
-    transition: opacity 0.2s;
-  }
-  a .home-button:hover {
-    opacity: 0.8;
+    gap: 2rem;
   }
 }

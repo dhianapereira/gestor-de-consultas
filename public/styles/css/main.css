@@ -6,8 +6,6 @@
   --simple-border: 1px solid #d3e2e5;
   --font-weight: 700;
   --padding: 1.5rem 2rem;
-
-  font-size: 62.5%;
 }
 
 * {
@@ -16,33 +14,19 @@
   box-sizing: border-box;
 }
 
-.page-pattern {
-  display: flex;
-  min-height: 100vh;
-  margin: auto;
+html{
+  font-size: 93.75%;
 }
 
 body {
-  height: 100vh;
-  color: white;
-  background: #ebf2f5;
+  background: #f0f2f5;
+  font-family: "Nunito", sans-serif;
+  color: var(--dark-blue);
 }
 
-main {
-  flex: 1;
-}
-
-body,
-input,
-button,
-label,
-ul,
-li {
-  font: 400 1.8rem/1 "Nunito", sans-serif;
-}
-
-ul,
-li {
+footer{
+  text-align: center;
+  padding: 4rem 0 2rem;
   color: var(--dark-blue);
 }
 
@@ -77,4 +61,10 @@ li {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+.page-pattern {
+  display: flex;
+  min-height: 100vh;
+  margin: auto;
 }

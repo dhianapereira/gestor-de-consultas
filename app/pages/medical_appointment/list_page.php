@@ -69,7 +69,7 @@
                                     <th>Médico(a)</th>
                                     <th>Data e Horário</th>
                                     <th>Horário de chegada</th>
-                                    <th>Consulta Realizada</th>
+                                    <th>Consulta Realizada?</th>
                             </tr>
                     <?php
                         foreach ($medical_appointment_list as $medical_appointment) {
