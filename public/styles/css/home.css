@@ -15,7 +15,8 @@ header {
   margin: auto;
 }
 
-.quick-access {
+.quick-access,
+.up {
   margin-top: -8rem;
 }
 
@@ -56,5 +57,11 @@ a.home-button h3 img{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
+  }
+
+  .up{
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
