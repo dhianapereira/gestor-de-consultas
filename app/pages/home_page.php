@@ -36,7 +36,7 @@
     </header>
     <main class="container">
       <section class="quick-access">
-        <a href="#" class="home-button">
+        <a href="./patient/menu.php" class="home-button">
           <h3>
             <p>Paciente</p>
             <img
