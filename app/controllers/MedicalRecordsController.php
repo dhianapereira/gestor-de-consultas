@@ -16,5 +16,11 @@
             
             return $result;
         }
+
+        public function allMedicalRecords(){
+            $result = $this->medical_records_service->allMedicalRecords();
+                
+            return $result;
+        }
     }
 ?>

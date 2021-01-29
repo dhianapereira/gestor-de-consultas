@@ -32,7 +32,7 @@
                     <img src="../../../public/styles/img/file-search.png" alt="Imagem de prontuário" />
                 </h3>
             </a>
-            <a href="#" class="home-button">
+            <a href="../medical_records/list_page.php" class="home-button">
                 <h3>
                     <p>Listar Prontuários</p>
                     <img src="../../../public/styles/img/medical-records-list.svg" alt="Imagem de lista de prontuários" />

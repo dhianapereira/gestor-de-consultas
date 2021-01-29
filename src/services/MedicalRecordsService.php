@@ -17,5 +17,11 @@
 
             return $result;
         }
+
+        public function allMedicalRecords(){
+            $result = $this->facade->allMedicalRecords();
+
+            return $result;
+        }
     }
 ?>

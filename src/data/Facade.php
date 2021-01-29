@@ -57,6 +57,12 @@ class Facade {
         }
     }
 
+    public function allMedicalRecords() {
+        $result = $this->medical_records_repository->allMedicalRecords();
+
+        return $result;
+    }
+
     public function fetchSymptoms($cpf) {
         $result = $this->symptom_repository->fetchSymptoms($cpf);
 

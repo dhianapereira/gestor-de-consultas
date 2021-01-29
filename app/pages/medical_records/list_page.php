@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<html>
 
 <head>
-    <title>Unidade de Saúde | Prontuário</title>
-    <meta charset="utf-8" />
+    <title>Unidade de Saúde | Lista de Prontuários</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../../../public/styles/img/doctors-list.svg" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/table.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
@@ -67,7 +67,7 @@
                             <td><?php echo ($medical_records->getResult()); ?></td>
                             <td><?php echo ($medical_records->getGravity()); ?></td>
                             <td><?php echo ($medical_records->getStartDate()); ?></td>
-
+                        
                         </tr>
                     <?php
                     }
@@ -88,6 +88,7 @@
             ?>
         </section>
     </main>
+
     <footer>
         <p>2021 - Unidade de Saúde</p>
     </footer>

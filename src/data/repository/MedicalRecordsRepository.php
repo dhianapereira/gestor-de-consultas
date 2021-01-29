@@ -79,5 +79,44 @@ class MedicalRecordsRepository {
             $this->conn  = null;
         }
     }
+
+    public function allMedicalRecords() {
+        try {
+            $sql = "SELECT * FROM medical_records";
+
+            $stmt = $this->conn->connect()->prepare( $sql );
+
+            $stmt->execute();
+
+            $result = $stmt->fetchAll();
+
+            if ( $result!=null ) {
+                $list = [];
+
+                foreach($result as $row){
+                    $id = $row['id'];
+                    $patient_cpf = $row['cpf_patient_fk'];
+                    $result = $row['result'];
+                    $gravity = $row['gravity'];
+                    $start_date = $row['start_date'];
+
+                    $medical_records = new MedicalRecords($id, $patient_cpf, $result, $gravity, $start_date);
+
+                    array_push($list, $medical_records);
+                }
+
+                return $list;
+            }
+
+            $response = "Não foi possível trazer a lista de médicos";
+            return $response;
+        } catch(\Exception $e){
+
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }
 }
 ?>
