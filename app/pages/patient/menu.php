@@ -85,10 +85,10 @@
             ?>
                 <div class="card">
                     <h3>
-                        <span>A lista de prontuários está vazia</span>
+                        <span>A lista de pacientes está vazia</span>
                         <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
                     </h3>
-                    <p>Ainda não há nenhum prontuário no sistema.</p>
+                    <p>Ainda não há nenhum paciente cadastrado.</p>
                 </div>
             <?php
             }
