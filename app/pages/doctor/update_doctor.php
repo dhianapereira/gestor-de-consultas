@@ -12,7 +12,6 @@
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
-<script src="../../../public/scripts/script.js"></script>
 
 <body>
   <header>
@@ -46,8 +45,7 @@
         </h3>
       </a>
     </section>
-    <section>
-
+    <section class="box">
       <?php
       include_once('../../utils/autoload.php');
 

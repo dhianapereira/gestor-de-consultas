@@ -1,5 +1,5 @@
-:root{
-  --dark-blue:#095379;
+:root {
+  --dark-blue: #095379;
   --green: #36cf82;
   --dark-green: #448866;
   --border-radius: 2rem;
@@ -14,7 +14,7 @@
   box-sizing: border-box;
 }
 
-html{
+html {
   font-size: 93.75%;
 }
 
@@ -24,33 +24,13 @@ body {
   color: var(--dark-blue);
 }
 
-footer{
+footer {
   text-align: center;
   padding: 4rem 0 2rem;
   color: var(--dark-blue);
 }
 
-.info {
-  background: white;
-  border: var(--simple-border);
-  color: #5c8599;
-
-  margin: 6.4rem auto;
-  padding: 8rem;
-
-  width: 70rem;
-
-  border-radius: var(--border-radius);
-  overflow: hidden;
-
-  font: 600 1.8rem/1 "Nunito", sans-serif;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sr-only{
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -61,13 +41,4 @@ footer{
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-main{
-  flex: 1;
-}
-
-.page-pattern {
-  display: flex;
-  min-height: 100vh;
-  margin: auto;
 }

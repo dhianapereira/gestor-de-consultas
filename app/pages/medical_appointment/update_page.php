@@ -15,44 +15,61 @@
 <script src="../../../public/scripts/script.js"></script>
 
 <body>
-  <div class="page-pattern">
-    <aside class="animate-right sidebar">
-      <footer>
-        <button class="sidebar-buttons" onclick="history.back()" title="Voltar">
-          <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
-        </button>
-        <a class="sidebar-buttons" href="./consultation_page.html" title="Marcar Consulta">
-          <img src="../../../public/styles/img/make-an-appointment.svg" alt="Marcar COnsulta" />
-        </a>
-        <a class="sidebar-buttons" href="./list_page.php" title="Lista de Atendimento">
-          <img src="../../../public/styles/img/medical-appointments-list.svg" alt="Lista de Atendimento" />
-        </a>
-      </footer>
-    </aside>
-    <main class="animate-appear with-sidebar">
-      <?php
-      include_once('../../utils/autoload.php');
-
-      use app\controllers\MedicalAppointmentController;
-
-      $medical_appointment_controller = new MedicalAppointmentController();
-
-      $id = $_POST["id"];
-
-      if (isset($id)) {
-        $medical_appointment = $medical_appointment_controller->fetchMedicalAppointment($id);
-
-        if ($medical_appointment == null || !is_object($medical_appointment)) {
-      ?>
-          <div class='info'>
-            <p>Não há nenhuma consulta com o ID: <?php echo "$id" ?> </p>
-          </div>
+  <header>
+    <h3 class="logo">Unidade de Saúde</h3>
+  </header>
+  <main class="container">
+    <section class="quick-access">
+      <a href="./search_medical_appointment.html" class="home-button">
+        <h3>
+          <p>Procurar Consulta</p>
+          <img src="../../../public/styles/img/update-medical-appointment.svg" alt="Imagem de pesquisa" />
+        </h3>
+      </a> <a href="./consultation_page.html" class="home-button">
+        <h3>
+          <p>Marcar Consulta</p>
+          <img src="../../../public/styles/img/make-an-appointment.svg" alt="Imagem de marcar consulta" />
+        </h3>
+      </a><a href="./list_page.php" class="home-button">
+        <h3>
+          <p>Lista de Atendimento</p>
+          <img src="../../../public/styles/img/medical-appointments-list.svg" alt="Imagem de lista de atendimento" />
+        </h3>
+      </a><a href="../home_page.php" class="home-button">
+        <h3>
+          <p>Home</p>
+          <img src="../../../public/styles/img/home.svg" alt="Imagem de Home" />
+        </h3>
+      </a>
+    </section>
+    <section class="box">
+      <div class="form">
         <?php
-        } else {
+        include_once('../../utils/autoload.php');
+
+        use app\controllers\MedicalAppointmentController;
+
+        $medical_appointment_controller = new MedicalAppointmentController();
+
+        $id = $_POST["id"];
+
+        if (isset($id)) {
+          $medical_appointment = $medical_appointment_controller->fetchMedicalAppointment($id);
+
+          if ($medical_appointment == null || !is_object($medical_appointment)) {
         ?>
-          <form method="POST" action="update_medical_appointment.php">
-            <fieldset>
-              <legend>Dados da Consulta</legend>
+            <div class="card">
+              <h3>
+                <span>Mensagem de Erro</span>
+                <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
+              </h3>
+              <p>Não há nenhuma consulta com o ID: <?php echo "$id" ?> </p>
+            </div>
+          <?php
+          } else {
+          ?>
+            <h2>Dados da Consulta</h2>
+            <form method="POST" action="update_medical_appointment.php">
               <div class="input-block">
                 <label for="id">ID</label>
                 <input id="id" value="<?php echo ($medical_appointment->getId()) ?>" disabled />
@@ -78,15 +95,15 @@
                   <button data-value="Feminino" onclick="toggleGenre(event)" type="button" <?php
                                                                                             if ($medical_appointment->getIdDoctor()[2] == "Feminino") {
                                                                                             ?> class="active-genre" <?php
-                                                                                            }
-                                                        ?>>
+                                                                                                                  }
+                                                                                                                    ?>>
                     Feminino
                   </button>
                   <button data-value="Masculino" onclick="toggleGenre(event)" type="button" <?php
                                                                                             if ($medical_appointment->getIdDoctor()[2] == "Masculino") {
                                                                                             ?> class="active-genre" <?php
-                                                                                            }
-                                                        ?>>
+                                                                                                                  }
+                                                                                                                    ?>>
                     Masculino
                   </button>
                 </div>
@@ -117,35 +134,42 @@
                   <button data-value=1 onclick="toggleActive(event)" type="button" <?php
                                                                                     if ($medical_appointment->getRealized() == 1) {
                                                                                     ?> class="active" <?php
-                                                                                    }
-                                                  ?>>
+                                                                                                    }
+                                                                                                      ?>>
                     Sim
                   </button>
                   <button data-value=0 onclick="toggleActive(event)" type="button" <?php
                                                                                     if ($medical_appointment->getRealized() == 0) {
                                                                                     ?> class="active" <?php
-                                                                                    }
-                                                  ?>>
+                                                                                                    }
+                                                                                                      ?>>
                     Não
                   </button>
                 </div>
               </div>
-            </fieldset>
-
-            <button type="submit" class="primary-button">Salvar Alterações</button>
-          </form>
+              <button type="submit" class="primary-button">Salvar Alterações</button>
+            </form>
+          <?php
+          }
+        } else {
+          ?>
+          <div class="card">
+            <h3>
+              <span>Não foi possível realizar esta operação</span>
+              <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
+            </h3>
+            <p>Você precisa inserir o ID da consulta!</p>
+          </div>
         <?php
         }
-      } else {
         ?>
-        <div class='info'>
-          <p>Você precisa inserir o ID da consulta!</p>
-        </div>
-      <?php
-      }
-      ?>
-    </main>
-  </div>
+      </div>
+
+    </section>
+  </main>
+  <footer>
+    <p>2021 - Unidade de Saúde</p>
+  </footer>
 </body>
 
 </html>
