@@ -90,13 +90,12 @@
             } else {
               $symptoms = $symptom_controller->fetchSymptoms($cpf);
             ?>
-              <h2>Prontuário</h2>
+              <h2>Dados Pessoais</h2>
               <form>
                 <div class="input-block">
                   <label for="full_name">Nome</label>
                   <input id="full_name" value="<?php echo ($patient->getName()) ?>" disabled />
                 </div>
-                <br>
                 <div class="input-block">
                   <label for="cpf">CPF </label>
                   <input id="cpf" value="<?php echo ($patient->getCpf()) ?>" disabled />
@@ -125,41 +124,37 @@
                   <label for="patient_address">Endereço</label>
                   <input id="patient_address" value="<?php echo ($patient->getAddress()) ?>" disabled />
                 </div>
-                <fieldset>
-                  <legend>Resultados</legend>
-                  <div class="input-block">
-                    <label for="start_date">Data de início dos sintomas</label>
-                    <input id="start_date" value="<?php echo ($medical_records->getStartDate()) ?>" disabled />
-                  </div>
-                  <div class="input-block">
-                    <label for="result">Resultado (%) </label>
-                    <input id="result" value="<?php echo (number_format($medical_records->getResult(), 2)) ?>" disabled />
-                  </div>
-                  <div class="input-block">
-                    <label for="gravity">Gravidade </label>
-                    <input id="gravity" value="<?php echo ($medical_records->getGravity()) ?>" disabled />
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <legend>Sintomas</legend>
+                <h2>Resultados</h2>
+                <div class="input-block">
+                  <label for="start_date">Data de início dos sintomas</label>
+                  <input id="start_date" value="<?php echo ($medical_records->getStartDate()) ?>" disabled />
+                </div>
+                <div class="input-block">
+                  <label for="result">Resultado (%) </label>
+                  <input id="result" value="<?php echo (number_format($medical_records->getResult(), 2)) ?>" disabled />
+                </div>
+                <div class="input-block">
+                  <label for="gravity">Gravidade </label>
+                  <input id="gravity" value="<?php echo ($medical_records->getGravity()) ?>" disabled />
+                </div>
+                <h2>Sintomas</h2>
+                <?php
+                if ($symptoms == null || !is_array($symptoms)) {
+                ?>
+                  <ul>
+                    <li>Este paciente não possui nenhum sintoma de Dengue.</li>
+                  </ul>
                   <?php
-                  if ($symptoms == null || !is_array($symptoms)) {
+                } else {
+                  foreach ($symptoms as $symptom) {
                   ?>
                     <ul>
-                      <li>Este paciente não possui nenhum sintoma de Dengue.</li>
+                      <li><?php echo ($symptom->getName()); ?></li>
                     </ul>
-                    <?php
-                  } else {
-                    foreach ($symptoms as $symptom) {
-                    ?>
-                      <ul>
-                        <li><?php echo ($symptom->getName()); ?></li>
-                      </ul>
-                  <?php
-                    }
+                <?php
                   }
-                  ?>
-                </fieldset>
+                }
+                ?>
               </form>
           <?php
             }
