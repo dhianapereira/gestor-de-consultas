@@ -46,7 +46,7 @@ class PatientRepository {
             Verifique sua conexão com a internet ou tente mais tarde.";
             
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
             return "Exception: $e";
         }
         finally {
@@ -88,7 +88,7 @@ class PatientRepository {
 
             $response = "Não foi possível trazer a lista de pacientes";
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
 
             return "Exception: $e";
         }
@@ -127,7 +127,7 @@ class PatientRepository {
 
             $response = "Não foi possível trazer o paciente escolhido.";
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
 
             return "Exception: $e";
         }

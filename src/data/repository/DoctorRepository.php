@@ -31,7 +31,7 @@ class DoctorRepository {
             Verifique sua conexão com a internet ou tente mais tarde.";
             
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
             return "Exception: $e";
         }
         finally {
@@ -62,7 +62,7 @@ class DoctorRepository {
             Verifique sua conexão com a internet ou tente mais tarde.";
             
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
             return "Exception: $e";
         }
         finally {
@@ -105,7 +105,7 @@ class DoctorRepository {
 
             $response = "Não foi possível trazer a lista de médicos";
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
 
             return "Exception: $e";
         }
@@ -139,7 +139,7 @@ class DoctorRepository {
 
             $response = "Não foi possível trazer o médico(a) escolhido.";
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
 
             return "Exception: $e";
         }

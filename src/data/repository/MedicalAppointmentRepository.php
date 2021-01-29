@@ -52,7 +52,7 @@ class MedicalAppointmentRepository {
             }
 
             return "Não há nenhum médico com essa descrição, por isso não foi possível marcar a consulta.";
-        } catch(Exception $e){
+        } catch(\Exception $e){
             return "Exception: $e";
         }
         finally {
@@ -111,7 +111,7 @@ class MedicalAppointmentRepository {
             $response = "Não foi possível trazer a lista de consultas";
 
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
 
             return "Exception: $e";
         }
@@ -162,7 +162,7 @@ class MedicalAppointmentRepository {
 
             $response = "Não foi possível trazer o médico(a) escolhido.";
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
 
             return "Exception: $e";
         }
@@ -216,7 +216,7 @@ class MedicalAppointmentRepository {
             }
 
             return "Não há nenhum médico com essa descrição, por isso não foi possível realizar a alteração.";
-        } catch(Exception $e){
+        } catch(\Exception $e){
             return "Exception: $e";
         }
         finally {

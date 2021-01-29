@@ -62,7 +62,7 @@
               alt="Imagem de consulta"
             /></h3
         ></a>
-        <a href="#" class="home-button"
+        <a href="./medical_records/menu.php" class="home-button"
           ><h3>
             <p>Prontuários</p>
             <img

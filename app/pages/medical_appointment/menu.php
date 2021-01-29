@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <title>Unidade de Saúde | Consultas</title>
+    <title>Unidade de Saúde | Consulta</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../../../public/styles/img/doctors-list.svg" type="image/x-icon" />

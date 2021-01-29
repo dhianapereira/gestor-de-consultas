@@ -1,3 +1,6 @@
+.control-group{
+  margin-top: 1rem;
+}
 .control {
   display: block;
   position: relative;

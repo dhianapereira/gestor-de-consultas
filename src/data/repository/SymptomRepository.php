@@ -26,7 +26,7 @@ class SymptomRepository {
             }
 
             return true;
-        } catch(Exception $e){
+        } catch(\Exception $e){
             return "Exception: $e";
         }
         finally {
@@ -64,7 +64,7 @@ class SymptomRepository {
 
             $response = "Não foi possível trazer a lista de sintomas do paciente escolhido.";
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
 
             return "Exception: $e";
         }

@@ -37,7 +37,7 @@ class MedicalRecordsRepository {
             $response = "Ocorreu um erro que impossibilitou a criação do prontuário médico.";
 
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
             return "Exception: $e";
         }
         finally {
@@ -71,7 +71,7 @@ class MedicalRecordsRepository {
 
             $response = "Não foi possível trazer o prontuário escolhido.";
             return $response;
-        } catch(Exception $e){
+        } catch(\Exception $e){
 
             return "Exception: $e";
         }

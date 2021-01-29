@@ -4,7 +4,11 @@
     <title>Unidade de Saúde | Questionário</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="#" />
+    <link
+      rel="shortcut icon"
+      href="../../../public/styles/img/doctors-list.svg"
+      type="image/x-icon"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -18,17 +22,12 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="../../../public/styles/css/animations.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
       href="../../../public/styles/css/buttons.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="../../../public/styles/css/sidebar.css"
+      href="../../../public/styles/css/home.css"
     />
     <link
       rel="stylesheet"
@@ -40,25 +39,45 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
-    <div class="page-pattern">
-      <aside class="animate-right sidebar">
-        <footer>
-          <button class="sidebar-buttons" onclick="history.back()" title="Voltar">
-            <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
-          </button>
-          <a class="sidebar-buttons" href="../medical_records/search_medical_records.html" title="Visualizar prontuários">
-            <img src="../../../public/styles/img/file-search.png" alt="Visualizar prontuários" />
-          </a>
-          <a class="sidebar-buttons" href="#" title="Listar Prontuários">
-            <img src="../../../public/styles/img/medical-records-list.svg" alt="Listar Prontuários" />
-          </a>
-        </footer>
-      </aside>
-      <main class="animate-appear with-sidebar">
-        <form method="POST" action="questionnaire.php">
-          <fieldset>
-            <legend>Informações Importantes</legend>
+    <header>
+      <h3 class="logo">Unidade de Saúde</h3>
+    </header>
+    <main class="container">
+      <section class="quick-access">
+        <a href="../medical_records/search_medical_records.html" class="home-button">
+          <h3>
+            <p>Procurar Prontuário</p>
+            <img
+              src="../../../public/styles/img/file-search.png"
+              alt="Imagem de prontuário"
+            />
+          </h3>
+        </a>
+        <a href="#" class="home-button">
+          <h3>
+            <p>Listar Prontuários</p>
+            <img
+              src="../../../public/styles/img/medical-records-list.svg"
+              alt="Imagem de lista de prontuários"
+            />
+          </h3>
+        </a>
+        <a href="../home_page.php" class="home-button">
+          <h3>
+            <p>Home</p>
+            <img
+              src="../../../public/styles/img/home.svg"
+              alt="Imagem de Home"
+            />
+          </h3>
+        </a>
+      </section>
+      <section class="box">
+        <div class="form">
+          <h2>Questionário (Dengue)</h2>
+          <form method="POST" action="questionnaire.php">
             <div class="input-block">
               <label for="patient_cpf">CPF</label>
               <input id="patient_cpf" name="patient_cpf" required />
@@ -67,9 +86,7 @@
               <label for="start_date">Data de início dos sintomas</label>
               <input type="date" id="start_date" name="start_date" required />
             </div>
-          </fieldset>
-          <fieldset>
-            <legend>Sintomas</legend>
+            <h2>Sintomas</h2>
             <div class="control-group">
               <label class="control control-checkbox">
                 Febre alta > 38.5ºC;
@@ -199,11 +216,15 @@
                 <div class="control_indicator"></div>
               </label>
             </div>
-          </fieldset>
 
-          <button type="submit" class="primary-button">Confirmar</button>
-        </form>
-      </main>
-    </div>
+            <button type="submit" class="primary-button">Confirmar</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>2021 - Unidade de Saúde</p>
+    </footer>
   </body>
 </html>

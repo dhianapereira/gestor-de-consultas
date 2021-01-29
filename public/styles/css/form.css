@@ -17,6 +17,9 @@
 .form h2{
   margin-top: 0;
 }
+.form form h2{
+  margin-top: 2rem;
+}
 
 form{
   max-width: 500%;
