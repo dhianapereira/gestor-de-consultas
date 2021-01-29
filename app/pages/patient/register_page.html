@@ -4,7 +4,12 @@
     <title>Unidade de Saúde | Cadastro</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="#" />
+    <link
+      rel="shortcut icon"
+      href="../../../public/styles/img/doctors-list.svg"
+      type="image/x-icon"
+    />
+
     <link
       rel="stylesheet"
       type="text/css"
@@ -13,17 +18,12 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="../../../public/styles/css/animations.css"
+      href="../../../public/styles/css/home.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
       href="../../../public/styles/css/buttons.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../../public/styles/css/sidebar.css"
     />
     <link
       rel="stylesheet"
@@ -37,24 +37,43 @@
   </head>
   <script src="../../../public/scripts/script.js"></script>
   <body>
-    <div class="page-pattern">
-      <aside class="animate-right sidebar">
-        <footer>
-          <button class="sidebar-buttons" onclick="history.back()" title="Voltar">
-            <img src="../../../public/styles/img/arrow-back.svg" alt="Voltar" />
-          </button>
-          <a class="sidebar-buttons" href="./list_page.php" title="Lista de pacientes">
-            <img src="../../../public/styles/img/list.svg" alt="Lista de pacientes" />
-          </a>
-          <a class="sidebar-buttons" href="#" title="Atualizar Paciente">
-            <img src="../../../public/styles/img/update-patient.svg" alt="Atualizar Paciente" />
-          </a>
-        </footer>
-      </aside>
-      <main class="animate-appear with-sidebar">
-        <form method="POST" action="register_patient.php">
-          <fieldset>
-            <legend>Dados Pessoais</legend>
+    <header>
+      <h3 class="logo">Unidade de Saúde</h3>
+    </header>
+    <main class="container">
+      <section class="quick-access">
+        <a href="./list_page.php" class="home-button">
+          <h3>
+            <p>Listar Pacientes</p>
+            <img
+              src="../../../public/styles/img/list.svg"
+              alt="Imagem de lista de pacientes"
+            />
+          </h3>
+        </a>
+        <a href="#" class="home-button">
+          <h3>
+            <p>Procurar Paciente</p>
+            <img
+              src="../../../public/styles/img/update-patient.svg"
+              alt="Imagem de paciente"
+            />
+          </h3>
+        </a>
+        <a href="../home_page.php" class="home-button">
+          <h3>
+            <p>Home</p>
+            <img
+              src="../../../public/styles/img/home.svg"
+              alt="Imagem de Home"
+            />
+          </h3>
+        </a>
+      </section>
+      <section class="box">
+        <div class="form">
+          <h2>Dados Pessoais</h2>
+          <form method="POST" action="register_patient.php">
             <div class="input-block">
               <label for="full_name">Nome Completo</label>
               <input id="full_name" name="full_name" required />
@@ -76,7 +95,12 @@
 
             <div class="input-block">
               <label for="date_of_birth">Data de nascimento</label>
-              <input type="date" id="date_of_birth" name="date_of_birth" required />
+              <input
+                type="date"
+                id="date_of_birth"
+                name="date_of_birth"
+                required
+              />
             </div>
 
             <div class="input-block">
@@ -140,11 +164,14 @@
                 </button>
               </div>
             </div>
-          </fieldset>
 
-          <button type="submit" class="primary-button">Confirmar</button>
-        </form>
-      </main>
-    </div>
+            <button type="submit" class="primary-button">Confirmar</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>2021 - Unidade de Saúde</p>
+    </footer>
   </body>
 </html>
