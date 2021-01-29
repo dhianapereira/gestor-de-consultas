@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/table.css" />
+  <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -37,7 +38,6 @@
       </a>
     </section>
     <section class="table">
-      <h2>Lista de Médicos</h2>
       <?php
       include_once('../../utils/autoload.php');
 
@@ -50,6 +50,7 @@
       if ($doctor_list != null && is_array($doctor_list)) {
 
       ?>
+        <h2>Lista de Médicos</h2>
         <table>
           <tr>
             <th>ID</th>
@@ -75,9 +76,13 @@
       <?php
       } else {
       ?>
-        <p>
-          A lista de médicos está vazia.
-        </p>
+        <div class="card">
+          <h3>
+            <span>A lista de médicos está vazia</span>
+            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
+          </h3>
+          <p>Ainda não há nenhum médico cadastrado.</p>
+        </div>
       <?php
       }
       ?>

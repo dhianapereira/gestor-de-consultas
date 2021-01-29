@@ -39,7 +39,6 @@
             </a>
         </section>
         <section class="table">
-            <h2>Lista de Médicos</h2>
             <?php
             include_once('../../utils/autoload.php');
 
@@ -52,6 +51,7 @@
             if ($doctor_list != null && is_array($doctor_list)) {
 
             ?>
+                <h2>Lista de Médicos</h2>
                 <table>
                     <tr>
                         <th>ID</th>

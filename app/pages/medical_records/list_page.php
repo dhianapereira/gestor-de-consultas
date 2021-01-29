@@ -38,7 +38,6 @@
             </a>
         </section>
         <section class="table">
-            <h2>Lista de Prontuários</h2>
             <?php
             include_once('../../utils/autoload.php');
 
@@ -50,6 +49,7 @@
 
             if ($medical_records_list != null && is_array($medical_records_list)) {
             ?>
+                <h2>Lista de Prontuários</h2>
                 <table>
                     <tr>
                         <th>ID</th>
@@ -67,7 +67,7 @@
                             <td><?php echo ($medical_records->getResult()); ?></td>
                             <td><?php echo ($medical_records->getGravity()); ?></td>
                             <td><?php echo ($medical_records->getStartDate()); ?></td>
-                        
+
                         </tr>
                     <?php
                     }
