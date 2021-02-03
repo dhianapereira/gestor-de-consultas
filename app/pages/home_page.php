@@ -47,7 +47,10 @@
     <section class="table">
       <h2>Lista de Atendimento</h2>
       <?php
+
       include_once('../utils/autoload.php');
+
+      spl_autoload_register("autoload");
 
       use app\controllers\MedicalAppointmentController;
 

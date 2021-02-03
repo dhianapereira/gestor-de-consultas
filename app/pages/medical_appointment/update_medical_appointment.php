@@ -45,6 +45,8 @@
       <?php
       include_once('../../utils/autoload.php');
 
+      spl_autoload_register("autoload");
+
       use app\controllers\MedicalAppointmentController;
       use app\models\MedicalAppointment;
 

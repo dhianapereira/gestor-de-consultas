@@ -20,6 +20,11 @@
             <?php
             include_once('../../app/utils/autoload.php');
 
+            spl_autoload_register("autoload");
+
+            error_reporting(E_ALL);
+            ini_set('display_errors', 'On');
+
             use src\data\repository\Connection;
 
             $conn = new Connection();

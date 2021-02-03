@@ -50,6 +50,8 @@
         <?php
         include_once('../../utils/autoload.php');
 
+        spl_autoload_register("autoload");
+
         use app\controllers\MedicalRecordsController;
         use app\controllers\PatientController;
         use app\controllers\SymptomController;

@@ -49,6 +49,8 @@
             <?php
             include_once('../../utils/autoload.php');
 
+            spl_autoload_register("autoload");
+
             use app\controllers\SymptomController;
             use app\controllers\PatientController;
 
