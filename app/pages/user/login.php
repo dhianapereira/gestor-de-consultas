@@ -4,10 +4,10 @@
     <title>Unidade de Saúde | Entrar</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../styles/img/doctors-list.svg" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="../styles/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/css/home.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/css/card.css" />
+    <link rel="shortcut icon" href="../../../public/styles/img/doctors-list.svg" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -18,7 +18,7 @@
     <main class="container">
         <section class="up">
             <?php
-            include_once('../../app/utils/autoload.php');
+            include_once('../utils/autoload.php');
 
             spl_autoload_register("autoload");
 
@@ -47,13 +47,13 @@
             ?> <div class="card">
                     <h3>
                         <span>Erro ao tentar acessar a plataforma</span>
-                        <img src="../styles/img/error.svg" alt="Imagem de mensagem de erro">
+                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
                     </h3>
                     <p>O usuário inserido não possui permissão para acessar a plataforma.</p>
                 </div>
             <?php
             } else {
-                header('Location:../../app/pages/home_page.php');
+                header('Location:../home_page.php');
             }
             ?>
         </section>

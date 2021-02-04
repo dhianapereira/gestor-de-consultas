@@ -24,6 +24,12 @@ body {
   color: var(--dark-blue);
 }
 
+header {
+  background: var(--green);
+  text-align: center;
+  padding: 2rem 0 10rem;
+}
+
 footer {
   text-align: center;
   padding: 4rem 0 2rem;
