@@ -60,13 +60,20 @@ CREATE TABLE medical_appointment (
 );
 
 CREATE TABLE user ( 
-  id INT(11) NOT NULL AUTO_INCREMENT, 
-  name VARCHAR(100) NOT NULL,
-  username VARCHAR(100) NOT NULL,
-  password VARCHAR(100) NOT NULL, 
-  responsibility VARCHAR(50) NOT NULL, 
-  CONSTRAINT user_pk PRIMARY KEY (id) 
+  cpf VARCHAR(14) NOT NULL,
+  name VARCHAR(100) NOT NULL, 
+  genre VARCHAR(50) NOT NULL,
+  date_of_birth DATE NOT NULL,
+  naturalness VARCHAR(50) NOT NULL,
+  responsibility VARCHAR(50) NOT NULL,
+  address VARCHAR(100) NOT NULL,
+  username VARCHAR(100),
+  password VARCHAR(100),
+  active BOOLEAN DEFAULT 1,  
+  CONSTRAINT user_pk PRIMARY KEY (cpf) 
 );
 
-INSERT INTO user (name, username, password, responsibility) 
-VALUES ("Andministrador", "admin", "123", "Administrador");
+INSERT INTO user (cpf, name, genre, date_of_birth, naturalness, 
+address, responsibility, username, password) 
+VALUES ("123.123.123-12", "Administrador", "Feminino", "1999-05-14",
+"Brasileiro(a)", "Endereço", "Administrador", "admin", "123");
