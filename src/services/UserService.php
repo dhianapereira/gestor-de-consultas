@@ -65,4 +65,11 @@ class UserService
 
         return $result;
     }
+
+    public function save($cpf, $username, $password)
+    {
+        $result = $this->facade->save($cpf, $username, $password);
+
+        return $result;
+    }
 }

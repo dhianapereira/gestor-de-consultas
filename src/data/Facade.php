@@ -224,4 +224,11 @@ class Facade
 
         return $result;
     }
+
+    public function save($cpf, $username, $password)
+    {
+        $result = $this->user_repository->save($cpf, $username, $password);
+
+        return $result;
+    }
 }

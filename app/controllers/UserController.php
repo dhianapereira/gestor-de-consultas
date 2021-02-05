@@ -66,4 +66,12 @@ class UserController
 
         return $result;
     }
+
+    public function save($cpf, $username, $password)
+    {
+
+        $result = $this->user_service->save($cpf, $username, $password);
+
+        return $result;
+    }
 }

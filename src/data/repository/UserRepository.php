@@ -238,10 +238,39 @@ class UserRepository
                 return $user;
             }
 
-            $response = "Não foi possível trazer o funcionário(a) escolhido.";
+            $response = "Não foi possível realizar o login.";
             return $response;
         } catch (\Exception $e) {
 
+            return "Exception: $e";
+        } finally {
+            $this->conn  = null;
+        }
+    }
+
+    public function save($cpf, $username, $password)
+    {
+        try {
+            $sql = "UPDATE user SET username = :username, password = :password WHERE cpf = :cpf";
+
+            echo(">>>>>>{$this->conn}");
+
+            $stmt = $this->conn->connect()->prepare($sql);
+
+            $success = $stmt->execute(array(
+                ':cpf' => $cpf,
+                ':username' => $username,
+                ':password' => $password,
+            ));
+
+            if ($success) {
+                return $success;
+            }
+
+            $response = "Não foi possível realizar o cadastro do usuário na plataforma";
+
+            return $response;
+        } catch (\Exception $e) {
             return "Exception: $e";
         } finally {
             $this->conn  = null;
