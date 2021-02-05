@@ -1,7 +1,7 @@
 .primary-button {
   margin-top: 2rem;
 
-  width: 50%;
+  width: 48%;
   height: 50px;
   border: 0;
 
@@ -68,9 +68,9 @@
 }
 
 .button-select button:first-child {
-  border-radius: .25rem 0 0 .25rem;
+  border-radius: 0.25rem 0 0 0.25rem;
 }
 
 .button-select button:last-child {
-  border-radius: 0 .25rem .25rem 0;
+  border-radius: 0 0.25rem 0.25rem 0;
 }

@@ -18,42 +18,42 @@
     <main class="container">
         <section class="up">
             <?php
-            include_once('../utils/autoload.php');
+            include_once('../../utils/autoload.php');
 
             spl_autoload_register("autoload");
 
-            use src\data\repository\Connection;
+            use app\controllers\UserController;
 
-            $conn = new Connection();
+            $user_controller = new UserController();
 
             $username = $_POST["username"];
             $password = $_POST["password"];
 
-            $sql = 'SELECT * FROM user WHERE username = :username 
-                            AND password = :password';
+            if (isset($username) && isset($password)) {
+                $result = $user_controller->signIn($username, $password);
 
-            $stmt = $conn->connect()->prepare($sql);
-
-            $stmt->execute(array(
-                ':username' => $username,
-                ':password' => $password,
-            ));
-
-            $user = $stmt->fetchAll();
-
-            $conn = null;
-
-            if ($user == null) {
+                if ($result == null || !is_object($result)) {
             ?> <div class="card">
+                        <h3>
+                            <span>Erro ao tentar acessar a plataforma</span>
+                            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
+                        </h3>
+                        <p>O usuário inserido não possui permissão para acessar a plataforma.</p>
+                    </div>
+                <?php
+                } else {
+                    header('Location:../home_page.php');
+                }
+            } else {
+                ?>
+                <div class="card">
                     <h3>
-                        <span>Erro ao tentar acessar a plataforma</span>
+                        <span>Não foi possível realizar esta operação</span>
                         <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
                     </h3>
-                    <p>O usuário inserido não possui permissão para acessar a plataforma.</p>
+                    <p>Você precisa inserir o username e a senha para acessar a plataforma!</p>
                 </div>
             <?php
-            } else {
-                header('Location:../home_page.php');
             }
             ?>
         </section>
