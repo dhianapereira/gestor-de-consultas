@@ -55,4 +55,3 @@
 		    $this->naturalness = $naturalness;
         }
     }
-?>

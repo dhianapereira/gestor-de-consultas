@@ -1,17 +1,30 @@
 <?php
+
 namespace src\data\repository;
+
 use src\data\repository\Connection;
 use app\models\Patient;
-class PatientRepository {
+
+class PatientRepository
+{
 
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conn = new Connection();
     }
 
-    public function register( $cpf, $full_name, $genre, $date_of_birth, 
-    $mother_name, $companion, $address, $naturalness ) {
+    public function register(
+        $cpf,
+        $full_name,
+        $genre,
+        $date_of_birth,
+        $mother_name,
+        $companion,
+        $address,
+        $naturalness
+    ) {
         try {
             $sql = "INSERT INTO patient (
                     cpf, full_name, genre, date_of_birth, 
@@ -21,9 +34,9 @@ class PatientRepository {
                     :mother_name, :companion, :address, :naturalness
                 )";
 
-            $stmt = $this->conn->connect()->prepare( $sql );
+            $stmt = $this->conn->connect()->prepare($sql);
 
-            $success = $stmt->execute( array(
+            $success = $stmt->execute(array(
                 ':cpf' => $cpf,
                 ':full_name' => $full_name,
                 ':genre' => $genre,
@@ -32,11 +45,19 @@ class PatientRepository {
                 ':companion' => $companion,
                 ':address' => $address,
                 ':naturalness' => $naturalness,
-            ) );
+            ));
 
-            if ( $success ) {
-                $patient = new Patient( $cpf, $full_name, $genre, $date_of_birth, 
-                $mother_name, $companion, $address, $naturalness);
+            if ($success) {
+                $patient = new Patient(
+                    $cpf,
+                    $full_name,
+                    $genre,
+                    $date_of_birth,
+                    $mother_name,
+                    $companion,
+                    $address,
+                    $naturalness
+                );
 
 
                 return $patient;
@@ -44,65 +65,67 @@ class PatientRepository {
 
             $response = "Não foi possível realizar o cadastro do paciente.
             Verifique sua conexão com a internet ou tente mais tarde.";
-            
+
             return $response;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
             return "Exception: $e";
-        }
-        finally {
+        } finally {
             $this->conn  = null;
         }
     }
 
-    public function update($patient) {
+    public function update($patient)
+    {
         try {
-            $sql = "UPDATE patient SET name = :name, date_of_birth = :date_of_birth, mothername = :mothername, genre = :genre, companion = :companion,
-                    address = :address, naturalness = :naturalness WHERE cpf = :cpf";
-            
-            $stmt = $this->conn->connect()->prepare( $sql );
-            
-            $success = $stmt->execute( array(
+            $sql = "UPDATE patient SET full_name = :full_name, date_of_birth = :date_of_birth, 
+                    mother_name = :mother_name, genre = :genre, companion = :companion,
+                    address = :address, naturalness = :naturalness 
+                    WHERE cpf = :cpf";
+
+            $stmt = $this->conn->connect()->prepare($sql);
+
+            $success = $stmt->execute(array(
                 ':cpf' => $patient->getCpf(),
-                ':name' => $patient->getName(), 
-                ':date_of_birth' => $patient->getDate_Of_Birth(),
-                ':mothername' => $patient->getMotherName(),
+                ':full_name' => $patient->getName(),
+                ':date_of_birth' => $patient->getDateOfBirth(),
+                ':mother_name' => $patient->getMotherName(),
                 ':genre' => $patient->getGenre(),
                 ':companion' => $patient->getCompanion(),
                 ':address' => $patient->getAddress(),
                 ':naturalness' => $patient->getNaturalness(),
 
-            ) );
+            ));
 
-            if ( $success ) {
+            if ($success) {
                 return $success;
             }
 
             $response = "Não foi possível realizar as alterações desejadas.
             Verifique sua conexão com a internet ou tente mais tarde.";
-            
+
             return $response;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
             return "Exception: $e";
-        }
-        finally {
+        } finally {
             $this->conn  = null;
         }
-    }  
+    }
 
-    public function allPatients() {
+    public function allPatients()
+    {
         try {
             $sql = "SELECT * FROM patient";
 
-            $stmt = $this->conn->connect()->prepare( $sql );
+            $stmt = $this->conn->connect()->prepare($sql);
 
             $stmt->execute();
 
             $result = $stmt->fetchAll();
 
-            if ( $result!=null ) {
+            if ($result != null) {
                 $list = [];
 
-                foreach($result as $row){
+                foreach ($result as $row) {
                     $cpf = $row['cpf'];
                     $full_name = $row['full_name'];
                     $genre = $row['genre'];
@@ -111,9 +134,17 @@ class PatientRepository {
                     $companion = $row['companion'];
                     $address = $row['address'];
                     $naturalness = $row['naturalness'];
-    
-                    $patient = new Patient($cpf, $full_name, $genre, $date_of_birth,
-                    $mother_name, $companion, $address, $naturalness);
+
+                    $patient = new Patient(
+                        $cpf,
+                        $full_name,
+                        $genre,
+                        $date_of_birth,
+                        $mother_name,
+                        $companion,
+                        $address,
+                        $naturalness
+                    );
 
                     array_push($list, $patient);
                 }
@@ -123,20 +154,20 @@ class PatientRepository {
 
             $response = "Não foi possível trazer a lista de pacientes";
             return $response;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
 
             return "Exception: $e";
-        }
-        finally {
+        } finally {
             $this->conn  = null;
         }
     }
 
-    public function fetchPatient($cpf) {
+    public function fetchPatient($cpf)
+    {
         try {
             $sql = "SELECT * FROM patient WHERE cpf = :cpf";
 
-            $stmt = $this->conn->connect()->prepare( $sql );
+            $stmt = $this->conn->connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':cpf' => $cpf,
@@ -144,7 +175,7 @@ class PatientRepository {
 
             $result = $stmt->fetchAll();
 
-            if ( $result!=null ) {
+            if ($result != null) {
                 $full_name = $result[0]['full_name'];
                 $genre = $result[0]['genre'];
                 $date_of_birth = $result[0]['date_of_birth'];
@@ -154,21 +185,27 @@ class PatientRepository {
                 $naturalness = $result[0]['naturalness'];
 
 
-                $patient = new Patient($cpf, $full_name, $genre, $date_of_birth,
-                $mother_name, $companion, $address, $naturalness);
+                $patient = new Patient(
+                    $cpf,
+                    $full_name,
+                    $genre,
+                    $date_of_birth,
+                    $mother_name,
+                    $companion,
+                    $address,
+                    $naturalness
+                );
 
                 return $patient;
             }
 
             $response = "Não foi possível trazer o paciente escolhido.";
             return $response;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
 
             return "Exception: $e";
-        }
-        finally {
+        } finally {
             $this->conn  = null;
         }
     }
 }
-?>

@@ -65,25 +65,25 @@
                 <span>Mensagem de Erro</span>
                 <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
               </h3>
-              <p>Nenhum Paciente com o CPF<?php echo "$cpf" ?> </p>
+              <p>Nenhum Paciente com o CPF: <?php echo "$cpf" ?> </p>
             </div>
           <?php
           } else {
           ?>
             <h2>Dados do Paciente</h2>
-            <form meethod="POST" action="update_patient.php">
+            <form method="POST" action="update_patient.php">
               <div class="input-block">
                 <label for="cpf">CPF</label>
                 <input id="cpf" value="<?php echo ($patient->getCpf()) ?>" disabled />
                 <input type="hidden" name="cpf" value="<?php echo ($patient->getCpf()) ?>" required />
               </div>
               <div class="input-block">
-                <label for="name">Nome</label>
-                <input id="name" name="name" value="<?php echo ($patient->getName()) ?>" required />
+                <label for="full_name">Nome</label>
+                <input id="full_name" name="full_name" value="<?php echo ($patient->getName()) ?>" required />
               </div>
               <div class="input-block">
                 <label for="date_of_birth">Data de Nascimento</label>
-                <input id="date_of_birth" name="date_of_birth" value="<?php echo ($patient->getDateOfBirth()) ?>" required />
+                <input id="date_of_birth" type="date" name="date_of_birth" value="<?php echo ($patient->getDateOfBirth()) ?>" required />
               </div>
               <div class="input-block">
                 <label for="mother_name">nome da Mãe</label>
@@ -128,15 +128,15 @@
                   <button data-value="Brasileiro" onclick="toggleNaturalness(event)" type="button" <?php
                                                                                                     if ($patient->getNaturalness() == "Brasileiro(a)") {
                                                                                                     ?> class="active-naturalness" <?php
-                                                                                                                }
-                                                                                                                  ?>>
+                                                                                                                                }
+                                                                                                                                  ?>>
                     Brasileiro(a)
                   </button>
                   <button data-value="Estrangeiro" onclick="toggleNaturalness(event)" type="button" <?php
                                                                                                     if ($patient->getNaturalness() == "Estrangeiro(a)") {
                                                                                                     ?> class="active-naturalness" <?php
-                                                                                                                }
-                                                                                                                  ?>>
+                                                                                                                                }
+                                                                                                                                  ?>>
                     Estrangeiro(a)
                   </button>
                 </div>
