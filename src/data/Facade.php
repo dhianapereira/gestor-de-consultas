@@ -31,6 +31,13 @@ class Facade {
         return $result;
     }
 
+    public function updatePatient($patient){
+            
+        $result = $this->patient_repository->update($patient);
+          
+        return $result;
+    }
+
     public function allPatients() {
         $result = $this->patient_repository->allPatients();
 

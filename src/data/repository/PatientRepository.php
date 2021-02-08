@@ -54,6 +54,41 @@ class PatientRepository {
         }
     }
 
+    public function update($patient) {
+        try {
+            $sql = "UPDATE patient SET name = :name, date_of_birth = :date_of_birth, mothername = :mothername, genre = :genre, companion = :companion,
+                    address = :address, naturalness = :naturalness WHERE cpf = :cpf";
+            
+            $stmt = $this->conn->connect()->prepare( $sql );
+            
+            $success = $stmt->execute( array(
+                ':cpf' => $patient->getCpf(),
+                ':name' => $patient->getName(), 
+                ':date_of_birth' => $patient->getDate_Of_Birth(),
+                ':mothername' => $patient->getMotherName(),
+                ':genre' => $patient->getGenre(),
+                ':companion' => $patient->getCompanion(),
+                ':address' => $patient->getAddress(),
+                ':naturalness' => $patient->getNaturalness(),
+
+            ) );
+
+            if ( $success ) {
+                return $success;
+            }
+
+            $response = "Não foi possível realizar as alterações desejadas.
+            Verifique sua conexão com a internet ou tente mais tarde.";
+            
+            return $response;
+        } catch(\Exception $e){
+            return "Exception: $e";
+        }
+        finally {
+            $this->conn  = null;
+        }
+    }  
+
     public function allPatients() {
         try {
             $sql = "SELECT * FROM patient";

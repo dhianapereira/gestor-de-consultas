@@ -29,7 +29,7 @@
                     <img src="../../../public/styles/img/list.svg" alt="Imagem de lista de pacientes" />
                 </h3>
             </a>
-            <a href="#" class="home-button">
+            <a href="search_patient.html" class="home-button">
                 <h3>
                     <p>Procurar Paciente</p>
                     <img src="../../../public/styles/img/update-patient.svg" alt="Imagem de paciente" />

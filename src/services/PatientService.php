@@ -20,6 +20,13 @@
             return $result;
         }
 
+        public function update($patient){
+            
+            $result = $this->facade->updatePatient($patient);
+              
+            return $result;
+        }
+
 
         public function allPatients(){
             $result = $this->facade->allPatients();
