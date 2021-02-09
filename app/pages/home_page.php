@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<html>
 
 <head>
   <title>Unidade de Saúde</title>

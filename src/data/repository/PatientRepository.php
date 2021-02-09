@@ -23,8 +23,7 @@ class PatientRepository
         $mother_name,
         $companion,
         $address,
-        $naturalness,
-        
+        $naturalness
     ) {
         try {
             $sql = "INSERT INTO patient (
@@ -49,10 +48,10 @@ class PatientRepository
             ));
 
 
-                if ( $success ) {
-                    return $success;
-                }
-        
+            if ($success) {
+                return $success;
+            }
+
 
             $response = "Não foi possível realizar o cadastro do paciente.
             Verifique sua conexão com a internet ou tente mais tarde.";
@@ -70,7 +69,7 @@ class PatientRepository
         try {
             $sql = "UPDATE patient SET full_name = :full_name, date_of_birth = :date_of_birth, 
                     mother_name = :mother_name, genre = :genre, companion = :companion,
-                    address = :address, naturalness = :naturalness, active = :active;
+                    address = :address, naturalness = :naturalness, active = :active
                     WHERE cpf = :cpf";
 
             $stmt = $this->conn->connect()->prepare($sql);
@@ -84,8 +83,7 @@ class PatientRepository
                 ':companion' => $patient->getCompanion(),
                 ':address' => $patient->getAddress(),
                 ':naturalness' => $patient->getNaturalness(),
-                ':active' =>  $patient->getActive(),
-
+                ':active' =>  $patient->getActive()
             ));
 
             if ($success) {
