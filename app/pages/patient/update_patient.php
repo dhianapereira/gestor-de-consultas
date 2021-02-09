@@ -63,12 +63,13 @@
       $companion = $_POST["companion"];
       $address = $_POST["address"];
       $naturalness = $_POST["naturalness"];
+      $active = $_POST["active"];
 
       if (
         isset($cpf) && isset($full_name) && isset($genre) && isset($date_of_birth) && isset($mother_name)
-        && isset($companion) && isset($address) && isset($naturalness)
+        && isset($companion) && isset($address) && isset($naturalness)  && isset($active)
       ) {
-        $patient = new Patient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $companion, $address, $naturalness);
+        $patient = new Patient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $companion, $address, $naturalness, $active);
 
         $result = $patient_controller->update($patient);
 

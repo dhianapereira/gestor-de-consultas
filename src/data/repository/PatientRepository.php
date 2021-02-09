@@ -23,7 +23,8 @@ class PatientRepository
         $mother_name,
         $companion,
         $address,
-        $naturalness
+        $naturalness,
+        
     ) {
         try {
             $sql = "INSERT INTO patient (
@@ -44,24 +45,14 @@ class PatientRepository
                 ':mother_name' => $mother_name,
                 ':companion' => $companion,
                 ':address' => $address,
-                ':naturalness' => $naturalness,
+                ':naturalness' => $naturalness
             ));
 
-            if ($success) {
-                $patient = new Patient(
-                    $cpf,
-                    $full_name,
-                    $genre,
-                    $date_of_birth,
-                    $mother_name,
-                    $companion,
-                    $address,
-                    $naturalness
-                );
 
-
-                return $patient;
-            }
+                if ( $success ) {
+                    return $success;
+                }
+        
 
             $response = "Não foi possível realizar o cadastro do paciente.
             Verifique sua conexão com a internet ou tente mais tarde.";
@@ -79,7 +70,7 @@ class PatientRepository
         try {
             $sql = "UPDATE patient SET full_name = :full_name, date_of_birth = :date_of_birth, 
                     mother_name = :mother_name, genre = :genre, companion = :companion,
-                    address = :address, naturalness = :naturalness 
+                    address = :address, naturalness = :naturalness, active = :active;
                     WHERE cpf = :cpf";
 
             $stmt = $this->conn->connect()->prepare($sql);
@@ -93,6 +84,7 @@ class PatientRepository
                 ':companion' => $patient->getCompanion(),
                 ':address' => $patient->getAddress(),
                 ':naturalness' => $patient->getNaturalness(),
+                ':active' =>  $patient->getActive(),
 
             ));
 
@@ -134,6 +126,7 @@ class PatientRepository
                     $companion = $row['companion'];
                     $address = $row['address'];
                     $naturalness = $row['naturalness'];
+                    $active = $row['active'];
 
                     $patient = new Patient(
                         $cpf,
@@ -143,7 +136,8 @@ class PatientRepository
                         $mother_name,
                         $companion,
                         $address,
-                        $naturalness
+                        $naturalness,
+                        $active
                     );
 
                     array_push($list, $patient);
@@ -183,7 +177,7 @@ class PatientRepository
                 $companion = $result[0]['companion'];
                 $address = $result[0]['address'];
                 $naturalness = $result[0]['naturalness'];
-
+                $active = $result[0]['active'];
 
                 $patient = new Patient(
                     $cpf,
@@ -193,7 +187,8 @@ class PatientRepository
                     $mother_name,
                     $companion,
                     $address,
-                    $naturalness
+                    $naturalness,
+                    $active
                 );
 
                 return $patient;

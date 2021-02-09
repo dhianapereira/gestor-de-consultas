@@ -144,49 +144,29 @@
 
 
 
-              <!--
+              
                 <div class="input-block">
                 <label for="active">Status</label>
-                <input type="hidden" name="active" id="active" value="<?php /*echo ($doctor->getActive()) ?>" required />
+                <input type="hidden" name="active" id="active" value="<?php echo ($patient->getActive()) ?>" required />
 
                 <div class="button-select">
                   <button data-value=1 onclick="toggleActive(event)" type="button" <?php
-                                                                                    if ($doctor->getActive() == 1) {
+                                                                                    if ($patient->getActive() == 1) {
                                                                                     ?> class="active" <?php
                                                                                                     }
                                                                                                       ?>>
                     Ativo
                   </button>
                   <button data-value=0 onclick="toggleActive(event)" type="button" <?php
-                                                                                    if ($doctor->getActive() == 0) {
+                                                                                    if ($patient->getActive() == 0) {
                                                                                     ?> class="active" <?php
-                                                                                                    }*/
+                                                                                                    }
                                                                       ?>>
                     Inativo
                   </button>
                 </div>
               </div>
-              <div class="input-block">
-                <label for="active">Status</label>
-                <input type="hidden" name="active" id="active" value="<?php /*echo ($doctor->getActive()) ?>" required />
-
-                <div class="button-select">
-                  <button data-value=1 onclick="toggleActive(event)" type="button" <?php
-                                                                                    if ($doctor->getActive() == 1) {
-                                                                                    ?> class="active" <?php
-                                                                                                    }
-                                                                                                      ?>>
-                    Ativo
-                  </button>
-                  <button data-value=0 onclick="toggleActive(event)" type="button" <?php
-                                                                                    if ($doctor->getActive() == 0) {
-                                                                                    ?> class="active" <?php
-                                                                                                    }*/
-                                                                      ?>>
-                    Inativo
-                  </button>
-                </div>
-              </div>-->
+              
               <button type="submit" class="primary-button">Salvar Alterações</button>
             </form>
           <?php

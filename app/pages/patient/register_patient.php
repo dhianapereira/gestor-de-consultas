@@ -52,14 +52,15 @@
 
             $patient_controller = new PatientController();
 
-            $cpf = addslashes($_POST["cpf"]);
-            $full_name = addslashes($_POST["full_name"]);
+            $cpf = $_POST["cpf"];
+            $full_name = $_POST["full_name"];
             $genre = $_POST["genre"];
-            $date_of_birth = addslashes($_POST["date_of_birth"]);
-            $mother_name = addslashes($_POST["mother_name"]);
-            $companion = addslashes($_POST["companion"]);
-            $address = addslashes($_POST["address"]);
+            $date_of_birth = $_POST["date_of_birth"];
+            $mother_name = $_POST["mother_name"];
+            $companion = $_POST["companion"];
+            $address = $_POST["address"];
             $naturalness = $_POST["naturalness"];
+            
 
             if (
                 !isset($cpf) || !isset($full_name)
@@ -86,10 +87,11 @@
                     $mother_name,
                     $companion,
                     $address,
-                    $naturalness
+                    $naturalness,
+                    
                 );
 
-                if (!is_object($result)) {
+                if (!is_bool($result)) {
                 ?>
                     <div class="card">
                         <h3>

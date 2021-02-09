@@ -9,6 +9,7 @@
         private $naturalness;
         private $companion;
         private $address;
+        private $active;
 
 
         public function getCpf (){
@@ -42,9 +43,14 @@
         public function getAddress (){
             return $this->address;
         }
+
+        public function getActive (){
+            return $this->active;
+        }
+        
         
         public function __construct ($cpf, $full_name, $genre, $date_of_birth, 
-        $mother_name, $companion, $address, $naturalness){
+        $mother_name, $companion, $address, $naturalness, $active){
 		    $this->cpf = $cpf;
             $this->full_name = $full_name;
             $this->genre = $genre;
@@ -53,5 +59,7 @@
 		    $this->companion = $companion;
 		    $this->address = $address;
 		    $this->naturalness = $naturalness;
+            $this->active = $active;
         }
     }
+?>
