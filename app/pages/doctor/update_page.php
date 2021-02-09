@@ -140,7 +140,7 @@
           ?>
           <div class="card">
             <h3>
-              <span>Mensagem de Erro</span>
+              <span>Não foi possível realizar esta operação</span>
               <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
             </h3>
             <p>Você precisa inserir um ID!</p>
