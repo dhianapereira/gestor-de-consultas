@@ -62,4 +62,3 @@
             $this->active = $active;
         }
     }
-?>

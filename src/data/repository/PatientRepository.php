@@ -124,7 +124,12 @@ class PatientRepository
                     $companion = $row['companion'];
                     $address = $row['address'];
                     $naturalness = $row['naturalness'];
-                    $active = $row['active'];
+
+                    if ($row['active']) {
+                        $active = "Ativo";
+                    } else {
+                        $active = "Inativo";
+                    }
 
                     $patient = new Patient(
                         $cpf,

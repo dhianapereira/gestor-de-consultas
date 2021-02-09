@@ -63,6 +63,7 @@
                         <th>Acompanhante</th>
                         <th>Endereço</th>
                         <th>Naturalidade</th>
+                        <th>Status</th>
                     </tr>
                     <?php
                     foreach ($patient_list as $patient) {
@@ -76,6 +77,7 @@
                             <td><?php echo ($patient->getCompanion()); ?></td>
                             <td><?php echo ($patient->getAddress()); ?></td>
                             <td><?php echo ($patient->getNaturalness()); ?></td>
+                            <td><?php echo ($patient->getActive()); ?></td>
                         </tr>
                     <?php
                     }
