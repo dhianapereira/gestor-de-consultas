@@ -56,20 +56,25 @@ class UserRepository
         }
     }
 
-    public function update($doctor)
+    public function update($user)
     {
         try {
-            $sql = "UPDATE doctor SET name = :name, genre = :genre, specialty = :specialty,
-                    active = :active WHERE id = :id";
+            $sql = "UPDATE user SET name = :name, genre = :genre,
+            date_of_birth = :date_of_birth, naturalness = :naturalness, 
+            responsibility = :responsibility,  address = :address, active = :active
+            WHERE cpf = :cpf";
 
             $stmt = $this->conn->getConnection()->prepare($sql);
 
             $success = $stmt->execute(array(
-                ':id' => $doctor->getId(),
-                ':name' => $doctor->getName(),
-                ':genre' => $doctor->getGenre(),
-                ':specialty' => $doctor->getSpecialty(),
-                ':active' => $doctor->getActive(),
+                ':cpf' => $user->getCpf(),
+                ':name' => $user->getName(),
+                ':genre' => $user->getGenre(),
+                ':date_of_birth' => $user->getDateOfBirth(),
+                ':responsibility' => $user->getResponsibility(),
+                ':naturalness' => $user->getNaturalness(),
+                ':address' => $user->getAddress(),
+                ':active' => $user->getActive(),
             ));
 
             if ($success) {
@@ -118,7 +123,8 @@ class UserRepository
                         $active = "Inativo";
                     }
 
-                    $user = new User(
+                    $user = new User();
+                    $user->constructor(
                         $cpf,
                         $name,
                         $genre,
@@ -170,7 +176,8 @@ class UserRepository
                 $password = $result[0]['password'];
                 $active = $result[0]['active'];
 
-                $user = new User(
+                $user = new User();
+                $user->constructor(
                     $cpf,
                     $name,
                     $genre,
@@ -200,13 +207,14 @@ class UserRepository
         try {
 
             $sql = 'SELECT * FROM user WHERE username = :username 
-            AND password = :password';
+            AND password = :password AND active = :active';
 
             $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute(array(
                 ':username' => $username,
                 ':password' => $password,
+                ':active' => 1,
             ));
 
             $result = $stmt->fetchAll();
@@ -221,7 +229,8 @@ class UserRepository
                 $responsibility = $result[0]['responsibility'];
                 $active = $result[0]['active'];
 
-                $user = new User(
+                $user = new User();
+                $user->constructor(
                     $cpf,
                     $name,
                     $genre,
@@ -249,7 +258,7 @@ class UserRepository
     public function save($cpf, $username, $password)
     {
         try {
-            $sql = "UPDATE user SET username = :username, password = :password WHERE cpf = :cpf";
+            $sql = "UPDATE user SET username = :username, password = :password WHERE cpf = :cpf AND active = :active";
 
             $stmt = $this->conn->getConnection()->prepare($sql);
 
@@ -257,6 +266,7 @@ class UserRepository
                 ':cpf' => $cpf,
                 ':username' => $username,
                 ':password' => $password,
+                ':active' => 1,
             ));
 
             if ($success) {

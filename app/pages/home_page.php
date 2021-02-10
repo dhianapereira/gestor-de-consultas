@@ -41,6 +41,12 @@
           <p>Prontuários</p>
           <img src="../../public/styles/img/medical-records-list.svg" alt="Imagem de prontuário" />
         </h3>
+      </a>  
+      <a href="./user/menu.php" class="home-button">
+        <h3>
+          <p>Funcionários</p>
+          <img src="../../public/styles/img/update-patient.svg" alt="Imagem de funcionário" />
+        </h3>
       </a>
     </section>
     <section class="table">
