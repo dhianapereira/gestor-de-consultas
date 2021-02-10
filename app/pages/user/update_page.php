@@ -26,7 +26,7 @@
                     <p>Procurar Funcionário(a)</p>
                     <img src="../../../public/styles/img/update-patient.svg" alt="Imagem de pesquisa">
                 </h3>
-            </a> <a href="#" class="home-button">
+            </a> <a href="./register_page.html" class="home-button">
                 <h3>
                     <p>Cadastrar Funcionário(a)</p>
                     <img src="../../../public/styles/img/plus.svg" alt="Imagem de adicionar" />

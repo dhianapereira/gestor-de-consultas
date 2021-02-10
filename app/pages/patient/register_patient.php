@@ -29,7 +29,7 @@
                     <img src="../../../public/styles/img/list.svg" alt="Imagem de lista de pacientes" />
                 </h3>
             </a>
-            <a href="search_patient.html" class="home-button">
+            <a href="./search_patient.html" class="home-button">
                 <h3>
                     <p>Procurar Paciente</p>
                     <img src="../../../public/styles/img/update-patient.svg" alt="Imagem de paciente" />
@@ -60,7 +60,7 @@
             $companion = $_POST["companion"];
             $address = $_POST["address"];
             $naturalness = $_POST["naturalness"];
-            
+
 
             if (
                 !isset($cpf) || !isset($full_name)
@@ -88,7 +88,7 @@
                     $companion,
                     $address,
                     $naturalness,
-                    
+
                 );
 
                 if (!is_bool($result)) {

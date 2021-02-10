@@ -44,19 +44,19 @@
       <section class="quick-access">
         <a href="./list_page.php" class="home-button">
           <h3>
-            <p>Listar Pacientes</p>
+            <p>Listar Funcionários</p>
             <img
               src="../../../public/styles/img/list.svg"
-              alt="Imagem de lista de pacientes"
+              alt="Imagem de lista de funcionários"
             />
           </h3>
         </a>
-        <a href="./search_patient.html" class="home-button">
+        <a href="./search_user.html" class="home-button">
           <h3>
-            <p>Procurar Paciente</p>
+            <p>Procurar Funcionário</p>
             <img
               src="../../../public/styles/img/update-patient.svg"
-              alt="Imagem de paciente"
+              alt="Imagem de funcionário"
             />
           </h3>
         </a>
@@ -73,24 +73,15 @@
       <section class="box">
         <div class="form">
           <h2>Dados Pessoais</h2>
-          <form method="POST" action="register_patient.php">
+          <form method="POST" action="register_user.php">
             <div class="input-block">
-              <label for="full_name">Nome Completo</label>
-              <input id="full_name" name="full_name" required />
+              <label for="name">Nome</label>
+              <input id="name" name="name" required />
             </div>
+
             <div class="input-block">
               <label for="cpf">CPF</label>
               <input id="cpf" name="cpf" required />
-            </div>
-
-            <div class="input-block">
-              <label for="mother_name">Nome da mãe</label>
-              <input id="mother_name" name="mother_name" required />
-            </div>
-
-            <div class="input-block">
-              <label for="companion">Acompanhante</label>
-              <input id="companion" name="companion" required />
             </div>
 
             <div class="input-block">
@@ -163,6 +154,10 @@
                   Estrangeiro(a)
                 </button>
               </div>
+            </div>
+            <div class="input-block">
+              <label for="responsibility">Cargo</label>
+              <input id="responsibility" name="responsibility" required />
             </div>
 
             <button type="submit" class="primary-button">Confirmar</button>

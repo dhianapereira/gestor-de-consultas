@@ -18,7 +18,7 @@
     </header>
     <main class="container">
         <section class="quick-access">
-            <a href="#" class="home-button">
+            <a href="./register_page.html" class="home-button">
                 <h3>
                     <p>Cadastrar Funcionário</p>
                     <img src="../../../public/styles/img/plus.svg" alt="Imagem de adicionar" />
