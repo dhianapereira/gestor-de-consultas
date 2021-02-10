@@ -17,7 +17,7 @@ class SymptomRepository {
                 $sql = "INSERT INTO symptom (cpf_patient_fk, name) 
                         VALUES (:cpf_patient_fk, :name)";
 
-                $stmt = $this->conn->connect()->prepare( $sql );
+                $stmt = $this->conn->getConnection()->prepare($sql);
 
                 $stmt->execute( array(
                     ':cpf_patient_fk' => $patient_cpf,
@@ -30,7 +30,7 @@ class SymptomRepository {
             return "Exception: $e";
         }
         finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -38,7 +38,7 @@ class SymptomRepository {
         try {
             $sql = "SELECT * FROM symptom WHERE cpf_patient_fk = :cpf_patient_fk";
 
-            $stmt = $this->conn->connect()->prepare( $sql );
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute(array(
                 ':cpf_patient_fk' => $cpf,
@@ -69,8 +69,7 @@ class SymptomRepository {
             return "Exception: $e";
         }
         finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 }
-?>

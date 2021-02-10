@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -75,7 +76,7 @@
                                     <span>Operação realizada</span>
                                     <img src="../../../public/styles/img/success.svg" alt="Imagem de mensagem de sucesso">
                                 </h3>
-                                <p>As atualizações foram realizadas com sucesso! Você já pode acessar a plataforma</p>
+                                <p>O cadastro foi realizado com sucesso! Você já pode acessar a plataforma</p>
                                 <a href="./login_page.html" class="primary-button">
                                     Entrar
                                 </a>

@@ -40,7 +40,7 @@ class MedicalRecordsRepository
             $sql = "INSERT INTO medical_records (cpf_patient_fk, result, gravity, start_date) 
                         VALUES (:cpf_patient_fk, :result, :gravity, :start_date)";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf_patient_fk' => $patient_cpf,
@@ -59,7 +59,7 @@ class MedicalRecordsRepository
         } catch (\Exception $e) {
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -68,7 +68,7 @@ class MedicalRecordsRepository
         try {
             $sql = "SELECT * FROM medical_records WHERE cpf_patient_fk = :cpf_patient_fk";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute(array(
                 ':cpf_patient_fk' => $cpf,
@@ -94,7 +94,7 @@ class MedicalRecordsRepository
 
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -103,7 +103,7 @@ class MedicalRecordsRepository
         try {
             $sql = "SELECT * FROM medical_records";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute();
 
@@ -133,7 +133,7 @@ class MedicalRecordsRepository
 
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 }

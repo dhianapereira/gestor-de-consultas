@@ -34,7 +34,7 @@ class PatientRepository
                     :mother_name, :companion, :address, :naturalness
                 )";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf' => $cpf,
@@ -60,7 +60,7 @@ class PatientRepository
         } catch (\Exception $e) {
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -72,7 +72,7 @@ class PatientRepository
                     address = :address, naturalness = :naturalness, active = :active
                     WHERE cpf = :cpf";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf' => $patient->getCpf(),
@@ -97,7 +97,7 @@ class PatientRepository
         } catch (\Exception $e) {
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -106,7 +106,7 @@ class PatientRepository
         try {
             $sql = "SELECT * FROM patient";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute();
 
@@ -155,7 +155,7 @@ class PatientRepository
 
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -164,7 +164,7 @@ class PatientRepository
         try {
             $sql = "SELECT * FROM patient WHERE cpf = :cpf";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute(array(
                 ':cpf' => $cpf,
@@ -203,7 +203,7 @@ class PatientRepository
 
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 }

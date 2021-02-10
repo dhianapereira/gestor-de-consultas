@@ -1,98 +1,106 @@
 <?php
+
 namespace src\data\repository;
+
 use src\data\repository\Connection;
 use app\models\Doctor;
-class DoctorRepository {
+
+class DoctorRepository
+{
 
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conn = new Connection();
     }
 
-    public function register($name, $genre, $specialty) {
+    public function register($name, $genre, $specialty)
+    {
         try {
             $sql = "INSERT INTO doctor (name, genre, specialty) 
                 VALUES (:name, :genre, :specialty)";
 
-            $stmt = $this->conn->connect()->prepare( $sql );
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
-            $success = $stmt->execute( array(
+            $success = $stmt->execute(array(
                 ':name' => $name,
                 ':genre' => $genre,
                 ':specialty' => $specialty,
-            ) );
+            ));
 
-            if ( $success ) {
+            if ($success) {
                 return $success;
             }
 
             $response = "Não foi possível realizar o cadastro do médico(a).
             Verifique sua conexão com a internet ou tente mais tarde.";
-            
+
             return $response;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
             return "Exception: $e";
-        }
-        finally {
-            $this->conn  = null;
+        } finally {
+
+            $this->conn->disconnect();
         }
     }
 
-    public function update($doctor) {
+    public function update($doctor)
+    {
         try {
             $sql = "UPDATE doctor SET name = :name, genre = :genre, specialty = :specialty,
                     active = :active WHERE id = :id";
-            
-            $stmt = $this->conn->connect()->prepare( $sql );
-            
-            $success = $stmt->execute( array(
+
+            $stmt = $this->conn->getConnection()->prepare($sql);
+
+            $success = $stmt->execute(array(
                 ':id' => $doctor->getId(),
                 ':name' => $doctor->getName(),
                 ':genre' => $doctor->getGenre(),
                 ':specialty' => $doctor->getSpecialty(),
                 ':active' => $doctor->getActive(),
-            ) );
+            ));
 
-            if ( $success ) {
+            if ($success) {
                 return $success;
             }
 
             $response = "Não foi possível realizar as alterações desejadas.
             Verifique sua conexão com a internet ou tente mais tarde.";
-            
+
             return $response;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
             return "Exception: $e";
-        }
-        finally {
-            $this->conn  = null;
+        } finally {
+
+            $this->conn->disconnect();
         }
     }
 
-    public function allDoctors() {
+    public function allDoctors()
+    {
         try {
             $sql = "SELECT * FROM doctor";
 
-            $stmt = $this->conn->connect()->prepare( $sql );
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute();
 
             $result = $stmt->fetchAll();
 
-            if ( $result!=null ) {
+            if ($result != null) {
                 $list = [];
 
-                foreach($result as $row){
+                foreach ($result as $row) {
                     $id = $row['id'];
                     $name = $row['name'];
                     $genre = $row['genre'];
                     $specialty = $row['specialty'];
-                    
-                    if($row['active']){
+
+                    if ($row['active']) {
                         $active = "Ativo";
-                    }else{
-                        $active = "Inativo";    
+                    } else {
+                        $active = "Inativo";
                     }
 
                     $doctor = new Doctor($id, $name, $genre, $specialty, $active);
@@ -105,20 +113,21 @@ class DoctorRepository {
 
             $response = "Não foi possível trazer a lista de médicos";
             return $response;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
 
             return "Exception: $e";
-        }
-        finally {
-            $this->conn  = null;
+        } finally {
+
+            $this->conn->disconnect();
         }
     }
 
-    public function fetchDoctor($id) {
+    public function fetchDoctor($id)
+    {
         try {
             $sql = "SELECT * FROM doctor WHERE id = :id";
 
-            $stmt = $this->conn->connect()->prepare( $sql );
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute(array(
                 ':id' => $id,
@@ -126,7 +135,7 @@ class DoctorRepository {
 
             $result = $stmt->fetchAll();
 
-            if ( $result!=null ) {
+            if ($result != null) {
                 $name = $result[0]['name'];
                 $genre = $result[0]['genre'];
                 $specialty = $result[0]['specialty'];
@@ -139,13 +148,12 @@ class DoctorRepository {
 
             $response = "Não foi possível trazer o médico(a) escolhido.";
             return $response;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
 
             return "Exception: $e";
-        }
-        finally {
-            $this->conn  = null;
+        } finally {
+
+            $this->conn->disconnect();
         }
     }
 }
-?>

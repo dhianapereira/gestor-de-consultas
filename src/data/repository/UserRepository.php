@@ -29,7 +29,7 @@ class UserRepository
                     address, responsibility) 
                     VALUES (:cpf, :name, :genre, :date_of_birth, :naturalness, :address, :responsibility)";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf' => $cpf,
@@ -52,7 +52,7 @@ class UserRepository
         } catch (\Exception $e) {
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -62,7 +62,7 @@ class UserRepository
             $sql = "UPDATE doctor SET name = :name, genre = :genre, specialty = :specialty,
                     active = :active WHERE id = :id";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':id' => $doctor->getId(),
@@ -83,7 +83,7 @@ class UserRepository
         } catch (\Exception $e) {
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -92,7 +92,7 @@ class UserRepository
         try {
             $sql = "SELECT * FROM user";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute();
 
@@ -140,10 +140,9 @@ class UserRepository
             $response = "Não foi possível trazer a lista de funcionários";
             return $response;
         } catch (\Exception $e) {
-
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -152,10 +151,10 @@ class UserRepository
         try {
             $sql = "SELECT * FROM user WHERE cpf = :cpf";
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute(array(
-                ':cpf' => $cpf,
+                ':cpf' => $cpf
             ));
 
             $result = $stmt->fetchAll();
@@ -190,20 +189,20 @@ class UserRepository
             $response = "Não foi possível trazer o funcionário(a) escolhido.";
             return $response;
         } catch (\Exception $e) {
-
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
     public function signIn($username, $password)
     {
         try {
+
             $sql = 'SELECT * FROM user WHERE username = :username 
             AND password = :password';
 
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $stmt->execute(array(
                 ':username' => $username,
@@ -241,10 +240,9 @@ class UserRepository
             $response = "Não foi possível realizar o login.";
             return $response;
         } catch (\Exception $e) {
-
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 
@@ -253,9 +251,7 @@ class UserRepository
         try {
             $sql = "UPDATE user SET username = :username, password = :password WHERE cpf = :cpf";
 
-            echo(">>>>>>{$this->conn}");
-
-            $stmt = $this->conn->connect()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf' => $cpf,
@@ -273,7 +269,7 @@ class UserRepository
         } catch (\Exception $e) {
             return "Exception: $e";
         } finally {
-            $this->conn  = null;
+            $this->conn->disconnect();
         }
     }
 }
