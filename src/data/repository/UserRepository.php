@@ -258,22 +258,40 @@ class UserRepository
     public function save($cpf, $username, $password)
     {
         try {
-            $sql = "UPDATE user SET username = :username, password = :password WHERE cpf = :cpf AND active = :active";
+            $select = "SELECT * FROM user WHERE cpf = :cpf AND active = :active";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = $this->conn->getConnection()->prepare($select);
 
-            $success = $stmt->execute(array(
+            $stmt->execute(array(
                 ':cpf' => $cpf,
-                ':username' => $username,
-                ':password' => $password,
                 ':active' => 1,
             ));
 
-            if ($success) {
-                return $success;
+            $user = $stmt->fetchAll();
+
+            if ($user != null) {
+
+                $sql = "UPDATE user SET username = :username, password = :password 
+                        WHERE cpf = :cpf";
+
+                $stmt = $this->conn->getConnection()->prepare($sql);
+
+                $success = $stmt->execute(array(
+                    ':cpf' => $cpf,
+                    ':username' => $username,
+                    ':password' => $password,
+                ));
+
+                if ($success) {
+                    return $success;
+                }
+
+                $response = "Não foi possível realizar o cadastro do usuário na plataforma";
+
+                return $response;
             }
 
-            $response = "Não foi possível realizar o cadastro do usuário na plataforma";
+            $response = "Você não é um Funcionário desta Unidade de Saúde.";
 
             return $response;
         } catch (\Exception $e) {
