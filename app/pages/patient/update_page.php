@@ -3,7 +3,6 @@
 <head>
   <title>Unidade de Saúde | Dados do Paciente</title>
   <meta charset="utf-8" />
-  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="../../../public/styles/img/doctors-list.svg" type="image/x-icon" />
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
@@ -25,16 +24,22 @@
       <a href="./search_patient.html" class="home-button">
         <h3>
           <p>Procurar Paciente</p>
-          <img src="../../../public/styles/img/update-patient.svg">
+          <img src="../../../public/styles/img/update-patient.svg" alt="Imagem de pesquisa">
         </h3>
       </a>
       <a href="./register_page.html" class="home-button">
+        <h3>
+          <p>Cadastrar Paciente</p>
+          <img src="../../../public/styles/img/plus.svg" alt="Imagem de adicionar" />
+        </h3>
+      </a>
+      <a href="./list_page.php" class="home-button">
         <h3>
           <p>Lista de Pacientes</p>
           <img src="../../../public/styles/img/list.svg">
         </h3>
       </a>
-      <a href="./menu.php" class="home-button">
+      <a href="../home_page.php" class="home-button">
         <h3>
           <p>Home</p>
           <img src="../../../public/styles/img/home.svg" alt="Imagem de Home" />
@@ -110,15 +115,6 @@
                   </button>
                 </div>
               </div>
-              <div class="input-block">
-                <label for="companion"> Acompanhante</label>
-                <input id="companion" name="companion" value="<?php echo ($patient->getCompanion()) ?>" required />
-              </div>
-              <div class="input-block">
-                <label for="address"> Endereço </label>
-                <input id="address" name="address" value="<?php echo ($patient->getAddress()) ?>" required />
-              </div>
-
 
               <div class="input-block">
                 <label for="naturalness">Naturalidade</label>
@@ -142,10 +138,22 @@
                 </div>
               </div>
 
+              <div class="input-block">
+                <label for="companion"> Acompanhante</label>
+                <input id="companion" name="companion" value="<?php echo ($patient->getCompanion()) ?>" required />
+              </div>
+              <div class="input-block">
+                <label for="address"> Endereço </label>
+                <input id="address" name="address" value="<?php echo ($patient->getAddress()) ?>" required />
+              </div>
 
 
-              
-                <div class="input-block">
+
+
+
+
+
+              <div class="input-block">
                 <label for="active">Status</label>
                 <input type="hidden" name="active" id="active" value="<?php echo ($patient->getActive()) ?>" required />
 
@@ -161,12 +169,12 @@
                                                                                     if ($patient->getActive() == 0) {
                                                                                     ?> class="active" <?php
                                                                                                     }
-                                                                      ?>>
+                                                                                                      ?>>
                     Inativo
                   </button>
                 </div>
               </div>
-              
+
               <button type="submit" class="primary-button">Salvar Alterações</button>
             </form>
           <?php
@@ -184,11 +192,12 @@
         }
         ?>
       </div>
-      </div>
 
     </section>
   </main>
-
+  <footer>
+    <p>2021 - Unidade de Saúde</p>
+  </footer>
 
 </body>
 

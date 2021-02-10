@@ -109,6 +109,10 @@
       ?>
 
     </section>
+  </main>
+  <footer>
+    <p>2021 - Unidade de Saúde</p>
+  </footer>
 </body>
 
 </html>
