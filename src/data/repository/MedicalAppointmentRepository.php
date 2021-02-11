@@ -138,7 +138,7 @@ class MedicalAppointmentRepository
                     MA.realized, MA.date, MA.cpf_patient_fk ,MA.time, MA.arrival_time
                     FROM medical_appointment AS MA
                         INNER JOIN doctor AS D ON (MA.id_doctor_fk = D.id)
-                    WHERE MA.id = :id
+                    WHERE MA.id = :id AND MA.realized = :realized
                     GROUP BY D.specialty, D.genre, D.name, MA.id, 
                         MA.realized, MA.date, MA.cpf_patient_fk ,
                         MA.time, MA.arrival_time";
@@ -147,6 +147,7 @@ class MedicalAppointmentRepository
 
             $stmt->execute(array(
                 ':id' => $id,
+                ':id' => 0,
             ));
 
             $result = $stmt->fetchAll();

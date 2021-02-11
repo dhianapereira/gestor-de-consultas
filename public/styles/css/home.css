@@ -11,7 +11,7 @@
 
 .quick-access,
 .up {
-  margin-top: -8rem;
+  margin-top: -7rem;
 }
 
 a.home-button{
@@ -49,7 +49,7 @@ a.home-button h3 img{
 
   .quick-access {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
   }
 

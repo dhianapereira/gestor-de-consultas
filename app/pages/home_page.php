@@ -17,6 +17,17 @@
     <h3 class="logo">Unidade de Saúde</h3>
   </header>
   <main class="container">
+    <?php
+
+    session_start();
+
+    include_once('../utils/autoload.php');
+
+    spl_autoload_register("autoload");
+
+    use app\controllers\MedicalAppointmentController;
+
+    ?>
     <section class="quick-access">
       <a href="./patient/menu.php" class="home-button">
         <h3>
@@ -41,8 +52,13 @@
           <p>Prontuários</p>
           <img src="../../public/styles/img/medical-records-list.svg" alt="Imagem de prontuário" />
         </h3>
-      </a>  
-      <a href="./user/menu.php" class="home-button">
+      </a>
+      <?php
+      if ($_SESSION['responsibility'] != "Administrador") {
+        $display = "display: none;";
+      }
+      ?>
+      <a style="<?php echo ($display) ?>" href="./user/menu.php" id="restricted-access" class="home-button">
         <h3>
           <p>Funcionários</p>
           <img src="../../public/styles/img/update-patient.svg" alt="Imagem de funcionário" />
@@ -52,13 +68,6 @@
     <section class="table">
       <h2>Lista de Atendimento</h2>
       <?php
-
-      include_once('../utils/autoload.php');
-
-      spl_autoload_register("autoload");
-
-      use app\controllers\MedicalAppointmentController;
-
       $medical_appointment_controller = new MedicalAppointmentController();
 
       $medical_appointment_list = $medical_appointment_controller->allMedicalAppointments();

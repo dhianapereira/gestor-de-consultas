@@ -18,6 +18,8 @@
     <main class="container">
         <section class="up">
             <?php
+            session_start();
+
             include_once('../../../utils/autoload.php');
 
             spl_autoload_register("autoload");
@@ -42,6 +44,7 @@
                     </div>
                 <?php
                 } else {
+                    $_SESSION['responsibility'] = $result->getResponsibility();
                     header('Location:../../home_page.php');
                 }
             } else {
