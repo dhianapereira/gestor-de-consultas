@@ -17,7 +17,7 @@
     </header>
     <main class="container">
         <section class="quick-access">
-            <a href="./consultation_page.html" class="home-button">
+            <a href="./consultation_page.php" class="home-button">
                 <h3>
                     <p>Marcar Consulta</p>
                     <img src="../../../public/styles/img/make-an-appointment.svg" alt="Imagem de marcar consulta" />

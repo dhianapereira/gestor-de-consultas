@@ -130,6 +130,13 @@ class Facade
         return $result;
     }
 
+    public function listOfSpecialties()
+    {
+        $result = $this->doctor_repository->listOfSpecialties();
+
+        return $result;
+    }
+
     public function fetchDoctor($id)
     {
         $result = $this->doctor_repository->fetchDoctor($id);

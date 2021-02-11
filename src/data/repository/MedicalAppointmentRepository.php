@@ -74,11 +74,14 @@ class MedicalAppointmentRepository
                             ON (MA.cpf_patient_fk = P.cpf)
                         INNER JOIN doctor AS D 
                             ON (MA.id_doctor_fk = D.id)
+                    WHERE MA.realized = :realized
                         ORDER BY MA.realized != 0, MA.arrival_time IS NULL, MA.arrival_time ASC";
 
             $stmt = $this->conn->getConnection()->prepare($sql);
 
-            $stmt->execute();
+            $stmt->execute(array(
+                ':realized' => 0,
+            ));
 
             $result = $stmt->fetchAll();
 
@@ -138,7 +141,7 @@ class MedicalAppointmentRepository
                     MA.realized, MA.date, MA.cpf_patient_fk ,MA.time, MA.arrival_time
                     FROM medical_appointment AS MA
                         INNER JOIN doctor AS D ON (MA.id_doctor_fk = D.id)
-                    WHERE MA.id = :id AND MA.realized = :realized
+                    WHERE MA.id = :id
                     GROUP BY D.specialty, D.genre, D.name, MA.id, 
                         MA.realized, MA.date, MA.cpf_patient_fk ,
                         MA.time, MA.arrival_time";
@@ -147,7 +150,6 @@ class MedicalAppointmentRepository
 
             $stmt->execute(array(
                 ':id' => $id,
-                ':id' => 0,
             ));
 
             $result = $stmt->fetchAll();

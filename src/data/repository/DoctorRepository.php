@@ -122,6 +122,32 @@ class DoctorRepository
         }
     }
 
+    public function listOfSpecialties()
+    {
+        try {
+            $sql = "SELECT specialty FROM doctor";
+
+            $stmt = $this->conn->getConnection()->prepare($sql);
+
+            $stmt->execute();
+
+            $result = $stmt->fetchAll();
+
+            if ($result != null) {
+                return $result;
+            }
+
+            $response = "Não foi possível trazer a lista de especialidades";
+            return $response;
+        } catch (\Exception $e) {
+
+            return "Exception: $e";
+        } finally {
+
+            $this->conn->disconnect();
+        }
+    }
+
     public function fetchDoctor($id)
     {
         try {

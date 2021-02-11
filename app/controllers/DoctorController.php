@@ -36,5 +36,11 @@
             
             return $result;
         }
+
+        public function listOfSpecialties(){
+            $result = $this->doctor_service->listOfSpecialties();
+                
+            return $result;
+        }
     }
 ?>

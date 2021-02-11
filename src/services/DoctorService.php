@@ -37,5 +37,11 @@
             return $result;
         }
 
+        public function listOfSpecialties(){
+            $result = $this->facade->listOfSpecialties();
+
+            return $result;
+        }
+
     }
 ?>

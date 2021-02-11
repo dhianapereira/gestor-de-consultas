@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<html>
 
 <head>
     <title>Unidade de Saúde | Marcar Consulta</title>
@@ -9,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/select.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/form.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
@@ -24,8 +24,7 @@
             <a href="./list_page.php" class="home-button">
                 <h3>
                     <p>Lista de Atendimento</p>
-                    <img src="../../../public/styles/img/medical-appointments-list.svg"
-                        alt="Imagem de lista de atendimento" />
+                    <img src="../../../public/styles/img/medical-appointments-list.svg" alt="Imagem de lista de atendimento" />
                 </h3>
             </a>
             <a href="./search_medical_appointment.html" class="home-button">
@@ -49,18 +48,13 @@
                         <input id="patient_cpf" placeholder="Insira o CPF" name="patient_cpf" required />
                     </div>
 
-                    <div class="input-block">
-                        <label for="specialty">Médico</label>
-                        <input id="specialty" placeholder="Insira a especialidade" name="specialty" required />
-                    </div>
-
+                    <h2>Escolher Médico(a)</h2>
                     <div class="input-block">
                         <label for="genre">Gênero</label>
                         <input type="hidden" name="genre" id="genre" value="Feminino" required />
 
                         <div class="button-select">
-                            <button data-value="Feminino" onclick="toggleGenre(event)" type="button"
-                                class="active-genre">
+                            <button data-value="Feminino" onclick="toggleGenre(event)" type="button" class="active-genre">
                                 Feminino
                             </button>
                             <button data-value="Masculino" onclick="toggleGenre(event)" type="button">
@@ -68,6 +62,31 @@
                             </button>
                         </div>
                     </div>
+
+
+                    <div class="custom-select">
+                        <select id="specialty" name="specialty" required>
+                            <option disabled selected>Selecione a especialidade: </option>
+                            <?php
+                            include_once('../../utils/autoload.php');
+
+                            spl_autoload_register("autoload");
+
+                            use app\controllers\DoctorController;
+
+                            $doctor_controller = new DoctorController();
+
+                            $list_of_specialties = $doctor_controller->listOfSpecialties();
+
+                            foreach ($list_of_specialties as $specialty) {
+                            ?>
+                                <option value="<?php echo ($specialty['specialty']); ?>"><?php echo ($specialty['specialty']); ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <script src="../../../public/scripts/selection_box.js"></script>
                     <br />
                     <span class="line">
                         <span class="input-block">
