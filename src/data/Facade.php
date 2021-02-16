@@ -8,6 +8,7 @@ use src\data\repository\MedicalRecordsRepository;
 use src\data\repository\MedicalAppointmentRepository;
 use src\data\repository\DoctorRepository;
 use src\data\repository\UserRepository;
+use src\data\repository\RoomRepository;
 
 class Facade
 {
@@ -18,6 +19,7 @@ class Facade
     private $medical_appointment_repository;
     private $doctor_repository;
     private $user_repository;
+    private $room_repository;
 
     public function __construct()
     {
@@ -27,7 +29,10 @@ class Facade
         $this->medical_appointment_repository = new MedicalAppointmentRepository();
         $this->doctor_repository = new DoctorRepository();
         $this->user_repository = new UserRepository();
+        $this->room_repository = new RoomRepository();
     }
+
+    // Patient operations
 
     public function registerPatient(
         $cpf,
@@ -53,7 +58,7 @@ class Facade
 
         return $result;
     }
-    
+
     public function updatePatient($patient)
     {
         $result = $this->patient_repository->update($patient);
@@ -74,6 +79,8 @@ class Facade
 
         return $result;
     }
+
+    // Medical Records operations
 
     public function addSymptoms($patient_cpf, $symptoms, $start_date)
     {
@@ -100,12 +107,22 @@ class Facade
         return $result;
     }
 
+
+    public function fetchMedicalRecords($cpf)
+    {
+        $result = $this->medical_records_repository->fetchMedicalRecords($cpf);
+
+        return $result;
+    }
+
     public function fetchSymptoms($cpf)
     {
         $result = $this->symptom_repository->fetchSymptoms($cpf);
 
         return $result;
     }
+
+    // Doctor operations
 
     public function registerDoctor($name, $genre, $specialty)
     {
@@ -144,12 +161,8 @@ class Facade
         return $result;
     }
 
-    public function fetchMedicalRecords($cpf)
-    {
-        $result = $this->medical_records_repository->fetchMedicalRecords($cpf);
 
-        return $result;
-    }
+    // Medical Appointment operations
 
     public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time)
     {
@@ -186,6 +199,8 @@ class Facade
 
         return $result;
     }
+
+    // User operations
 
     public function registerUser(
         $cpf,
@@ -242,6 +257,38 @@ class Facade
     public function save($cpf, $username, $password)
     {
         $result = $this->user_repository->save($cpf, $username, $password);
+
+        return $result;
+    }
+
+    // Room operations
+
+    public function registerRoom($type)
+    {
+
+        $result = $this->room_repository->register($type);
+
+        return $result;
+    }
+
+    public function updateRoom($room)
+    {
+
+        $result = $this->room_repository->update($room);
+
+        return $result;
+    }
+
+    public function allRooms()
+    {
+        $result = $this->room_repository->allRooms();
+
+        return $result;
+    }
+
+    public function fetchRoom($id)
+    {
+        $result = $this->room_repository->fetchRoom($id);
 
         return $result;
     }
