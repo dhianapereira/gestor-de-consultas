@@ -40,6 +40,15 @@
             </a>
         </section>
         <section class="box">
+            <?php
+            include_once('../../utils/autoload.php');
+
+            spl_autoload_register("autoload");
+
+            use app\controllers\DoctorController;
+            use app\controllers\RoomController;
+
+            ?>
             <div class="form">
                 <h2>Marcar Consulta</h2>
                 <form method="POST" action="make_an_appointment.php">
@@ -68,11 +77,6 @@
                         <select id="specialty" name="specialty" required>
                             <option disabled selected>Selecione a especialidade: </option>
                             <?php
-                            include_once('../../utils/autoload.php');
-
-                            spl_autoload_register("autoload");
-
-                            use app\controllers\DoctorController;
 
                             $doctor_controller = new DoctorController();
 
@@ -86,6 +90,27 @@
                             ?>
                         </select>
                     </div>
+
+
+                    <h2>Escolher Sala</h2>
+                    <div class="custom-select">
+                        <select id="room" name="room" required>
+                            <option disabled selected>Selecione a sala: </option>
+                            <?php
+
+                            $room_controller = new RoomController();
+
+                            $list_of_types = $room_controller->listOfTypes();
+
+                            foreach ($list_of_types as $type) {
+                            ?>
+                                <option value="<?php echo ($type['id']); ?>"><?php echo ($type['type']); ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
                     <script src="../../../public/scripts/selection_box.js"></script>
                     <br />
                     <span class="line">

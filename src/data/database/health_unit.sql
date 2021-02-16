@@ -49,6 +49,7 @@ CREATE TABLE medical_appointment (
   id INT(11) NOT NULL AUTO_INCREMENT,
   cpf_patient_fk VARCHAR(14) NOT NULL,
   id_doctor_fk INT(11) NOT NULL,
+  id_room_fk INT(11) NOT NULL,
   time TIME NOT NULL,
   date DATE NOT NULL,
   arrival_time TIME,
@@ -57,7 +58,9 @@ CREATE TABLE medical_appointment (
   CONSTRAINT medical_appointment_fk1 FOREIGN KEY (cpf_patient_fk)
   REFERENCES patient (cpf), 
   CONSTRAINT medical_appointment_fk2 FOREIGN KEY (id_doctor_fk)
-  REFERENCES doctor (id) 
+  REFERENCES doctor (id),
+  CONSTRAINT medical_appointment_fk3 FOREIGN KEY (id_room_fk)
+  REFERENCES room (id)  
 );
 
 CREATE TABLE user ( 

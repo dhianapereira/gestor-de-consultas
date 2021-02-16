@@ -56,10 +56,11 @@
             $genre = $_POST["genre"];
             $date = $_POST["date"];
             $time = $_POST["time"];
+            $room = $_POST["room"];
 
             if (
                 !isset($specialty) || !isset($patient_cpf) || !isset($genre)
-                || !isset($date) || !isset($time)
+                || !isset($date) || !isset($time) || !isset($room)
             ) {
             ?>
                 <div class="card">
@@ -77,7 +78,8 @@
                     $genre,
                     $specialty,
                     $date,
-                    $time
+                    $time,
+                    $room
                 );
 
                 if (!is_bool($result)) {

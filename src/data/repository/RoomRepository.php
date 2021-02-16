@@ -147,4 +147,32 @@ class RoomRepository
             $this->conn->disconnect();
         }
     }
+
+    public function listOfTypes()
+    {
+        try {
+            $sql = "SELECT type, id FROM room WHERE status = :status";
+
+            $stmt = $this->conn->getConnection()->prepare($sql);
+
+            $stmt->execute(array(
+                ':status' => 0,
+            ));
+
+            $result = $stmt->fetchAll();
+
+            if ($result != null) {
+                return $result;
+            }
+
+            $response = "Não foi possível trazer a lista de tipos de sala";
+            return $response;
+        } catch (\Exception $e) {
+
+            return "Exception: $e";
+        } finally {
+
+            $this->conn->disconnect();
+        }
+    }
 }

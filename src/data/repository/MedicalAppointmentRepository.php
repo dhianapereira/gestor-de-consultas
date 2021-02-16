@@ -15,7 +15,7 @@ class MedicalAppointmentRepository
         $this->conn = new Connection();
     }
 
-    public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time)
+    public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time, $room)
     {
         try {
 
@@ -34,8 +34,9 @@ class MedicalAppointmentRepository
             if ($doctor != null) {
                 $id_doctor = $doctor[0]['id'];
 
-                $sql = "INSERT INTO medical_appointment (cpf_patient_fk, id_doctor_fk, time, date) 
-                    VALUES (:cpf_patient_fk, :id_doctor_fk, :time, :date)";
+                $sql = "INSERT INTO medical_appointment (cpf_patient_fk, id_doctor_fk, 
+                        id_room_fk, time, date) 
+                        VALUES (:cpf_patient_fk, :id_doctor_fk,:id_room_fk, :time, :date)";
 
 
                 $stmt = $this->conn->getConnection()->prepare($sql);
@@ -43,6 +44,7 @@ class MedicalAppointmentRepository
                 $success = $stmt->execute(array(
                     ':cpf_patient_fk' => $patient_cpf,
                     ':id_doctor_fk' => $id_doctor,
+                    ':id_room_fk' => $room,
                     ':time' => $time,
                     ':date' => $date,
                 ));

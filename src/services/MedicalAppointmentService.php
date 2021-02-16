@@ -11,10 +11,10 @@
             $this->facade =  new Facade();
         }
 
-        public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time){
+        public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time, $room){
 
             $result = $this->facade->makeAnAppointment($patient_cpf, $genre, $specialty,
-             $date, $time);
+             $date, $time, $room);
 
             return $result;
         }

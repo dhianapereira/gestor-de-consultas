@@ -36,5 +36,10 @@
             
             return $result;
         }
+
+        public function listOfTypes(){
+            $result = $this->room_service->listOfTypes();
+                
+            return $result;
+        }
     }
-?>

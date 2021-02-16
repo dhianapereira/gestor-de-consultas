@@ -164,7 +164,7 @@ class Facade
 
     // Medical Appointment operations
 
-    public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time)
+    public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time, $room)
     {
 
         $result = $this->medical_appointment_repository->makeAnAppointment(
@@ -172,7 +172,8 @@ class Facade
             $genre,
             $specialty,
             $date,
-            $time
+            $time,
+            $room
         );
 
         return $result;
@@ -289,6 +290,13 @@ class Facade
     public function fetchRoom($id)
     {
         $result = $this->room_repository->fetchRoom($id);
+
+        return $result;
+    }
+
+    public function listOfTypes()
+    {
+        $result = $this->room_repository->listOfTypes();
 
         return $result;
     }

@@ -11,10 +11,10 @@
         }
         
         public function makeAnAppointment($patient_cpf, 
-        $genre, $specialty, $date, $time){
+        $genre, $specialty, $date, $time, $room){
             
             $result = $this->medical_appointment_service->makeAnAppointment($patient_cpf, 
-            $genre, $specialty, $date, $time);
+            $genre, $specialty, $date, $time, $room);
               
             return $result;
         }
