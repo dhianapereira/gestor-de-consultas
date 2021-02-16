@@ -96,7 +96,7 @@
                 <form method="POST" action="register_room.php">
                     <div class="input-block">
                         <label class="sr-only" for="type">Tipo de Sala</label>
-                        <input id="type" name="type" placeholder="Sala de ...">
+                        <input id="type" name="type" placeholder="Sala de ..." required>
                     </div>
                     <div class="input-block actions">
                         <a href="#" onclick="Modal.close()" class="button-cancel">Cancelar</a>
