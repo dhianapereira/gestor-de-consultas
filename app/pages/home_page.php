@@ -53,6 +53,12 @@
           <img src="../../public/styles/img/medical-records-list.svg" alt="Imagem de prontuário" />
         </h3>
       </a>
+      <a href="./room/menu.php" class="home-button">
+        <h3>
+          <p>Salas</p>
+          <img src="../../public/styles/img/medical-room.svg" alt="Imagem de salas" />
+        </h3>
+      </a>
       <?php
       if ($_SESSION['responsibility'] != "Administrador") {
         $display = "display: none;";

@@ -27,6 +27,39 @@
   background: #3cdc8c;
 }
 
+.button-cancel {
+  margin-top: 2rem;
+  color: var(--red);
+  border: 2px solid var(--red);
+  border-radius: 0.2rem;
+  padding: 0;
+
+  cursor: pointer;
+  height: 50px;
+
+  opacity: 0.6;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-block.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-block.actions .button-cancel,
+.input-block.actions .primary-button {
+  width: 48%;
+}
+
+.button-cancel:hover {
+  opacity: 1;
+}
+
 .button-select {
   display: grid;
   grid-template-columns: 1fr 1fr;
