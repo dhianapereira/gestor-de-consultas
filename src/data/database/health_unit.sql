@@ -74,6 +74,13 @@ CREATE TABLE user (
   CONSTRAINT user_pk PRIMARY KEY (cpf) 
 );
 
+CREATE TABLE room ( 
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  type VARCHAR(100) NOT NULL,
+  status BOOLEAN DEFAULT 0,  
+  CONSTRAINT room_pk PRIMARY KEY (id) 
+);
+
 INSERT INTO user (cpf, name, genre, date_of_birth, naturalness, 
 address, responsibility, username, password) 
 VALUES ("123.123.123-12", "Administrador", "Feminino", "1999-05-14",
