@@ -8,6 +8,7 @@
         private $arrival_time;
         private $date;
         private $realized;
+        private $id_room;
 
 
         public function getId() {
@@ -20,6 +21,10 @@
 
         public function getIdDoctor (){
             return $this->id_doctor;
+        }
+
+        public function getIdRoom (){
+            return $this->id_room;
         }
 
         public function getDate (){
@@ -38,11 +43,12 @@
             return $this->realized;
         }
         
-        public function __construct ($id, $patient_cpf, $id_doctor, $date, 
-        $time, $arrival_time, $realized){
+        public function __construct ($id, $patient_cpf, $id_doctor, 
+        $id_room, $date, $time, $arrival_time, $realized){
 		    $this->id = $id;
             $this->patient_cpf = $patient_cpf;
             $this->id_doctor = $id_doctor;
+            $this->id_room = $id_room;
             $this->date = $date;
             $this->time = $time;
             $this->arrival_time = $arrival_time;

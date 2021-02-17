@@ -72,20 +72,20 @@
       </a>
     </section>
     <section class="table">
-      <h2>Lista de Atendimento</h2>
       <?php
       $medical_appointment_controller = new MedicalAppointmentController();
 
       $medical_appointment_list = $medical_appointment_controller->allMedicalAppointments();
-      if (
-        $medical_appointment_list != null &&
-        is_array($medical_appointment_list)
-      ) { ?>
+
+      if ($medical_appointment_list != null && is_array($medical_appointment_list)) {
+      ?>
+        <h2>Lista de Atendimento</h2>
         <table>
           <tr>
             <th>ID</th>
             <th>Paciente</th>
             <th>Médico(a)</th>
+            <th>Sala</th>
             <th>Data e Horário</th>
             <th>Horário de chegada</th>
             <th>Consulta Realizada?</th>
@@ -97,10 +97,8 @@
               <td><?php echo ($medical_appointment->getId()); ?></td>
               <td><?php echo ($medical_appointment->getPatientCpf()); ?></td>
               <td><?php echo ($medical_appointment->getIdDoctor()); ?></td>
-              <td>
-                <?php echo ($medical_appointment->getDate() . " às
-              " . $medical_appointment->getTime()); ?>
-              </td>
+              <td><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " " . $medical_appointment->getIdRoom()[1]); ?></td>
+              <td><?php echo ($medical_appointment->getDate() . " às " . $medical_appointment->getTime()); ?></td>
               <td><?php echo ($medical_appointment->getArrivalTime()); ?></td>
               <td><?php echo ($medical_appointment->getRealized()); ?></td>
             </tr>
@@ -110,10 +108,11 @@
         </table>
       <?php
       } else {
-      ?> <div class="card">
+      ?>
+        <div class="card">
           <h3>
             <span>A lista de atendimento está vazia</span>
-            <img src="../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
+            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
           </h3>
           <p>Ainda não há nenhuma consulta marcada.</p>
         </div>

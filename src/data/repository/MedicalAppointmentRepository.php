@@ -70,12 +70,14 @@ class MedicalAppointmentRepository
     {
         try {
             $sql = "SELECT MA.id, P.full_name, D.name, MA.time, 
-                    MA.date, MA.arrival_time, MA.realized 
-                    FROM patient AS P
-                        INNER JOIN medical_appointment AS MA 
+                    MA.date, MA.arrival_time, MA.id_room_fk, R.type, MA.realized 
+                    FROM medical_appointment AS MA
+                        INNER JOIN patient AS P 
                             ON (MA.cpf_patient_fk = P.cpf)
                         INNER JOIN doctor AS D 
                             ON (MA.id_doctor_fk = D.id)
+                        INNER JOIN room AS R
+                            ON (MA.id_room_fk = R.id)
                     WHERE MA.realized = :realized
                         ORDER BY MA.realized != 0, MA.arrival_time IS NULL, MA.arrival_time ASC";
 
@@ -96,6 +98,8 @@ class MedicalAppointmentRepository
                     $doctor = $row['name'];
                     $time = $row['time'];
                     $date = $row['date'];
+                    $type = $row['type'];
+                    $id_room = $row['id_room_fk'];
 
                     if ($row['realized']) {
                         $realized = "Sim";
@@ -113,6 +117,7 @@ class MedicalAppointmentRepository
                         $id,
                         $patient,
                         $doctor,
+                        [$id_room, $type],
                         $date,
                         $time,
                         $arrival_time,
@@ -140,9 +145,13 @@ class MedicalAppointmentRepository
     {
         try {
             $sql = "SELECT D.specialty, D.genre, D.name, MA.id, 
-                    MA.realized, MA.date, MA.cpf_patient_fk ,MA.time, MA.arrival_time
+                    MA.realized, MA.date, MA.cpf_patient_fk ,MA.time, 
+                    MA.arrival_time, R.type
                     FROM medical_appointment AS MA
-                        INNER JOIN doctor AS D ON (MA.id_doctor_fk = D.id)
+                        INNER JOIN doctor AS D 
+                            ON (MA.id_doctor_fk = D.id)
+                        INNER JOIN room AS R
+                            ON (MA.id_room_fk = R.id)
                     WHERE MA.id = :id
                     GROUP BY D.specialty, D.genre, D.name, MA.id, 
                         MA.realized, MA.date, MA.cpf_patient_fk ,
@@ -164,6 +173,7 @@ class MedicalAppointmentRepository
                 $date = $result[0]['date'];
                 $time = $result[0]['time'];
                 $patient_cpf = $result[0]['cpf_patient_fk'];
+                $room = $result[0]['type'];
 
                 if ($result[0]['arrival_time'] != null) {
                     $arrival_time = $result[0]['arrival_time'];
@@ -175,6 +185,7 @@ class MedicalAppointmentRepository
                     $id,
                     $patient_cpf,
                     [$name, $specialty, $genre],
+                    $room,
                     $date,
                     $time,
                     $arrival_time,

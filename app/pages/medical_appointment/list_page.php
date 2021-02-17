@@ -56,6 +56,7 @@
                         <th>ID</th>
                         <th>Paciente</th>
                         <th>Médico(a)</th>
+                        <th>Sala</th>
                         <th>Data e Horário</th>
                         <th>Horário de chegada</th>
                         <th>Consulta Realizada?</th>
@@ -67,6 +68,7 @@
                             <td><?php echo ($medical_appointment->getId()); ?></td>
                             <td><?php echo ($medical_appointment->getPatientCpf()); ?></td>
                             <td><?php echo ($medical_appointment->getIdDoctor()); ?></td>
+                            <td><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " " . $medical_appointment->getIdRoom()[1]); ?></td>
                             <td><?php echo ($medical_appointment->getDate() . " às " . $medical_appointment->getTime()); ?></td>
                             <td><?php echo ($medical_appointment->getArrivalTime()); ?></td>
                             <td><?php echo ($medical_appointment->getRealized()); ?></td>

@@ -104,7 +104,7 @@
 
                             foreach ($list_of_types as $type) {
                             ?>
-                                <option value="<?php echo ($type['id']); ?>"><?php echo ($type['type']); ?></option>
+                                <option value="<?php echo ($type['id']); ?>"><?php echo ("id: " . $type['id'] . " - " . $type['type']); ?></option>
                             <?php
                             }
                             ?>
