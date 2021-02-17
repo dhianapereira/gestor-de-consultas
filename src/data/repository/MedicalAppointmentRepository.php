@@ -82,7 +82,7 @@ class MedicalAppointmentRepository
                         INNER JOIN status AS S
                             ON (MA.id_status_fk = S.id)
                     WHERE MA.id_status_fk NOT IN (:id_status_fk)
-                        ORDER BY MA.id_status_fk != 1, MA.arrival_time IS NULL, MA.arrival_time ASC";
+                        ORDER BY MA.arrival_time IS NULL, MA.arrival_time ASC, MA.time ASC";
 
             $stmt = $this->conn->getConnection()->prepare($sql);
 
