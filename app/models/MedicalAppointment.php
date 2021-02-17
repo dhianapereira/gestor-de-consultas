@@ -7,7 +7,7 @@
         private $time;
         private $arrival_time;
         private $date;
-        private $realized;
+        private $status;
         private $id_room;
 
 
@@ -39,12 +39,12 @@
             return $this->arrival_time;
         }
 
-        public function getRealized (){
-            return $this->realized;
+        public function getStatus (){
+            return $this->status;
         }
         
         public function __construct ($id, $patient_cpf, $id_doctor, 
-        $id_room, $date, $time, $arrival_time, $realized){
+        $id_room, $date, $time, $arrival_time, $status){
 		    $this->id = $id;
             $this->patient_cpf = $patient_cpf;
             $this->id_doctor = $id_doctor;
@@ -52,7 +52,7 @@
             $this->date = $date;
             $this->time = $time;
             $this->arrival_time = $arrival_time;
-            $this->realized = $realized;
+            $this->status = $status;
 	    }
     }
 ?>

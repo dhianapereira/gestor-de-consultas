@@ -60,11 +60,11 @@
       $date = $_POST["date"];
       $time = $_POST["time"];
       $arrival_time = $_POST["arrival_time"];
-      $active = $_POST["active"];
+      $status = $_POST["status"];
 
       if (
         isset($id) && isset($specialty) && isset($genre)
-        && isset($patient_cpf) && isset($active) && isset($date)
+        && isset($patient_cpf) && isset($status) && isset($date)
         && isset($time) && isset($arrival_time)
       ) {
 
@@ -76,7 +76,7 @@
           $date,
           $time,
           $arrival_time,
-          $active
+          $status
         );
 
         $result = $medical_appointment_controller->update($medical_appointment);

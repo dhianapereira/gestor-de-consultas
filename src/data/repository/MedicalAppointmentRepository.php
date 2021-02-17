@@ -70,7 +70,8 @@ class MedicalAppointmentRepository
     {
         try {
             $sql = "SELECT MA.id, P.full_name, D.name, MA.time, 
-                    MA.date, MA.arrival_time, MA.id_room_fk, R.type, MA.realized 
+                    MA.date, MA.arrival_time, MA.id_room_fk, R.type,
+                    MA.id_status_fk, S.name AS status
                     FROM medical_appointment AS MA
                         INNER JOIN patient AS P 
                             ON (MA.cpf_patient_fk = P.cpf)
@@ -78,13 +79,16 @@ class MedicalAppointmentRepository
                             ON (MA.id_doctor_fk = D.id)
                         INNER JOIN room AS R
                             ON (MA.id_room_fk = R.id)
-                    WHERE MA.realized = :realized
-                        ORDER BY MA.realized != 0, MA.arrival_time IS NULL, MA.arrival_time ASC";
+                        INNER JOIN status AS S
+                            ON (MA.id_status_fk = S.id)
+                    WHERE MA.id_status_fk NOT IN (:id_status_fk)
+                        ORDER BY MA.id_status_fk != 1, MA.arrival_time IS NULL, MA.arrival_time ASC";
 
             $stmt = $this->conn->getConnection()->prepare($sql);
+            
 
             $stmt->execute(array(
-                ':realized' => 0,
+                ':id_status_fk' => 3,
             ));
 
             $result = $stmt->fetchAll();
@@ -100,12 +104,8 @@ class MedicalAppointmentRepository
                     $date = $row['date'];
                     $type = $row['type'];
                     $id_room = $row['id_room_fk'];
-
-                    if ($row['realized']) {
-                        $realized = "Sim";
-                    } else {
-                        $realized = "Não";
-                    }
+                    $id_status = $row['id_status_fk'];
+                    $status = $row['status'];
 
                     if ($row['arrival_time'] != null) {
                         $arrival_time = $row['arrival_time'];
@@ -121,7 +121,7 @@ class MedicalAppointmentRepository
                         $date,
                         $time,
                         $arrival_time,
-                        $realized
+                        [$id_status, $status]
                     );
 
                     array_push($list, $medical_appointment);
@@ -144,18 +144,21 @@ class MedicalAppointmentRepository
     public function fetchMedicalAppointment($id)
     {
         try {
-            $sql = "SELECT D.specialty, D.genre, D.name, MA.id, 
-                    MA.realized, MA.date, MA.cpf_patient_fk ,MA.time, 
-                    MA.arrival_time, MA.id_room_fk, R.type
+            $sql = "SELECT D.specialty, D.genre, D.name, MA.id,
+                    MA.date, MA.cpf_patient_fk ,MA.time, MA.arrival_time,
+                    MA.id_room_fk, R.type, MA.id_status_fk, S.name AS status
                     FROM medical_appointment AS MA
                         INNER JOIN doctor AS D 
                             ON (MA.id_doctor_fk = D.id)
                         INNER JOIN room AS R
                             ON (MA.id_room_fk = R.id)
+                        INNER JOIN status AS S
+                            ON (MA.id_status_fk = S.id)
                     WHERE MA.id = :id
-                    GROUP BY D.specialty, D.genre, D.name, MA.id, 
-                        MA.realized, MA.date, MA.cpf_patient_fk ,
-                        MA.time, MA.arrival_time";
+                    GROUP BY D.specialty, D.genre, D.name, MA.id,
+                        MA.date, MA.cpf_patient_fk , MA.time, 
+                        MA.arrival_time, MA.id_room_fk, R.type,
+                        MA.id_status_fk, S.name";
 
             $stmt = $this->conn->getConnection()->prepare($sql);
 
@@ -169,7 +172,8 @@ class MedicalAppointmentRepository
                 $name = $result[0]['name'];
                 $genre = $result[0]['genre'];
                 $specialty = $result[0]['specialty'];
-                $realized = $result[0]['realized'];
+                $id_status = $result[0]['id_status_fk'];
+                $status = $result[0]['status'];
                 $date = $result[0]['date'];
                 $time = $result[0]['time'];
                 $patient_cpf = $result[0]['cpf_patient_fk'];
@@ -190,13 +194,13 @@ class MedicalAppointmentRepository
                     $date,
                     $time,
                     $arrival_time,
-                    $realized
+                    [$id_status, $status]
                 );
 
                 return $medical_appointment;
             }
 
-            $response = "Não foi possível trazer o médico(a) escolhido.";
+            $response = "Não foi possível trazer a consulta escolhida.";
             return $response;
         } catch (\Exception $e) {
 
@@ -227,7 +231,7 @@ class MedicalAppointmentRepository
 
                 $sql = "UPDATE medical_appointment SET cpf_patient_fk = :cpf_patient_fk,
                 id_doctor_fk = :id_doctor_fk, id_room_fk = :id_room_fk, time = :time, 
-                date = :date, arrival_time = :arrival_time, realized = :realized 
+                date = :date, arrival_time = :arrival_time, id_status_fk = :id_status_fk 
                 WHERE id = :id";
 
                 $stmt = $this->conn->getConnection()->prepare($sql);
@@ -240,7 +244,7 @@ class MedicalAppointmentRepository
                     ':time' => $medical_appointment->getTime(),
                     ':date' => $medical_appointment->getDate(),
                     ':arrival_time' => $medical_appointment->getArrivalTime(),
-                    ':realized' => $medical_appointment->getRealized(),
+                    ':id_status_fk' => $medical_appointment->getStatus(),
                 ));
 
                 if ($success) {

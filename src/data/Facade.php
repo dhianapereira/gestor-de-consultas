@@ -9,6 +9,7 @@ use src\data\repository\MedicalAppointmentRepository;
 use src\data\repository\DoctorRepository;
 use src\data\repository\UserRepository;
 use src\data\repository\RoomRepository;
+use src\data\repository\StatusRepository;
 
 class Facade
 {
@@ -20,6 +21,7 @@ class Facade
     private $doctor_repository;
     private $user_repository;
     private $room_repository;
+    private $status_repository;
 
     public function __construct()
     {
@@ -30,6 +32,7 @@ class Facade
         $this->doctor_repository = new DoctorRepository();
         $this->user_repository = new UserRepository();
         $this->room_repository = new RoomRepository();
+        $this->status_repository = new StatusRepository();
     }
 
     // Patient operations
@@ -297,6 +300,13 @@ class Facade
     public function listOfTypes()
     {
         $result = $this->room_repository->listOfTypes();
+
+        return $result;
+    }
+
+    public function allStatus()
+    {
+        $result = $this->status_repository->allStatus();
 
         return $result;
     }

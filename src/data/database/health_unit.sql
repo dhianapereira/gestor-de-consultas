@@ -53,14 +53,16 @@ CREATE TABLE medical_appointment (
   time TIME NOT NULL,
   date DATE NOT NULL,
   arrival_time TIME,
-  realized BOOLEAN DEFAULT 0,
+  id_status_fk INT(11) DEFAULT 1,
   CONSTRAINT medical_appointment_pk PRIMARY KEY (id),
   CONSTRAINT medical_appointment_fk1 FOREIGN KEY (cpf_patient_fk)
   REFERENCES patient (cpf), 
   CONSTRAINT medical_appointment_fk2 FOREIGN KEY (id_doctor_fk)
   REFERENCES doctor (id),
   CONSTRAINT medical_appointment_fk3 FOREIGN KEY (id_room_fk)
-  REFERENCES room (id)  
+  REFERENCES room (id),
+  CONSTRAINT medical_appointment_fk4 FOREIGN KEY (id_status_fk)
+  REFERENCES status (id)   
 );
 
 CREATE TABLE user ( 
@@ -84,7 +86,17 @@ CREATE TABLE room (
   CONSTRAINT room_pk PRIMARY KEY (id) 
 );
 
+CREATE TABLE status ( 
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  CONSTRAINT status_pk PRIMARY KEY (id) 
+);
+
 INSERT INTO user (cpf, name, genre, date_of_birth, naturalness, 
 address, responsibility, username, password) 
 VALUES ("123.123.123-12", "Administrador", "Feminino", "1999-05-14",
 "Brasileiro(a)", "Endereço", "Administrador", "admin", "123");
+
+INSERT INTO status (name) VALUES ("Não");
+INSERT INTO status (name) VALUES ("Em Andamento");
+INSERT INTO status (name) VALUES ("Sim");

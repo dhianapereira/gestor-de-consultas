@@ -53,6 +53,7 @@
         use app\controllers\MedicalAppointmentController;
         use app\controllers\DoctorController;
         use app\controllers\RoomController;
+        use app\controllers\StatusController;
 
         $medical_appointment_controller = new MedicalAppointmentController();
 
@@ -111,7 +112,7 @@
               </div>
               <div class="custom-select">
                 <select id="specialty" name="specialty" required>
-                  <option selected><?php echo ($medical_appointment->getIdDoctor()[1]); ?></option>
+                  <option value="<?php echo ($medical_appointment->getIdDoctor()[1]); ?>" selected><?php echo ($medical_appointment->getIdDoctor()[1]); ?></option>
                   <?php
 
                   $doctor_controller = new DoctorController();
@@ -131,7 +132,7 @@
               <h2>Sala</h2>
               <div class="custom-select">
                 <select id="room" name="room" required>
-                  <option selected><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " - " . $medical_appointment->getIdRoom()[1]); ?></option>
+                  <option value="<?php echo ($medical_appointment->getIdRoom()[0]); ?>" selected><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " - " . $medical_appointment->getIdRoom()[1]); ?></option>
                   <?php
 
                   $room_controller = new RoomController();
@@ -146,7 +147,6 @@
                   ?>
                 </select>
               </div>
-              <script src="../../../public/scripts/selection_box.js"></script>
               <br>
               <br>
               <span class="line">
@@ -165,27 +165,25 @@
                 <label for="arrival_time">Horário de Chegada: </label>
                 <input type="time" id="arrival_time" name="arrival_time" value="<?php echo ($medical_appointment->getArrivalTime()) ?>" required />
               </div>
-              <div class="input-block">
-                <label for="realized">Consulta realizada?</label>
-                <input type="hidden" name="active" id="realized" value="<?php echo ($medical_appointment->getRealized()) ?>" required />
+              <div class="custom-select">
+                <select id="status" name="status" required>
+                  <option value="<?php echo ($medical_appointment->getStatus()[0]); ?>" selected><?php echo ($medical_appointment->getStatus()[1]); ?></option>
+                  <?php
 
-                <div class="button-select">
-                  <button data-value=1 onclick="toggleActive(event)" type="button" <?php
-                                                                                    if ($medical_appointment->getRealized() == 1) {
-                                                                                    ?> class="active" <?php
-                                                                                                    }
-                                                                                                      ?>>
-                    Sim
-                  </button>
-                  <button data-value=0 onclick="toggleActive(event)" type="button" <?php
-                                                                                    if ($medical_appointment->getRealized() == 0) {
-                                                                                    ?> class="active" <?php
-                                                                                                    }
-                                                                                                      ?>>
-                    Não
-                  </button>
-                </div>
+                  $status_controller = new StatusController();
+
+                  $status_list = $status_controller->allStatus();
+
+                  foreach ($status_list as $status) {
+                  ?>
+                    <option value="<?php echo ($status->getId()); ?>"><?php echo ($status->getName()); ?></option>
+                  <?php
+                  }
+                  ?>
+                </select>
               </div>
+              <script src="../../../public/scripts/selection_box.js"></script>
+
               <button type="submit" class="primary-button">Salvar Alterações</button>
             </form>
           <?php
@@ -209,6 +207,7 @@
   <footer>
     <p>2021 - Unidade de Saúde</p>
   </footer>
+
 </body>
 
 </html>
