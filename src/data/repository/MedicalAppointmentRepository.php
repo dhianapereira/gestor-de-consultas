@@ -85,7 +85,7 @@ class MedicalAppointmentRepository
                         ORDER BY MA.id_status_fk != 1, MA.arrival_time IS NULL, MA.arrival_time ASC";
 
             $stmt = $this->conn->getConnection()->prepare($sql);
-            
+
 
             $stmt->execute(array(
                 ':id_status_fk' => 3,
@@ -248,7 +248,28 @@ class MedicalAppointmentRepository
                 ));
 
                 if ($success) {
-                    return $success;
+                    $sql = "UPDATE room SET status = :status WHERE id = :id";
+
+                    $stmt = $this->conn->getConnection()->prepare($sql);
+
+                    if ($medical_appointment->getStatus() != 2) {
+                        $status = 0;
+                    } else {
+                        $status = 1;
+                    }
+
+                    $success = $stmt->execute(array(
+                        ':id' => $medical_appointment->getIdRoom(),
+                        ':status' => $status
+                    ));
+
+                    if ($success) {
+                        return $success;
+                    }
+
+                    $response = "Não foi possível realizar as alterações desejadas na consulta. Tente mais tarde";
+
+                    return $response;
                 }
 
                 $response = "Não foi possível realizar as alterações desejadas na consulta. Tente mais tarde";

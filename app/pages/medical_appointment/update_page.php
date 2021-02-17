@@ -13,7 +13,6 @@
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/select.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
-<script src="../../../public/scripts/script.js"></script>
 
 <body>
   <header>
