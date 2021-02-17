@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/form.css" />
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
+  <link rel="stylesheet" type="text/css" href="../../../public/styles/css/select.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 <script src="../../../public/scripts/script.js"></script>
@@ -50,6 +51,8 @@
         spl_autoload_register("autoload");
 
         use app\controllers\MedicalAppointmentController;
+        use app\controllers\DoctorController;
+        use app\controllers\RoomController;
 
         $medical_appointment_controller = new MedicalAppointmentController();
 
@@ -86,10 +89,6 @@
                 <input id="doctor" value="<?php echo ($medical_appointment->getIdDoctor()[0]) ?>" disabled />
               </div>
               <div class="input-block">
-                <label for="specialty">Especialidade</label>
-                <input id="specialty" name="specialty" value="<?php echo ($medical_appointment->getIdDoctor()[1]) ?>" required />
-              </div>
-              <div class="input-block">
                 <label for="genre">Gênero</label>
                 <input type="hidden" name="genre" id="genre" value="<?php echo ($medical_appointment->getIdDoctor()[2]) ?>" required />
 
@@ -110,6 +109,44 @@
                   </button>
                 </div>
               </div>
+              <div class="custom-select">
+                <select id="specialty" name="specialty" required>
+                  <option selected><?php echo ($medical_appointment->getIdDoctor()[1]); ?></option>
+                  <?php
+
+                  $doctor_controller = new DoctorController();
+
+                  $list_of_specialties = $doctor_controller->listOfSpecialties();
+
+                  foreach ($list_of_specialties as $specialty) {
+                  ?>
+                    <option value="<?php echo ($specialty['specialty']); ?>"><?php echo ($specialty['specialty']); ?></option>
+                  <?php
+                  }
+                  ?>
+                </select>
+              </div>
+
+
+              <h2>Sala</h2>
+              <div class="custom-select">
+                <select id="room" name="room" required>
+                  <option selected><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " - " . $medical_appointment->getIdRoom()[1]); ?></option>
+                  <?php
+
+                  $room_controller = new RoomController();
+
+                  $list_of_types = $room_controller->listOfTypes();
+
+                  foreach ($list_of_types as $type) {
+                  ?>
+                    <option value="<?php echo ($type['id']); ?>"><?php echo ("id: " . $type['id'] . " - " . $type['type']); ?></option>
+                  <?php
+                  }
+                  ?>
+                </select>
+              </div>
+              <script src="../../../public/scripts/selection_box.js"></script>
               <br>
               <br>
               <span class="line">

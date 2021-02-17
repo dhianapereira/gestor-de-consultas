@@ -146,7 +146,7 @@ class MedicalAppointmentRepository
         try {
             $sql = "SELECT D.specialty, D.genre, D.name, MA.id, 
                     MA.realized, MA.date, MA.cpf_patient_fk ,MA.time, 
-                    MA.arrival_time, R.type
+                    MA.arrival_time, MA.id_room_fk, R.type
                     FROM medical_appointment AS MA
                         INNER JOIN doctor AS D 
                             ON (MA.id_doctor_fk = D.id)
@@ -173,7 +173,8 @@ class MedicalAppointmentRepository
                 $date = $result[0]['date'];
                 $time = $result[0]['time'];
                 $patient_cpf = $result[0]['cpf_patient_fk'];
-                $room = $result[0]['type'];
+                $type = $result[0]['type'];
+                $id_room = $result[0]['id_room_fk'];
 
                 if ($result[0]['arrival_time'] != null) {
                     $arrival_time = $result[0]['arrival_time'];
@@ -185,7 +186,7 @@ class MedicalAppointmentRepository
                     $id,
                     $patient_cpf,
                     [$name, $specialty, $genre],
-                    $room,
+                    [$id_room, $type],
                     $date,
                     $time,
                     $arrival_time,
@@ -225,8 +226,8 @@ class MedicalAppointmentRepository
                 $id_doctor = $doctor[0]['id'];
 
                 $sql = "UPDATE medical_appointment SET cpf_patient_fk = :cpf_patient_fk,
-                id_doctor_fk = :id_doctor_fk, time = :time, date = :date,
-                arrival_time = :arrival_time, realized = :realized 
+                id_doctor_fk = :id_doctor_fk, id_room_fk = :id_room_fk, time = :time, 
+                date = :date, arrival_time = :arrival_time, realized = :realized 
                 WHERE id = :id";
 
                 $stmt = $this->conn->getConnection()->prepare($sql);
@@ -235,6 +236,7 @@ class MedicalAppointmentRepository
                     ':id' => $medical_appointment->getId(),
                     ':cpf_patient_fk' => $medical_appointment->getPatientCpf(),
                     ':id_doctor_fk' => $id_doctor,
+                    ':id_room_fk' => $medical_appointment->getIdRoom(),
                     ':time' => $medical_appointment->getTime(),
                     ':date' => $medical_appointment->getDate(),
                     ':arrival_time' => $medical_appointment->getArrivalTime(),

@@ -112,7 +112,7 @@
         <div class="card">
           <h3>
             <span>A lista de atendimento está vazia</span>
-            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
+            <img src="../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
           </h3>
           <p>Ainda não há nenhuma consulta marcada.</p>
         </div>

@@ -55,6 +55,7 @@
       $id = $_POST["id"];
       $specialty = $_POST["specialty"];
       $genre = $_POST["genre"];
+      $room = $_POST["room"];
       $patient_cpf = $_POST["patient_cpf"];
       $date = $_POST["date"];
       $time = $_POST["time"];
@@ -71,6 +72,7 @@
           $id,
           $patient_cpf,
           [$specialty, $genre],
+          $room,
           $date,
           $time,
           $arrival_time,
