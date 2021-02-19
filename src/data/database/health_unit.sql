@@ -45,6 +45,19 @@ CREATE TABLE doctor (
   CONSTRAINT user_pk PRIMARY KEY (id) 
 );
 
+CREATE TABLE status ( 
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  CONSTRAINT status_pk PRIMARY KEY (id) 
+);
+
+CREATE TABLE room ( 
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  type VARCHAR(100) NOT NULL,
+  status BOOLEAN DEFAULT 0,  
+  CONSTRAINT room_pk PRIMARY KEY (id) 
+);
+
 CREATE TABLE medical_appointment (
   id INT(11) NOT NULL AUTO_INCREMENT,
   cpf_patient_fk VARCHAR(14) NOT NULL,
@@ -79,18 +92,6 @@ CREATE TABLE user (
   CONSTRAINT user_pk PRIMARY KEY (cpf) 
 );
 
-CREATE TABLE room ( 
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  type VARCHAR(100) NOT NULL,
-  status BOOLEAN DEFAULT 0,  
-  CONSTRAINT room_pk PRIMARY KEY (id) 
-);
-
-CREATE TABLE status ( 
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
-  CONSTRAINT status_pk PRIMARY KEY (id) 
-);
 
 INSERT INTO user (cpf, name, genre, date_of_birth, naturalness, 
 address, responsibility, username, password) 
