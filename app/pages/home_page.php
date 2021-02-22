@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="../../public/styles/css/home.css" />
   <link rel="stylesheet" type="text/css" href="../../public/styles/css/table.css" />
   <link rel="stylesheet" type="text/css" href="../../public/styles/css/card.css" />
+  <link rel="stylesheet" type="text/css" href="../../public/styles/css/buttons.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -26,7 +27,6 @@
     spl_autoload_register("autoload");
 
     use app\controllers\MedicalAppointmentController;
-
     ?>
     <section class="quick-access">
       <a href="./patient/menu.php" class="home-button">
@@ -75,9 +75,23 @@
       <?php
       $medical_appointment_controller = new MedicalAppointmentController();
 
-      $medical_appointment_list = $medical_appointment_controller->allMedicalAppointments();
 
-      if ($medical_appointment_list != null && is_array($medical_appointment_list)) {
+      $total_records = "2";
+
+      $page = $_GET['page'];
+      if (!$page) {
+        $position = "1";
+      } else {
+        $position = $page;
+      }
+
+      $start = $position - 1;
+      $start = $start * $total_records;
+
+      $result = $medical_appointment_controller->allMedicalAppointments($start, $total_records);
+
+      if ($result != null && !is_string($result)) {
+        $medical_appointment_list = $result[1];
       ?>
         <h2>Lista de Atendimento</h2>
         <table>
@@ -106,6 +120,28 @@
           }
           ?>
         </table>
+        <div class="input-block actions">
+          <?php
+          $total = $result[0];
+
+          $total_pages = $total / $total_records;
+
+          $previous = $position - 1;
+          $next = $position + 1;
+
+          if ($position > 1) {
+          ?>
+            <a class="button" href="?page=<?php echo ($previous) ?>">
+              <- Anterior</a>
+              <?php
+            }
+            if ($position < $total_pages) {
+              ?>
+                <a class="button" href="?page=<?php echo ($next) ?>"> Próxima -> </a>
+              <?php
+            }
+              ?>
+        </div>
       <?php
       } else {
       ?>

@@ -19,8 +19,8 @@
             return $result;
         }
 
-        public function allMedicalAppointments(){
-            $result = $this->facade->allMedicalAppointments();
+        public function allMedicalAppointments($start, $total_records){
+            $result = $this->facade->allMedicalAppointments($start, $total_records);
 
             return $result;
         }
@@ -39,4 +39,3 @@
         }
 
     }
-?>

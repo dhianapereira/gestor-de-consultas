@@ -19,8 +19,8 @@
             return $result;
         }
 
-        public function allMedicalAppointments(){
-            $result = $this->medical_appointment_service->allMedicalAppointments();
+        public function allMedicalAppointments($start, $total_records){
+            $result = $this->medical_appointment_service->allMedicalAppointments($start, $total_records);
                 
             return $result;
         }
@@ -39,4 +39,3 @@
             return $result;
         }
     }
-?>

@@ -66,7 +66,7 @@ class MedicalAppointmentRepository
         }
     }
 
-    public function allMedicalAppointments()
+    public function allMedicalAppointments($start, $total_records)
     {
         try {
             $sql = "SELECT MA.id, P.full_name, D.name, MA.time, 
@@ -82,7 +82,7 @@ class MedicalAppointmentRepository
                         INNER JOIN status AS S
                             ON (MA.id_status_fk = S.id)
                     WHERE MA.id_status_fk NOT IN (:id_status_fk)
-                        ORDER BY MA.arrival_time IS NULL, MA.arrival_time ASC, MA.time ASC";
+                    ORDER BY MA.arrival_time IS NULL, MA.arrival_time ASC, MA.time ASC";
 
             $stmt = $this->conn->getConnection()->prepare($sql);
 
@@ -94,9 +94,18 @@ class MedicalAppointmentRepository
             $result = $stmt->fetchAll();
 
             if ($result != null) {
+
+                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+
+                $stmt->execute(array(
+                    ':id_status_fk' => 3,
+                ));
+
+                $medical_appointments = $stmt->fetchAll();
+
                 $list = [];
 
-                foreach ($result as $row) {
+                foreach ($medical_appointments as $row) {
                     $id = $row['id'];
                     $patient = $row['full_name'];
                     $doctor = $row['name'];
@@ -127,7 +136,7 @@ class MedicalAppointmentRepository
                     array_push($list, $medical_appointment);
                 }
 
-                return $list;
+                return [count($result), $list];
             }
 
             $response = "Não foi possível trazer a lista de consultas";

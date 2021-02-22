@@ -7,7 +7,7 @@
 
   cursor: pointer;
 
-  background: #36cf82;
+  background: var(--green);
   border-radius: 0.25rem;
   color: #fff;
   font-weight: 600;
@@ -25,6 +25,35 @@
 
 .primary-button:hover {
   background: #3cdc8c;
+}
+
+.button {
+  margin-top: 2rem;
+
+  width: 38%;
+  height: 50px;
+  border: 0;
+
+  cursor: pointer;
+
+  background: var(--dark-green);
+  border-radius: 0.25rem;
+  color: #fff;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  outline: none;
+
+  opacity: 0.8;
+
+  text-decoration: none;
+}
+
+.button:hover {
+  opacity: 1;
 }
 
 .button-cancel {

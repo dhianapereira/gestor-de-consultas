@@ -182,9 +182,9 @@ class Facade
         return $result;
     }
 
-    public function allMedicalAppointments()
+    public function allMedicalAppointments($start, $total_records)
     {
-        $result = $this->medical_appointment_repository->allMedicalAppointments();
+        $result = $this->medical_appointment_repository->allMedicalAppointments($start, $total_records);
 
         return $result;
     }
