@@ -55,6 +55,7 @@
         spl_autoload_register("autoload");
 
         use app\controllers\DoctorController;
+        use app\components\MessageContainer;
 
         $doctor_controller = new DoctorController();
 
@@ -64,17 +65,9 @@
           $doctor = $doctor_controller->fetchDoctor($id);
 
           if ($doctor == null || !is_object($doctor)) {
-        ?>
-            <div class="card">
-              <h3>
-                <span>Mensagem de Erro</span>
-                <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-              </h3>
-              <p>Não há nenhum médico com o ID: <?php echo "$id" ?> </p>
-            </div>
-          <?php
+            MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg", "Não há nenhum médico com o ID: $id");
           } else {
-          ?>
+        ?>
             <h2>Dados do Médico(a)</h2>
             <form method="POST" action="update_doctor.php">
               <div class="input-block">
@@ -134,18 +127,10 @@
               </div>
               <button type="submit" class="primary-button">Salvar Alterações</button>
             </form>
-          <?php
+        <?php
           }
         } else {
-          ?>
-          <div class="card">
-            <h3>
-              <span>Não foi possível realizar esta operação</span>
-              <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-            </h3>
-            <p>Você precisa inserir um ID!</p>
-          </div>
-        <?php
+          MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg",  "Você precisa inserir um ID!");
         }
         ?>
       </div>

@@ -47,6 +47,7 @@
             spl_autoload_register("pagination");
 
             use app\controllers\UserController;
+            use app\components\MessageContainer;
 
             $user_controller = new UserController();
 
@@ -61,38 +62,44 @@
 
             if ($result != null && !is_string($result)) {
                 $user_list = $result[1];
+                if ($user_list != null && is_array($user_list)) {
             ?>
-                <div class="table">
-                    <h2>Lista de Funcionários</h2>
-                    <table>
-                        <tr>
-                            <th>CPF</th>
-                            <th>Nome</th>
-                            <th>Gênero</th>
-                            <th>Data de nascimento</th>
-                            <th>Naturalidade</th>
-                            <th>Endereço</th>
-                            <th>Cargo</th>
-                            <th>Status</th>
-                        </tr>
-                        <?php
-                        foreach ($user_list as $user) {
-                        ?>
+                    <div class="table">
+                        <h2>Lista de Funcionários</h2>
+                        <table>
                             <tr>
-                                <td><?php echo ($user->getCpf()); ?></td>
-                                <td><?php echo ($user->getName()); ?></td>
-                                <td><?php echo ($user->getGenre()); ?></td>
-                                <td><?php echo ($user->getDateOfBirth()); ?></td>
-                                <td><?php echo ($user->getNaturalness()); ?></td>
-                                <td><?php echo ($user->getAddress()); ?></td>
-                                <td><?php echo ($user->getResponsibility()); ?></td>
-                                <td><?php echo ($user->getActive()); ?></td>
+                                <th>CPF</th>
+                                <th>Nome</th>
+                                <th>Gênero</th>
+                                <th>Data de nascimento</th>
+                                <th>Naturalidade</th>
+                                <th>Endereço</th>
+                                <th>Cargo</th>
+                                <th>Status</th>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                    </table>
-                </div>
+                            <?php
+                            foreach ($user_list as $user) {
+                            ?>
+                                <tr>
+                                    <td><?php echo ($user->getCpf()); ?></td>
+                                    <td><?php echo ($user->getName()); ?></td>
+                                    <td><?php echo ($user->getGenre()); ?></td>
+                                    <td><?php echo ($user->getDateOfBirth()); ?></td>
+                                    <td><?php echo ($user->getNaturalness()); ?></td>
+                                    <td><?php echo ($user->getAddress()); ?></td>
+                                    <td><?php echo ($user->getResponsibility()); ?></td>
+                                    <td><?php echo ($user->getActive()); ?></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
+                <?php
+                } else {
+                    MessageContainer::errorMessage("A lista de funcionários está vazia", "../../../public/styles/img/error.svg", "Não há mais nenhum funcionário cadastrado.");
+                }
+                ?>
                 <div class="input-block actions">
                     <?php
                     $total = $result[0];
@@ -104,15 +111,7 @@
                 </div>
             <?php
             } else {
-            ?>
-                <div class="card">
-                    <h3>
-                        <span>A lista de funcionários está vazia</span>
-                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Ainda não há nenhum funcionário cadastrado.</p>
-                </div>
-            <?php
+                MessageContainer::errorMessage("A lista de funcionários está vazia", "../../../public/styles/img/error.svg", "Ainda não há nenhum funcionário cadastrado.");
             }
             ?>
         </section>

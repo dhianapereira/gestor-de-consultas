@@ -15,6 +15,17 @@
 </head>
 
 <body>
+    <?php
+    include_once('../../utils/autoload.php');
+    include_once('../../utils/pagination.php');
+
+    spl_autoload_register("autoload");
+    spl_autoload_register("pagination");
+
+    use app\controllers\RoomController;
+    use app\components\MessageContainer;
+    use app\components\Modal;
+    ?>
     <header>
         <h3 class="logo">Unidade de Saúde</h3>
     </header>
@@ -46,73 +57,27 @@
         </section>
         <section class="box">
             <?php
-            include_once('../../utils/autoload.php');
-
-            spl_autoload_register("autoload");
-
-            use app\controllers\RoomController;
-
             $room_controller = new RoomController();
 
             $type = $_POST["type"];
             if (!isset($type)) {
-            ?>
-                <div class="card">
-                    <h3>
-                        <span>Não foi possível realizar esta operação</span>
-                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Você precisa preencher todos os campos para realizar esta operação!</p>
-                </div>
-                <?php
+                MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg", "Você precisa preencher todos os campos para realizar esta operação!");
             } else {
 
                 $result = $room_controller->register($type);
 
                 if (!is_bool($result)) {
-                ?>
-                    <div class="card">
-                        <h3>
-                            <span>Mensagem de erro</span>
-                            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                        </h3>
-
-                        <p><?php echo "$result" ?></p>
-                    </div>
-                <?php
+                    MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg", $result);
                 } else {
-                ?>
-                    <div class="card">
-                        <h3>
-                            <span>Operação realizada</span>
-                            <img src="../../../public/styles/img/success.svg" alt="Imagem de mensagem de sucesso">
-                        </h3>
-                        <p>O cadastro da sala foi realizado com sucesso!</p>
-                    </div>
-            <?php
+                    MessageContainer::successMessage("Operação realizada", "../../../public/styles/img/success.svg", "O cadastro da sala foi realizado com sucesso!");
                 }
             }
             ?>
         </section>
     </main>
-
-    <div class="modal-overlay">
-        <div class="modal">
-            <div class="form">
-                <h2>Cadastrar nova sala</h2>
-                <form method="POST" action="#">
-                    <div class="input-block">
-                        <label class="sr-only" for="type">Tipo de Sala</label>
-                        <input id="type" name="type" placeholder="Sala de ..." required>
-                    </div>
-                    <div class="input-block actions">
-                        <a href="#" onclick="Modal.close()" class="button-cancel">Cancelar</a>
-                        <button type="submit" class="primary-button">Cadastrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <?php
+    Modal::registerRoom("#");
+    ?>
     <footer>
         <p>2021 - Unidade de Saúde</p>
     </footer>

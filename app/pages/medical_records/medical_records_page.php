@@ -13,7 +13,15 @@
 </head>
 
 <body>
+  <?php
+  include_once('../../utils/autoload.php');
 
+  spl_autoload_register("autoload");
+
+  use app\controllers\MedicalRecordsController;
+  use app\controllers\PatientController;
+  use app\controllers\SymptomController;
+  ?>
   <header>
     <h3 class="logo">Unidade de Saúde</h3>
   </header>
@@ -48,13 +56,7 @@
     <section class="box">
       <div class="form">
         <?php
-        include_once('../../utils/autoload.php');
 
-        spl_autoload_register("autoload");
-
-        use app\controllers\MedicalRecordsController;
-        use app\controllers\PatientController;
-        use app\controllers\SymptomController;
 
         $medical_records_controller = new MedicalRecordsController();
         $patient_controller = new PatientController();

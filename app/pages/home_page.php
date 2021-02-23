@@ -29,6 +29,7 @@
     spl_autoload_register("pagination");
 
     use app\controllers\MedicalAppointmentController;
+    use app\components\MessageContainer;
     ?>
     <section class="quick-access">
       <a href="./patient/menu.php" class="home-button">
@@ -88,37 +89,43 @@
 
       if ($result != null && !is_string($result)) {
         $medical_appointment_list = $result[1];
+        if ($medical_appointment_list != null && is_array($medical_appointment_list)) {
       ?>
-        <div class="table">
+          <div class="table">
 
-          <h2>Lista de Atendimento</h2>
-          <table>
-            <tr>
-              <th>ID</th>
-              <th>Paciente</th>
-              <th>Médico(a)</th>
-              <th>Sala</th>
-              <th>Data e Horário</th>
-              <th>Horário de chegada</th>
-              <th>Consulta Realizada?</th>
-            </tr>
-            <?php
-            foreach ($medical_appointment_list as $medical_appointment) {
-            ?>
+            <h2>Lista de Atendimento</h2>
+            <table>
               <tr>
-                <td><?php echo ($medical_appointment->getId()); ?></td>
-                <td><?php echo ($medical_appointment->getPatientCpf()); ?></td>
-                <td><?php echo ($medical_appointment->getIdDoctor()); ?></td>
-                <td><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " " . $medical_appointment->getIdRoom()[1]); ?></td>
-                <td><?php echo ($medical_appointment->getDate() . " às " . $medical_appointment->getTime()); ?></td>
-                <td><?php echo ($medical_appointment->getArrivalTime()); ?></td>
-                <td><?php echo ($medical_appointment->getStatus()[1]); ?></td>
+                <th>ID</th>
+                <th>Paciente</th>
+                <th>Médico(a)</th>
+                <th>Sala</th>
+                <th>Data e Horário</th>
+                <th>Horário de chegada</th>
+                <th>Consulta Realizada?</th>
               </tr>
-            <?php
-            }
-            ?>
-          </table>
-        </div>
+              <?php
+              foreach ($medical_appointment_list as $medical_appointment) {
+              ?>
+                <tr>
+                  <td><?php echo ($medical_appointment->getId()); ?></td>
+                  <td><?php echo ($medical_appointment->getPatientCpf()); ?></td>
+                  <td><?php echo ($medical_appointment->getIdDoctor()); ?></td>
+                  <td><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " " . $medical_appointment->getIdRoom()[1]); ?></td>
+                  <td><?php echo ($medical_appointment->getDate() . " às " . $medical_appointment->getTime()); ?></td>
+                  <td><?php echo ($medical_appointment->getArrivalTime()); ?></td>
+                  <td><?php echo ($medical_appointment->getStatus()[1]); ?></td>
+                </tr>
+              <?php
+              }
+              ?>
+            </table>
+          </div>
+        <?php
+        } else {
+          MessageContainer::errorMessage("A lista de atendimento está vazia", "../../public/styles/img/error.svg", "Não há mais registros de consulta.");
+        }
+        ?>
         <div class="input-block actions">
           <?php
           $total = $result[0];
@@ -130,15 +137,7 @@
         </div>
       <?php
       } else {
-      ?>
-        <div class="card">
-          <h3>
-            <span>A lista de atendimento está vazia</span>
-            <img src="../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-          </h3>
-          <p>Ainda não há nenhuma consulta marcada.</p>
-        </div>
-      <?php
+        MessageContainer::errorMessage("A lista de atendimento está vazia", "../../public/styles/img/error.svg", "Ainda não há nenhuma consulta marcada.");
       }
       ?>
     </section>

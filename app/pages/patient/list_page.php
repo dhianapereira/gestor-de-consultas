@@ -47,6 +47,7 @@
             spl_autoload_register("pagination");
 
             use app\controllers\PatientController;
+            use app\components\MessageContainer;
 
             $patient_controller = new PatientController();
 
@@ -60,41 +61,47 @@
 
             if ($result != null && !is_string($result)) {
                 $patient_list = $result[1];
+                if ($patient_list != null && is_array($patient_list)) {
             ?>
-                <div class="table">
+                    <div class="table">
 
-                    <h2>Lista de Pacientes</h2>
-                    <table>
-                        <tr>
-                            <th>CPF</th>
-                            <th>Nome Completo</th>
-                            <th>Gênero</th>
-                            <th>Data de nascimento</th>
-                            <th>Nome da Mãe</th>
-                            <th>Acompanhante</th>
-                            <th>Endereço</th>
-                            <th>Naturalidade</th>
-                            <th>Status</th>
-                        </tr>
-                        <?php
-                        foreach ($patient_list as $patient) {
-                        ?>
+                        <h2>Lista de Pacientes</h2>
+                        <table>
                             <tr>
-                                <td><?php echo ($patient->getCpf()); ?></td>
-                                <td><?php echo ($patient->getName()); ?></td>
-                                <td><?php echo ($patient->getGenre()); ?></td>
-                                <td><?php echo ($patient->getDateOfBirth()); ?></td>
-                                <td><?php echo ($patient->getMotherName()); ?></td>
-                                <td><?php echo ($patient->getCompanion()); ?></td>
-                                <td><?php echo ($patient->getAddress()); ?></td>
-                                <td><?php echo ($patient->getNaturalness()); ?></td>
-                                <td><?php echo ($patient->getActive()); ?></td>
+                                <th>CPF</th>
+                                <th>Nome Completo</th>
+                                <th>Gênero</th>
+                                <th>Data de nascimento</th>
+                                <th>Nome da Mãe</th>
+                                <th>Acompanhante</th>
+                                <th>Endereço</th>
+                                <th>Naturalidade</th>
+                                <th>Status</th>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                    </table>
-                </div>
+                            <?php
+                            foreach ($patient_list as $patient) {
+                            ?>
+                                <tr>
+                                    <td><?php echo ($patient->getCpf()); ?></td>
+                                    <td><?php echo ($patient->getName()); ?></td>
+                                    <td><?php echo ($patient->getGenre()); ?></td>
+                                    <td><?php echo ($patient->getDateOfBirth()); ?></td>
+                                    <td><?php echo ($patient->getMotherName()); ?></td>
+                                    <td><?php echo ($patient->getCompanion()); ?></td>
+                                    <td><?php echo ($patient->getAddress()); ?></td>
+                                    <td><?php echo ($patient->getNaturalness()); ?></td>
+                                    <td><?php echo ($patient->getActive()); ?></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
+                <?php
+                } else {
+
+                    MessageContainer::errorMessage("A lista de pacientes está vazia", "../../../public/styles/img/error.svg",  "Não há mais nenhum paciente cadastrado.");
+                } ?>
                 <div class="input-block actions">
                     <?php
                     $total = $result[0];
@@ -106,15 +113,7 @@
                 </div>
             <?php
             } else {
-            ?>
-                <div class="card">
-                    <h3>
-                        <span>A lista de pacientes está vazia</span>
-                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Ainda não há nenhum paciente cadastrado.</p>
-                </div>
-            <?php
+                MessageContainer::errorMessage("A lista de pacientes está vazia", "../../../public/styles/img/error.svg",  "Ainda não há nenhum paciente cadastrado.");
             }
             ?>
         </section>

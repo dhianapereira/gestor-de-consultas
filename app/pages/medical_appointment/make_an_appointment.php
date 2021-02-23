@@ -48,6 +48,7 @@
             spl_autoload_register("autoload");
 
             use app\controllers\MedicalAppointmentController;
+            use app\components\MessageContainer;
 
             $medical_appointment_controller = new MedicalAppointmentController();
 
@@ -62,15 +63,7 @@
                 !isset($specialty) || !isset($patient_cpf) || !isset($genre)
                 || !isset($date) || !isset($time) || !isset($room)
             ) {
-            ?>
-                <div class="card">
-                    <h3>
-                        <span>Não foi possível realizar esta operação</span>
-                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Você precisa preencher todos os campos para realizar esta operação!</p>
-                </div>
-                <?php
+                MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg", "Você precisa preencher todos os campos para realizar esta operação!");
             } else {
 
                 $result = $medical_appointment_controller->makeAnAppointment(
@@ -83,25 +76,9 @@
                 );
 
                 if (!is_bool($result)) {
-                ?>
-                    <div class="card">
-                        <h3>
-                            <span>Mensagem de Erro</span>
-                            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                        </h3>
-                        <p><?php echo "$result" ?></p>
-                    </div>
-                <?php
+                    MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg",  $result);
                 } else {
-                ?>
-                    <div class="card">
-                        <h3>
-                            <span>Mensagem de Erro</span>
-                            <img src="../../../public/styles/img/success.svg" alt="Imagem de mensagem de sucesso">
-                        </h3>
-                        <p>A consulta foi marcada com sucesso!</p>
-                    </div>
-            <?php
+                    MessageContainer::successMessage("Operação realizada", "../../../public/styles/img/success.svg", "A consulta foi marcada com sucesso!");
                 }
             }
             ?>

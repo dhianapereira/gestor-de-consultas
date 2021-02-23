@@ -17,6 +17,17 @@
 </head>
 
 <body>
+    <?php
+    include_once('../../utils/autoload.php');
+    include_once('../../utils/pagination.php');
+
+    spl_autoload_register("autoload");
+    spl_autoload_register("pagination");
+
+    use app\controllers\RoomController;
+    use app\components\MessageContainer;
+    use app\components\Modal;
+    ?>
     <header>
         <h3 class="logo">Unidade de Saúde</h3>
     </header>
@@ -42,14 +53,6 @@
         </section>
         <section>
             <?php
-            include_once('../../utils/autoload.php');
-            include_once('../../utils/pagination.php');
-
-            spl_autoload_register("autoload");
-            spl_autoload_register("pagination");
-
-            use app\controllers\RoomController;
-
             $room_controller = new RoomController();
 
             if (!isset($_GET['page'])) {
@@ -62,70 +65,53 @@
 
             if ($result != null && !is_string($result)) {
                 $room_list = $result[1];
+                if ($room_list != null && is_array($room_list)) {
             ?>
-                <div class="table">
+                    <div class="table">
 
-                    <h2>Lista de Salas</h2>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Tipo</th>
-                            <th>Status</th>
-                        </tr>
-                        <?php
-                        foreach ($room_list as $room) {
-                        ?>
+                        <h2>Lista de Salas</h2>
+                        <table>
                             <tr>
-                                <td><?php echo ($room->getId()); ?></td>
-                                <td><?php echo ($room->getType()); ?></td>
-                                <td><?php echo ($room->getStatus()); ?></td>
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                    </table>
-                    <div class="input-block actions">
-                        <?php
-                        $total = $result[0];
-                        $total_records = $pagination[1];
-                        $position = $pagination[2];
-
-                        printTheButtons($total, $total_records, $position);
-                        ?>
+                            <?php
+                            foreach ($room_list as $room) {
+                            ?>
+                                <tr>
+                                    <td><?php echo ($room->getId()); ?></td>
+                                    <td><?php echo ($room->getType()); ?></td>
+                                    <td><?php echo ($room->getStatus()); ?></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </table>
                     </div>
+                <?php
+                } else {
+                    MessageContainer::errorMessage("A lista de salas está vazia", "../../../public/styles/img/error.svg", "Não há mais nenhuma sala cadastrada.");
+                } ?>
+                <div class="input-block actions">
+                    <?php
+                    $total = $result[0];
+                    $total_records = $pagination[1];
+                    $position = $pagination[2];
+
+                    printTheButtons($total, $total_records, $position);
+                    ?>
                 </div>
             <?php
             } else {
-            ?>
-                <div class="card">
-                    <h3>
-                        <span>A lista de salas está vazia</span>
-                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Ainda não há nenhuma sala cadastrada.</p>
-                </div>
-            <?php
+                MessageContainer::errorMessage("A lista de salas está vazia", "../../../public/styles/img/error.svg", "Ainda não há nenhuma sala cadastrada.");
             }
             ?>
         </section>
     </main>
-    <div class="modal-overlay">
-        <div class="modal">
-            <div class="form">
-                <h2>Cadastrar nova sala</h2>
-                <form method="POST" action="register_room.php">
-                    <div class="input-block">
-                        <label class="sr-only" for="type">Tipo de Sala</label>
-                        <input id="type" name="type" placeholder="Sala de ..." required>
-                    </div>
-                    <div class="input-block actions">
-                        <a href="#" onclick="Modal.close()" class="button-cancel">Cancelar</a>
-                        <button type="submit" class="primary-button">Cadastrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <?php
+    Modal::registerRoom("register_room.php");
+    ?>
     <footer>
         <p>2021 - Unidade de Saúde</p>
     </footer>

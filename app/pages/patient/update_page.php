@@ -55,6 +55,7 @@
         spl_autoload_register("autoload");
 
         use app\controllers\PatientController;
+        use app\components\MessageContainer;
 
         $patient_controller = new PatientController();
 
@@ -63,18 +64,9 @@
         if (isset($cpf)) {
           $patient = $patient_controller->fetchPatient($cpf);
           if ($patient == null || !is_object($patient)) {
-
-        ?>
-            <div class="card">
-              <h3>
-                <span>Mensagem de Erro</span>
-                <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-              </h3>
-              <p>Nenhum Paciente com o CPF: <?php echo "$cpf" ?> </p>
-            </div>
-          <?php
+            MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg", "Nenhum Paciente com o CPF: $cpf");
           } else {
-          ?>
+        ?>
             <h2>Dados do Paciente</h2>
             <form method="POST" action="update_patient.php">
               <div class="input-block">
@@ -177,18 +169,11 @@
 
               <button type="submit" class="primary-button">Salvar Alterações</button>
             </form>
-          <?php
+        <?php
           }
         } else {
-          ?>
-          <div class="card">
-            <h3>
-              <span>Mensagem de Erro</span>
-              <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-            </h3>
-            <p>Você precisa inserir um CPF!</p>
-          </div>
-        <?php
+
+          MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg", "Você precisa inserir um CPF!");
         }
         ?>
       </div>

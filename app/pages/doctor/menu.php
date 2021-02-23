@@ -47,6 +47,7 @@
       spl_autoload_register("pagination");
 
       use app\controllers\DoctorController;
+      use app\components\MessageContainer;
 
       $doctor_controller = new DoctorController();
 
@@ -61,53 +62,53 @@
 
       if ($result != null && !is_string($result)) {
         $doctor_list = $result[1];
+        if ($doctor_list != null & is_array($doctor_list)) {
+
       ?>
-        <div class="table">
+          <div class="table">
 
-          <h2>Lista de Médicos</h2>
-          <table>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Gênero</th>
-              <th>Especialidade</th>
-              <th>Status</th>
-            </tr>
-            <?php
-            foreach ($doctor_list as $doctor) {
-            ?>
+            <h2>Lista de Médicos</h2>
+            <table>
               <tr>
-                <td><?php echo ($doctor->getId()); ?></td>
-                <td><?php echo ($doctor->getName()); ?></td>
-                <td><?php echo ($doctor->getGenre()); ?></td>
-                <td><?php echo ($doctor->getSpecialty()); ?></td>
-                <td><?php echo ($doctor->getActive()); ?></td>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Gênero</th>
+                <th>Especialidade</th>
+                <th>Status</th>
               </tr>
-            <?php
-            }
-            ?>
-          </table>
-          <div class="input-block actions">
-            <?php
-            $total = $result[0];
-            $total_records = $pagination[1];
-            $position = $pagination[2];
+              <?php
+              foreach ($doctor_list as $doctor) {
+              ?>
+                <tr>
+                  <td><?php echo ($doctor->getId()); ?></td>
+                  <td><?php echo ($doctor->getName()); ?></td>
+                  <td><?php echo ($doctor->getGenre()); ?></td>
+                  <td><?php echo ($doctor->getSpecialty()); ?></td>
+                  <td><?php echo ($doctor->getActive()); ?></td>
+                </tr>
+              <?php
+              }
+              ?>
+            </table>
 
-            printTheButtons($total, $total_records, $position);
-            ?>
           </div>
+        <?php
+        } else {
+          MessageContainer::errorMessage("A lista de médicos está vazia", "../../../public/styles/img/error.svg", "Não há mais nenhum médico cadastrado.");
+        }
+        ?>
+        <div class="input-block actions">
+          <?php
+          $total = $result[0];
+          $total_records = $pagination[1];
+          $position = $pagination[2];
+
+          printTheButtons($total, $total_records, $position);
+          ?>
         </div>
       <?php
       } else {
-      ?>
-        <div class="card">
-          <h3>
-            <span>A lista de médicos está vazia</span>
-            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-          </h3>
-          <p>Ainda não há nenhum médico cadastrado.</p>
-        </div>
-      <?php
+        MessageContainer::errorMessage("A lista de médicos está vazia", "../../../public/styles/img/error.svg", "Ainda não há nenhum médico cadastrado.");
       }
       ?>
     </section>

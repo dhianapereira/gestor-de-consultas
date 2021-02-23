@@ -49,6 +49,7 @@
             spl_autoload_register("pagination");
 
             use app\controllers\MedicalRecordsController;
+            use app\components\MessageContainer;
 
             $medical_records_controller = new MedicalRecordsController();
 
@@ -62,33 +63,38 @@
 
             if ($result != null && !is_string($result)) {
                 $medical_records_list = $result[1];
+                if ($medical_records_list != null && is_array($medical_records_list)) {
             ?>
-                <div class="table">
-                    <h2>Lista de Prontuários</h2>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Paciente</th>
-                            <th>Resultado (%)</th>
-                            <th>Gravidade</th>
-                            <th>Data de início dos sintomas</th>
-                        </tr>
-                        <?php
-                        foreach ($medical_records_list as $medical_records) {
-                        ?>
+                    <div class="table">
+                        <h2>Lista de Prontuários</h2>
+                        <table>
                             <tr>
-                                <td><?php echo ($medical_records->getId()); ?></td>
-                                <td><?php echo ($medical_records->getPatientCpf()); ?></td>
-                                <td><?php echo ($medical_records->getResult()); ?></td>
-                                <td><?php echo ($medical_records->getGravity()); ?></td>
-                                <td><?php echo ($medical_records->getStartDate()); ?></td>
-
+                                <th>ID</th>
+                                <th>Paciente</th>
+                                <th>Resultado (%)</th>
+                                <th>Gravidade</th>
+                                <th>Data de início dos sintomas</th>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                    </table>
-                </div>
+                            <?php
+                            foreach ($medical_records_list as $medical_records) {
+                            ?>
+                                <tr>
+                                    <td><?php echo ($medical_records->getId()); ?></td>
+                                    <td><?php echo ($medical_records->getPatientCpf()); ?></td>
+                                    <td><?php echo ($medical_records->getResult()); ?></td>
+                                    <td><?php echo ($medical_records->getGravity()); ?></td>
+                                    <td><?php echo ($medical_records->getStartDate()); ?></td>
+
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
+                <?php
+                } else {
+                    MessageContainer::errorMessage("A lista de prontuários está vazia", "../../../public/styles/img/error.svg", "Não há mais nenhum prontuário cadastrado.");
+                } ?>
                 <div class="input-block actions">
                     <?php
                     $total = $result[0];
@@ -100,15 +106,7 @@
                 </div>
             <?php
             } else {
-            ?>
-                <div class="card">
-                    <h3>
-                        <span>A lista de prontuários está vazia</span>
-                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Ainda não há nenhum prontuário no sistema.</p>
-                </div>
-            <?php
+                MessageContainer::errorMessage("A lista de prontuários está vazia", "../../../public/styles/img/error.svg", "Ainda não há nenhum prontuário no sistema.");
             }
             ?>
         </section>

@@ -53,6 +53,7 @@
         use app\controllers\DoctorController;
         use app\controllers\RoomController;
         use app\controllers\StatusController;
+        use app\components\MessageContainer;
 
         $medical_appointment_controller = new MedicalAppointmentController();
 
@@ -62,17 +63,9 @@
           $medical_appointment = $medical_appointment_controller->fetchMedicalAppointment($id);
 
           if ($medical_appointment == null || !is_object($medical_appointment)) {
-        ?>
-            <div class="card">
-              <h3>
-                <span>Mensagem de Erro</span>
-                <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-              </h3>
-              <p>Não há nenhuma consulta com o ID: <?php echo "$id" ?> </p>
-            </div>
-          <?php
+            MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg",  "Não há nenhuma consulta com o ID: $id");
           } else {
-          ?>
+        ?>
             <h2>Dados da Consulta</h2>
             <form method="POST" action="update_medical_appointment.php">
               <div class="input-block">
@@ -185,18 +178,10 @@
 
               <button type="submit" class="primary-button">Salvar Alterações</button>
             </form>
-          <?php
+        <?php
           }
         } else {
-          ?>
-          <div class="card">
-            <h3>
-              <span>Não foi possível realizar esta operação</span>
-              <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-            </h3>
-            <p>Você precisa inserir o ID da consulta!</p>
-          </div>
-        <?php
+          MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg",  "Você precisa inserir o ID da consulta!");
         }
         ?>
       </div>

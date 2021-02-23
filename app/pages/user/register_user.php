@@ -49,6 +49,7 @@
             spl_autoload_register("autoload");
 
             use app\controllers\UserController;
+            use app\components\MessageContainer;
 
             $user_controller = new UserController();
 
@@ -67,15 +68,8 @@
                 || !isset($responsibility)
                 || !isset($address) || !isset($naturalness)
             ) {
-            ?>
-                <div class="card">
-                    <h3>
-                        <span>Não foi possível realizar esta operação</span>
-                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Você precisa preencher todos os campos para realizar esta operação!</p>
-                </div>
-                <?php
+
+                MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg", "Você precisa preencher todos os campos para realizar esta operação!");
             } else {
 
                 $result = $user_controller->register(
@@ -89,26 +83,9 @@
                 );
 
                 if (!is_bool($result)) {
-                ?>
-                    <div class="card">
-                        <h3>
-                            <span>Mensagem de erro</span>
-                            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                        </h3>
-
-                        <p><?php echo "$result" ?></p>
-                    </div>
-                <?php
+                    MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg",  $result);
                 } else {
-                ?>
-                    <div class="card">
-                        <h3>
-                            <span>Operação realizada</span>
-                            <img src="../../../public/styles/img/success.svg" alt="Imagem de mensagem de sucesso">
-                        </h3>
-                        <p>O cadastro do funcionário(a) foi realizado com sucesso!</p>
-                    </div>
-            <?php
+                    MessageContainer::successMessage("Operação realizada", "../../../public/styles/img/success.svg", "O cadastro do funcionário(a) foi realizado com sucesso!");
                 }
             }
             ?>

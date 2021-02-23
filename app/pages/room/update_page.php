@@ -16,7 +16,17 @@
 <script src="../../../public/scripts/script.js"></script>
 
 <body>
+    <?php
+    include_once('../../utils/autoload.php');
+    include_once('../../utils/pagination.php');
 
+    spl_autoload_register("autoload");
+    spl_autoload_register("pagination");
+
+    use app\controllers\RoomController;
+    use app\components\MessageContainer;
+    use app\components\Modal;
+    ?>
     <header>
         <h3 class="logo">Unidade de Saúde</h3>
     </header>
@@ -49,12 +59,6 @@
         <section class="box">
             <div class="form">
                 <?php
-                include_once('../../utils/autoload.php');
-
-                spl_autoload_register("autoload");
-
-                use app\controllers\RoomController;
-
                 $room_controller = new RoomController();
 
                 $id = $_POST["id"];
@@ -63,17 +67,9 @@
                     $room = $room_controller->fetchRoom($id);
 
                     if ($room == null || !is_object($room)) {
-                ?>
-                        <div class="card">
-                            <h3>
-                                <span>Mensagem de Erro</span>
-                                <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                            </h3>
-                            <p>Não há nenhuma sala com o ID: <?php echo "$id" ?> </p>
-                        </div>
-                    <?php
+                        MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg", "Não há nenhuma sala com o ID: $id");
                     } else {
-                    ?>
+                ?>
                         <h2>Sala</h2>
                         <form method="POST" action="update_room.php">
                             <div class="input-block">
@@ -108,40 +104,18 @@
                             </div>
                             <button type="submit" class="primary-button">Salvar Alterações</button>
                         </form>
-                    <?php
+                <?php
                     }
                 } else {
-                    ?>
-                    <div class="card">
-                        <h3>
-                            <span>Não foi possível realizar esta operação</span>
-                            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                        </h3>
-                        <p>Você precisa inserir um ID!</p>
-                    </div>
-                <?php
+                    MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg", "Você precisa inserir um ID!");
                 }
                 ?>
             </div>
         </section>
     </main>
-    <div class="modal-overlay">
-        <div class="modal">
-            <div class="form">
-                <h2>Cadastrar nova sala</h2>
-                <form method="POST" action="register_room.php">
-                    <div class="input-block">
-                        <label class="sr-only" for="type">Tipo de Sala</label>
-                        <input id="type" name="type" placeholder="Sala de ..." required>
-                    </div>
-                    <div class="input-block actions">
-                        <a href="#" onclick="Modal.close()" class="button-cancel">Cancelar</a>
-                        <button type="submit" class="primary-button">Cadastrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <?php
+    Modal::registerRoom("register_room.php");
+    ?>
     <footer>
         <p>2021 - Unidade de Saúde</p>
     </footer>

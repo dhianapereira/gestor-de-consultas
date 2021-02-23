@@ -54,6 +54,7 @@
                 spl_autoload_register("autoload");
 
                 use app\controllers\UserController;
+                use app\components\MessageContainer;
 
                 $user_controller = new UserController();
 
@@ -62,18 +63,9 @@
                 if (isset($cpf)) {
                     $user = $user_controller->fetchUser($cpf);
                     if ($user == null || !is_object($user)) {
-
-                ?>
-                        <div class="card">
-                            <h3>
-                                <span>Mensagem de Erro</span>
-                                <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                            </h3>
-                            <p>Nenhum Funcionário com o CPF: <?php echo "$cpf" ?> </p>
-                        </div>
-                    <?php
+                        MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg", "Nenhum Funcionário com o CPF: $cpf");
                     } else {
-                    ?>
+                ?>
                         <h2>Dados do Funcionário</h2>
                         <form method="POST" action="update_user.php">
                             <div class="input-block">
@@ -170,18 +162,10 @@
 
                             <button type="submit" class="primary-button">Salvar Alterações</button>
                         </form>
-                    <?php
+                <?php
                     }
                 } else {
-                    ?>
-                    <div class="card">
-                        <h3>
-                            <span>Mensagem de Erro</span>
-                            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                        </h3>
-                        <p>Você precisa inserir um CPF!</p>
-                    </div>
-                <?php
+                    MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg",  "Você precisa inserir um CPF!");
                 }
                 ?>
             </div>

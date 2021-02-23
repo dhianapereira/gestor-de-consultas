@@ -53,6 +53,7 @@
 
       use app\controllers\DoctorController;
       use app\models\Doctor;
+      use app\components\MessageContainer;
 
       $doctor_controller = new DoctorController();
 
@@ -68,36 +69,12 @@
         $result = $doctor_controller->update($doctor);
 
         if ($result == null || !is_bool($result)) {
-      ?>
-          <div class="card">
-            <h3>
-              <span>Mensagem de Erro</span>
-              <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-            </h3>
-            <p><?php echo "$result" ?></p>
-          </div>
-        <?php
+          MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg",  $result);
         } else {
-        ?>
-          <div class="card">
-            <h3>
-              <span>Operação realizada</span>
-              <img src="../../../public/styles/img/success.svg" alt="Imagem de mensagem de sucesso">
-            </h3>
-            <p>As atualizações foram realizadas com sucesso!</p>
-          </div>
-        <?php
+          MessageContainer::successMessage("Operação realizada", "../../../public/styles/img/success.svg", "As atualizações foram realizadas com sucesso!");
         }
       } else {
-        ?>
-        <div class="card">
-          <h3>
-            <span>Não foi possível realizar esta operação</span>
-            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-          </h3>
-          <p>Você precisa alterar alguma informação para que a operação seja realizada.</p>
-        </div>
-      <?php
+        MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg",  "Você precisa alterar alguma informação para que a operação seja realizada.");
       }
       ?>
     </section>

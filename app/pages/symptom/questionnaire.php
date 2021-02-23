@@ -53,6 +53,7 @@
 
             use app\controllers\SymptomController;
             use app\controllers\PatientController;
+            use app\components\MessageContainer;
 
             $patient_controller = new PatientController();
             $symptom_controller = new SymptomController();
@@ -62,55 +63,25 @@
             $symptoms = $_POST["symptom"];
 
             if (!isset($patient_cpf) || !isset($start_date)) {
-            ?>
-                <div class="card">
-                    <h3>
-                        <span>Não foi possível realizar esta operação</span>
-                        <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Você precisa preencher os campos de CPF e data de início dos sintomas</p>
-                </div>
-                <?php
+                MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg", "Você precisa preencher os campos de CPF e data de início dos sintomas");
             } else {
                 $patient = $patient_controller->fetchPatient($patient_cpf);
 
                 if (is_object($patient)) {
                     $result = $symptom_controller->addSymptoms($patient_cpf, $symptoms, $start_date);
                     if (!is_bool($result)) {
-                ?>
-                        <div class="card">
-                            <h3>
-                                <span>Mensagem de erro</span>
-                                <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                            </h3>
-                            <p><?php echo "$result" ?></p>
-                        </div>
-                    <?php
+                        MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg", $result);
                     } else {
-                    ?>
-                        <div class="card">
-                            <h3>
-                                <span>Operação realizada</span>
-                                <img src="../../../public/styles/img/success.svg" alt="Imagem de mensagem de sucesso">
-                            </h3>
-                            <p>O prontuário médico do paciente de CPF: <?php echo ("$patient_cpf") ?> está pronto!</p>
+                        MessageContainer::successMessage("Operação realizada", "../../../public/styles/img/success.svg", "O prontuário médico do paciente de CPF: $patient_cpf está pronto!");
 
-                            <a href="../medical_records/search_medical_records.html" class="primary-button">
-                                Visualizar Prontuários
-                            </a>
-                        </div>
-                    <?php
+            ?>
+                        <a href="../medical_records/search_medical_records.html" class="primary-button">
+                            Visualizar Prontuários
+                        </a>
+            <?php
                     }
                 } else {
-                    ?>
-                    <div class="card">
-                        <h3>
-                            <span>Mensagem de erro</span>
-                            <img src="../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                        </h3>
-                        <p>O paciente de CPF: <?php echo ("$patient_cpf") ?> não existe!</p>
-                    </div>
-            <?php
+                    MessageContainer::errorMessage("Mensagem de Erro", "../../../public/styles/img/error.svg", "O paciente de CPF: $patient_cpf não existe!");
                 }
             }
             ?>

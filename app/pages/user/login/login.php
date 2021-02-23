@@ -25,6 +25,7 @@
             spl_autoload_register("autoload");
 
             use app\controllers\UserController;
+            use app\components\MessageContainer;
 
             $user_controller = new UserController();
 
@@ -35,28 +36,14 @@
                 $result = $user_controller->signIn($username, $password);
 
                 if ($result == null || !is_object($result)) {
-            ?> <div class="card">
-                        <h3>
-                            <span>Erro ao tentar acessar a plataforma</span>
-                            <img src="../../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                        </h3>
-                        <p>O usuário inserido não possui permissão para acessar a plataforma.</p>
-                    </div>
-                <?php
+
+                    MessageContainer::errorMessage("Erro ao tentar acessar a plataforma", "../../../../public/styles/img/error.svg", "O usuário inserido não possui permissão para acessar a plataforma.");
                 } else {
                     $_SESSION['responsibility'] = $result->getResponsibility();
                     header('Location:../../home_page.php');
                 }
             } else {
-                ?>
-                <div class="card">
-                    <h3>
-                        <span>Não foi possível realizar esta operação</span>
-                        <img src="../../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Você precisa inserir o username e a senha para acessar a plataforma!</p>
-                </div>
-            <?php
+                MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../../public/styles/img/error.svg", "Você precisa inserir o username e a senha para acessar a plataforma!");
             }
             ?>
         </section>

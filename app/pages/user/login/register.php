@@ -24,6 +24,7 @@
             spl_autoload_register("autoload");
 
             use app\controllers\UserController;
+            use app\components\MessageContainer;
 
             $user_controller = new UserController();
 
@@ -38,63 +39,28 @@
             ) {
                 $user = $user_controller->fetchUser($cpf);
                 if ($user == null || !is_object($user)) {
-            ?>
-                    <div class="card">
-                        <h3>
-                            <span>Não foi possível realizar esta operação</span>
-                            <img src="../../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                        </h3>
-                        <p>Você não pode realizar o cadastro porque você não é um funcionário dessa Unidade de Saúde</p>
-                    </div>
-                    <?php
+                    MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../../public/styles/img/error.svg", "Você não pode realizar o cadastro porque você não é um funcionário dessa Unidade de Saúde");
                 } else {
                     if ($password != $confirm_password) {
-                    ?>
-                        <div class="card">
-                            <h3>
-                                <span>Senhas diferentes</span>
-                                <img src="../../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                            </h3>
-                            <p>O campo SENHA está diferente do campo CONFIRMAR SENHA</p>
-                        </div>
-                        <?php
+                        MessageContainer::errorMessage("Senhas diferentes", "../../../../public/styles/img/error.svg", "O campo SENHA está diferente do campo CONFIRMAR SENHA");
                     } else {
                         $result = $user_controller->save($cpf, $username, $password);
 
                         if ($result == null || !is_bool($result)) {
-                        ?> <div class="card">
-                                <h3>
-                                    <span>Mensagem de Erro</span>
-                                    <img src="../../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                                </h3>
-                                <p><?php echo "$result" ?></p>
-                            </div>
-                        <?php
+                            MessageContainer::errorMessage("Mensagem de Erro", "../../../../public/styles/img/error.svg", $result);
                         } else {
-                        ?> <div class="card">
-                                <h3>
-                                    <span>Operação realizada</span>
-                                    <img src="../../../../public/styles/img/success.svg" alt="Imagem de mensagem de sucesso">
-                                </h3>
-                                <p>O cadastro foi realizado com sucesso! Você já pode acessar a plataforma</p>
-                                <a href="./login_page.html" class="primary-button">
-                                    Entrar
-                                </a>
-                            </div>
-                <?php
+                            MessageContainer::successMessage("Senhas diferentes", "../../../../public/styles/img/success.svg", "O cadastro foi realizado com sucesso! Você já pode acessar a plataforma.");
+            ?>
+
+                            <a href="./login_page.html" class="primary-button">
+                                Entrar na Plataforma
+                            </a>
+            <?php
                         }
                     }
                 }
             } else {
-                ?>
-                <div class="card">
-                    <h3>
-                        <span>Não foi possível realizar esta operação</span>
-                        <img src="../../../../public/styles/img/error.svg" alt="Imagem de mensagem de erro">
-                    </h3>
-                    <p>Você precisa preencher todos os campos parar cadastrar o usuário na plataforma!</p>
-                </div>
-            <?php
+                MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../../public/styles/img/error.svg", "Você precisa preencher todos os campos parar cadastrar o usuário na plataforma!");
             }
             ?>
         </section>
