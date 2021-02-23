@@ -69,9 +69,9 @@ class Facade
         return $result;
     }
 
-    public function allPatients()
+    public function allPatients($start, $total_records)
     {
-        $result = $this->patient_repository->allPatients();
+        $result = $this->patient_repository->allPatients($start, $total_records);
 
         return $result;
     }
@@ -103,9 +103,9 @@ class Facade
         }
     }
 
-    public function allMedicalRecords()
+    public function allMedicalRecords($start, $total_records)
     {
-        $result = $this->medical_records_repository->allMedicalRecords();
+        $result = $this->medical_records_repository->allMedicalRecords($start, $total_records);
 
         return $result;
     }
@@ -143,9 +143,9 @@ class Facade
         return $result;
     }
 
-    public function allDoctors()
+    public function allDoctors($start, $total_records)
     {
-        $result = $this->doctor_repository->allDoctors();
+        $result = $this->doctor_repository->allDoctors($start, $total_records);
 
         return $result;
     }
@@ -237,9 +237,9 @@ class Facade
         return $result;
     }
 
-    public function allUsers()
+    public function allUsers($start, $total_records)
     {
-        $result = $this->user_repository->allUsers();
+        $result = $this->user_repository->allUsers($start, $total_records);
 
         return $result;
     }
@@ -283,9 +283,9 @@ class Facade
         return $result;
     }
 
-    public function allRooms()
+    public function allRooms($start, $total_records)
     {
-        $result = $this->room_repository->allRooms();
+        $result = $this->room_repository->allRooms($start, $total_records);
 
         return $result;
     }

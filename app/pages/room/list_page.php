@@ -39,40 +39,60 @@
                 </h3>
             </a>
         </section>
-        <section class="table">
+        <section>
             <?php
             include_once('../../utils/autoload.php');
+            include_once('../../utils/pagination.php');
 
             spl_autoload_register("autoload");
+            spl_autoload_register("pagination");
 
             use app\controllers\RoomController;
 
             $room_controller = new RoomController();
 
-            $room_list = $room_controller->allRooms();
+            if (!isset($_GET['page'])) {
+                $_GET['page'] = "1";
+            }
 
-            if ($room_list != null && is_array($room_list)) {
+            $pagination = pagination($_GET['page'], "5");
 
+            $result = $room_controller->allRooms($pagination[0], $pagination[1]);
+
+            if ($result != null && !is_string($result)) {
+                $room_list = $result[1];
             ?>
-                <h2>Lista de Salas</h2>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tipo</th>
-                        <th>Status</th>
-                    </tr>
-                    <?php
-                    foreach ($room_list as $room) {
-                    ?>
+                <div class="table">
+
+                    <h2>Lista de Salas</h2>
+                    <table>
                         <tr>
-                            <td><?php echo ($room->getId()); ?></td>
-                            <td><?php echo ($room->getType()); ?></td>
-                            <td><?php echo ($room->getStatus()); ?></td>
+                            <th>ID</th>
+                            <th>Tipo</th>
+                            <th>Status</th>
                         </tr>
-                    <?php
-                    }
-                    ?>
-                </table>
+                        <?php
+                        foreach ($room_list as $room) {
+                        ?>
+                            <tr>
+                                <td><?php echo ($room->getId()); ?></td>
+                                <td><?php echo ($room->getType()); ?></td>
+                                <td><?php echo ($room->getStatus()); ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </table>
+                    <div class="input-block actions">
+                        <?php
+                        $total = $result[0];
+                        $total_records = $pagination[1];
+                        $position = $pagination[2];
+
+                        printTheButtons($total, $total_records, $position);
+                        ?>
+                    </div>
+                </div>
             <?php
             } else {
             ?>

@@ -45,9 +45,9 @@ class UserService
         return $result;
     }
 
-    public function allUsers()
+    public function allUsers($start, $total_records)
     {
-        $result = $this->facade->allUsers();
+        $result = $this->facade->allUsers($start, $total_records);
 
         return $result;
     }

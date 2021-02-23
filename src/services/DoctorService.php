@@ -25,8 +25,8 @@
             return $result;
         }
 
-        public function allDoctors(){
-            $result = $this->facade->allDoctors();
+        public function allDoctors($start, $total_records){
+            $result = $this->facade->allDoctors($start, $total_records);
 
             return $result;
         }

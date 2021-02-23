@@ -94,6 +94,7 @@ class MedicalAppointmentRepository
             $result = $stmt->fetchAll();
 
             if ($result != null) {
+                $size = count($result);
 
                 $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
 
@@ -101,11 +102,11 @@ class MedicalAppointmentRepository
                     ':id_status_fk' => 3,
                 ));
 
-                $medical_appointments = $stmt->fetchAll();
+                $fetchAll = $stmt->fetchAll();
 
                 $list = [];
 
-                foreach ($medical_appointments as $row) {
+                foreach ($fetchAll as $row) {
                     $id = $row['id'];
                     $patient = $row['full_name'];
                     $doctor = $row['name'];
@@ -136,7 +137,7 @@ class MedicalAppointmentRepository
                     array_push($list, $medical_appointment);
                 }
 
-                return [count($result), $list];
+                return [$size, $list];
             }
 
             $response = "Não foi possível trazer a lista de consultas";

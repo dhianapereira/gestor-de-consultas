@@ -92,7 +92,7 @@ class UserRepository
         }
     }
 
-    public function allUsers()
+    public function allUsers($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM user";
@@ -104,9 +104,17 @@ class UserRepository
             $result = $stmt->fetchAll();
 
             if ($result != null) {
+                $size = count($result);
+
+                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+
+                $stmt->execute();
+
+                $fetchAll = $stmt->fetchAll();
+
                 $list = [];
 
-                foreach ($result as $row) {
+                foreach ($fetchAll as $row) {
                     $cpf = $row['cpf'];
                     $name = $row['name'];
                     $genre = $row['genre'];
@@ -140,7 +148,7 @@ class UserRepository
                     array_push($list, $user);
                 }
 
-                return $list;
+                return [$size, $list];
             }
 
             $response = "Não foi possível trazer a lista de funcionários";

@@ -77,7 +77,7 @@ class DoctorRepository
         }
     }
 
-    public function allDoctors()
+    public function allDoctors($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM doctor";
@@ -89,9 +89,16 @@ class DoctorRepository
             $result = $stmt->fetchAll();
 
             if ($result != null) {
+                $size = count($result);
+                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+
+                $stmt->execute();
+
+                $fetchAll = $stmt->fetchAll();
+
                 $list = [];
 
-                foreach ($result as $row) {
+                foreach ($fetchAll as $row) {
                     $id = $row['id'];
                     $name = $row['name'];
                     $genre = $row['genre'];
@@ -108,7 +115,7 @@ class DoctorRepository
                     array_push($list, $doctor);
                 }
 
-                return $list;
+                return [$size, $list];
             }
 
             $response = "Não foi possível trazer a lista de médicos";

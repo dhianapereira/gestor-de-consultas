@@ -30,9 +30,9 @@ class RoomService
         return $result;
     }
 
-    public function allRooms()
+    public function allRooms($start, $total_records)
     {
-        $result = $this->facade->allRooms();
+        $result = $this->facade->allRooms($start, $total_records);
 
         return $result;
     }

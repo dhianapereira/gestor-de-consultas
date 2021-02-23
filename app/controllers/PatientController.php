@@ -47,9 +47,9 @@ class PatientController
     }
 
 
-    public function allPatients()
+    public function allPatients($start, $total_records)
     {
-        $result = $this->patient_service->allPatients();
+        $result = $this->patient_service->allPatients($start, $total_records);
 
         return $result;
     }

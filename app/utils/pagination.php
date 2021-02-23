@@ -5,11 +5,8 @@ spl_autoload_register("autoload");
 use app\components\Button;
 
 
-function pagination($page)
+function pagination($page, $total_records)
 {
-
-    $total_records = "2";
-
     $position = $page;
 
     $start = $position - 1;

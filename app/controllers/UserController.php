@@ -44,9 +44,9 @@ class UserController
         return $result;
     }
 
-    public function allUsers()
+    public function allUsers($start, $total_records)
     {
-        $result = $this->user_service->allUsers();
+        $result = $this->user_service->allUsers($start, $total_records);
 
         return $result;
     }

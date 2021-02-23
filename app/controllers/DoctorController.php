@@ -24,8 +24,8 @@
             return $result;
         }
 
-        public function allDoctors(){
-            $result = $this->doctor_service->allDoctors();
+        public function allDoctors($start, $total_records){
+            $result = $this->doctor_service->allDoctors($start, $total_records);
                 
             return $result;
         }

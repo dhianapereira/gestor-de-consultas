@@ -17,8 +17,8 @@
             return $result;
         }
 
-        public function allMedicalRecords(){
-            $result = $this->medical_records_service->allMedicalRecords();
+        public function allMedicalRecords($start, $total_records){
+            $result = $this->medical_records_service->allMedicalRecords($start, $total_records);
                 
             return $result;
         }

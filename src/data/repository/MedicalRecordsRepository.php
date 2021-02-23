@@ -98,7 +98,7 @@ class MedicalRecordsRepository
         }
     }
 
-    public function allMedicalRecords()
+    public function allMedicalRecords($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM medical_records";
@@ -110,9 +110,16 @@ class MedicalRecordsRepository
             $result = $stmt->fetchAll();
 
             if ($result != null) {
+                $size = count($result);
+                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+
+                $stmt->execute();
+
+                $fetchAll = $stmt->fetchAll();
+
                 $list = [];
 
-                foreach ($result as $row) {
+                foreach ($fetchAll as $row) {
                     $id = $row['id'];
                     $patient_cpf = $row['cpf_patient_fk'];
                     $result = $row['result'];
@@ -124,7 +131,7 @@ class MedicalRecordsRepository
                     array_push($list, $medical_records);
                 }
 
-                return $list;
+                return [$size, $list];
             }
 
             $response = "Não foi possível trazer a lista de médicos";

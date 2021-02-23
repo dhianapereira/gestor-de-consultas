@@ -18,8 +18,8 @@
             return $result;
         }
 
-        public function allMedicalRecords(){
-            $result = $this->facade->allMedicalRecords();
+        public function allMedicalRecords($start, $total_records){
+            $result = $this->facade->allMedicalRecords($start, $total_records);
 
             return $result;
         }

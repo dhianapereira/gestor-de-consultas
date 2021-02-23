@@ -71,7 +71,7 @@ class RoomRepository
         }
     }
 
-    public function allRooms()
+    public function allRooms($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM room";
@@ -83,9 +83,17 @@ class RoomRepository
             $result = $stmt->fetchAll();
 
             if ($result != null) {
+                $size = count($result);
+
+                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+
+                $stmt->execute();
+
+                $fetchAll = $stmt->fetchAll();
+
                 $list = [];
 
-                foreach ($result as $row) {
+                foreach ($fetchAll as $row) {
                     $id = $row['id'];
                     $type = $row['type'];
 
@@ -100,7 +108,7 @@ class RoomRepository
                     array_push($list, $room);
                 }
 
-                return $list;
+                return [$size, $list];
             }
 
             $response = "Não foi possível trazer a lista de salas";

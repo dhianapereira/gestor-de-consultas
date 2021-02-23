@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/table.css" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -37,50 +38,70 @@
                 </h3>
             </a>
         </section>
-        <section class="table">
+        <section>
             <?php
             include_once('../../utils/autoload.php');
+            include_once('../../utils/pagination.php');
 
             spl_autoload_register("autoload");
+            spl_autoload_register("pagination");
 
             use app\controllers\UserController;
 
             $user_controller = new UserController();
 
-            $user_list = $user_controller->allUsers();
+            if (!isset($_GET['page'])) {
+                $_GET['page'] = "1";
+            }
 
-            if ($user_list != null && is_array($user_list)) {
+            $pagination = pagination($_GET['page'], "2");
 
+
+            $result = $user_controller->allUsers($pagination[0], $pagination[1]);
+
+            if ($result != null && !is_string($result)) {
+                $user_list = $result[1];
             ?>
-                <h2>Lista de Funcionários</h2>
-                <table>
-                    <tr>
-                        <th>CPF</th>
-                        <th>Nome</th>
-                        <th>Gênero</th>
-                        <th>Data de nascimento</th>
-                        <th>Naturalidade</th>
-                        <th>Endereço</th>
-                        <th>Cargo</th>
-                        <th>Status</th>
-                    </tr>
-                    <?php
-                    foreach ($user_list as $user) {
-                    ?>
+                <div class="table">
+                    <h2>Lista de Funcionários</h2>
+                    <table>
                         <tr>
-                            <td><?php echo ($user->getCpf()); ?></td>
-                            <td><?php echo ($user->getName()); ?></td>
-                            <td><?php echo ($user->getGenre()); ?></td>
-                            <td><?php echo ($user->getDateOfBirth()); ?></td>
-                            <td><?php echo ($user->getNaturalness()); ?></td>
-                            <td><?php echo ($user->getAddress()); ?></td>
-                            <td><?php echo ($user->getResponsibility()); ?></td>
-                            <td><?php echo ($user->getActive()); ?></td>
+                            <th>CPF</th>
+                            <th>Nome</th>
+                            <th>Gênero</th>
+                            <th>Data de nascimento</th>
+                            <th>Naturalidade</th>
+                            <th>Endereço</th>
+                            <th>Cargo</th>
+                            <th>Status</th>
                         </tr>
+                        <?php
+                        foreach ($user_list as $user) {
+                        ?>
+                            <tr>
+                                <td><?php echo ($user->getCpf()); ?></td>
+                                <td><?php echo ($user->getName()); ?></td>
+                                <td><?php echo ($user->getGenre()); ?></td>
+                                <td><?php echo ($user->getDateOfBirth()); ?></td>
+                                <td><?php echo ($user->getNaturalness()); ?></td>
+                                <td><?php echo ($user->getAddress()); ?></td>
+                                <td><?php echo ($user->getResponsibility()); ?></td>
+                                <td><?php echo ($user->getActive()); ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </div>
+                <div class="input-block actions">
                     <?php
-                    }
+                    $total = $result[0];
+                    $total_records = $pagination[1];
+                    $position = $pagination[2];
+
+                    printTheButtons($total, $total_records, $position);
                     ?>
-                </table>
+                </div>
             <?php
             } else {
             ?>

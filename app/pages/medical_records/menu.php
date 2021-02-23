@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/table.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -38,44 +39,65 @@
                 </h3>
             </a>
         </section>
-        <section class="table">
+        <section>
             <?php
+
             include_once('../../utils/autoload.php');
+            include_once('../../utils/pagination.php');
 
             spl_autoload_register("autoload");
+            spl_autoload_register("pagination");
 
             use app\controllers\MedicalRecordsController;
 
             $medical_records_controller = new MedicalRecordsController();
 
-            $medical_records_list = $medical_records_controller->allMedicalRecords();
+            if (!isset($_GET['page'])) {
+                $_GET['page'] = "1";
+            }
 
-            if ($medical_records_list != null && is_array($medical_records_list)) {
+            $pagination = pagination($_GET['page'], "5");
+
+            $result = $medical_records_controller->allMedicalRecords($pagination[0], $pagination[1]);
+
+            if ($result != null && !is_string($result)) {
+                $medical_records_list = $result[1];
             ?>
-                <h2>Lista de Prontuários</h2>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Paciente</th>
-                        <th>Resultado (%)</th>
-                        <th>Gravidade</th>
-                        <th>Data de início dos sintomas</th>
-                    </tr>
-                    <?php
-                    foreach ($medical_records_list as $medical_records) {
-                    ?>
+                <div class="table">
+                    <h2>Lista de Prontuários</h2>
+                    <table>
                         <tr>
-                            <td><?php echo ($medical_records->getId()); ?></td>
-                            <td><?php echo ($medical_records->getPatientCpf()); ?></td>
-                            <td><?php echo ($medical_records->getResult()); ?></td>
-                            <td><?php echo ($medical_records->getGravity()); ?></td>
-                            <td><?php echo ($medical_records->getStartDate()); ?></td>
-
+                            <th>ID</th>
+                            <th>Paciente</th>
+                            <th>Resultado (%)</th>
+                            <th>Gravidade</th>
+                            <th>Data de início dos sintomas</th>
                         </tr>
+                        <?php
+                        foreach ($medical_records_list as $medical_records) {
+                        ?>
+                            <tr>
+                                <td><?php echo ($medical_records->getId()); ?></td>
+                                <td><?php echo ($medical_records->getPatientCpf()); ?></td>
+                                <td><?php echo ($medical_records->getResult()); ?></td>
+                                <td><?php echo ($medical_records->getGravity()); ?></td>
+                                <td><?php echo ($medical_records->getStartDate()); ?></td>
+
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </div>
+                <div class="input-block actions">
                     <?php
-                    }
+                    $total = $result[0];
+                    $total_records = $pagination[1];
+                    $position = $pagination[2];
+
+                    printTheButtons($total, $total_records, $position);
                     ?>
-                </table>
+                </div>
             <?php
             } else {
             ?>

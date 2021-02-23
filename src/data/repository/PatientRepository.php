@@ -101,7 +101,7 @@ class PatientRepository
         }
     }
 
-    public function allPatients()
+    public function allPatients($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM patient";
@@ -113,9 +113,17 @@ class PatientRepository
             $result = $stmt->fetchAll();
 
             if ($result != null) {
+                $size = count($result);
+
+                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+
+                $stmt->execute();
+
+                $fetchAll = $stmt->fetchAll();
+
                 $list = [];
 
-                foreach ($result as $row) {
+                foreach ($fetchAll as $row) {
                     $cpf = $row['cpf'];
                     $full_name = $row['full_name'];
                     $genre = $row['genre'];
@@ -146,7 +154,7 @@ class PatientRepository
                     array_push($list, $patient);
                 }
 
-                return $list;
+                return [$size, $list];
             }
 
             $response = "Não foi possível trazer a lista de pacientes";

@@ -28,8 +28,8 @@
         }
 
 
-        public function allPatients(){
-            $result = $this->facade->allPatients();
+        public function allPatients($start, $total_records){
+            $result = $this->facade->allPatients($start, $total_records);
 
             return $result;
         }

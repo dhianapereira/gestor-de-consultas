@@ -37,7 +37,7 @@
                 </h3>
             </a>
         </section>
-        <section class="table">
+        <section>
             <?php
             include_once('../../utils/autoload.php');
             include_once('../../utils/pagination.php');
@@ -53,40 +53,42 @@
                 $_GET['page'] = "1";
             }
 
-            $pagination = pagination($_GET['page']);
+            $pagination = pagination($_GET['page'], "2");
 
             $result =  $medical_appointment_controller->allMedicalAppointments($pagination[0], $pagination[1]);
 
             if ($result != null && !is_string($result)) {
                 $medical_appointment_list = $result[1];
             ?>
-                <h2>Lista de Atendimento</h2>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Paciente</th>
-                        <th>Médico(a)</th>
-                        <th>Sala</th>
-                        <th>Data e Horário</th>
-                        <th>Horário de chegada</th>
-                        <th>Consulta Realizada?</th>
-                    </tr>
-                    <?php
-                    foreach ($medical_appointment_list as $medical_appointment) {
-                    ?>
+                <div class="table">
+                    <h2>Lista de Atendimento</h2>
+                    <table>
                         <tr>
-                            <td><?php echo ($medical_appointment->getId()); ?></td>
-                            <td><?php echo ($medical_appointment->getPatientCpf()); ?></td>
-                            <td><?php echo ($medical_appointment->getIdDoctor()); ?></td>
-                            <td><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " " . $medical_appointment->getIdRoom()[1]); ?></td>
-                            <td><?php echo ($medical_appointment->getDate() . " às " . $medical_appointment->getTime()); ?></td>
-                            <td><?php echo ($medical_appointment->getArrivalTime()); ?></td>
-                            <td><?php echo ($medical_appointment->getStatus()[1]); ?></td>
+                            <th>ID</th>
+                            <th>Paciente</th>
+                            <th>Médico(a)</th>
+                            <th>Sala</th>
+                            <th>Data e Horário</th>
+                            <th>Horário de chegada</th>
+                            <th>Consulta Realizada?</th>
                         </tr>
-                    <?php
-                    }
-                    ?>
-                </table>
+                        <?php
+                        foreach ($medical_appointment_list as $medical_appointment) {
+                        ?>
+                            <tr>
+                                <td><?php echo ($medical_appointment->getId()); ?></td>
+                                <td><?php echo ($medical_appointment->getPatientCpf()); ?></td>
+                                <td><?php echo ($medical_appointment->getIdDoctor()); ?></td>
+                                <td><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " " . $medical_appointment->getIdRoom()[1]); ?></td>
+                                <td><?php echo ($medical_appointment->getDate() . " às " . $medical_appointment->getTime()); ?></td>
+                                <td><?php echo ($medical_appointment->getArrivalTime()); ?></td>
+                                <td><?php echo ($medical_appointment->getStatus()[1]); ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </div>
                 <div class="input-block actions">
                     <?php
                     $total = $result[0];

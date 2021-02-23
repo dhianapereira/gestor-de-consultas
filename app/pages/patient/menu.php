@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/table.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -37,52 +38,72 @@
                 </h3>
             </a>
         </section>
-        <section class="table">
+        <section>
             <?php
             include_once('../../utils/autoload.php');
+            include_once('../../utils/pagination.php');
 
             spl_autoload_register("autoload");
+            spl_autoload_register("pagination");
 
             use app\controllers\PatientController;
 
             $patient_controller = new PatientController();
 
-            $patient_list = $patient_controller->allPatients();
+            if (!isset($_GET['page'])) {
+                $_GET['page'] = "1";
+            }
 
-            if ($patient_list != null && is_array($patient_list)) {
+            $pagination = pagination($_GET['page'], "2");
 
+            $result = $patient_controller->allPatients($pagination[0], $pagination[1]);
+
+            if ($result != null && !is_string($result)) {
+                $patient_list = $result[1];
             ?>
-                <h2>Lista de Pacientes</h2>
-                <table>
-                    <tr>
-                        <th>CPF</th>
-                        <th>Nome Completo</th>
-                        <th>Gênero</th>
-                        <th>Data de nascimento</th>
-                        <th>Nome da Mãe</th>
-                        <th>Acompanhante</th>
-                        <th>Endereço</th>
-                        <th>Naturalidade</th>
-                        <th>Status</th>
-                    </tr>
-                    <?php
-                    foreach ($patient_list as $patient) {
-                    ?>
+                <div class="table">
+
+                    <h2>Lista de Pacientes</h2>
+                    <table>
                         <tr>
-                            <td><?php echo ($patient->getCpf()); ?></td>
-                            <td><?php echo ($patient->getName()); ?></td>
-                            <td><?php echo ($patient->getGenre()); ?></td>
-                            <td><?php echo ($patient->getDateOfBirth()); ?></td>
-                            <td><?php echo ($patient->getMotherName()); ?></td>
-                            <td><?php echo ($patient->getCompanion()); ?></td>
-                            <td><?php echo ($patient->getAddress()); ?></td>
-                            <td><?php echo ($patient->getNaturalness()); ?></td>
-                            <td><?php echo ($patient->getActive()); ?></td>
+                            <th>CPF</th>
+                            <th>Nome Completo</th>
+                            <th>Gênero</th>
+                            <th>Data de nascimento</th>
+                            <th>Nome da Mãe</th>
+                            <th>Acompanhante</th>
+                            <th>Endereço</th>
+                            <th>Naturalidade</th>
+                            <th>Status</th>
                         </tr>
+                        <?php
+                        foreach ($patient_list as $patient) {
+                        ?>
+                            <tr>
+                                <td><?php echo ($patient->getCpf()); ?></td>
+                                <td><?php echo ($patient->getName()); ?></td>
+                                <td><?php echo ($patient->getGenre()); ?></td>
+                                <td><?php echo ($patient->getDateOfBirth()); ?></td>
+                                <td><?php echo ($patient->getMotherName()); ?></td>
+                                <td><?php echo ($patient->getCompanion()); ?></td>
+                                <td><?php echo ($patient->getAddress()); ?></td>
+                                <td><?php echo ($patient->getNaturalness()); ?></td>
+                                <td><?php echo ($patient->getActive()); ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </div>
+                <div class="input-block actions">
                     <?php
-                    }
+                    $total = $result[0];
+                    $total_records = $pagination[1];
+                    $position = $pagination[2];
+
+                    printTheButtons($total, $total_records, $position);
                     ?>
-                </table>
+                </div>
             <?php
             } else {
             ?>

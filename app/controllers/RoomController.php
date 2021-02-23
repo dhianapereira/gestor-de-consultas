@@ -24,8 +24,8 @@
             return $result;
         }
 
-        public function allRooms(){
-            $result = $this->room_service->allRooms();
+        public function allRooms($start, $total_records){
+            $result = $this->room_service->allRooms($start, $total_records);
                 
             return $result;
         }
