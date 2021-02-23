@@ -23,8 +23,10 @@
     session_start();
 
     include_once('../utils/autoload.php');
+    include_once('../utils/pagination.php');
 
     spl_autoload_register("autoload");
+    spl_autoload_register("pagination");
 
     use app\controllers\MedicalAppointmentController;
     ?>
@@ -76,19 +78,13 @@
       $medical_appointment_controller = new MedicalAppointmentController();
 
 
-      $total_records = "2";
-
-      $page = $_GET['page'];
-      if (!$page) {
-        $position = "1";
-      } else {
-        $position = $page;
+      if (!isset($_GET['page'])) {
+        $_GET['page'] = "1";
       }
 
-      $start = $position - 1;
-      $start = $start * $total_records;
+      $pagination = pagination($_GET['page']);
 
-      $result = $medical_appointment_controller->allMedicalAppointments($start, $total_records);
+      $result = $medical_appointment_controller->allMedicalAppointments($pagination[0], $pagination[1]);
 
       if ($result != null && !is_string($result)) {
         $medical_appointment_list = $result[1];
@@ -123,24 +119,11 @@
         <div class="input-block actions">
           <?php
           $total = $result[0];
+          $total_records = $pagination[1];
+          $position = $pagination[2];
 
-          $total_pages = $total / $total_records;
-
-          $previous = $position - 1;
-          $next = $position + 1;
-
-          if ($position > 1) {
+          printTheButtons($total, $total_records, $position);
           ?>
-            <a class="button" href="?page=<?php echo ($previous) ?>">
-              <- Anterior</a>
-              <?php
-            }
-            if ($position < $total_pages) {
-              ?>
-                <a class="button" href="?page=<?php echo ($next) ?>"> Próxima -> </a>
-              <?php
-            }
-              ?>
         </div>
       <?php
       } else {
