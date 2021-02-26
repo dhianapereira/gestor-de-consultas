@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/form.css" />
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
   <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
+  <link rel="stylesheet" type="text/css" href="../../../public/styles/css/select.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -51,14 +52,15 @@
           <?php
           include_once('../../utils/autoload.php');
           include_once('../../utils/months.php');
+
           spl_autoload_register("autoload");
 
           use app\components\SelectionBox;
 
-          SelectionBox::months("Meses", $months, $days, "months");
+          SelectionBox::months($months, $days);
 
           ?>
-          <script src="../../../public/scripts/selection_box.js"></script> 
+
           <button type="submit" class="primary-button">Confirmar</button>
         </form>
       </div>
@@ -66,7 +68,7 @@
   </main>
 
   <footer>
-    <p>2021 - unidade de Saúde</p>
+    <p>2021 - Unidade de Saúde</p>
   </footer>
 </body>
 

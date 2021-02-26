@@ -33,7 +33,7 @@
             <a href="./list_page.php" class="home-button">
                 <h3>
                     <p>Listar Prontuários</p>
-                    <img src="../../../public/styles/img/medical-records-list.svg" alt="imagem da lita de prontuários" />
+                    <img src="../../../public/styles/img/medical-records-list.svg" alt="imagem da lista de prontuários" />
                 </h3>
             </a>
             <a href="./search_medical_records.html" class="home-button">
@@ -50,9 +50,18 @@
 
             </a>
         </section>
-        <section class="table">
+        <section>
+            <?php
+            include_once('../../utils/autoload.php');
+            include_once('../../utils/pagination.php');
 
+            spl_autoload_register("autoload");
+            spl_autoload_register("pagination");
 
+            $total_days = intval($_POST["months"]);
+
+            echo ($total_days);
+            ?>
 
         </section>
     </main>

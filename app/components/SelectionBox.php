@@ -4,32 +4,26 @@ namespace app\components;
 
 class SelectionBox
 {
-    public static function months($title, $months_list, $days_list, $name)
+    public static function months($months, $days)
     {
 ?>
         <div class="custom-select">
-            <select name="<?php echo ($name); ?>" required>
-                <option disabled selected><?php echo ($title); ?> </option>
+            <select id="months" name="months" required>
+                <option disabled selected>Escolha o mês</option>
                 <?php
-
-                foreach ($months_list as $month) {
-                    foreach ($days_list as $days) {
-
-
+                $size = count($months);
+                for ($i = 0; $i < $size; $i++) {
                 ?>
-                        <option value="<?php echo ($days); ?>"><?php echo ($month); ?></option>
+                    <option value="<?php echo ($days[$i]); ?>"><?php echo ($months[$i]); ?></option>
                 <?php
-                    break;
-                    }
-                    
                 }
                 ?>
-                
+
             </select>
-            
 
         </div>
-           
+
+        <script src="../../../public/scripts/selection_box.js"></script>
 <?php
 
     }
