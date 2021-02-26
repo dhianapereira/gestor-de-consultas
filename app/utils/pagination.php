@@ -24,11 +24,9 @@ function printTheButtons($total, $total_records, $position)
     $next = $position + 1;
 
     if ($position > 1) {
-        $previous_button = new Button("<- Anterior", "button", $previous);
-        $previous_button->getButton();
+        Button::show("<- Anterior", "button", $previous);
     }
     if ($position < $total_pages) {
-        $next_button = new Button("Próxima ->", "button", $next);
-        $next_button->getButton();
+        Button::show("Próxima ->", "button", $next);
     }
 }
