@@ -58,9 +58,12 @@
             spl_autoload_register("autoload");
             spl_autoload_register("pagination");
 
-            $total_days = intval($_POST["months"]);
+            $month = explode(' ', $_POST["months"]);
 
-            echo ($total_days);
+            $total_days = intval($month[0]);
+            $month_in_number = intval($month[1]);
+
+            echo ("Total de dias: " . $total_days . " " . "Mês: " . $month_in_number);
             ?>
 
         </section>
