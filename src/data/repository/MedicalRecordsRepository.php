@@ -143,4 +143,14 @@ class MedicalRecordsRepository
             $this->conn->disconnect();
         }
     }
+    public function listOfSymptomsByMonth(){
+            try{
+                    
+
+            }
+            catch(\Exception $e){
+
+
+            }
+    }
 }

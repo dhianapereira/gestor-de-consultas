@@ -46,7 +46,7 @@
           <img src="../../../public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
         </h3>
       </a>
-      <a href="./search_by_month.html" class="home-button">
+      <a href="./search_by_month.php" class="home-button">
         <h3>
           <p>Sintomas mais recorrentes</p>
           <img src="../../../public/styles/img/search.svg" alt="Imagem da pesquisa por sintomas mais recorrentes" />
