@@ -51,13 +51,13 @@
         <form method="POST" action="symptoms_list.php">
           <?php
           include_once('../../utils/autoload.php');
-          include_once('../../utils/months.php');
+          include_once('../../utils/constants.php');
 
           spl_autoload_register("autoload");
 
           use app\components\SelectionBox;
 
-          SelectionBox::months($months, $days);
+          SelectionBox::months($months);
 
           ?>
 

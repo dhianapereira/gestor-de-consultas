@@ -4,17 +4,17 @@ namespace app\components;
 
 class SelectionBox
 {
-    public static function months($months, $days)
+    public static function months($months)
     {
 ?>
         <div class="custom-select">
             <select id="months" name="months" required>
                 <option disabled selected>Escolha o mês</option>
                 <?php
-                $size = count($months);
+                $size = count($months["months"]);
                 for ($i = 0; $i < $size; $i++) {
                 ?>
-                    <option value="<?php echo ($days[$i]); ?>"><?php echo ($months[$i]); ?></option>
+                    <option value="<?php echo ($months["days"][$i]); ?>"><?php echo ($months["months"][$i]); ?></option>
                 <?php
                 }
                 ?>
