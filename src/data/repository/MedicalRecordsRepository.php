@@ -145,56 +145,65 @@ class MedicalRecordsRepository
     }
     public function listOfSymptomsByMonth($total_days, $month_in_number)
     {
-
         try {
-            $initial_date = "20210" . $month_in_number . "01";
-            $final_date = "20210" . $month_in_number . $total_days;
+            $initial_date = "2021" . $month_in_number . "01";
+            $final_date = "2021" . $month_in_number . $total_days;
 
             $sql = "SELECT MAX(amount) as larger 
                 FROM (
-                    SELECT count(s.name) as amount 
-                    FROM patient as p 
-                    INNER JOIN medical_records as mr on (p.cpf = mr.cpf_patient_fk) 
-                    INNER JOIN symptom as s on (s.cpf_patient_fk = p.cpf) 
-                    WHERE mr.start_date between (?) and (?) 
-                    GROUP BY s.name
+                    SELECT count(S.name) as amount 
+                    FROM patient as P 
+                    INNER JOIN medical_records as MR on (P.cpf = MR.cpf_patient_fk) 
+                    INNER JOIN symptom as S on (S.cpf_patient_fk = P.cpf) 
+                    WHERE MR.start_date between ? and ? 
+                    GROUP BY S.name
                 ) as repeated";
-    
-    
 
             $stmt = $this->conn->getConnection()->prepare($sql);
-    
-            $stmt->bind_param('ss',$initial_date,$final_date);
-            
+
+            $stmt->bindParam(1, $initial_date);
+            $stmt->bindParam(2, $final_date);
+
             $stmt->execute();
-            
-            $larger = $stmt->get_result();
-            
+            $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+
+            $larger = $stmt->fetch();
+
             if ($larger != null) {
                 $sql = "SELECT symptom FROM (
                             SELECT count(S.name) as amount, S.name as symptom 
                             FROM patient as P 
                                 INNER JOIN medical_records as MR on (P.cpf = MR.cpf_patient_fk) 
                                 INNER JOIN symptom as S on (S.cpf_patient_fk = P.cpf) 
-                            WHERE MR.start_date between $initial_date and $final_date
+                            WHERE MR.start_date between ? and ?
                             GROUP BY S.name) as larger
-                            WHERE amount = $larger ";
+                            WHERE amount = ?";
 
                 $stmt = $this->conn->getConnection()->prepare($sql);
-    
-                $stmt->bind_param('ss',$initial_date,$final_date);
+
+                $stmt->bindParam(1, $initial_date);
+                $stmt->bindParam(2, $final_date);
+                $stmt->bindParam(3, $larger['larger']);
 
                 $stmt->execute();
 
-                $symptom = $stmt->get_result();
-                
-                if ($symptom != null) {
-                    $percentage = $larger * 100 / 15;
+                $stmt->setFetchMode(\PDO::FETCH_ASSOC);
 
-                    return [$symptom, $percentage];
+                $symptom = $stmt->fetch();
+
+                if ($symptom != null) {
+                    $percentage =  intval($larger['larger']) * 100 / 15;
+
+                    return [$symptom['symptom'], number_format($percentage, 2)];
                 }
+
+                $response = "Não foi possível 333realizar esta operação";
+
+                return $response;
             }
+
             $response = "Não foi possível realizar esta operação";
+
             return $response;
         } catch (\Exception $e) {
 

@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0" />
     <link rel="shortcut icon" href="../../../public/styles/img/doctors-list.svg" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/form.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
     <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -53,25 +52,36 @@
         <section>
             <?php
             include_once('../../utils/autoload.php');
-            include_once('../../utils/pagination.php');
 
             spl_autoload_register("autoload");
-            spl_autoload_register("pagination");
+
             use app\controllers\MedicalRecordsController;
-            use app\models\MedicalRecords;
+            use app\components\MessageContainer;
 
             $medical_records_controller = new MedicalRecordsController();
 
-            $month = explode(' ', $_POST["months"]);
+            if (isset($_POST["months"])) {
 
-            $total_days = intval($month[0]);
-            $month_in_number = intval($month[1]);
+                $month = explode(' ', $_POST["months"]);
 
-            $medical_records_controller = new MedicalRecordsController();
-            $result = $medical_records_controller->listOfSymptomsByMonth($total_days,$month_in_number);
+                $total_days = intval($month[0]);
 
-            echo("sintoma mais constado no mês:". $result);
-        
+                $month_in_number = strlen($month[1]) < 2 ? "0$month[1]" : $month[1];
+
+                $month_name = $month[2];
+
+                $medical_records_controller = new MedicalRecordsController();
+
+                $result = $medical_records_controller->listOfSymptomsByMonth($total_days, $month_in_number);
+
+                if ($result != null && !is_string($result)) {
+                    MessageContainer::successMessage("Sintoma mais recorrente com porcentagem de $result[1]%", "../../../public/styles/img/success.svg", "O sintoma mais recorrente no mês de $month_name foi:<br>$result[0]");
+                } else {
+                    MessageContainer::errorMessage("Não há sintomas recorrentes", "../../../public/styles/img/error.svg", "Não há nenhum sintoma recorrente no mês de $month_name.");
+                }
+            } else {
+                MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../public/styles/img/error.svg", "Você precisa escolher um mês para visualizar o sintoma mais recorrente.");
+            }
             ?>
 
         </section>

@@ -15,9 +15,9 @@ class SelectionBox
                 $size = count($months["months"]);
                 for ($i = 0; $i < $size; $i++) {
                 ?>
-                    <option value="<?php $value = $months["days"][$i] . ' ' . ($i + 1);
+                    <option value="<?php $value = $months["days"][$i] . ' ' . ($i + 1) . ' ' . $months["months"][$i];
                                     echo ($value); ?>"><?php echo ($months["months"][$i]); ?></option>
-               <?php
+                <?php
                 }
                 ?>
 
