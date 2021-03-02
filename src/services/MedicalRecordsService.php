@@ -23,5 +23,13 @@
 
             return $result;
         }
-    }
+    
+        public function listOfSymptomsByMonth($total_days, $month_in_number)
+        {
+
+            $result = $this->facade->listOfSymptomsByMonth($total_days, $month_in_number);
+
+            return $result;
+        }
+        }
 ?>

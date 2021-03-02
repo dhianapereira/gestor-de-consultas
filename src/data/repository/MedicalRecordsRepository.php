@@ -143,14 +143,64 @@ class MedicalRecordsRepository
             $this->conn->disconnect();
         }
     }
-    public function listOfSymptomsByMonth(){
-            try{
-                    
+    public function listOfSymptomsByMonth($total_days, $month_in_number)
+    {
 
+        try {
+            $initial_date = "20210" . $month_in_number . "01";
+            $final_date = "20210" . $month_in_number . $total_days;
+
+            $sql = "SELECT MAX(amount) as larger 
+                FROM (
+                    SELECT count(s.name) as amount 
+                    FROM patient as p 
+                    INNER JOIN medical_records as mr on (p.cpf = mr.cpf_patient_fk) 
+                    INNER JOIN symptom as s on (s.cpf_patient_fk = p.cpf) 
+                    WHERE mr.start_date between (?) and (?) 
+                    GROUP BY s.name
+                ) as repeated";
+    
+    
+
+            $stmt = $this->conn->getConnection()->prepare($sql);
+    
+            $stmt->bind_param('ss',$initial_date,$final_date);
+            
+            $stmt->execute();
+            
+            $larger = $stmt->get_result();
+            
+            if ($larger != null) {
+                $sql = "SELECT symptom FROM (
+                            SELECT count(S.name) as amount, S.name as symptom 
+                            FROM patient as P 
+                                INNER JOIN medical_records as MR on (P.cpf = MR.cpf_patient_fk) 
+                                INNER JOIN symptom as S on (S.cpf_patient_fk = P.cpf) 
+                            WHERE MR.start_date between $initial_date and $final_date
+                            GROUP BY S.name) as larger
+                            WHERE amount = $larger ";
+
+                $stmt = $this->conn->getConnection()->prepare($sql);
+    
+                $stmt->bind_param('ss',$initial_date,$final_date);
+
+                $stmt->execute();
+
+                $symptom = $stmt->get_result();
+                
+                if ($symptom != null) {
+                    $percentage = $larger * 100 / 15;
+
+                    return [$symptom, $percentage];
+                }
             }
-            catch(\Exception $e){
+            $response = "Não foi possível realizar esta operação";
+            return $response;
+        } catch (\Exception $e) {
 
-
-            }
+            return "Exception: $e";
+        } finally {
+            $this->conn->disconnect();
+        }
     }
 }

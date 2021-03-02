@@ -22,5 +22,13 @@
                 
             return $result;
         }
+            
+        public function listOfSymptomsByMonth($total_days, $month_in_number)
+        {
+
+            $result = $this->medical_records_service->listOfSymptomsByMonth($total_days, $month_in_number);
+
+            return $result;
+        }
     }
 ?>

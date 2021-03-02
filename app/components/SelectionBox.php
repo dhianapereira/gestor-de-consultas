@@ -17,7 +17,7 @@ class SelectionBox
                 ?>
                     <option value="<?php $value = $months["days"][$i] . ' ' . ($i + 1);
                                     echo ($value); ?>"><?php echo ($months["months"][$i]); ?></option>
-                <?php
+               <?php
                 }
                 ?>
 

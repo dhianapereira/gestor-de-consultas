@@ -118,6 +118,15 @@ class Facade
         return $result;
     }
 
+
+    public function listOfSymptomsByMonth($total_days, $month_in_number)
+    {
+
+        $result = $this->medical_records_repository->listOfSymptomsByMonth($total_days,$month_in_number);
+
+        return $result;
+    }
+
     public function fetchSymptoms($cpf)
     {
         $result = $this->symptom_repository->fetchSymptoms($cpf);

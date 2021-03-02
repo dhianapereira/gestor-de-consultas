@@ -76,6 +76,7 @@
     </section>
     <section>
       <?php
+      
       $medical_appointment_controller = new MedicalAppointmentController();
 
 

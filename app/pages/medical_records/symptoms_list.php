@@ -57,13 +57,21 @@
 
             spl_autoload_register("autoload");
             spl_autoload_register("pagination");
+            use app\controllers\MedicalRecordsController;
+            use app\models\MedicalRecords;
+
+            $medical_records_controller = new MedicalRecordsController();
 
             $month = explode(' ', $_POST["months"]);
 
             $total_days = intval($month[0]);
             $month_in_number = intval($month[1]);
 
-            echo ("Total de dias: " . $total_days . " " . "Mês: " . $month_in_number);
+            $medical_records_controller = new MedicalRecordsController();
+            $result = $medical_records_controller->listOfSymptomsByMonth($total_days,$month_in_number);
+
+            echo("sintoma mais constado no mês:". $result);
+        
             ?>
 
         </section>
