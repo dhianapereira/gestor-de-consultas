@@ -3,26 +3,44 @@ require_once "src/services/UserService.php";
 
 class UserController
 {
-    public static function register(
-        $cpf,
-        $name,
-        $genre,
-        $date_of_birth,
-        $naturalness,
-        $address,
-        $responsibility
-    ) {
-        $result = UserService::register(
-            $cpf,
-            $name,
-            $genre,
-            $date_of_birth,
-            $naturalness,
-            $address,
-            $responsibility
-        );
+    public static function register()
+    {
+        $cpf = $_POST["cpf"];
+        $name = $_POST["name"];
+        $genre = $_POST["genre"];
+        $date_of_birth = $_POST["date_of_birth"];
+        $address = $_POST["address"];
+        $naturalness = $_POST["naturalness"];
+        $responsibility = $_POST["responsibility"];
 
-        return $result;
+        if (
+            !isset($cpf) || !isset($name)
+            || !isset($genre) || !isset($date_of_birth)
+            || !isset($responsibility)
+            || !isset($address) || !isset($naturalness)
+        ) {
+            $_SESSION['errorMessage'] =  "Você precisa preencher todos os campos para realizar esta operação!";
+            require_once "app/pages/user/register/index.php";
+        } else {
+
+            $result = UserService::register(
+                $cpf,
+                $name,
+                $genre,
+                $date_of_birth,
+                $naturalness,
+                $address,
+                $responsibility
+            );
+
+            if (!is_bool($result)) {
+                $_SESSION['errorMessage'] =  $result;
+                require_once "app/pages/user/register/index.php";
+            } else {
+                $_SESSION['successMessage'] =  "O cadastro do funcionário foi realizado com sucesso!";
+                require_once "app/pages/user/register/index.php";
+            }
+        }
     }
 
     public static function update($user)

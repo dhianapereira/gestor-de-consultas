@@ -85,24 +85,4 @@ class User
         $this->password = $password;
         $this->active = $active;
     }
-
-    public function user(
-        $cpf,
-        $name,
-        $genre,
-        $date_of_birth,
-        $naturalness,
-        $address,
-        $responsibility,
-        $active
-    ) {
-        $this->cpf = $cpf;
-        $this->name = $name;
-        $this->genre = $genre;
-        $this->date_of_birth = $date_of_birth;
-        $this->naturalness = $naturalness;
-        $this->address = $address;
-        $this->responsibility = $responsibility;
-        $this->active = $active;
-    }
 }
