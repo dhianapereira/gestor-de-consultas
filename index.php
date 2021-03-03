@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "app/utils/autoload.php";
 
 if (isset($_GET["page"])) {
   require_once "app/pages/" . $_GET["page"] . "/index.php";

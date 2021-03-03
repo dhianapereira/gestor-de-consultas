@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION["loggedUser"])) {
+    header("Location: ./");
+}
+?>
+
 <html>
 
 <head>

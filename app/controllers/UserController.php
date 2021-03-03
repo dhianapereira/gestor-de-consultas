@@ -1,11 +1,4 @@
 <?php
-
-namespace app\controllers;
-
-require_once('../utils/autoload.php');
-
-spl_autoload_register("autoload");
-
 use src\services\UserService;
 use app\components\MessageContainer;
 
@@ -76,7 +69,6 @@ class UserController
 
                 MessageContainer::errorMessage("Erro ao tentar acessar a plataforma", "../../../../public/styles/img/error.svg", "O usuário inserido não possui permissão para acessar a plataforma.");
             } else {
-                session_start();
                 $_SESSION["loggedUser"] = serialize($result);
                 $_SESSION['responsibility'] = $result->getResponsibility();
 
@@ -94,5 +86,12 @@ class UserController
         $result = $this->user_service->save($cpf, $username, $password);
 
         return $result;
+    }
+
+    public function logout()
+    {
+        $_SESSION["loggedUser"] = null;
+
+        header("Location: ./");
     }
 }

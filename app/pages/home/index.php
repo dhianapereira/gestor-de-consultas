@@ -73,6 +73,9 @@
           <img src="./public/styles/img/update-patient.svg" alt="Imagem de funcionário" />
         </h3>
       </a>
+      <a href="?class=User&action=logout" class="home-button">
+        Sair
+      </a>
     </section>
     <section>
       <?php
