@@ -1,3 +1,12 @@
+<?php
+require_once('app/utils/autoload.php');
+
+spl_autoload_register("autoload");
+
+use app\controllers\UserController;
+use app\components\MessageContainer;
+?>
+
 <html>
 
 <head>
@@ -21,7 +30,7 @@
     <section class="up">
       <div class="form">
         <h2>Entrar</h2>
-        <form method="POST" action="login.php">
+        <form method="POST" action="?class=User&action=singIn">
           <div class="input-block">
             <label for="username">LOGIN</label>
             <input id="username" name="username" required />

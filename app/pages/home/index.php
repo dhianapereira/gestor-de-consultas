@@ -4,12 +4,12 @@
   <title>Unidade de Saúde</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="../../public/styles/img/doctors-list.svg" type="image/x-icon" />
-  <link rel="stylesheet" type="text/css" href="../../public/styles/css/main.css" />
-  <link rel="stylesheet" type="text/css" href="../../public/styles/css/home.css" />
-  <link rel="stylesheet" type="text/css" href="../../public/styles/css/table.css" />
-  <link rel="stylesheet" type="text/css" href="../../public/styles/css/card.css" />
-  <link rel="stylesheet" type="text/css" href="../../public/styles/css/buttons.css" />
+  <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="./public/styles/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
+  <link rel="stylesheet" type="text/css" href="./public/styles/css/table.css" />
+  <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
+  <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -22,8 +22,8 @@
 
     session_start();
 
-    include_once('../utils/autoload.php');
-    include_once('../utils/pagination.php');
+    include_once('app/utils/autoload.php');
+    include_once('app/utils/pagination.php');
 
     spl_autoload_register("autoload");
     spl_autoload_register("pagination");
@@ -32,34 +32,34 @@
     use app\components\MessageContainer;
     ?>
     <section class="quick-access">
-      <a href="./patient/menu.php" class="home-button">
+      <a href="?page=patient/menu" class="home-button">
         <h3>
           <p>Paciente</p>
-          <img src="../../public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
+          <img src="./public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
         </h3>
       </a>
       <a href="./doctor/menu.php" class="home-button">
         <h3>
           <p>Médico</p>
-          <img src="../../public/styles/img/doctor.svg" alt="Imagem de médico" />
+          <img src="./public/styles/img/doctor.svg" alt="Imagem de médico" />
         </h3>
       </a>
       <a href="./medical_appointment/menu.php" class="home-button">
         <h3>
           <p>Consultas</p>
-          <img src="../../public/styles/img/make-an-appointment.svg" alt="Imagem de consulta" />
+          <img src="./public/styles/img/make-an-appointment.svg" alt="Imagem de consulta" />
         </h3>
       </a>
       <a href="./medical_records/menu.php" class="home-button">
         <h3>
           <p>Prontuários</p>
-          <img src="../../public/styles/img/medical-records-list.svg" alt="Imagem de prontuário" />
+          <img src="./public/styles/img/medical-records-list.svg" alt="Imagem de prontuário" />
         </h3>
       </a>
       <a href="./room/menu.php" class="home-button">
         <h3>
           <p>Salas</p>
-          <img src="../../public/styles/img/medical-room.svg" alt="Imagem de salas" />
+          <img src="./public/styles/img/medical-room.svg" alt="Imagem de salas" />
         </h3>
       </a>
       <?php
@@ -70,13 +70,13 @@
       <a style="<?php echo ($display) ?>" href="./user/menu.php" id="restricted-access" class="home-button">
         <h3>
           <p>Funcionários</p>
-          <img src="../../public/styles/img/update-patient.svg" alt="Imagem de funcionário" />
+          <img src="./public/styles/img/update-patient.svg" alt="Imagem de funcionário" />
         </h3>
       </a>
     </section>
     <section>
       <?php
-      
+
       $medical_appointment_controller = new MedicalAppointmentController();
 
 
@@ -124,7 +124,7 @@
           </div>
         <?php
         } else {
-          MessageContainer::errorMessage("A lista de atendimento está vazia", "../../public/styles/img/error.svg", "Não há mais registros de consulta.");
+          MessageContainer::errorMessage("A lista de atendimento está vazia", "./public/styles/img/error.svg", "Não há mais registros de consulta.");
         }
         ?>
         <div class="input-block actions">
@@ -138,7 +138,7 @@
         </div>
       <?php
       } else {
-        MessageContainer::errorMessage("A lista de atendimento está vazia", "../../public/styles/img/error.svg", "Ainda não há nenhuma consulta marcada.");
+        MessageContainer::errorMessage("A lista de atendimento está vazia", "./public/styles/img/error.svg", "Ainda não há nenhuma consulta marcada.");
       }
       ?>
     </section>

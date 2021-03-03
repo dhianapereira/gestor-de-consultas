@@ -2,7 +2,12 @@
 
 namespace app\controllers;
 
+require_once('../utils/autoload.php');
+
+spl_autoload_register("autoload");
+
 use src\services\UserService;
+use app\components\MessageContainer;
 
 class UserController
 {
@@ -59,12 +64,28 @@ class UserController
         return $result;
     }
 
-    public function signIn($username, $password)
+    public function signIn()
     {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
 
-        $result = $this->user_service->signIn($username, $password);
+        if (isset($username) && isset($password)) {
+            $result = $this->user_service->signIn($username, $password);
 
-        return $result;
+            if ($result == null || !is_object($result)) {
+
+                MessageContainer::errorMessage("Erro ao tentar acessar a plataforma", "../../../../public/styles/img/error.svg", "O usuário inserido não possui permissão para acessar a plataforma.");
+            } else {
+                session_start();
+                $_SESSION["loggedUser"] = serialize($result);
+                $_SESSION['responsibility'] = $result->getResponsibility();
+
+                header("Location: ./");
+            }
+        } else {
+            MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../../public/styles/img/error.svg", "Você precisa inserir o username e a senha para acessar a plataforma!");
+        }
+        require_once "app/pages/index.php";
     }
 
     public function save($cpf, $username, $password)

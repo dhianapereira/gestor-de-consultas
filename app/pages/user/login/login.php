@@ -39,8 +39,10 @@
 
                     MessageContainer::errorMessage("Erro ao tentar acessar a plataforma", "../../../../public/styles/img/error.svg", "O usuário inserido não possui permissão para acessar a plataforma.");
                 } else {
+                    $_SESSION["loggedUser"] = serialize($result);
                     $_SESSION['responsibility'] = $result->getResponsibility();
-                    header('Location:../../home_page.php');
+
+                    header("Location: ./");
                 }
             } else {
                 MessageContainer::errorMessage("Não foi possível realizar esta operação", "../../../../public/styles/img/error.svg", "Você precisa inserir o username e a senha para acessar a plataforma!");
