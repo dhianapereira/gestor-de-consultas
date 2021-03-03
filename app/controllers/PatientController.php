@@ -1,19 +1,9 @@
 <?php
-
-namespace app\controllers;
-
-use src\services\PatientService;
+require_once "src/services/PatientService.php";
 
 class PatientController
 {
-    private $patient_service;
-
-    public function __construct()
-    {
-        $this->patient_service =  new PatientService();
-    }
-
-    public function register(
+    public static function register(
         $cpf,
         $full_name,
         $genre,
@@ -24,7 +14,7 @@ class PatientController
         $naturalness
     ) {
 
-        $result = $this->patient_service->register(
+        $result = PatientService::register(
             $cpf,
             $full_name,
             $genre,
@@ -38,26 +28,24 @@ class PatientController
         return $result;
     }
 
-    public function update($patient)
+    public static function update($patient)
     {
-
-        $result = $this->patient_service->update($patient);
+        $result = PatientService::update($patient);
 
         return $result;
     }
 
 
-    public function allPatients($start, $total_records)
+    public static function allPatients($start, $total_records)
     {
-        $result = $this->patient_service->allPatients($start, $total_records);
+        $result = PatientService::allPatients($start, $total_records);
 
         return $result;
     }
 
-    public function fetchPatient($cpf)
+    public static function fetchPatient($cpf)
     {
-
-        $result = $this->patient_service->fetchPatient($cpf);
+        $result = PatientService::fetchPatient($cpf);
 
         return $result;
     }

@@ -1,21 +1,10 @@
 <?php
-
-namespace src\data\repository;
-
-use src\data\repository\Connection;
-use app\models\Patient;
+require_once "src/data/repository/Connection.php";
+require_once "app/models/Patient.php";
 
 class PatientRepository
 {
-
-    private $conn;
-
-    public function __construct()
-    {
-        $this->conn = new Connection();
-    }
-
-    public function register(
+    public static function register(
         $cpf,
         $full_name,
         $genre,
@@ -34,7 +23,7 @@ class PatientRepository
                     :mother_name, :companion, :address, :naturalness
                 )";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf' => $cpf,
@@ -59,12 +48,10 @@ class PatientRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function update($patient)
+    public static function update($patient)
     {
         try {
             $sql = "UPDATE patient SET full_name = :full_name, date_of_birth = :date_of_birth, 
@@ -72,7 +59,7 @@ class PatientRepository
                     address = :address, naturalness = :naturalness, active = :active
                     WHERE cpf = :cpf";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf' => $patient->getCpf(),
@@ -96,30 +83,28 @@ class PatientRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function allPatients($start, $total_records)
+    public static function allPatients($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM patient";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute();
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $size = count($result);
 
-                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+                $stmt = Connection::connect()->prepare("$sql LIMIT $start, $total_records");
 
                 $stmt->execute();
 
-                $fetchAll = $stmt->fetchAll();
+                $fetchAll = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
                 $list = [];
 
@@ -162,23 +147,21 @@ class PatientRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function fetchPatient($cpf)
+    public static function fetchPatient($cpf)
     {
         try {
             $sql = "SELECT * FROM patient WHERE cpf = :cpf";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':cpf' => $cpf,
             ));
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $full_name = $result[0]['full_name'];
@@ -210,8 +193,6 @@ class PatientRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 }
