@@ -3,6 +3,7 @@
 require_once "src/data/repository/UserRepository.php";
 require_once "src/data/repository/MedicalAppointmentRepository.php";
 require_once "src/data/repository/PatientRepository.php";
+require_once "src/data/repository/DoctorRepository.php";
 
 class Facade
 {
@@ -51,6 +52,43 @@ class Facade
     public static function fetchPatient($cpf)
     {
         $result = PatientRepository::fetchPatient($cpf);
+
+        return $result;
+    }
+
+    // Doctor Operations
+
+    public static function registerDoctor($name, $genre, $specialty)
+    {
+        $result = DoctorRepository::register($name, $genre, $specialty);
+
+        return $result;
+    }
+
+    public static function updateDoctor($doctor)
+    {
+        $result = DoctorRepository::update($doctor);
+
+        return $result;
+    }
+
+    public static function allDoctors($start, $total_records)
+    {
+        $result = DoctorRepository::allDoctors($start, $total_records);
+
+        return $result;
+    }
+
+    public static function listOfSpecialties()
+    {
+        $result = DoctorRepository::listOfSpecialties();
+
+        return $result;
+    }
+
+    public static function fetchDoctor($id)
+    {
+        $result = DoctorRepository::fetchDoctor($id);
 
         return $result;
     }

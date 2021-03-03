@@ -25,6 +25,7 @@ if (!isset($_SESSION["loggedUser"])) {
   <main class="container">
     <?php
     require_once "app/utils/pagination.php";
+    require_once "app/controllers/DoctorController.php";
     require_once "app/components/MessageContainer.php";
     ?>
     <section class="quick-access">
@@ -55,7 +56,10 @@ if (!isset($_SESSION["loggedUser"])) {
 
       $pagination = pagination($_GET['index'], "2");
 
-      $result = $doctor_controller->allDoctors($pagination[0], $pagination[1]);
+      $start = $pagination[0];
+      $total_records = $pagination[1];
+
+      $result = DoctorController::allDoctors($start, $total_records);
 
       if ($result != null && !is_string($result)) {
         $doctor_list = $result[1];
@@ -97,10 +101,9 @@ if (!isset($_SESSION["loggedUser"])) {
         <div class="input-block actions">
           <?php
           $total = $result[0];
-          $total_records = $pagination[1];
           $position = $pagination[2];
 
-          printTheButtons($total, $total_records, $position);
+          printTheButtons($total, $total_records, $position, "doctor/menu");
           ?>
         </div>
       <?php

@@ -1,27 +1,16 @@
 <?php
-
-namespace src\data\repository;
-
-use src\data\repository\Connection;
-use app\models\Doctor;
+require_once "src/data/repository/Connection.php";
+require_once "app/models/Doctor.php";
 
 class DoctorRepository
 {
-
-    private $conn;
-
-    public function __construct()
-    {
-        $this->conn = new Connection();
-    }
-
-    public function register($name, $genre, $specialty)
+    public static function register($name, $genre, $specialty)
     {
         try {
             $sql = "INSERT INTO doctor (name, genre, specialty) 
                 VALUES (:name, :genre, :specialty)";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':name' => $name,
@@ -39,19 +28,16 @@ class DoctorRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 
-    public function update($doctor)
+    public static function update($doctor)
     {
         try {
             $sql = "UPDATE doctor SET name = :name, genre = :genre, specialty = :specialty,
                     active = :active WHERE id = :id";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':id' => $doctor->getId(),
@@ -71,30 +57,27 @@ class DoctorRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 
-    public function allDoctors($start, $total_records)
+    public static function allDoctors($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM doctor";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute();
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $size = count($result);
-                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+                $stmt = Connection::connect()->prepare("$sql LIMIT $start, $total_records");
 
                 $stmt->execute();
 
-                $fetchAll = $stmt->fetchAll();
+                $fetchAll = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
                 $list = [];
 
@@ -123,22 +106,19 @@ class DoctorRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 
-    public function listOfSpecialties()
+    public static function listOfSpecialties()
     {
         try {
             $sql = "SELECT specialty FROM doctor";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute();
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 return $result;
@@ -149,24 +129,21 @@ class DoctorRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 
-    public function fetchDoctor($id)
+    public static function fetchDoctor($id)
     {
         try {
             $sql = "SELECT * FROM doctor WHERE id = :id";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':id' => $id,
             ));
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $name = $result[0]['name'];
@@ -184,9 +161,6 @@ class DoctorRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 }

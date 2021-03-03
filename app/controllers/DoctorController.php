@@ -1,46 +1,41 @@
 <?php
-    namespace app\controllers;
-    use src\services\DoctorService;
-    
-    class DoctorController{
-        private $doctor_service;
+require_once "src/services/DoctorService.php";
 
-        public function __construct()
-        {
-            $this->doctor_service =  new DoctorService();
-        }
-        
-        public function register($name, $genre, $specialty){
-            
-            $result = $this->doctor_service->register($name, $genre, $specialty);
-              
-            return $result;
-        }
+class DoctorController
+{
+    public static function register($name, $genre, $specialty)
+    {
+        $result = DoctorService::register($name, $genre, $specialty);
 
-        public function update($doctor){
-            
-            $result = $this->doctor_service->update($doctor);
-              
-            return $result;
-        }
-
-        public function allDoctors($start, $total_records){
-            $result = $this->doctor_service->allDoctors($start, $total_records);
-                
-            return $result;
-        }
-
-        public function fetchDoctor($id){
-            
-            $result = $this->doctor_service->fetchDoctor($id);
-            
-            return $result;
-        }
-
-        public function listOfSpecialties(){
-            $result = $this->doctor_service->listOfSpecialties();
-                
-            return $result;
-        }
+        return $result;
     }
-?>
+
+    public static function update($doctor)
+    {
+        $result = DoctorService::update($doctor);
+
+        return $result;
+    }
+
+    public static function allDoctors($start, $total_records)
+    {
+        $result = DoctorService::allDoctors($start, $total_records);
+
+        return $result;
+    }
+
+    public static function fetchDoctor($id)
+    {
+
+        $result = DoctorService::fetchDoctor($id);
+
+        return $result;
+    }
+
+    public static function listOfSpecialties()
+    {
+        $result = DoctorService::listOfSpecialties();
+
+        return $result;
+    }
+}
