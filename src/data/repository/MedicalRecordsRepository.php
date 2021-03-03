@@ -5,8 +5,6 @@ require_once "app/utils/functions.php";
 
 class MedicalRecordsRepository
 {
-
-
     public static function addMedicalRecords($patient_cpf, $symptoms, $start_date)
     {
         try {
@@ -38,7 +36,7 @@ class MedicalRecordsRepository
         }
     }
 
-    public function fetchMedicalRecords($cpf)
+    public static function fetchMedicalRecords($cpf)
     {
         try {
             $sql = "SELECT * FROM medical_records WHERE cpf_patient_fk = :cpf_patient_fk";
@@ -49,7 +47,7 @@ class MedicalRecordsRepository
                 ':cpf_patient_fk' => $cpf,
             ));
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $id = $result[0]['id'];
@@ -71,7 +69,7 @@ class MedicalRecordsRepository
         }
     }
 
-    public function allMedicalRecords($start, $total_records)
+    public static function allMedicalRecords($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM medical_records";
@@ -80,7 +78,7 @@ class MedicalRecordsRepository
 
             $stmt->execute();
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $size = count($result);
@@ -88,7 +86,7 @@ class MedicalRecordsRepository
 
                 $stmt->execute();
 
-                $fetchAll = $stmt->fetchAll();
+                $fetchAll = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
                 $list = [];
 
@@ -115,7 +113,7 @@ class MedicalRecordsRepository
         }
     }
 
-    public function listOfSymptomsByMonth($total_days, $month_in_number)
+    public static function listOfSymptomsByMonth($total_days, $month_in_number)
     {
         try {
             $initial_date = "2021" . $month_in_number . "01";

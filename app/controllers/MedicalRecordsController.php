@@ -1,34 +1,27 @@
 <?php
-    namespace app\controllers;
-    use src\services\MedicalRecordsService;
-    
-    class MedicalRecordsController{
-        private $medical_records_service;
+require_once "src/services/MedicalRecordsService.php";
 
-        public function __construct()
-        {
-            $this->medical_records_service =  new MedicalRecordsService();
-        }
-        
-        public function fetchMedicalRecords($cpf){
-            
-            $result = $this->medical_records_service->fetchMedicalRecords($cpf);
-            
-            return $result;
-        }
+class MedicalRecordsController
+{
 
-        public function allMedicalRecords($start, $total_records){
-            $result = $this->medical_records_service->allMedicalRecords($start, $total_records);
-                
-            return $result;
-        }
-            
-        public function listOfSymptomsByMonth($total_days, $month_in_number)
-        {
+    public static function fetchMedicalRecords($cpf)
+    {
+        $result = MedicalRecordsService::fetchMedicalRecords($cpf);
 
-            $result = $this->medical_records_service->listOfSymptomsByMonth($total_days, $month_in_number);
-
-            return $result;
-        }
+        return $result;
     }
-?>
+
+    public static function allMedicalRecords($start, $total_records)
+    {
+        $result = MedicalRecordsService::allMedicalRecords($start, $total_records);
+
+        return $result;
+    }
+
+    public static function listOfSymptomsByMonth($total_days, $month_in_number)
+    {
+        $result = MedicalRecordsService::listOfSymptomsByMonth($total_days, $month_in_number);
+
+        return $result;
+    }
+}

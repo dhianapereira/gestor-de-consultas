@@ -1,35 +1,26 @@
 <?php
-    namespace src\services;
-    use src\data\Facade;
-    
-    class MedicalRecordsService{
+require_once "src/data/Facade.php";
 
-        private $facade;
+class MedicalRecordsService
+{
+    public static function fetchMedicalRecords($cpf)
+    {
+        $result = Facade::fetchMedicalRecords($cpf);
 
-        public function __construct()
-        {
-            $this->facade =  new Facade();
-        }
+        return $result;
+    }
 
-        public function fetchMedicalRecords($cpf){
+    public static function allMedicalRecords($start, $total_records)
+    {
+        $result = Facade::allMedicalRecords($start, $total_records);
 
-            $result = $this->facade->fetchMedicalRecords($cpf);
+        return $result;
+    }
 
-            return $result;
-        }
+    public static function listOfSymptomsByMonth($total_days, $month_in_number)
+    {
+        $result = Facade::listOfSymptomsByMonth($total_days, $month_in_number);
 
-        public function allMedicalRecords($start, $total_records){
-            $result = $this->facade->allMedicalRecords($start, $total_records);
-
-            return $result;
-        }
-    
-        public function listOfSymptomsByMonth($total_days, $month_in_number)
-        {
-
-            $result = $this->facade->listOfSymptomsByMonth($total_days, $month_in_number);
-
-            return $result;
-        }
-        }
-?>
+        return $result;
+    }
+}

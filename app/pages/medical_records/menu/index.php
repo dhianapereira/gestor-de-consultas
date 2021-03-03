@@ -6,7 +6,7 @@ if (!isset($_SESSION["loggedUser"])) {
 <html>
 
 <head>
-    <title>Unidade de Saúde | Prontuário</title>
+    <title>Unidade de Saúde | Prontuários</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
@@ -25,6 +25,7 @@ if (!isset($_SESSION["loggedUser"])) {
     <main class="container">
         <?php
         require_once "app/utils/pagination.php";
+        require_once "app/controllers/MedicalRecordsController.php";
         require_once "app/components/MessageContainer.php";
 
         ?>
@@ -61,9 +62,12 @@ if (!isset($_SESSION["loggedUser"])) {
                 $_GET['index'] = "1";
             }
 
-            $pagination = pagination($_GET['index'], "5");
+            $pagination = pagination($_GET['index'], "4");
 
-            $result = $medical_records_controller->allMedicalRecords($pagination[0], $pagination[1]);
+            $start = $pagination[0];
+            $total_records = $pagination[1];
+
+            $result = MedicalRecordsController::allMedicalRecords($start, $total_records);
 
             if ($result != null && !is_string($result)) {
                 $medical_records_list = $result[1];
@@ -102,10 +106,9 @@ if (!isset($_SESSION["loggedUser"])) {
                 <div class="input-block actions">
                     <?php
                     $total = $result[0];
-                    $total_records = $pagination[1];
                     $position = $pagination[2];
 
-                    printTheButtons($total, $total_records, $position);
+                    printTheButtons($total, $total_records, $position, "medical_records/menu");
                     ?>
                 </div>
             <?php
