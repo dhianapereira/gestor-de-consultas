@@ -1,7 +1,6 @@
 <?php
 
-use app\components\Button;
-
+require_once "app/components/Button.php";
 
 function pagination($page, $total_records)
 {

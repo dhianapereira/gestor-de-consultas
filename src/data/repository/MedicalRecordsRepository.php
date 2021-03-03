@@ -1,46 +1,23 @@
 <?php
-
-namespace src\data\repository;
-
-use src\data\repository\Connection;
-use app\models\MedicalRecords;
+require_once "src/data/repository/Connection.php";
+require_once "app/models/MedicalRecords.php";
+require_once "app/utils/functions.php";
 
 class MedicalRecordsRepository
 {
 
-    private $conn;
 
-    public function __construct()
-    {
-        $this->conn = new Connection();
-    }
-
-    private function gravityCalculation($percentage)
-    {
-        if ($percentage == 0) {
-            return "Inexistente";
-        } else if ($percentage <= 25 && $percentage > 0) {
-            return "Baixa";
-        } else if ($percentage > 25 && $percentage <= 50) {
-            return "Média";
-        } else if ($percentage > 50 && $percentage <= 75) {
-            return "Alta";
-        } else {
-            return "Muito alta";
-        }
-    }
-
-    public function addMedicalRecords($patient_cpf, $symptoms, $start_date)
+    public static function addMedicalRecords($patient_cpf, $symptoms, $start_date)
     {
         try {
 
             $result = ($symptoms / 15) * 100;
-            $gravity = $this->gravityCalculation($result);
+            $gravity = gravityCalculation($result);
 
             $sql = "INSERT INTO medical_records (cpf_patient_fk, result, gravity, start_date) 
                         VALUES (:cpf_patient_fk, :result, :gravity, :start_date)";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf_patient_fk' => $patient_cpf,
@@ -58,8 +35,6 @@ class MedicalRecordsRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
@@ -68,7 +43,7 @@ class MedicalRecordsRepository
         try {
             $sql = "SELECT * FROM medical_records WHERE cpf_patient_fk = :cpf_patient_fk";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':cpf_patient_fk' => $cpf,
@@ -93,8 +68,6 @@ class MedicalRecordsRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
@@ -103,7 +76,7 @@ class MedicalRecordsRepository
         try {
             $sql = "SELECT * FROM medical_records";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute();
 
@@ -111,7 +84,7 @@ class MedicalRecordsRepository
 
             if ($result != null) {
                 $size = count($result);
-                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+                $stmt = Connection::connect()->prepare("$sql LIMIT $start, $total_records");
 
                 $stmt->execute();
 
@@ -139,10 +112,9 @@ class MedicalRecordsRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
+
     public function listOfSymptomsByMonth($total_days, $month_in_number)
     {
         try {
@@ -159,7 +131,7 @@ class MedicalRecordsRepository
                     GROUP BY S.name
                 ) as repeated";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->bindParam(1, $initial_date);
             $stmt->bindParam(2, $final_date);
@@ -179,7 +151,7 @@ class MedicalRecordsRepository
                             GROUP BY S.name) as larger
                             WHERE amount = ?";
 
-                $stmt = $this->conn->getConnection()->prepare($sql);
+                $stmt = Connection::connect()->prepare($sql);
 
                 $stmt->bindParam(1, $initial_date);
                 $stmt->bindParam(2, $final_date);
@@ -208,8 +180,6 @@ class MedicalRecordsRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 }

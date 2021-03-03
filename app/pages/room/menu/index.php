@@ -18,10 +18,8 @@
 
 <body>
     <?php
-    include_once('../../utils/autoload.php');
-    include_once('../../utils/pagination.php');
 
-    spl_autoload_register("autoload");
+    include_once('../../utils/pagination.php');
     spl_autoload_register("pagination");
 
     use app\controllers\RoomController;

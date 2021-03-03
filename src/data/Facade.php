@@ -1,9 +1,47 @@
 <?php
 
 require_once "src/data/repository/UserRepository.php";
+require_once "src/data/repository/MedicalAppointmentRepository.php";
 
 class Facade
 {
+
+    public static function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time, $room)
+    {
+
+        $result = MedicalAppointmentRepository::makeAnAppointment(
+            $patient_cpf,
+            $genre,
+            $specialty,
+            $date,
+            $time,
+            $room
+        );
+
+        return $result;
+    }
+
+    public static function allMedicalAppointments($start, $total_records)
+    {
+        $result = MedicalAppointmentRepository::allMedicalAppointments($start, $total_records);
+
+        return $result;
+    }
+
+    public static function fetchMedicalAppointment($id)
+    {
+        $result = MedicalAppointmentRepository::fetchMedicalAppointment($id);
+
+        return $result;
+    }
+
+    public static function updateMedicalAppointment($medical_appointment)
+    {
+        $result = MedicalAppointmentRepository::update($medical_appointment);
+
+        return $result;
+    }
+
     // User operations
 
     public static function registerUser(

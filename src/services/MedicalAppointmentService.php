@@ -1,41 +1,43 @@
 <?php
-    namespace src\services;
-    use src\data\Facade;
-    
-    class MedicalAppointmentService{
 
-        private $facade;
+require_once "src/data/Facade.php";
 
-        public function __construct()
-        {
-            $this->facade =  new Facade();
-        }
+class MedicalAppointmentService
+{
+    public static function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time, $room)
+    {
 
-        public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time, $room){
+        $result = Facade::makeAnAppointment(
+            $patient_cpf,
+            $genre,
+            $specialty,
+            $date,
+            $time,
+            $room
+        );
 
-            $result = $this->facade->makeAnAppointment($patient_cpf, $genre, $specialty,
-             $date, $time, $room);
-
-            return $result;
-        }
-
-        public function allMedicalAppointments($start, $total_records){
-            $result = $this->facade->allMedicalAppointments($start, $total_records);
-
-            return $result;
-        }
-
-        public function fetchMedicalAppointment($id){
-            $result = $this->facade->fetchMedicalAppointment($id);
-
-            return $result;
-        }
-
-        public function update($medical_appointment){
-            
-            $result = $this->facade->updateMedicalAppointment($medical_appointment);
-              
-            return $result;
-        }
-
+        return $result;
     }
+
+    public static function allMedicalAppointments($start, $total_records)
+    {
+        $result = Facade::allMedicalAppointments($start, $total_records);
+
+        return $result;
+    }
+
+    public static function fetchMedicalAppointment($id)
+    {
+        $result = Facade::fetchMedicalAppointment($id);
+
+        return $result;
+    }
+
+    public static function update($medical_appointment)
+    {
+
+        $result = Facade::updateMedicalAppointment($medical_appointment);
+
+        return $result;
+    }
+}

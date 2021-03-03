@@ -1,27 +1,16 @@
 <?php
-
-namespace src\data\repository;
-
-use src\data\repository\Connection;
-use app\models\MedicalAppointment;
+require_once "src/data/repository/Connection.php";
+require_once "app/models/MedicalAppointment.php";
 
 class MedicalAppointmentRepository
 {
-
-    private $conn;
-
-    public function __construct()
-    {
-        $this->conn = new Connection();
-    }
-
-    public function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time, $room)
+    public static function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time, $room)
     {
         try {
 
             $select = "SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty AND active = :active";
 
-            $stmt = $this->conn->getConnection()->prepare($select);
+            $stmt = Connection::connect()->prepare($select);
 
             $stmt->execute(array(
                 ':genre' => $genre,
@@ -39,7 +28,7 @@ class MedicalAppointmentRepository
                         VALUES (:cpf_patient_fk, :id_doctor_fk,:id_room_fk, :time, :date)";
 
 
-                $stmt = $this->conn->getConnection()->prepare($sql);
+                $stmt = Connection::connect()->prepare($sql);
 
                 $success = $stmt->execute(array(
                     ':cpf_patient_fk' => $patient_cpf,
@@ -61,12 +50,10 @@ class MedicalAppointmentRepository
             return "Não há nenhum médico com essa descrição, por isso não foi possível marcar a consulta.";
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function allMedicalAppointments($start, $total_records)
+    public static function allMedicalAppointments($start, $total_records)
     {
         try {
             $sql = "SELECT MA.id, P.full_name, D.name, MA.time, 
@@ -84,25 +71,24 @@ class MedicalAppointmentRepository
                     WHERE MA.id_status_fk NOT IN (:id_status_fk)
                     ORDER BY MA.arrival_time IS NULL, MA.arrival_time ASC, MA.time ASC";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
-
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':id_status_fk' => 3,
             ));
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $size = count($result);
 
-                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+                $stmt = Connection::connect()->prepare("$sql LIMIT $start, $total_records");
 
                 $stmt->execute(array(
                     ':id_status_fk' => 3,
                 ));
 
-                $fetchAll = $stmt->fetchAll();
+                $fetchAll = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
                 $list = [];
 
@@ -146,12 +132,10 @@ class MedicalAppointmentRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function fetchMedicalAppointment($id)
+    public static function fetchMedicalAppointment($id)
     {
         try {
             $sql = "SELECT D.specialty, D.genre, D.name, MA.id,
@@ -170,13 +154,13 @@ class MedicalAppointmentRepository
                         MA.arrival_time, MA.id_room_fk, R.type,
                         MA.id_status_fk, S.name";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':id' => $id,
             ));
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $name = $result[0]['name'];
@@ -215,18 +199,16 @@ class MedicalAppointmentRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function update($medical_appointment)
+    public static function update($medical_appointment)
     {
         try {
 
             $select = "SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty AND active = :active";
 
-            $stmt = $this->conn->getConnection()->prepare($select);
+            $stmt = Connection::connect()->prepare($select);
 
             $stmt->execute(array(
                 ':specialty' => $medical_appointment->getIdDoctor()[0],
@@ -234,7 +216,7 @@ class MedicalAppointmentRepository
                 ':active' => 1,
             ));
 
-            $doctor = $stmt->fetchAll();
+            $doctor = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($doctor != null) {
                 $id_doctor = $doctor[0]['id'];
@@ -244,7 +226,7 @@ class MedicalAppointmentRepository
                 date = :date, arrival_time = :arrival_time, id_status_fk = :id_status_fk 
                 WHERE id = :id";
 
-                $stmt = $this->conn->getConnection()->prepare($sql);
+                $stmt = Connection::connect()->prepare($sql);
 
                 $success = $stmt->execute(array(
                     ':id' => $medical_appointment->getId(),
@@ -260,7 +242,7 @@ class MedicalAppointmentRepository
                 if ($success) {
                     $sql = "UPDATE room SET status = :status WHERE id = :id";
 
-                    $stmt = $this->conn->getConnection()->prepare($sql);
+                    $stmt = Connection::connect()->prepare($sql);
 
                     if ($medical_appointment->getStatus() != 2) {
                         $status = 0;
@@ -290,8 +272,6 @@ class MedicalAppointmentRepository
             return "Não há nenhum médico com essa descrição, por isso não foi possível realizar a alteração.";
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 }

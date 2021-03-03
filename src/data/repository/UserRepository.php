@@ -96,7 +96,7 @@ class UserRepository
 
                 $stmt->execute();
 
-                $fetchAll = $stmt->fetchAll();
+                $fetchAll = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
                 $list = [];
 
@@ -254,7 +254,7 @@ class UserRepository
                 ':active' => 1,
             ));
 
-            $user = $stmt->fetchAll();
+            $user = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($user != null) {
 

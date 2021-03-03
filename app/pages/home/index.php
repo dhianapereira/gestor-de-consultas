@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION["loggedUser"])) {
+  header("Location: ./");
+}
+?>
 <html>
 
 <head>
@@ -31,25 +36,25 @@
           <img src="./public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
         </h3>
       </a>
-      <a href="./doctor/menu.php" class="home-button">
+      <a href="?page=doctor/menu" class="home-button">
         <h3>
           <p>Médico</p>
           <img src="./public/styles/img/doctor.svg" alt="Imagem de médico" />
         </h3>
       </a>
-      <a href="./medical_appointment/menu.php" class="home-button">
+      <a href="?page=medical_appointment/menu" class="home-button">
         <h3>
           <p>Consultas</p>
           <img src="./public/styles/img/make-an-appointment.svg" alt="Imagem de consulta" />
         </h3>
       </a>
-      <a href="./medical_records/menu.php" class="home-button">
+      <a href="?page=medical_records/menu" class="home-button">
         <h3>
           <p>Prontuários</p>
           <img src="./public/styles/img/medical-records-list.svg" alt="Imagem de prontuário" />
         </h3>
       </a>
-      <a href="./room/menu.php" class="home-button">
+      <a href="?page=room/menu" class="home-button">
         <h3>
           <p>Salas</p>
           <img src="./public/styles/img/medical-room.svg" alt="Imagem de salas" />
@@ -58,7 +63,7 @@
       <?php
       if ($_SESSION['loggedUser'] == "Administrador") {
       ?>
-        <a href="./user/menu.php" class="home-button">
+        <a href="?page=user/menu" class="home-button">
           <h3>
             <p>Funcionários</p>
             <img src="./public/styles/img/update-patient.svg" alt="Imagem de funcionário" />
@@ -68,19 +73,24 @@
       }
       ?>
       <a href="?class=User&action=logout" class="home-button">
-        Sair
+        <h3>
+          <p>Sair</p>
+          <img src="./public/styles/img/logout.svg" alt="Sair" />
+        </h3>
       </a>
     </section>
     <section>
       <?php
 
-      if (!isset($_GET['page'])) {
-        $_GET['page'] = "1";
+      require_once "app/controllers/MedicalAppointmentController.php";
+
+      if (!isset($_GET['index'])) {
+        $_GET['index'] = "1";
       }
 
-      $pagination = pagination($_GET['page'], "2");
+      $pagination = pagination($_GET['index'], "2");
 
-      $result = $medical_appointment_controller->allMedicalAppointments($pagination[0], $pagination[1]);
+      $result = MedicalAppointmentController::allMedicalAppointments($pagination[0], $pagination[1]);
 
       if ($result != null && !is_string($result)) {
         $medical_appointment_list = $result[1];
@@ -118,7 +128,7 @@
           </div>
         <?php
         } else {
-          MessageContainer::errorMessage("A lista de atendimento está vazia", "./public/styles/img/error.svg", "Não há mais registros de consulta.");
+          MessageContainer::errorMessage("A lista de atendimento está vazia", "Não há mais registros de consulta.");
         }
         ?>
         <div class="input-block actions">
@@ -132,7 +142,7 @@
         </div>
       <?php
       } else {
-        MessageContainer::errorMessage("A lista de atendimento está vazia", "./public/styles/img/error.svg", "Ainda não há nenhuma consulta marcada.");
+        MessageContainer::errorMessage("A lista de atendimento está vazia",  "Ainda não há nenhuma consulta marcada.");
       }
       ?>
     </section>
