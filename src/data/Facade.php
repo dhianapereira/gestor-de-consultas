@@ -6,6 +6,7 @@ require_once "src/data/repository/PatientRepository.php";
 require_once "src/data/repository/DoctorRepository.php";
 require_once "src/data/repository/MedicalRecordsRepository.php";
 require_once "src/data/repository/SymptomRepository.php";
+require_once "src/data/repository/RoomRepository.php";
 
 class Facade
 {
@@ -238,6 +239,43 @@ class Facade
     public static function save($cpf, $username, $password)
     {
         $result = UserRepository::save($cpf, $username, $password);
+
+        return $result;
+    }
+
+    // Room operations
+
+    public static function registerRoom($type)
+    {
+        $result = RoomRepository::register($type);
+
+        return $result;
+    }
+
+    public static function updateRoom($room)
+    {
+        $result = RoomRepository::update($room);
+
+        return $result;
+    }
+
+    public static function allRooms($start, $total_records)
+    {
+        $result = RoomRepository::allRooms($start, $total_records);
+
+        return $result;
+    }
+
+    public static function fetchRoom($id)
+    {
+        $result = RoomRepository::fetchRoom($id);
+
+        return $result;
+    }
+
+    public static function listOfTypes()
+    {
+        $result = RoomRepository::listOfTypes();
 
         return $result;
     }

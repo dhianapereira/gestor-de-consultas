@@ -1,52 +1,39 @@
 <?php
-
-namespace src\services;
-
-use src\data\Facade;
+require_once "src/data/Facade.php";
 
 class RoomService
 {
-
-    private $facade;
-
-    public function __construct()
+    public static function register($type)
     {
-        $this->facade =  new Facade();
-    }
-
-    public function register($type)
-    {
-
-        $result = $this->facade->registerRoom($type);
+        $result = Facade::registerRoom($type);
 
         return $result;
     }
 
-    public function update($room)
+    public static function update($room)
     {
-
-        $result = $this->facade->updateRoom($room);
+        $result = Facade::updateRoom($room);
 
         return $result;
     }
 
-    public function allRooms($start, $total_records)
+    public static function allRooms($start, $total_records)
     {
-        $result = $this->facade->allRooms($start, $total_records);
+        $result = Facade::allRooms($start, $total_records);
 
         return $result;
     }
 
-    public function fetchRoom($id)
+    public static function fetchRoom($id)
     {
-        $result = $this->facade->fetchRoom($id);
+        $result = Facade::fetchRoom($id);
 
         return $result;
     }
 
-    public function listOfTypes()
+    public static function listOfTypes()
     {
-        $result = $this->facade->listOfTypes();
+        $result = Facade::listOfTypes();
 
         return $result;
     }

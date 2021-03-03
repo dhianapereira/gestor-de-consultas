@@ -24,6 +24,7 @@ if (!isset($_SESSION["loggedUser"])) {
     <?php
     require_once "app/utils/pagination.php";
     require_once "app/components/Modal.php";
+    require_once "app/controllers/RoomController.php";
     require_once "app/components/MessageContainer.php";
     ?>
     <header>
@@ -56,9 +57,12 @@ if (!isset($_SESSION["loggedUser"])) {
                 $_GET['index'] = "1";
             }
 
-            $pagination = pagination($_GET['index'], "5");
+            $pagination = pagination($_GET['index'], "4");
 
-            $result = $room_controller->allRooms($pagination[0], $pagination[1]);
+            $start = $pagination[0];
+            $total_records = $pagination[1];
+
+            $result = RoomController::allRooms($start, $total_records);
 
             if ($result != null && !is_string($result)) {
                 $room_list = $result[1];
@@ -93,10 +97,9 @@ if (!isset($_SESSION["loggedUser"])) {
                 <div class="input-block actions">
                     <?php
                     $total = $result[0];
-                    $total_records = $pagination[1];
                     $position = $pagination[2];
 
-                    printTheButtons($total, $total_records, $position);
+                    printTheButtons($total, $total_records, $position, "room/menu");
                     ?>
                 </div>
             <?php

@@ -1,45 +1,40 @@
 <?php
-    namespace app\controllers;
-    use src\services\RoomService;
-    
-    class RoomController{
-        private $room_service;
+require_once "src/services/RoomService.php";
 
-        public function __construct()
-        {
-            $this->room_service =  new RoomService();
-        }
-        
-        public function register($type){
-            
-            $result = $this->room_service->register($type);
-              
-            return $result;
-        }
+class RoomController
+{
+    public static function register($type)
+    {
+        $result = RoomService::register($type);
 
-        public function update($room){
-            
-            $result = $this->room_service->update($room);
-              
-            return $result;
-        }
-
-        public function allRooms($start, $total_records){
-            $result = $this->room_service->allRooms($start, $total_records);
-                
-            return $result;
-        }
-
-        public function fetchRoom($id){
-            
-            $result = $this->room_service->fetchRoom($id);
-            
-            return $result;
-        }
-
-        public function listOfTypes(){
-            $result = $this->room_service->listOfTypes();
-                
-            return $result;
-        }
+        return $result;
     }
+
+    public static function update($room)
+    {
+        $result = RoomService::update($room);
+
+        return $result;
+    }
+
+    public static function allRooms($start, $total_records)
+    {
+        $result = RoomService::allRooms($start, $total_records);
+
+        return $result;
+    }
+
+    public static function fetchRoom($id)
+    {
+        $result = RoomService::fetchRoom($id);
+
+        return $result;
+    }
+
+    public static function listOfTypes()
+    {
+        $result = RoomService::listOfTypes();
+
+        return $result;
+    }
+}

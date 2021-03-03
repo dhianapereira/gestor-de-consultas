@@ -1,26 +1,15 @@
 <?php
-
-namespace src\data\repository;
-
-use src\data\repository\Connection;
-use app\models\Room;
+require_once "src/data/repository/Connection.php";
+require_once "app/models/Room.php";
 
 class RoomRepository
 {
-
-    private $conn;
-
-    public function __construct()
-    {
-        $this->conn = new Connection();
-    }
-
-    public function register($type)
+    public static function register($type)
     {
         try {
             $sql = "INSERT INTO room (type) VALUES (:type)";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':type' => $type,
@@ -36,18 +25,15 @@ class RoomRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 
-    public function update($room)
+    public static function update($room)
     {
         try {
             $sql = "UPDATE room SET type = :type, status = :status WHERE id = :id";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':id' => $room->getId(),
@@ -65,31 +51,28 @@ class RoomRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 
-    public function allRooms($start, $total_records)
+    public static function allRooms($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM room";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute();
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $size = count($result);
 
-                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+                $stmt = Connection::connect()->prepare("$sql LIMIT $start, $total_records");
 
                 $stmt->execute();
 
-                $fetchAll = $stmt->fetchAll();
+                $fetchAll = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
                 $list = [];
 
@@ -116,25 +99,22 @@ class RoomRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 
 
-    public function fetchRoom($id)
+    public static function fetchRoom($id)
     {
         try {
             $sql = "SELECT * FROM room WHERE id = :id";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':id' => $id,
             ));
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $type = $result[0]['type'];
@@ -150,24 +130,21 @@ class RoomRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 
-    public function listOfTypes()
+    public static function listOfTypes()
     {
         try {
             $sql = "SELECT type, id FROM room WHERE status = :status";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':status' => 0,
             ));
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 return $result;
@@ -178,9 +155,6 @@ class RoomRepository
         } catch (\Exception $e) {
 
             return "Exception: $e";
-        } finally {
-
-            $this->conn->disconnect();
         }
     }
 }
