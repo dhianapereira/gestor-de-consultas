@@ -2,9 +2,9 @@
 
 require_once "app/components/Button.php";
 
-function pagination($page, $total_records)
+function pagination($index, $total_records)
 {
-    $position = $page;
+    $position = $index;
 
     $start = $position - 1;
     $start = $start * $total_records;
@@ -12,7 +12,7 @@ function pagination($page, $total_records)
     return [$start, $total_records, $position];
 }
 
-function printTheButtons($total, $total_records, $position)
+function printTheButtons($total, $total_records, $position, $page)
 {
 
     $total_pages = $total / $total_records;
@@ -21,9 +21,9 @@ function printTheButtons($total, $total_records, $position)
     $next = $position + 1;
 
     if ($position > 1) {
-        Button::show("<- Anterior", "button", $previous);
+        Button::show("<- Anterior", "button", "?page=$page&index=$previous");
     }
     if ($position < $total_pages) {
-        Button::show("Próxima ->", "button", $next);
+        Button::show("Próxima ->", "button", "?page=$page&index=$next");
     }
 }

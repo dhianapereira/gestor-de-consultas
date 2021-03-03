@@ -88,7 +88,10 @@ if (!isset($_SESSION["loggedUser"])) {
 
       $pagination = pagination($_GET['index'], "2");
 
-      $result = MedicalAppointmentController::allMedicalAppointments($pagination[0], $pagination[1]);
+      $start = $pagination[0];
+      $total_records = $pagination[1];
+
+      $result = MedicalAppointmentController::allMedicalAppointments($start, $total_records);
 
       if ($result != null && !is_string($result)) {
         $medical_appointment_list = $result[1];
@@ -132,10 +135,9 @@ if (!isset($_SESSION["loggedUser"])) {
         <div class="input-block actions">
           <?php
           $total = $result[0];
-          $total_records = $pagination[1];
           $position = $pagination[2];
 
-          printTheButtons($total, $total_records, $position);
+          printTheButtons($total, $total_records, $position, "home");
           ?>
         </div>
       <?php
