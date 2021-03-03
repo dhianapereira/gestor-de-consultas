@@ -1,20 +1,10 @@
 <?php
-
-namespace src\services;
-
-use src\data\Facade;
+require_once "src/data/Facade.php";
 
 class UserService
 {
 
-    private $facade;
-
-    public function __construct()
-    {
-        $this->facade =  new Facade();
-    }
-
-    public function register(
+    public static function register(
         $cpf,
         $name,
         $genre,
@@ -24,7 +14,7 @@ class UserService
         $responsibility
     ) {
 
-        $result = $this->facade->registerUser(
+        $result = Facade::registerUser(
             $cpf,
             $name,
             $genre,
@@ -37,38 +27,38 @@ class UserService
         return $result;
     }
 
-    public function update($user)
+    public static function update($user)
     {
 
-        $result = $this->facade->updateUser($user);
+        $result = Facade::updateUser($user);
 
         return $result;
     }
 
-    public function allUsers($start, $total_records)
+    public static function allUsers($start, $total_records)
     {
-        $result = $this->facade->allUsers($start, $total_records);
+        $result = Facade::allUsers($start, $total_records);
 
         return $result;
     }
 
-    public function fetchUser($cpf)
+    public static function fetchUser($cpf)
     {
-        $result = $this->facade->fetchUser($cpf);
+        $result = Facade::fetchUser($cpf);
 
         return $result;
     }
 
-    public function signIn($username, $password)
+    public static function signIn($username, $password)
     {
-        $result = $this->facade->signIn($username, $password);
+        $result = Facade::signIn($username, $password);
 
         return $result;
     }
 
-    public function save($cpf, $username, $password)
+    public static function save($cpf, $username, $password)
     {
-        $result = $this->facade->save($cpf, $username, $password);
+        $result = Facade::save($cpf, $username, $password);
 
         return $result;
     }

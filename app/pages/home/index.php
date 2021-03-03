@@ -19,17 +19,10 @@
   </header>
   <main class="container">
     <?php
+    require_once "app/utils/pagination.php";
+    require_once "app/controllers/MedicalAppointmentController.php";
+    require_once "app/components/MessageContainer.php";
 
-    session_start();
-
-    include_once('app/utils/autoload.php');
-    include_once('app/utils/pagination.php');
-
-    spl_autoload_register("autoload");
-    spl_autoload_register("pagination");
-
-    use app\controllers\MedicalAppointmentController;
-    use app\components\MessageContainer;
     ?>
     <section class="quick-access">
       <a href="?page=patient/menu" class="home-button">
@@ -63,25 +56,23 @@
         </h3>
       </a>
       <?php
-      if ($_SESSION['responsibility'] != "Administrador") {
-        $display = "display: none;";
+      if ($_SESSION['loggedUser'] == "Administrador") {
+      ?>
+        <a href="./user/menu.php" class="home-button">
+          <h3>
+            <p>Funcionários</p>
+            <img src="./public/styles/img/update-patient.svg" alt="Imagem de funcionário" />
+          </h3>
+        </a>
+      <?php
       }
       ?>
-      <a style="<?php echo ($display) ?>" href="./user/menu.php" id="restricted-access" class="home-button">
-        <h3>
-          <p>Funcionários</p>
-          <img src="./public/styles/img/update-patient.svg" alt="Imagem de funcionário" />
-        </h3>
-      </a>
       <a href="?class=User&action=logout" class="home-button">
         Sair
       </a>
     </section>
     <section>
       <?php
-
-      $medical_appointment_controller = new MedicalAppointmentController();
-
 
       if (!isset($_GET['page'])) {
         $_GET['page'] = "1";

@@ -1,21 +1,11 @@
 <?php
-
-namespace src\data\repository;
-
-use src\data\repository\Connection;
-use app\models\User;
+require_once "src/data/repository/Connection.php";
+require_once "app/models/User.php";
 
 class UserRepository
 {
 
-    private $conn;
-
-    public function __construct()
-    {
-        $this->conn = new Connection();
-    }
-
-    public function register(
+    public static function register(
         $cpf,
         $name,
         $genre,
@@ -29,7 +19,7 @@ class UserRepository
                     address, responsibility) 
                     VALUES (:cpf, :name, :genre, :date_of_birth, :naturalness, :address, :responsibility)";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf' => $cpf,
@@ -51,12 +41,10 @@ class UserRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function update($user)
+    public static function update($user)
     {
         try {
             $sql = "UPDATE user SET name = :name, genre = :genre,
@@ -64,7 +52,7 @@ class UserRepository
             responsibility = :responsibility,  address = :address, active = :active
             WHERE cpf = :cpf";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $success = $stmt->execute(array(
                 ':cpf' => $user->getCpf(),
@@ -87,17 +75,15 @@ class UserRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function allUsers($start, $total_records)
+    public static function allUsers($start, $total_records)
     {
         try {
             $sql = "SELECT * FROM user";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute();
 
@@ -106,7 +92,7 @@ class UserRepository
             if ($result != null) {
                 $size = count($result);
 
-                $stmt = $this->conn->getConnection()->prepare("$sql LIMIT $start, $total_records");
+                $stmt = Connection::connect()->prepare("$sql LIMIT $start, $total_records");
 
                 $stmt->execute();
 
@@ -131,8 +117,7 @@ class UserRepository
                         $active = "Inativo";
                     }
 
-                    $user = new User();
-                    $user->constructor(
+                    $user = new User(
                         $cpf,
                         $name,
                         $genre,
@@ -155,23 +140,21 @@ class UserRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function fetchUser($cpf)
+    public static function fetchUser($cpf)
     {
         try {
             $sql = "SELECT * FROM user WHERE cpf = :cpf";
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':cpf' => $cpf
             ));
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
                 $name = $result[0]['name'];
@@ -184,8 +167,7 @@ class UserRepository
                 $password = $result[0]['password'];
                 $active = $result[0]['active'];
 
-                $user = new User();
-                $user->constructor(
+                $user = new User(
                     $cpf,
                     $name,
                     $genre,
@@ -205,19 +187,17 @@ class UserRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function signIn($username, $password)
+    public static function signIn($username, $password)
     {
         try {
 
             $sql = 'SELECT * FROM user WHERE username = :username 
             AND password = :password AND active = :active';
 
-            $stmt = $this->conn->getConnection()->prepare($sql);
+            $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
                 ':username' => $username,
@@ -225,9 +205,10 @@ class UserRepository
                 ':active' => 1,
             ));
 
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
+
                 $cpf = $result[0]['cpf'];
                 $name = $result[0]['name'];
                 $genre = $result[0]['genre'];
@@ -237,8 +218,7 @@ class UserRepository
                 $responsibility = $result[0]['responsibility'];
                 $active = $result[0]['active'];
 
-                $user = new User();
-                $user->constructor(
+                $user = new User(
                     $cpf,
                     $name,
                     $genre,
@@ -251,6 +231,7 @@ class UserRepository
                     $active
                 );
 
+
                 return $user;
             }
 
@@ -258,17 +239,15 @@ class UserRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 
-    public function save($cpf, $username, $password)
+    public static function save($cpf, $username, $password)
     {
         try {
             $select = "SELECT * FROM user WHERE cpf = :cpf AND active = :active";
 
-            $stmt = $this->conn->getConnection()->prepare($select);
+            $stmt = Connection::connect()->prepare($select);
 
             $stmt->execute(array(
                 ':cpf' => $cpf,
@@ -282,7 +261,7 @@ class UserRepository
                 $sql = "UPDATE user SET username = :username, password = :password 
                         WHERE cpf = :cpf";
 
-                $stmt = $this->conn->getConnection()->prepare($sql);
+                $stmt = Connection::connect()->prepare($sql);
 
                 $success = $stmt->execute(array(
                     ':cpf' => $cpf,
@@ -304,8 +283,6 @@ class UserRepository
             return $response;
         } catch (\Exception $e) {
             return "Exception: $e";
-        } finally {
-            $this->conn->disconnect();
         }
     }
 }

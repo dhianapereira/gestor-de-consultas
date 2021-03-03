@@ -1,12 +1,3 @@
-<?php
-require_once('app/utils/autoload.php');
-
-spl_autoload_register("autoload");
-
-use app\controllers\UserController;
-use app\components\MessageContainer;
-?>
-
 <html>
 
 <head>
@@ -19,6 +10,7 @@ use app\components\MessageContainer;
   <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
   <link rel="stylesheet" type="text/css" href="./public/styles/css/form.css" />
   <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
+  <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -30,7 +22,7 @@ use app\components\MessageContainer;
     <section class="up">
       <div class="form">
         <h2>Entrar</h2>
-        <form method="POST" action="?class=User&action=singIn">
+        <form method="POST" action="?class=User&action=signIn">
           <div class="input-block">
             <label for="username">LOGIN</label>
             <input id="username" name="username" required />
@@ -43,6 +35,20 @@ use app\components\MessageContainer;
         </form>
       </div>
     </section>
+    <?php
+    require_once "app/components/MessageContainer.php";
+
+    if (isset($_SESSION["loginErrorMessage"])) {
+      MessageContainer::errorMessage("Erro ao tentar entrar na plataforma", $_SESSION["loginErrorMessage"]);
+    }
+    ?>
+
+    <section class="box">
+      <a href="?page=user/register_on_platform">
+        Ainda não possui uma conta? <strong>Cadastrar</strong>
+      </a>
+    </section>
+
   </main>
   <footer>
     <p>2021 - Unidade de Saúde</p>
@@ -50,3 +56,6 @@ use app\components\MessageContainer;
 </body>
 
 </html>
+
+<?php
+$_SESSION["loginErrorMessage"] = null;

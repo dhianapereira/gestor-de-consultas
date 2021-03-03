@@ -1,10 +1,10 @@
-.box{
+.box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.form{
+.form {
   background: #f0f2f5;
   padding: 2.4rem;
   width: 90%;
@@ -14,31 +14,30 @@
   overflow-x: auto;
 }
 
-.form h2{
+.form h2 {
   margin-top: 0;
 }
-.form form h2{
+.form form h2 {
   margin-top: 2rem;
 }
 
-form{
+form {
   max-width: 500%;
 }
 
-input{
+input {
   background: #f5f8fa;
   border: none;
-  border-radius: .2rem;
-  padding: .8rem;
+  border-radius: 0.2rem;
+  padding: 0.8rem;
   outline: none;
 
   width: 100%;
 }
 
-.input-block{
-  margin-top: .8rem;
+.input-block {
+  margin-top: 0.8rem;
 }
-
 
 .line .input-block input {
   width: 48%;

@@ -1,7 +1,4 @@
 <?php
-
-namespace app\models;
-
 class User
 {
     private $cpf;
@@ -65,7 +62,7 @@ class User
         return $this->active;
     }
 
-    public function constructor(
+    public function __construct(
         $cpf,
         $name,
         $genre,

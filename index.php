@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once "app/utils/autoload.php";
 
 if (isset($_GET["page"])) {
   require_once "app/pages/" . $_GET["page"] . "/index.php";
@@ -11,10 +10,9 @@ if (isset($_GET["page"])) {
   require_once "app/controllers/" . $controller . ".php";
 
   $controller = new $controller();
-
   $controller->$action();
 } else if (isset($_SESSION["loggedUser"])) {
   require_once "app/pages/home/index.php";
 } else {
-  require_once "app/pages/index.php";
+  require_once "app/pages/user/login/index.php";
 }

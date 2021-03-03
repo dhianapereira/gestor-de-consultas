@@ -19,7 +19,8 @@ html {
   font-size: 93.75%;
 }
 
-body {
+body,
+a {
   background: #f0f2f5;
   font-family: "Nunito", sans-serif;
   color: var(--dark-blue);
@@ -29,6 +30,10 @@ header {
   background: var(--green);
   text-align: center;
   padding: 2rem 0 10rem;
+}
+
+a {
+  text-decoration: none;
 }
 
 footer {

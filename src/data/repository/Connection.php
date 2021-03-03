@@ -1,7 +1,4 @@
 <?php
-
-namespace src\data\repository;
-
 define('HOST', "localhost");
 define('USER', "root");
 define('PASS', "");
@@ -9,25 +6,13 @@ define('DBNAME', "health_unit");
 
 class Connection
 {
-    private $connection;
-
-    public function getConnection()
+    public static function connect()
     {
+        $connection = new \PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, USER, PASS);
 
-        if ($this->connection === NULL) {
-            $this->connect();
-        }
+        $connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
 
-        return $this->connection;
-    }
-
-    public function connect()
-    {
-        $this->connection = new \PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, USER, PASS);
-    }
-
-    public function disconnect()
-    {
-        $this->connection = NULL;
+        return $connection;
     }
 }
