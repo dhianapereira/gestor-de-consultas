@@ -82,8 +82,6 @@ if (!isset($_SESSION["loggedUser"])) {
     <section>
       <?php
 
-      require_once "app/controllers/MedicalAppointmentController.php";
-
       if (!isset($_GET['index'])) {
         $_GET['index'] = "1";
       }

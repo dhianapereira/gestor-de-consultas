@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<?php
+if (!isset($_SESSION["loggedUser"])) {
+    header("Location: ./");
+}
+?>
+<html>
 
 <head>
     <title>Unidade de Saúde | Consulta</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../../../public/styles/img/doctors-list.svg" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/table.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
+    <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/table.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -19,51 +23,48 @@
         <h3 class="logo">Unidade de Saúde</h3>
     </header>
     <main class="container">
+        <?php
+        require_once "app/utils/pagination.php";
+        require_once "app/controllers/MedicalAppointmentController.php";
+        require_once "app/components/MessageContainer.php";
+
+        ?>
         <section class="quick-access">
             <a href="./consultation_page.php" class="home-button">
                 <h3>
                     <p>Marcar Consulta</p>
-                    <img src="../../../public/styles/img/make-an-appointment.svg" alt="Imagem de marcar consulta" />
+                    <img src="./public/styles/img/make-an-appointment.svg" alt="Imagem de marcar consulta" />
                 </h3>
             </a>
             <a href="./search_medical_appointment.html" class="home-button">
                 <h3>
                     <p>Procurar Consulta</p>
-                    <img src="../../../public/styles/img/update-medical-appointment.svg" alt="Imagem de pesquisa" />
+                    <img src="./public/styles/img/update-medical-appointment.svg" alt="Imagem de pesquisa" />
                 </h3>
-            </a> <a href="../home_page.php" class="home-button">
+            </a> <a href="?page=home" class="home-button">
                 <h3>
                     <p>Home</p>
-                    <img src="../../../public/styles/img/home.svg" alt="Imagem de Home" />
+                    <img src="./public/styles/img/home.svg" alt="Imagem de Home" />
                 </h3>
             </a>
         </section>
         <section>
             <?php
-            include_once('../../utils/autoload.php');
-            include_once('../../utils/pagination.php');
 
-            spl_autoload_register("autoload");
-            spl_autoload_register("pagination");
-
-            use app\controllers\MedicalAppointmentController;
-            use app\components\MessageContainer;
-
-            $medical_appointment_controller = new MedicalAppointmentController();
-
-            if (!isset($_GET['page'])) {
-                $_GET['page'] = "1";
+            if (!isset($_GET['index'])) {
+                $_GET['index'] = "1";
             }
 
-            $pagination = pagination($_GET['page'], "2");
+            $pagination = pagination($_GET['index'], "2");
 
-            $result =  $medical_appointment_controller->allMedicalAppointments($pagination[0], $pagination[1]);
+            $result = MedicalAppointmentController::allMedicalAppointments($pagination[0], $pagination[1]);
 
             if ($result != null && !is_string($result)) {
                 $medical_appointment_list = $result[1];
                 if ($medical_appointment_list != null && is_array($medical_appointment_list)) {
             ?>
                     <div class="table">
+
                         <h2>Lista de Atendimento</h2>
                         <table>
                             <tr>
@@ -94,8 +95,9 @@
                     </div>
                 <?php
                 } else {
-                    MessageContainer::errorMessage("A lista de atendimento está vazia", "../../../public/styles/img/error.svg", "Não há mais nenhuma consulta marcada.");
-                } ?>
+                    MessageContainer::errorMessage("A lista de atendimento está vazia", "Não há mais registros de consulta.");
+                }
+                ?>
                 <div class="input-block actions">
                     <?php
                     $total = $result[0];
@@ -107,7 +109,7 @@
                 </div>
             <?php
             } else {
-                MessageContainer::errorMessage("A lista de atendimento está vazia", "../../../public/styles/img/error.svg", "Ainda não há nenhuma consulta marcada.");
+                MessageContainer::errorMessage("A lista de atendimento está vazia",  "Ainda não há nenhuma consulta marcada.");
             }
             ?>
         </section>

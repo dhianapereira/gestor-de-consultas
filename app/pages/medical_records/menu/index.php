@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<?php
+if (!isset($_SESSION["loggedUser"])) {
+    header("Location: ./");
+}
+?>
+<html>
 
 <head>
     <title>Unidade de Saúde | Prontuário</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../../../public/styles/img/doctors-list.svg" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/table.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
+    <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/table.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -19,51 +23,45 @@
         <h3 class="logo">Unidade de Saúde</h3>
     </header>
     <main class="container">
+        <?php
+        require_once "app/utils/pagination.php";
+        require_once "app/components/MessageContainer.php";
+
+        ?>
         <section class="quick-access">
             <a href="../symptom/questionnaire_page.html" class="home-button">
                 <h3>
                     <p>Questionário (Dengue)</p>
-                    <img src="../../../public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
+                    <img src="./public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
                 </h3>
             </a>
             <a href="./search_medical_records.html" class="home-button">
                 <h3>
                     <p>Procurar Prontuário</p>
-                    <img src="../../../public/styles/img/file-search.png" alt="Imagem de prontuário" />
+                    <img src="./public/styles/img/file-search.png" alt="Imagem de prontuário" />
                 </h3>
             </a>
             <a href="./search_by_month.php" class="home-button">
                 <h3>
                     <p>Sintomas mais recorrentes</p>
-                    <img src="../../../public/styles/img/search.svg" alt="Imagem da pesquisa por sintomas mais recorrentes" />
+                    <img src="./public/styles/img/search.svg" alt="Imagem da pesquisa por sintomas mais recorrentes" />
                 </h3>
             </a>
-            <a href="../home_page.php" class="home-button">
+            <a href="?page=home" class="home-button">
                 <h3>
                     <p>Home</p>
-                    <img src="../../../public/styles/img/home.svg" alt="Imagem de Home" />
+                    <img src="./public/styles/img/home.svg" alt="Imagem de Home" />
                 </h3>
             </a>
         </section>
         <section>
             <?php
 
-            include_once('../../utils/autoload.php');
-            include_once('../../utils/pagination.php');
-
-            spl_autoload_register("autoload");
-            spl_autoload_register("pagination");
-
-            use app\controllers\MedicalRecordsController;
-            use app\components\MessageContainer;
-
-            $medical_records_controller = new MedicalRecordsController();
-
-            if (!isset($_GET['page'])) {
-                $_GET['page'] = "1";
+            if (!isset($_GET['index'])) {
+                $_GET['index'] = "1";
             }
 
-            $pagination = pagination($_GET['page'], "5");
+            $pagination = pagination($_GET['index'], "5");
 
             $result = $medical_records_controller->allMedicalRecords($pagination[0], $pagination[1]);
 
@@ -99,7 +97,7 @@
                     </div>
                 <?php
                 } else {
-                    MessageContainer::errorMessage("A lista de prontuários está vazia", "../../../public/styles/img/error.svg", "Não há mais nenhum prontuário cadastrado.");
+                    MessageContainer::errorMessage("A lista de prontuários está vazia", "Não há mais nenhum prontuário cadastrado.");
                 } ?>
                 <div class="input-block actions">
                     <?php
@@ -112,7 +110,7 @@
                 </div>
             <?php
             } else {
-                MessageContainer::errorMessage("A lista de prontuários está vazia", "../../../public/styles/img/error.svg", "Ainda não há nenhum prontuário no sistema.");
+                MessageContainer::errorMessage("A lista de prontuários está vazia", "Ainda não há nenhum prontuário no sistema.");
             }
             ?>
         </section>

@@ -1,15 +1,20 @@
+<?php
+if (!isset($_SESSION["loggedUser"])) {
+    header("Location: ./");
+}
+?>
 <html>
 
 <head>
     <title>Unidade de Saúde | Paciente</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../../../public/styles/img/doctors-list.svg" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/home.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/table.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/card.css" />
-    <link rel="stylesheet" type="text/css" href="../../../public/styles/css/buttons.css" />
+    <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/table.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
@@ -18,44 +23,38 @@
         <h3 class="logo">Unidade de Saúde</h3>
     </header>
     <main class="container">
+        <?php
+        require_once "app/utils/pagination.php";
+        require_once "app/components/MessageContainer.php";
+        ?>
         <section class="quick-access">
             <a href="./register_page.html" class="home-button">
                 <h3>
                     <p>Cadastrar Paciente</p>
-                    <img src="../../../public/styles/img/plus.svg" alt="Imagem de adicionar" />
+                    <img src="./public/styles/img/plus.svg" alt="Imagem de adicionar" />
                 </h3>
             </a>
             <a href="./search_patient.html" class="home-button">
                 <h3>
                     <p>Procurar Paciente</p>
-                    <img src="../../../public/styles/img/update-patient.svg" alt="Imagem de paciente" />
+                    <img src="./public/styles/img/update-patient.svg" alt="Imagem de paciente" />
                 </h3>
             </a>
-            <a href="../home_page.php" class="home-button">
+            <a href="?page=home" class="home-button">
                 <h3>
                     <p>Home</p>
-                    <img src="../../../public/styles/img/home.svg" alt="Imagem de Home" />
+                    <img src="./public/styles/img/home.svg" alt="Imagem de Home" />
                 </h3>
             </a>
         </section>
         <section>
             <?php
-            include_once('../../utils/autoload.php');
-            include_once('../../utils/pagination.php');
 
-            spl_autoload_register("autoload");
-            spl_autoload_register("pagination");
-
-            use app\controllers\PatientController;
-            use app\components\MessageContainer;
-
-            $patient_controller = new PatientController();
-
-            if (!isset($_GET['page'])) {
-                $_GET['page'] = "1";
+            if (!isset($_GET['index'])) {
+                $_GET['index'] = "1";
             }
 
-            $pagination = pagination($_GET['page'], "2");
+            $pagination = pagination($_GET['index'], "2");
 
             $result = $patient_controller->allPatients($pagination[0], $pagination[1]);
 
@@ -100,7 +99,7 @@
                 <?php
                 } else {
 
-                    MessageContainer::errorMessage("A lista de pacientes está vazia", "../../../public/styles/img/error.svg",  "Não há mais nenhum paciente cadastrado.");
+                    MessageContainer::errorMessage("A lista de pacientes está vazia", "Não há mais nenhum paciente cadastrado.");
                 } ?>
                 <div class="input-block actions">
                     <?php
@@ -113,7 +112,7 @@
                 </div>
             <?php
             } else {
-                MessageContainer::errorMessage("A lista de pacientes está vazia", "../../../public/styles/img/error.svg",  "Ainda não há nenhum paciente cadastrado.");
+                MessageContainer::errorMessage("A lista de pacientes está vazia", "Ainda não há nenhum paciente cadastrado.");
             }
             ?>
         </section>
