@@ -25,6 +25,7 @@ if (!isset($_SESSION["loggedUser"])) {
     <main class="container">
         <?php
         require_once "app/utils/pagination.php";
+        require_once "app/controllers/UserController.php";
         require_once "app/components/MessageContainer.php";
         ?>
         <section class="quick-access">
@@ -56,8 +57,10 @@ if (!isset($_SESSION["loggedUser"])) {
 
             $pagination = pagination($_GET['index'], "2");
 
+            $start = $pagination[0];
+            $total_records = $pagination[1];
 
-            $result = $user_controller->allUsers($pagination[0], $pagination[1]);
+            $result = UserController::allUsers($start, $total_records);
 
             if ($result != null && !is_string($result)) {
                 $user_list = $result[1];
@@ -102,10 +105,9 @@ if (!isset($_SESSION["loggedUser"])) {
                 <div class="input-block actions">
                     <?php
                     $total = $result[0];
-                    $total_records = $pagination[1];
                     $position = $pagination[2];
 
-                    printTheButtons($total, $total_records, $position);
+                    printTheButtons($total, $total_records, $position, "user/menu");
                     ?>
                 </div>
             <?php
