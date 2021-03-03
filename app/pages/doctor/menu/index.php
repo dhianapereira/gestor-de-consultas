@@ -29,7 +29,7 @@ if (!isset($_SESSION["loggedUser"])) {
     require_once "app/components/MessageContainer.php";
     ?>
     <section class="quick-access">
-      <a href="./register_page.html" class="home-button">
+      <a href="?page=doctor/register" class="home-button">
         <h3>
           <p>Cadastrar Médico(a)</p>
           <img src="./public/styles/img/add-doctor.svg" alt="Imagem de cadastro de um médico" />

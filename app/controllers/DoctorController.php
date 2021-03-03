@@ -3,11 +3,27 @@ require_once "src/services/DoctorService.php";
 
 class DoctorController
 {
-    public static function register($name, $genre, $specialty)
+    public static function register()
     {
-        $result = DoctorService::register($name, $genre, $specialty);
+        $name = $_POST["name"];
+        $genre = $_POST["genre"];
+        $specialty = $_POST["specialty"];
 
-        return $result;
+        if (!isset($specialty) || !isset($name) || !isset($genre)) {
+            $_SESSION['errorMessage'] = "Você precisa preencher todos os campos para realizar esta operação!";
+            require_once "app/pages/doctor/register/index.php";
+        } else {
+            $result = DoctorService::register($name, $genre, $specialty);
+
+            if (!is_bool($result)) {
+
+                $_SESSION['errorMessage'] = $result;
+                require_once "app/pages/doctor/register/index.php";
+            } else {
+                $_SESSION['successMessage'] = "O cadastro do médico foi realizado com sucesso!";
+                require_once "app/pages/doctor/register/index.php";
+            }
+        }
     }
 
     public static function update($doctor)

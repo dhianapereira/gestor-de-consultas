@@ -31,7 +31,7 @@
                     <img src="./public/styles/img/doctor.svg" alt="Imagem de pesquisa" />
                 </h3>
             </a>
-            <a href="./register_page.html" class="home-button">
+            <a href="?page=doctor/register" class="home-button">
                 <h3>
                     <p>Cadastrar Médico(a)</p>
                     <img src="./public/styles/img/add-doctor.svg" alt="Imagem de cadastro de médicos" />
