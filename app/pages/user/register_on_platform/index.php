@@ -46,10 +46,12 @@
     <?php
     require_once "app/components/MessageContainer.php";
 
-    if (isset($_SESSION["registerOnPlatformErrorMessage"])) {
-      MessageContainer::errorMessage("Não foi possível realizar esta operação", $_SESSION["registerOnPlatformErrorMessage"]);
+    if (isset($_SESSION["errorMessage"])) {
+      MessageContainer::errorMessage("Não foi possível realizar esta operação", $_SESSION["errorMessage"]);
+      $_SESSION["errorMessage"] = null;
     } else if (isset($_SESSION["successMessage"])) {
       MessageContainer::successMessage("Operação realizada", $_SESSION["successMessage"]);
+      $_SESSION["successMessage"] = null;
     }
     ?>
 
@@ -65,6 +67,3 @@
 </body>
 
 </html>
-<?php
-$_SESSION["registerOnPlatformErrorMessage"] = null;
-$_SESSION["successMessage"] = null;

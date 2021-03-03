@@ -55,7 +55,7 @@ class UserController
             $result = UserService::signIn($username, $password);
 
             if ($result == null || !is_object($result)) {
-                $_SESSION["loginErrorMessage"] = "O usuário inserido não possui permissão para acessar a plataforma.";
+                $_SESSION["errorMessage"] = "O usuário inserido não possui permissão para acessar a plataforma.";
                 header("Location: ./");
             } else {
                 $_SESSION["loggedUser"] = $result->getResponsibility();
@@ -63,7 +63,7 @@ class UserController
                 header("Location: ./");
             }
         } else {
-            $_SESSION["loginErrorMessage"] = "Você precisa inserir o username e a senha para acessar a plataforma!";
+            $_SESSION["errorMessage"] = "Você precisa inserir o username e a senha para acessar a plataforma!";
 
             header("Location: ./");
         }
@@ -71,7 +71,6 @@ class UserController
 
     public static function save()
     {
-
         $cpf = $_POST["cpf"];
         $username = $_POST["username"];
         $password = $_POST["password"];
@@ -84,17 +83,17 @@ class UserController
             $user = UserService::fetchUser($cpf);
 
             if ($user == null || !is_object($user)) {
-                $_SESSION["registerOnPlatformErrorMessage"]  = "Você não pode realizar o cadastro porque você não é um funcionário dessa Unidade de Saúde";
+                $_SESSION["errorMessage"]  = "Você não pode realizar o cadastro porque você não é um funcionário dessa Unidade de Saúde";
                 require_once "app/pages/user/register_on_platform/index.php";
             } else {
                 if ($password != $confirm_password) {
-                    $_SESSION["registerOnPlatformErrorMessage"] = "O campo SENHA está diferente do campo CONFIRMAR SENHA";
+                    $_SESSION["errorMessage"] = "O campo SENHA está diferente do campo CONFIRMAR SENHA";
                     require_once "app/pages/user/register_on_platform/index.php";
                 } else {
                     $result = UserService::save($cpf, $username, $password);
 
                     if ($result == null || !is_bool($result)) {
-                        $_SESSION["registerOnPlatformErrorMessage"] = $result;
+                        $_SESSION["errorMessage"] = $result;
                         require_once "app/pages/user/register_on_platform/index.php";
                     } else {
                         $_SESSION["successMessage"] = "O cadastro foi realizado com sucesso! Você já pode acessar a plataforma.";
@@ -103,7 +102,7 @@ class UserController
                 }
             }
         } else {
-            $_SESSION["registerOnPlatformErrorMessage"] = "Você precisa preencher todos os campos parar cadastrar o usuário na plataforma!";
+            $_SESSION["errorMessage"] = "Você precisa preencher todos os campos parar cadastrar o usuário na plataforma!";
             require_once "app/pages/user/register_on_platform/index.php";
         }
     }

@@ -38,8 +38,9 @@
     <?php
     require_once "app/components/MessageContainer.php";
 
-    if (isset($_SESSION["loginErrorMessage"])) {
-      MessageContainer::errorMessage("Erro ao tentar entrar na plataforma", $_SESSION["loginErrorMessage"]);
+    if (isset($_SESSION["errorMessage"])) {
+      MessageContainer::errorMessage("Erro ao tentar entrar na plataforma", $_SESSION["errorMessage"]);
+      $_SESSION["errorMessage"] = null;
     }
     ?>
 
@@ -56,6 +57,3 @@
 </body>
 
 </html>
-
-<?php
-$_SESSION["loginErrorMessage"] = null;
