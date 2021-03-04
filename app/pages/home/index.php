@@ -120,7 +120,7 @@ if (!isset($_SESSION["loggedUser"])) {
                   <td><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " " . $medical_appointment->getIdRoom()[1]); ?></td>
                   <td><?php echo ($medical_appointment->getDate() . " às " . $medical_appointment->getTime()); ?></td>
                   <td><?php echo ($medical_appointment->getArrivalTime()); ?></td>
-                  <td><?php echo ($medical_appointment->getStatus()[1]); ?></td>
+                  <td><?php echo ($medical_appointment->getStatus()); ?></td>
                 </tr>
               <?php
               }

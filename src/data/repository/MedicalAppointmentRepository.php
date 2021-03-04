@@ -7,6 +7,7 @@ class MedicalAppointmentRepository
     public static function makeAnAppointment($patient_cpf, $genre, $specialty, $date, $time, $room)
     {
         try {
+            require_once "app/utils/constants.php";
 
             $select = "SELECT id FROM doctor WHERE genre = :genre AND specialty = :specialty AND active = :active";
 
@@ -18,14 +19,14 @@ class MedicalAppointmentRepository
                 ':active' => 1,
             ));
 
-            $doctor = $stmt->fetchAll();
+            $doctor = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($doctor != null) {
                 $id_doctor = $doctor[0]['id'];
 
                 $sql = "INSERT INTO medical_appointment (cpf_patient_fk, id_doctor_fk, 
-                        id_room_fk, time, date) 
-                        VALUES (:cpf_patient_fk, :id_doctor_fk,:id_room_fk, :time, :date)";
+                        id_room_fk, time, date, status) 
+                        VALUES (:cpf_patient_fk, :id_doctor_fk,:id_room_fk, :time, :date, :status)";
 
 
                 $stmt = Connection::connect()->prepare($sql);
@@ -36,6 +37,7 @@ class MedicalAppointmentRepository
                     ':id_room_fk' => $room,
                     ':time' => $time,
                     ':date' => $date,
+                    ':status' => $allStatus[0]
                 ));
 
                 if ($success) {
@@ -56,9 +58,11 @@ class MedicalAppointmentRepository
     public static function allMedicalAppointments($start, $total_records)
     {
         try {
+            require_once "app/utils/constants.php";
+
             $sql = "SELECT MA.id, P.full_name, D.name, MA.time, 
                     MA.date, MA.arrival_time, MA.id_room_fk, R.type,
-                    MA.id_status_fk, S.name AS status
+                    MA.status
                     FROM medical_appointment AS MA
                         INNER JOIN patient AS P 
                             ON (MA.cpf_patient_fk = P.cpf)
@@ -66,15 +70,13 @@ class MedicalAppointmentRepository
                             ON (MA.id_doctor_fk = D.id)
                         INNER JOIN room AS R
                             ON (MA.id_room_fk = R.id)
-                        INNER JOIN status AS S
-                            ON (MA.id_status_fk = S.id)
-                    WHERE MA.id_status_fk NOT IN (:id_status_fk)
+                    WHERE MA.status NOT IN (:status)
                     ORDER BY MA.arrival_time IS NULL, MA.arrival_time ASC, MA.time ASC";
 
             $stmt = Connection::connect()->prepare($sql);
 
             $stmt->execute(array(
-                ':id_status_fk' => 3,
+                ':status' => $allStatus[1],
             ));
 
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -85,7 +87,7 @@ class MedicalAppointmentRepository
                 $stmt = Connection::connect()->prepare("$sql LIMIT $start, $total_records");
 
                 $stmt->execute(array(
-                    ':id_status_fk' => 3,
+                    ':status' => $allStatus[1],
                 ));
 
                 $fetchAll = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -100,7 +102,6 @@ class MedicalAppointmentRepository
                     $date = $row['date'];
                     $type = $row['type'];
                     $id_room = $row['id_room_fk'];
-                    $id_status = $row['id_status_fk'];
                     $status = $row['status'];
 
                     if ($row['arrival_time'] != null) {
@@ -117,7 +118,7 @@ class MedicalAppointmentRepository
                         $date,
                         $time,
                         $arrival_time,
-                        [$id_status, $status]
+                        $status
                     );
 
                     array_push($list, $medical_appointment);
@@ -140,19 +141,17 @@ class MedicalAppointmentRepository
         try {
             $sql = "SELECT D.specialty, D.genre, D.name, MA.id,
                     MA.date, MA.cpf_patient_fk ,MA.time, MA.arrival_time,
-                    MA.id_room_fk, R.type, MA.id_status_fk, S.name AS status
+                    MA.id_room_fk, R.type, MA.status
                     FROM medical_appointment AS MA
                         INNER JOIN doctor AS D 
                             ON (MA.id_doctor_fk = D.id)
                         INNER JOIN room AS R
                             ON (MA.id_room_fk = R.id)
-                        INNER JOIN status AS S
-                            ON (MA.id_status_fk = S.id)
                     WHERE MA.id = :id
                     GROUP BY D.specialty, D.genre, D.name, MA.id,
                         MA.date, MA.cpf_patient_fk , MA.time, 
                         MA.arrival_time, MA.id_room_fk, R.type,
-                        MA.id_status_fk, S.name";
+                        MA.status";
 
             $stmt = Connection::connect()->prepare($sql);
 
@@ -166,7 +165,6 @@ class MedicalAppointmentRepository
                 $name = $result[0]['name'];
                 $genre = $result[0]['genre'];
                 $specialty = $result[0]['specialty'];
-                $id_status = $result[0]['id_status_fk'];
                 $status = $result[0]['status'];
                 $date = $result[0]['date'];
                 $time = $result[0]['time'];
@@ -188,7 +186,7 @@ class MedicalAppointmentRepository
                     $date,
                     $time,
                     $arrival_time,
-                    [$id_status, $status]
+                    $status
                 );
 
                 return $medical_appointment;
@@ -223,7 +221,7 @@ class MedicalAppointmentRepository
 
                 $sql = "UPDATE medical_appointment SET cpf_patient_fk = :cpf_patient_fk,
                 id_doctor_fk = :id_doctor_fk, id_room_fk = :id_room_fk, time = :time, 
-                date = :date, arrival_time = :arrival_time, id_status_fk = :id_status_fk 
+                date = :date, arrival_time = :arrival_time, status = :status 
                 WHERE id = :id";
 
                 $stmt = Connection::connect()->prepare($sql);
@@ -236,7 +234,7 @@ class MedicalAppointmentRepository
                     ':time' => $medical_appointment->getTime(),
                     ':date' => $medical_appointment->getDate(),
                     ':arrival_time' => $medical_appointment->getArrivalTime(),
-                    ':id_status_fk' => $medical_appointment->getStatus(),
+                    ':status' => $medical_appointment->getStatus(),
                 ));
 
                 if ($success) {
@@ -244,7 +242,7 @@ class MedicalAppointmentRepository
 
                     $stmt = Connection::connect()->prepare($sql);
 
-                    if ($medical_appointment->getStatus() != 2) {
+                    if ($medical_appointment->getStatus() != "Em Andamento") {
                         $status = 0;
                     } else {
                         $status = 1;

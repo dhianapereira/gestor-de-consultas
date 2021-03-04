@@ -66,16 +66,14 @@ CREATE TABLE medical_appointment (
   time TIME NOT NULL,
   date DATE NOT NULL,
   arrival_time TIME,
-  id_status_fk INT(11) DEFAULT 1,
+  status VARCHAR(50) NOT NULL,
   CONSTRAINT medical_appointment_pk PRIMARY KEY (id),
   CONSTRAINT medical_appointment_fk1 FOREIGN KEY (cpf_patient_fk)
   REFERENCES patient (cpf), 
   CONSTRAINT medical_appointment_fk2 FOREIGN KEY (id_doctor_fk)
   REFERENCES doctor (id),
   CONSTRAINT medical_appointment_fk3 FOREIGN KEY (id_room_fk)
-  REFERENCES room (id),
-  CONSTRAINT medical_appointment_fk4 FOREIGN KEY (id_status_fk)
-  REFERENCES status (id)   
+  REFERENCES room (id)
 );
 
 CREATE TABLE user ( 

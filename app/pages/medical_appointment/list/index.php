@@ -30,7 +30,7 @@ if (!isset($_SESSION["loggedUser"])) {
 
         ?>
         <section class="quick-access">
-            <a href="./consultation_page.php" class="home-button">
+            <a href="?page=medical_appointment/register" class="home-button">
                 <h3>
                     <p>Marcar Consulta</p>
                     <img src="./public/styles/img/make-an-appointment.svg" alt="Imagem de marcar consulta" />
@@ -89,7 +89,7 @@ if (!isset($_SESSION["loggedUser"])) {
                                     <td><?php echo ("id: " . $medical_appointment->getIdRoom()[0] . " " . $medical_appointment->getIdRoom()[1]); ?></td>
                                     <td><?php echo ($medical_appointment->getDate() . " às " . $medical_appointment->getTime()); ?></td>
                                     <td><?php echo ($medical_appointment->getArrivalTime()); ?></td>
-                                    <td><?php echo ($medical_appointment->getStatus()[1]); ?></td>
+                                    <td><?php echo ($medical_appointment->getStatus()); ?></td>
                                 </tr>
                             <?php
                             }
