@@ -37,7 +37,7 @@ if (!isset($_SESSION["loggedUser"])) {
           <img src="./public/styles/img/medical-records-list.svg" alt="Imagem de lista de prontuários" />
         </h3>
       </a>
-      <a href="../medical_records/search_by_month.php" class="home-button">
+      <a href="?page=medical_records/most_recurrent_symptom" class="home-button">
         <h3>
           <p>Sintomas mais recorrentes</p>
           <img src="./public/styles/img/search.svg" alt="Imagem da pesquisa por sintomas mais recorrentes" />

@@ -1,7 +1,4 @@
 <?php
-
-namespace app\components;
-
 class SelectionBox
 {
     public static function months($months)
@@ -24,7 +21,7 @@ class SelectionBox
             </select>
         </div>
 
-        <script src="../../../public/scripts/selection_box.js"></script>
+        <script src="./public/scripts/selection_box.js"></script>
 <?php
 
     }
