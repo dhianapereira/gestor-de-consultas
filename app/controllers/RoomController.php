@@ -23,11 +23,28 @@ class RoomController
         }
     }
 
-    public static function update($room)
+    public static function update()
     {
-        $result = RoomService::update($room);
+        $id = $_POST["id"];
+        $type = $_POST["type"];
+        $status = $_POST["active"];
 
-        return $result;
+        if (isset($id) && isset($type) && isset($status)) {
+            $room = new Room($id, $type, $status);
+
+            $result = RoomService::update($room);
+
+            if ($result == null || !is_bool($result)) {
+                $_SESSION['errorMessage'] =   $result;
+                require_once "app/pages/room/update/index.php";
+            } else {
+                $_SESSION['successMessage'] =   "As atualizações foram realizadas com sucesso!";
+                require_once "app/pages/room/update/index.php";
+            }
+        } else {
+            $_SESSION['errorMessage'] =  "Você precisa alterar alguma informação para que a operação seja realizada.";
+            require_once "app/pages/room/update/index.php";
+        }
     }
 
     public static function allRooms($start, $total_records)
@@ -37,11 +54,23 @@ class RoomController
         return $result;
     }
 
-    public static function fetchRoom($id)
+    public static function fetchRoom()
     {
-        $result = RoomService::fetchRoom($id);
+        $id = $_POST["id"];
 
-        return $result;
+        if (isset($id)) {
+            $room = RoomService::fetchRoom($id);
+
+            if ($room == null || !is_object($room)) {
+                $_SESSION['errorMessage'] =   "Não há nenhuma sala com o ID: $id";
+                require_once "app/pages/room/search/index.php";
+            } else {
+                require_once "app/pages/room/update/index.php";
+            }
+        } else {
+            $_SESSION['errorMessage'] =   "Você precisa inserir um ID!";
+            require_once "app/pages/room/search/index.php";
+        }
     }
 
     public static function listOfTypes()

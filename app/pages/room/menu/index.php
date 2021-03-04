@@ -38,7 +38,7 @@ if (!isset($_SESSION["loggedUser"])) {
                     <img src="./public/styles/img/hospital-icon.svg" alt="Imagem de cadastro de uma sala" />
                 </h3>
             </a>
-            <a href="./search_room.html" class="home-button">
+            <a href="?page=room/search" class="home-button">
                 <h3>
                     <p>Procurar Sala</p>
                     <img src="./public/styles/img/search.svg" alt="Imagem de pesquisa" />
