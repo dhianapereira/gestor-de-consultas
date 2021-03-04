@@ -25,7 +25,7 @@
         ?>
         <section class="quick-access">
 
-            <a href="./search_doctor.html" class="home-button">
+            <a href="?page=doctor/search" class="home-button">
                 <h3>
                     <p>Procurar Médico(a)</p>
                     <img src="./public/styles/img/doctor.svg" alt="Imagem de pesquisa" />

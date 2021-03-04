@@ -16,7 +16,6 @@ class DoctorController
             $result = DoctorService::register($name, $genre, $specialty);
 
             if (!is_bool($result)) {
-
                 $_SESSION['errorMessage'] = $result;
                 require_once "app/pages/doctor/register/index.php";
             } else {
@@ -26,11 +25,30 @@ class DoctorController
         }
     }
 
-    public static function update($doctor)
+    public static function update()
     {
-        $result = DoctorService::update($doctor);
+        $id = $_POST["id"];
+        $specialty = $_POST["specialty"];
+        $genre = $_POST["genre"];
+        $name = $_POST["name"];
+        $active = $_POST["active"];
 
-        return $result;
+        if (isset($id) && isset($specialty) && isset($genre) && isset($name) && isset($active)) {
+            $doctor = new Doctor($id, $name, $genre, $specialty, $active);
+
+            $result = DoctorService::update($doctor);
+
+            if ($result == null || !is_bool($result)) {
+                $_SESSION['errorMessage'] = $result;
+                require_once "app/pages/doctor/update/index.php";
+            } else {
+                $_SESSION['successMessage'] = "As atualizações foram realizadas com sucesso!";
+                require_once "app/pages/doctor/update/index.php";
+            }
+        } else {
+            $_SESSION['errorMessage'] = "Você precisa alterar alguma informação para que a operação seja realizada.";
+            require_once "app/pages/doctor/update/index.php";
+        }
     }
 
     public static function allDoctors($start, $total_records)
@@ -40,12 +58,22 @@ class DoctorController
         return $result;
     }
 
-    public static function fetchDoctor($id)
+    public static function fetchDoctor()
     {
+        $id = $_POST["id"];
 
-        $result = DoctorService::fetchDoctor($id);
-
-        return $result;
+        if (isset($id)) {
+            $doctor = DoctorService::fetchDoctor($id);
+            if ($doctor == null || !is_object($doctor)) {
+                $_SESSION['errorMessage'] = "Não há nenhum médico com o ID: $id";
+                require_once "app/pages/doctor/search/index.php";
+            } else {
+                require_once "app/pages/doctor/update/index.php";
+            }
+        } else {
+            $_SESSION['errorMessage'] = "Você precisa inserir um ID!";
+            require_once "app/pages/doctor/search/index.php";
+        }
     }
 
     public static function listOfSpecialties()
