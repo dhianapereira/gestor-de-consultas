@@ -45,12 +45,6 @@ CREATE TABLE doctor (
   CONSTRAINT user_pk PRIMARY KEY (id) 
 );
 
-CREATE TABLE status ( 
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
-  CONSTRAINT status_pk PRIMARY KEY (id) 
-);
-
 CREATE TABLE room ( 
   id INT(11) NOT NULL AUTO_INCREMENT,
   type VARCHAR(100) NOT NULL,
@@ -95,7 +89,3 @@ INSERT INTO user (cpf, name, genre, date_of_birth, naturalness,
 address, responsibility, username, password) 
 VALUES ("123.123.123-12", "Administrador", "Feminino", "1999-05-14",
 "Brasileiro(a)", "Endereço", "Administrador", "admin", "123");
-
-INSERT INTO status (name) VALUES ("Não");
-INSERT INTO status (name) VALUES ("Em Andamento");
-INSERT INTO status (name) VALUES ("Sim");
