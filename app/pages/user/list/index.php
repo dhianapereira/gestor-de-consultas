@@ -35,7 +35,7 @@ if (!isset($_SESSION["loggedUser"])) {
                     <img src="./public/styles/img/plus.svg" alt="Imagem de adicionar" />
                 </h3>
             </a>
-            <a href="./search_user.html" class="home-button">
+            <a href="?page=user/search" class="home-button">
                 <h3>
                     <p>Procurar Funcionário</p>
                     <img src="./public/styles/img/update-patient.svg" alt="Imagem de funcionário" />

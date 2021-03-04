@@ -43,11 +43,56 @@ class UserController
         }
     }
 
-    public static function update($user)
+    public static function update()
     {
-        $result = UserService::update($user);
+        $cpf = $_POST["cpf"];
+        $name = $_POST["name"];
+        $date_of_birth = $_POST["date_of_birth"];
+        $genre = $_POST["genre"];
+        $naturalness = $_POST["naturalness"];
+        $address = $_POST["address"];
+        $responsibility = $_POST["responsibility"];
+        $active = $_POST["active"];
 
-        return $result;
+        if (
+            isset($cpf) && isset($name) && isset($genre) && isset($date_of_birth)
+            && isset($responsibility) && isset($address)
+            && isset($naturalness)  && isset($active)
+        ) {
+
+            $data = UserService::fetchUser($cpf);
+
+            if ($data != null && is_object($data)) {
+                $username = $data->getUsername();
+                $password = $data->getPassword();
+
+                $user = new User(
+                    $cpf,
+                    $name,
+                    $genre,
+                    $date_of_birth,
+                    $naturalness,
+                    $address,
+                    $responsibility,
+                    $username,
+                    $password,
+                    $active
+                );
+
+                $result = UserService::update($user);
+
+                if ($result == null || !is_bool($result)) {
+                    $_SESSION['errorMessage'] = $result;
+                    require_once "app/pages/user/update/index.php";
+                } else {
+                    $_SESSION['successMessage'] = "As atualizações foram realizadas com sucesso!";
+                    require_once "app/pages/user/update/index.php";
+                }
+            }
+        } else {
+            $_SESSION['errorMessage'] = "Você precisa alterar alguma informação para que a operação seja realizada.";
+            require_once "app/pages/user/update/index.php";
+        }
     }
 
     public static function allUsers($start, $total_records)
@@ -57,11 +102,22 @@ class UserController
         return $result;
     }
 
-    public static function fetchUser($cpf)
+    public static function fetchUser()
     {
-        $result = UserService::fetchUser($cpf);
+        $cpf = $_POST["cpf"];
 
-        return $result;
+        if (isset($cpf)) {
+            $user = UserService::fetchUser($cpf);
+            if ($user == null || !is_object($user)) {
+                $_SESSION['errorMessage'] = "Não há nenhum funcionário com o CPF: $cpf";
+                require_once "app/pages/user/search/index.php";
+            } else {
+                require_once "app/pages/user/update/index.php";
+            }
+        } else {
+            $_SESSION['errorMessage'] =  "Você precisa inserir um CPF!";
+            require_once "app/pages/user/search/index.php";
+        }
     }
 
     public static function signIn()
