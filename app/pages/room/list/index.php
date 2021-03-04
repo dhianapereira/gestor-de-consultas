@@ -110,7 +110,7 @@ if (!isset($_SESSION["loggedUser"])) {
         </section>
     </main>
     <?php
-    Modal::registerRoom("register_room.php");
+    Modal::registerRoom("?class=Room&action=register");
     ?>
     <footer>
         <p>2021 - Unidade de Saúde</p>

@@ -50,6 +50,15 @@ if (!isset($_SESSION["loggedUser"])) {
                 </h3>
             </a>
         </section>
+        <?php
+        if (isset($_SESSION["errorMessage"])) {
+            MessageContainer::errorMessage("Mensagem de Erro", $_SESSION["errorMessage"]);
+            $_SESSION["errorMessage"] = null;
+        } else if (isset($_SESSION["successMessage"])) {
+            MessageContainer::successMessage("Operação realizada", $_SESSION["successMessage"]);
+            $_SESSION["successMessage"] = null;
+        }
+        ?>
         <section>
             <?php
 
@@ -110,7 +119,7 @@ if (!isset($_SESSION["loggedUser"])) {
         </section>
     </main>
     <?php
-    Modal::registerRoom("register_room.php");
+    Modal::registerRoom("?class=Room&action=register");
     ?>
     <footer>
         <p>2021 - Unidade de Saúde</p>

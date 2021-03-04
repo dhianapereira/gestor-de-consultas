@@ -3,11 +3,24 @@ require_once "src/services/RoomService.php";
 
 class RoomController
 {
-    public static function register($type)
+    public static function register()
     {
-        $result = RoomService::register($type);
+        $type = $_POST["type"];
 
-        return $result;
+        if (!isset($type)) {
+            $_SESSION['errorMessage'] =  "Você precisa preencher todos os campos para realizar esta operação!";
+            require_once "app/pages/room/menu/index.php";
+        } else {
+            $result = RoomService::register($type);
+
+            if (!is_bool($result)) {
+                $_SESSION['errorMessage'] = $result;
+                require_once "app/pages/room/menu/index.php";
+            } else {
+                $_SESSION['successMessage'] = "O cadastro da sala foi realizado com sucesso!";
+                require_once "app/pages/room/menu/index.php";
+            }
+        }
     }
 
     public static function update($room)
