@@ -36,7 +36,7 @@ if (!isset($_SESSION["loggedUser"])) {
                     <img src="./public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
                 </h3>
             </a>
-            <a href="./search_medical_records.html" class="home-button">
+            <a href="?page=medical_records/search" class="home-button">
                 <h3>
                     <p>Procurar Prontuário</p>
                     <img src="./public/styles/img/file-search.png" alt="Imagem de prontuário" />

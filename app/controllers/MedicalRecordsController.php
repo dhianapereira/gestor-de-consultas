@@ -4,11 +4,33 @@ require_once "src/services/MedicalRecordsService.php";
 class MedicalRecordsController
 {
 
-    public static function fetchMedicalRecords($cpf)
+    public static function fetchMedicalRecords()
     {
-        $result = MedicalRecordsService::fetchMedicalRecords($cpf);
+        $cpf = $_POST["cpf"];
 
-        return $result;
+        if (isset($cpf)) {
+            $medical_records = MedicalRecordsService::fetchMedicalRecords($cpf);
+
+            if ($medical_records == null || !is_object($medical_records)) {
+                $_SESSION['errorMessage'] = "Não há nenhum prontuário com o CPF: $cpf";
+                require_once "app/pages/medical_records/search/index.php";
+            } else {
+                require_once "app/controllers/PatientController.php";
+                $patient = PatientController::fetchPatient($cpf);
+
+                if ($patient == null || !is_object($patient)) {
+                    $_SESSION['errorMessage'] = "Não há nenhum prontuário com o CPF: $cpf";
+                    require_once "app/pages/medical_records/search/index.php";
+                } else {
+                    require_once "app/controllers/SymptomController.php";
+                    $symptoms = SymptomController::fetchSymptoms($cpf);
+                    require_once "app/pages/medical_records/details/index.php";
+                }
+            }
+        } else {
+            $_SESSION['errorMessage'] = "Você precisa inserir um CPF!";
+            require_once "app/pages/medical_records/search/index.php";
+        }
     }
 
     public static function allMedicalRecords($start, $total_records)

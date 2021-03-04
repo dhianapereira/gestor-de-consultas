@@ -25,7 +25,7 @@ if (!isset($_SESSION["loggedUser"])) {
   </header>
   <main class="container">
     <section class="quick-access">
-      <a href="../medical_records/search_medical_records.html" class="home-button">
+      <a href="?page=medical_records/search" class="home-button">
         <h3>
           <p>Procurar Prontuário</p>
           <img src="./public/styles/img/file-search.png" alt="Imagem de prontuário" />
