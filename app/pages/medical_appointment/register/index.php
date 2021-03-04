@@ -37,7 +37,7 @@ if (!isset($_SESSION["loggedUser"])) {
                     <img src="./public/styles/img/medical-appointments-list.svg" alt="Imagem de lista de atendimento" />
                 </h3>
             </a>
-            <a href="./search_medical_appointment.html" class="home-button">
+            <a href="?page=medical_appointment/search" class="home-button">
                 <h3>
                     <p>Procurar Consulta</p>
                     <img src="./public/styles/img/update-medical-appointment.svg" alt="Imagem de pesquisa" />

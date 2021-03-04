@@ -48,19 +48,65 @@ class MedicalAppointmentController
         return $result;
     }
 
-    public static function fetchMedicalAppointment($id)
+    public static function fetchMedicalAppointment()
     {
+        $id = $_POST["id"];
 
-        $result = MedicalAppointmentService::fetchMedicalAppointment($id);
-
-        return $result;
+        if (isset($id)) {
+            $medical_appointment = MedicalAppointmentService::fetchMedicalAppointment($id);
+            if ($medical_appointment == null || !is_object($medical_appointment)) {
+                $_SESSION['errorMessage'] =  "Não há nenhuma consulta com o ID: $id";
+                require_once "app/pages/medical_appointment/search/index.php";
+            } else {
+                require_once "app/pages/medical_appointment/update/index.php";
+            }
+        } else {
+            $_SESSION['errorMessage'] =  "Você precisa inserir o ID da consulta!";
+            require_once "app/pages/medical_appointment/search/index.php";
+        }
     }
 
-    public static function update($medical_appointment)
+    public static function update()
     {
+        $id = $_POST["id"];
+        $specialty = $_POST["specialty"];
+        $genre = $_POST["genre"];
+        $room = $_POST["room"];
+        $patient_cpf = $_POST["patient_cpf"];
+        $date = $_POST["date"];
+        $time = $_POST["time"];
+        $arrival_time = $_POST["arrival_time"];
+        $status = $_POST["status"];
 
-        $result = MedicalAppointmentService::update($medical_appointment);
+        if (
+            isset($id) && isset($specialty) && isset($genre)
+            && isset($patient_cpf) && isset($status) && isset($date)
+            && isset($time) && isset($arrival_time)
+        ) {
 
-        return $result;
+            $medical_appointment = new MedicalAppointment(
+                $id,
+                $patient_cpf,
+                [$specialty, $genre],
+                $room,
+                $date,
+                $time,
+                $arrival_time,
+                $status
+            );
+
+            $result = MedicalAppointmentService::update($medical_appointment);
+
+            if ($result == null || !is_bool($result)) {
+                $_SESSION['errorMessage'] =  $result;
+                require_once "app/pages/medical_appointment/update/index.php";
+            } else {
+                $_SESSION['successMessage'] =  "As atualizações foram realizadas com sucesso!";
+                require_once "app/pages/medical_appointment/update/index.php";
+            }
+        } else {
+            $_SESSION['errorMessage'] =  "Você precisa alterar alguma informação da consulta para que a operação seja realizada.";
+            require_once "app/pages/medical_appointment/update/index.php";
+        }
     }
 }
