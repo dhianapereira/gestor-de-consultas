@@ -1,28 +1,18 @@
 <?php
-    namespace src\services;
-    use src\data\Facade;
-    
-    class SymptomService{
+require_once "src/data/Facade.php";
+class SymptomService
+{
+    public static function addSymptoms($patient_cpf, $symptoms, $start_date)
+    {
+        $result = Facade::addSymptoms($patient_cpf, $symptoms, $start_date);
 
-        private $facade;
-
-        public function __construct()
-        {
-            $this->facade =  new Facade();
-        }
-
-        public function addSymptoms($patient_cpf, $symptoms, $start_date){
-
-            $result = $this->facade->addSymptoms($patient_cpf, $symptoms, $start_date);
-
-            return $result;
-        }
-
-        public function fetchSymptoms($cpf){
-
-            $result = $this->facade->fetchSymptoms($cpf);
-
-            return $result;
-        }
+        return $result;
     }
-?>
+
+    public static function fetchSymptoms($cpf)
+    {
+        $result = Facade::fetchSymptoms($cpf);
+
+        return $result;
+    }
+}

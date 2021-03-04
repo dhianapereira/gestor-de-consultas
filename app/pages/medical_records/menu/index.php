@@ -30,7 +30,7 @@ if (!isset($_SESSION["loggedUser"])) {
 
         ?>
         <section class="quick-access">
-            <a href="../symptom/questionnaire_page.html" class="home-button">
+            <a href="?page=symptom" class="home-button">
                 <h3>
                     <p>Questionário (Dengue)</p>
                     <img src="./public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
