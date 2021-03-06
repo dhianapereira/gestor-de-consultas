@@ -2,82 +2,77 @@
 if (!isset($_SESSION["loggedUser"])) {
   header("Location: ./");
 }
+
+require_once "app/utils/pagination.php";
+require_once "app/controllers/MedicalAppointmentController.php";
+require_once "app/components/MessageContainer.php";
+require_once "app/components/Base.php";
+require_once "app/components/Button.php";
+
 ?>
 <html>
 
 <head>
-  <title>Unidade de Saúde</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
-  <link rel="stylesheet" type="text/css" href="./public/styles/css/main.css" />
-  <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
+  <?php Base::head("Unidade de Saúde"); ?>
   <link rel="stylesheet" type="text/css" href="./public/styles/css/table.css" />
-  <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
-  <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-  <header>
-    <h3 class="logo">Unidade de Saúde</h3>
-  </header>
+  <?php Base::header(); ?>
   <main class="container">
-    <?php
-    require_once "app/utils/pagination.php";
-    require_once "app/controllers/MedicalAppointmentController.php";
-    require_once "app/components/MessageContainer.php";
-
-    ?>
     <section class="quick-access">
-      <a href="?page=patient/menu" class="home-button">
-        <h3>
-          <p>Paciente</p>
-          <img src="./public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
-        </h3>
-      </a>
-      <a href="?page=doctor/menu" class="home-button">
-        <h3>
-          <p>Médico</p>
-          <img src="./public/styles/img/doctor.svg" alt="Imagem de médico" />
-        </h3>
-      </a>
-      <a href="?page=medical_appointment/menu" class="home-button">
-        <h3>
-          <p>Consultas</p>
-          <img src="./public/styles/img/make-an-appointment.svg" alt="Imagem de consulta" />
-        </h3>
-      </a>
-      <a href="?page=medical_records/menu" class="home-button">
-        <h3>
-          <p>Prontuários</p>
-          <img src="./public/styles/img/medical-records-list.svg" alt="Imagem de prontuário" />
-        </h3>
-      </a>
-      <a href="?page=room/menu" class="home-button">
-        <h3>
-          <p>Salas</p>
-          <img src="./public/styles/img/medical-room.svg" alt="Imagem de salas" />
-        </h3>
-      </a>
       <?php
+      Button::quickAccess(
+        "?page=patient/menu",
+        "Paciente",
+        "./public/styles/img/questionnaire.svg",
+        "Imagem de questionário"
+      );
+
+      Button::quickAccess(
+        "?page=doctor/menu",
+        "Médico",
+        "./public/styles/img/doctor.svg",
+        "Imagem de médico"
+      );
+
+      Button::quickAccess(
+        "?page=medical_appointment/menu",
+        "Consultas",
+        "./public/styles/img/make-an-appointment.svg",
+        "Imagem de consulta"
+      );
+
+      Button::quickAccess(
+        "?page=medical_records/menu",
+        "Prontuários",
+        "./public/styles/img/medical-records-list.svg",
+        "Imagem de prontuário"
+      );
+
+      Button::quickAccess(
+        "?page=room/menu",
+        "Salas",
+        "./public/styles/img/medical-room.svg",
+        "Imagem de salas"
+      );
+
       if ($_SESSION['loggedUser'] == "Administrador") {
-      ?>
-        <a href="?page=user/menu" class="home-button">
-          <h3>
-            <p>Funcionários</p>
-            <img src="./public/styles/img/update-patient.svg" alt="Imagem de funcionário" />
-          </h3>
-        </a>
-      <?php
+        Button::quickAccess(
+          "?page=user/menu",
+          "Funcionários",
+          "./public/styles/img/update-patient.svg",
+          "Imagem de funcionário"
+        );
       }
+
+      Button::quickAccess(
+        "?class=User&action=logout",
+        "Sair",
+        "./public/styles/img/logout.svg",
+        "Sair"
+      );
       ?>
-      <a href="?class=User&action=logout" class="home-button">
-        <h3>
-          <p>Sair</p>
-          <img src="./public/styles/img/logout.svg" alt="Sair" />
-        </h3>
-      </a>
     </section>
     <section>
       <?php
@@ -147,9 +142,7 @@ if (!isset($_SESSION["loggedUser"])) {
       ?>
     </section>
   </main>
-  <footer>
-    <p>2021 - Unidade de Saúde</p>
-  </footer>
+  <?php Base::footer(); ?>
 </body>
 
 </html>

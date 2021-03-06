@@ -2,28 +2,22 @@
 if (!isset($_SESSION["loggedUser"])) {
     header("Location: ./");
 }
+
+require_once "app/components/MessageContainer.php";
+require_once "app/components/Base.php";
 ?>
 <html>
 
 <head>
-    <title>Unidade de Saúde | Dados do Funcionário</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
+    <?php Base::head("Dados do Funcionário | Unidade de Saúde"); ?>
     <link rel="stylesheet" type="text/css" href="./public/styles/css/form.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 <script src="./public/scripts/toggle.js"></script>
 
 <body>
 
-    <header>
-        <h3 class="logo">Unidade de Saúde</h3>
-    </header>
+    <?php Base::header(); ?>
+
     <main class="container">
         <section class="quick-access">
             <a href="?page=user/search" class="home-button">
@@ -51,8 +45,6 @@ if (!isset($_SESSION["loggedUser"])) {
             </a>
         </section>
         <?php
-        require_once "app/components/MessageContainer.php";
-
         if (isset($_SESSION["errorMessage"])) {
             MessageContainer::errorMessage("Mensagem de Erro", $_SESSION["errorMessage"]);
             $_SESSION["errorMessage"] = null;
@@ -84,18 +76,18 @@ if (!isset($_SESSION["loggedUser"])) {
                             <input type="hidden" name="genre" id="genre" value="<?php echo ($user->getGenre()) ?>" required />
 
                             <div class="button-select">
-                                <button data-value="Feminino" onclick="toggleGenre(event)" type="button" <?php
-                                                                                                            if ($user->getGenre() == "Feminino") {
-                                                                                                            ?> class="active-genre" <?php
-                                                                                                                                }
-                                                                                                                                    ?>>
+                                <button data-value="Feminino" onclick="toggle(event, 'active-genre', 'genre')" type="button" <?php
+                                                                                                                                if ($user->getGenre() == "Feminino") {
+                                                                                                                                ?> class="active-genre" <?php
+                                                                                                                                                    }
+                                                                                                                                                        ?>>
                                     Feminino
                                 </button>
-                                <button data-value="Masculino" onclick="toggleGenre(event)" type="button" <?php
-                                                                                                            if ($user->getGenre() == "Masculino") {
-                                                                                                            ?> class="active-genre" <?php
-                                                                                                                                }
-                                                                                                                                    ?>>
+                                <button data-value="Masculino" onclick="toggle(event, 'active-genre', 'genre')" type="button" <?php
+                                                                                                                                if ($user->getGenre() == "Masculino") {
+                                                                                                                                ?> class="active-genre" <?php
+                                                                                                                                                    }
+                                                                                                                                                        ?>>
                                     Masculino
                                 </button>
                             </div>
@@ -106,18 +98,18 @@ if (!isset($_SESSION["loggedUser"])) {
                             <input type="hidden" name="naturalness" id="naturalness" value="<?php echo ($user->getNaturalness()) ?>" required />
 
                             <div class="button-select">
-                                <button data-value="Brasileiro" onclick="toggleNaturalness(event)" type="button" <?php
-                                                                                                                    if ($user->getNaturalness() == "Brasileiro(a)") {
-                                                                                                                    ?> class="active-naturalness" <?php
-                                                                                                                                                }
-                                                                                                                                                    ?>>
+                                <button data-value="Brasileiro(a)" onclick="toggle(event, 'active-naturalness', 'naturalness')" type="button" <?php
+                                                                                                                                                if ($user->getNaturalness() == "Brasileiro(a)") {
+                                                                                                                                                ?> class="active-naturalness" <?php
+                                                                                                                                                                            }
+                                                                                                                                                                                ?>>
                                     Brasileiro(a)
                                 </button>
-                                <button data-value="Estrangeiro" onclick="toggleNaturalness(event)" type="button" <?php
-                                                                                                                    if ($user->getNaturalness() == "Estrangeiro(a)") {
-                                                                                                                    ?> class="active-naturalness" <?php
-                                                                                                                                                }
-                                                                                                                                                    ?>>
+                                <button data-value="Estrangeiro(a)" onclick="toggle(event, 'active-naturalness', 'naturalness')" type="button" <?php
+                                                                                                                                                if ($user->getNaturalness() == "Estrangeiro(a)") {
+                                                                                                                                                ?> class="active-naturalness" <?php
+                                                                                                                                                                            }
+                                                                                                                                                                                ?>>
                                     Estrangeiro(a)
                                 </button>
                             </div>
@@ -140,18 +132,18 @@ if (!isset($_SESSION["loggedUser"])) {
                             <input type="hidden" name="active" id="active" value="<?php echo ($user->getActive()) ?>" required />
 
                             <div class="button-select">
-                                <button data-value=1 onclick="toggleActive(event)" type="button" <?php
-                                                                                                    if ($user->getActive() == 1) {
-                                                                                                    ?> class="active" <?php
-                                                                                                                    }
-                                                                                                                        ?>>
+                                <button data-value=1 onclick="toggle(event, 'active', 'active')" type="button" <?php
+                                                                                                                if ($user->getActive() == 1) {
+                                                                                                                ?> class="active" <?php
+                                                                                                                                }
+                                                                                                                                    ?>>
                                     Ativo
                                 </button>
-                                <button data-value=0 onclick="toggleActive(event)" type="button" <?php
-                                                                                                    if ($user->getActive() == 0) {
-                                                                                                    ?> class="active" <?php
-                                                                                                                    }
-                                                                                                                        ?>>
+                                <button data-value=0 onclick="toggle(event, 'active', 'active')" type="button" <?php
+                                                                                                                if ($user->getActive() == 0) {
+                                                                                                                ?> class="active" <?php
+                                                                                                                                }
+                                                                                                                                    ?>>
                                     Inativo
                                 </button>
                             </div>
@@ -166,9 +158,7 @@ if (!isset($_SESSION["loggedUser"])) {
         }
         ?>
     </main>
-    <footer>
-        <p>2021 - Unidade de Saúde</p>
-    </footer>
+    <?php Base::footer(); ?>
 
 </body>
 

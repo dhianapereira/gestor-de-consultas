@@ -2,34 +2,25 @@
 if (!isset($_SESSION["loggedUser"])) {
     header("Location: ./");
 }
+
+require_once "app/controllers/DoctorController.php";
+require_once "app/controllers/RoomController.php";
+require_once "app/components/MessageContainer.php";
+require_once "app/components/Base.php";
 ?>
 <html>
 
 <head>
-    <title>Unidade de Saúde | Marcar Consulta</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
+    <?php Base::head("Marcar Consulta | Unidade de Saúde"); ?>
     <link rel="stylesheet" type="text/css" href="./public/styles/css/select.css" />
     <link rel="stylesheet" type="text/css" href="./public/styles/css/form.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
-<body>
-    <script src="./public/scripts/toggle.js"></script>
+<script src="./public/scripts/toggle.js"></script>
 
-    <header>
-        <h3 class="logo">Unidade de Saúde</h3>
-    </header>
+<body>
+    <?php Base::header(); ?>
     <main class="container">
-        <?php
-        require_once "app/controllers/DoctorController.php";
-        require_once "app/controllers/RoomController.php";
-        ?>
         <section class="quick-access">
             <a href="?page=medical_appointment/list" class="home-button">
                 <h3>
@@ -50,8 +41,6 @@ if (!isset($_SESSION["loggedUser"])) {
             </a>
         </section>
         <?php
-        require_once "app/components/MessageContainer.php";
-
         if (isset($_SESSION["errorMessage"])) {
             MessageContainer::errorMessage("Mensagem de Erro", $_SESSION["errorMessage"]);
             $_SESSION["errorMessage"] = null;
@@ -75,10 +64,10 @@ if (!isset($_SESSION["loggedUser"])) {
                         <input type="hidden" name="genre" id="genre" value="Feminino" required />
 
                         <div class="button-select">
-                            <button data-value="Feminino" onclick="toggleGenre(event)" type="button" class="active-genre">
+                            <button data-value="Feminino" onclick="toggle(event, 'active-genre', 'genre')" type="button" class="active-genre">
                                 Feminino
                             </button>
-                            <button data-value="Masculino" onclick="toggleGenre(event)" type="button">
+                            <button data-value="Masculino" onclick="toggle(event, 'active-genre', 'genre')" type="button">
                                 Masculino
                             </button>
                         </div>
@@ -136,9 +125,7 @@ if (!isset($_SESSION["loggedUser"])) {
         </section>
 
     </main>
-    <footer>
-        <p>2021 - Unidade de Saúde</p>
-    </footer>
+    <?php Base::footer(); ?>
 </body>
 
 </html>
