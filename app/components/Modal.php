@@ -23,6 +23,8 @@ class Modal
                 </div>
             </div>
         </div>
+
+        <script src="./public/scripts/modal.js"></script>
 <?php
     }
 }

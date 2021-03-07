@@ -2,33 +2,22 @@
 if (!isset($_SESSION["loggedUser"])) {
     header("Location: ./");
 }
+
+require_once "app/utils/pagination.php";
+require_once "app/controllers/MedicalAppointmentController.php";
+require_once "app/components/MessageContainer.php";
+require_once "app/components/Base.php";
 ?>
 <html>
 
 <head>
-    <title>Unidade de Saúde | Consulta</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
+    <?php Base::head("Consulta | Unidade de Saúde"); ?>
     <link rel="stylesheet" type="text/css" href="./public/styles/css/table.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-    <header>
-        <h3 class="logo">Unidade de Saúde</h3>
-    </header>
+    <?php Base::header(); ?>
     <main class="container">
-        <?php
-        require_once "app/utils/pagination.php";
-        require_once "app/controllers/MedicalAppointmentController.php";
-        require_once "app/components/MessageContainer.php";
-
-        ?>
         <section class="quick-access">
             <a href="?page=medical_appointment/register" class="home-button">
                 <h3>
@@ -116,9 +105,7 @@ if (!isset($_SESSION["loggedUser"])) {
             ?>
         </section>
     </main>
-    <footer>
-        <p>2021 - Unidade de Saúde</p>
-    </footer>
+    <?php Base::footer(); ?>
 </body>
 
 </html>

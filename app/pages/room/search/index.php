@@ -73,8 +73,6 @@ if (!isset($_SESSION["loggedUser"])) {
   <footer>
     <p>2021 - Unidade de Saúde</p>
   </footer>
-
-  <script src="./public/scripts/modal.js"></script>
 </body>
 
 </html>

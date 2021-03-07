@@ -80,18 +80,18 @@ if (!isset($_SESSION["loggedUser"])) {
                             <input type="hidden" name="active" id="active" value="<?php echo ($room->getStatus()) ?>" required />
 
                             <div class="button-select">
-                                <button data-value=1 onclick="toggleActive(event)" type="button" <?php
-                                                                                                    if ($room->getStatus() == 1) {
-                                                                                                    ?> class="active" <?php
+                                <button data-value=1 onclick="toggle(event, 'active', 'active')" type="button" <?php
+                                                                                                                if ($room->getStatus() == 1) {
+                                                                                                                ?> class="active" <?php
                                                                                                                     }
                                                                                                                         ?>>
                                     Ocupada
                                 </button>
-                                <button data-value=0 onclick="toggleActive(event)" type="button" <?php
-                                                                                                    if ($room->getStatus() == 0) {
-                                                                                                    ?> class="active" <?php
-                                                                                                                    }
-                                                                                                                        ?>>
+                                <button data-value=0 onclick="toggle(event, 'active', 'active')" type="button" <?php
+                                                                                                                if ($room->getStatus() == 0) {
+                                                                                                                ?> class="active" <?php
+                                                                                                                                }
+                                                                                                                                    ?>>
                                     Liberada
                                 </button>
                             </div>
@@ -109,7 +109,6 @@ if (!isset($_SESSION["loggedUser"])) {
     <footer>
         <p>2021 - Unidade de Saúde</p>
     </footer>
-    <script src="./public/scripts/modal.js"></script>
 </body>
 
 </html>

@@ -2,34 +2,23 @@
 if (!isset($_SESSION["loggedUser"])) {
     header("Location: ./");
 }
+require_once "app/utils/pagination.php";
+require_once "app/components/Modal.php";
+require_once "app/controllers/RoomController.php";
+require_once "app/components/MessageContainer.php";
+require_once "app/components/Base.php";
 ?>
 <html>
 
 <head>
-    <title>Unidade de Saúde | Salas</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./public/styles/img/doctors-list.svg" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/home.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/table.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/card.css" />
+    <?php Base::head("Salas | Unidade de Saúde"); ?>
     <link rel="stylesheet" type="text/css" href="./public/styles/css/modal.css" />
-    <link rel="stylesheet" type="text/css" href="./public/styles/css/buttons.css" />
+    <link rel="stylesheet" type="text/css" href="./public/styles/css/table.css" />
     <link rel="stylesheet" type="text/css" href="./public/styles/css/form.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-    <?php
-    require_once "app/utils/pagination.php";
-    require_once "app/components/Modal.php";
-    require_once "app/controllers/RoomController.php";
-    require_once "app/components/MessageContainer.php";
-    ?>
-    <header>
-        <h3 class="logo">Unidade de Saúde</h3>
-    </header>
+    <?php Base::header(); ?>
     <main class="container">
         <section class="quick-access">
             <a href="#" onclick="Modal.open()" class="home-button">
@@ -120,11 +109,8 @@ if (!isset($_SESSION["loggedUser"])) {
     </main>
     <?php
     Modal::registerRoom("?class=Room&action=register");
+    Base::footer();
     ?>
-    <footer>
-        <p>2021 - Unidade de Saúde</p>
-    </footer>
-    <script src="./public/scripts/modal.js"></script>
 </body>
 
 </html>
