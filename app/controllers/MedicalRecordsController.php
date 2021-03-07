@@ -15,17 +15,7 @@ class MedicalRecordsController
                 $_SESSION['errorMessage'] = "Não há nenhum prontuário com o CPF: $cpf";
                 require_once "app/pages/medical_records/search/index.php";
             } else {
-                require_once "app/controllers/PatientController.php";
-                $patient = PatientController::fetchPatient($cpf);
-
-                if ($patient == null || !is_object($patient)) {
-                    $_SESSION['errorMessage'] = "Não há nenhum prontuário com o CPF: $cpf";
-                    require_once "app/pages/medical_records/search/index.php";
-                } else {
-                    require_once "app/controllers/SymptomController.php";
-                    $symptoms = SymptomController::fetchSymptoms($cpf);
-                    require_once "app/pages/medical_records/details/index.php";
-                }
+                require_once "app/pages/medical_records/details/index.php";
             }
         } else {
             $_SESSION['errorMessage'] = "Você precisa inserir um CPF!";

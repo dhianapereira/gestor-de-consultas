@@ -39,7 +39,12 @@ class MedicalRecordsRepository
     public static function fetchMedicalRecords($cpf)
     {
         try {
-            $sql = "SELECT * FROM medical_records WHERE cpf_patient_fk = :cpf_patient_fk";
+            $sql = "SELECT P.full_name, P.date_of_birth, P.genre, P.naturalness,
+                    P.mother_name, P.companion, P.address, 
+                    MA.start_date, MA.result, MA.gravity
+                    FROM patient as P
+                    INNER JOIN medical_records as MA ON (P.cpf = MA.cpf_patient_fk)
+                    WHERE MA.cpf_patient_fk = :cpf_patient_fk";
 
             $stmt = Connection::connect()->prepare($sql);
 
@@ -50,13 +55,42 @@ class MedicalRecordsRepository
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result != null) {
+                $sql = "SELECT S.name
+                FROM symptom as S
+                INNER JOIN patient as P ON (P.cpf = S.cpf_patient_fk)
+                WHERE S.cpf_patient_fk = :cpf_patient_fk";
+
+                $stmt = Connection::connect()->prepare($sql);
+
+                $stmt->execute(array(
+                    ':cpf_patient_fk' => $cpf,
+                ));
+
+                $symptoms = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
                 $id = $result[0]['id'];
-                $patient_cpf = $result[0]['cpf_patient_fk'];
+                $patient_name = $result[0]['full_name'];
+                $date_of_birth = $result[0]['date_of_birth'];
+                $genre = $result[0]['genre'];
+                $naturalness = $result[0]['naturalness'];
+                $companion = $result[0]['companion'];
+                $mother_name = $result[0]['mother_name'];
+                $address = $result[0]['address'];
                 $percentage = $result[0]['result'];
                 $gravity = $result[0]['gravity'];
                 $start_date = $result[0]['start_date'];
 
-                $medical_records = new MedicalRecords($id, $patient_cpf, $percentage, $gravity, $start_date);
+                $medical_records = new MedicalRecords(
+                    $id,
+                    [
+                        $cpf, $patient_name,
+                        $date_of_birth, $genre, $naturalness,
+                        $address, $mother_name, $companion, $symptoms
+                    ],
+                    $percentage,
+                    $gravity,
+                    $start_date
+                );
 
                 return $medical_records;
             }

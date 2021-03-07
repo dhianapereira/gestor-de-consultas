@@ -64,35 +64,35 @@ require_once "app/components/Base.php";
           <form>
             <div class="input-block">
               <label for="full_name">Nome</label>
-              <input id="full_name" value="<?php echo ($patient->getName()) ?>" disabled />
+              <input id="full_name" value="<?php echo ($medical_records->getPatientCpf()[1]) ?>" disabled />
             </div>
             <div class="input-block">
               <label for="cpf">CPF </label>
-              <input id="cpf" value="<?php echo ($patient->getCpf()) ?>" disabled />
+              <input id="cpf" value="<?php echo ($medical_records->getPatientCpf()[0]) ?>" disabled />
             </div>
             <div class="input-block">
               <label for="date_of_birth">Data de nascimento </label>
-              <input id="date_of_birth" value="<?php echo ($patient->getDateOfBirth()) ?>" disabled />
+              <input id="date_of_birth" value="<?php echo ($medical_records->getPatientCpf()[2]) ?>" disabled />
             </div>
             <div class="input-block">
               <label for="genre">Gênero: </label>
-              <input id="genre" value="<?php echo ($patient->getGenre()) ?>" disabled />
+              <input id="genre" value="<?php echo ($medical_records->getPatientCpf()[3]) ?>" disabled />
             </div>
             <div class="input-block">
               <label for="naturalness">Naturalidade: </label>
-              <input id="naturalness" value="<?php echo ($patient->getNaturalness()) ?>" disabled />
+              <input id="naturalness" value="<?php echo ($medical_records->getPatientCpf()[4]) ?>" disabled />
             </div>
             <div class="input-block">
               <label for="mother_name">Nome da Mãe</label>
-              <input id="mother_name" value="<?php echo ($patient->getMotherName()) ?>" disabled />
+              <input id="mother_name" value="<?php echo ($medical_records->getPatientCpf()[6]) ?>" disabled />
             </div>
             <div class="input-block">
               <label for="companion">Acompanhante</label>
-              <input id="companion" value="<?php echo ($patient->getCompanion()) ?>" disabled />
+              <input id="companion" value="<?php echo ($medical_records->getPatientCpf()[7]) ?>" disabled />
             </div>
             <div class="input-block">
               <label for="patient_address">Endereço</label>
-              <input id="patient_address" value="<?php echo ($patient->getAddress()) ?>" disabled />
+              <input id="patient_address" value="<?php echo ($medical_records->getPatientCpf()[5]) ?>" disabled />
             </div>
             <h2>Resultados</h2>
             <div class="input-block">
@@ -109,17 +109,18 @@ require_once "app/components/Base.php";
             </div>
             <h2>Sintomas</h2>
             <?php
-            if ($symptoms == null || !is_array($symptoms)) {
+            if ($medical_records->getPatientCpf()[8] == null) {
             ?>
               <ul>
                 <li>Este paciente não possui nenhum sintoma de Dengue.</li>
               </ul>
               <?php
             } else {
+              $symptoms = $medical_records->getPatientCpf()[8];
               foreach ($symptoms as $symptom) {
               ?>
                 <ul>
-                  <li><?php echo ($symptom->getName()); ?></li>
+                  <li><?php echo ($symptom['name']); ?></li>
                 </ul>
             <?php
               }
