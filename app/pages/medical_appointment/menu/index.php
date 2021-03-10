@@ -30,7 +30,12 @@ require_once "app/components/Base.php";
                     <p>Procurar Consulta</p>
                     <img src="./public/styles/img/update-medical-appointment.svg" alt="Imagem de pesquisa" />
                 </h3>
-            </a> <a href="?page=home" class="home-button">
+            </a> <a href="?page=medical_appointment/reports" class="home-button">
+                <h3>
+                    <p>Registros</p>
+                    <img src="./public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
+                </h3>
+            </a><a href="?page=home" class="home-button">
                 <h3>
                     <p>Home</p>
                     <img src="./public/styles/img/home.svg" alt="Imagem de Home" />

@@ -40,4 +40,12 @@ class MedicalAppointmentService
 
         return $result;
     }
+
+    public static function listOfReportsByMonth($total_days, $month_in_number)
+    {
+
+        $result = Facade::listOfReportsByMonth($total_days, $month_in_number);
+
+        return $result;
+    }
 }

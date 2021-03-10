@@ -272,4 +272,77 @@ class MedicalAppointmentRepository
             return "Exception: $e";
         }
     }
+
+    public static function listOfReportsByMonth($total_days, $month_in_number)
+    {
+        try {
+            $initial_date = "2021" . $month_in_number . "01";
+            $final_date = "2021" . $month_in_number . $total_days;
+
+            $sql = "SELECT  MA.id, P.full_name, D.name, MA.time, 
+                    MA.date, MA.arrival_time, MA.id_room_fk, R.type, MA.status
+                    FROM medical_appointment AS MA
+                        INNER JOIN patient AS P 
+                            ON (MA.cpf_patient_fk = P.cpf)
+                        INNER JOIN doctor AS D 
+                            ON (MA.id_doctor_fk = D.id)
+                        INNER JOIN room AS R
+                            ON (MA.id_room_fk = R.id)
+                    WHERE MR.date BETWEEN ? AND ?  
+                    GROUP BY MA.id, P.full_name, D.name, MA.time, 
+                    MA.date, MA.arrival_time, MA.id_room_fk, R.type, MA.status";
+
+            $stmt = Connection::connect()->prepare($sql);
+
+            $stmt->bindParam(1, $initial_date);
+            $stmt->bindParam(2, $final_date);
+
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+
+            $reports = $stmt->fetch();
+
+            if ($reports != null) {
+                $list = [];
+
+                foreach ($reports as $row) {
+                    $id = $row['id'];
+                    $patient = $row['full_name'];
+                    $doctor = $row['name'];
+                    $time = $row['time'];
+                    $date = $row['date'];
+                    $type = $row['type'];
+                    $id_room = $row['id_room_fk'];
+                    $status = $row['status'];
+
+                    if ($row['arrival_time'] != null) {
+                        $arrival_time = $row['arrival_time'];
+                    } else {
+                        $arrival_time = "-----";
+                    }
+
+                    $medical_appointment = new MedicalAppointment(
+                        $id,
+                        $patient,
+                        $doctor,
+                        [$id_room, $type],
+                        $date,
+                        $time,
+                        $arrival_time,
+                        $status
+                    );
+
+                    array_push($list, $medical_appointment);
+                }
+
+                return $list;
+            }
+            $response = "Não foi possível realizar esta operação";
+            return $response;
+        } catch (\Exception $e) {
+
+            return "Exception: $e";
+        }
+    }
 }

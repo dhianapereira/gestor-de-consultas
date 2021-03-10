@@ -183,6 +183,13 @@ class Facade
         return $result;
     }
 
+    public static function listOfReportsByMonth($total_days, $month_in_number)
+    {
+        $result = MedicalAppointmentRepository::listOfReportsByMonth($total_days, $month_in_number);
+
+        return $result;
+    }
+
     // User operations
 
     public static function registerUser(

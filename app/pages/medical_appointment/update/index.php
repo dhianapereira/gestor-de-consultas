@@ -39,6 +39,11 @@ require_once "app/components/Base.php";
                     <p>Lista de Atendimento</p>
                     <img src="./public/styles/img/medical-appointments-list.svg" alt="Imagem de lista de atendimento" />
                 </h3>
+            </a><a href="?page=medical_appointment/reports" class="home-button">
+                <h3>
+                    <p>Registros</p>
+                    <img src="./public/styles/img/questionnaire.svg" alt="Imagem de questionário" />
+                </h3>
             </a><a href="?page=home" class="home-button">
                 <h3>
                     <p>Home</p>
