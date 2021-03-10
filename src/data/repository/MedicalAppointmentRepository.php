@@ -288,7 +288,7 @@ class MedicalAppointmentRepository
                             ON (MA.id_doctor_fk = D.id)
                         INNER JOIN room AS R
                             ON (MA.id_room_fk = R.id)
-                    WHERE MR.date BETWEEN ? AND ?  
+                    WHERE MA.date BETWEEN ? AND ?
                     GROUP BY MA.id, P.full_name, D.name, MA.time, 
                     MA.date, MA.arrival_time, MA.id_room_fk, R.type, MA.status";
 

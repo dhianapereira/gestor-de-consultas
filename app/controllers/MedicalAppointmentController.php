@@ -166,6 +166,8 @@ class MedicalAppointmentController
                 $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
 
                 $mpdf->Output($filename, "D");
+
+                require_once "app/pages/medical_appointment/reports/index.php";
             } else {
                 $_SESSION['errorMessage'] = "Não há nenhuma consulta marcada no mês de $month_name.";
                 require_once "app/pages/medical_appointment/reports/index.php";
