@@ -201,7 +201,7 @@ class MedicalRecordsRepository
                     return [$symptom['symptom'], number_format($percentage, 2)];
                 }
 
-                $response = "Não foi possível 333realizar esta operação";
+                $response = "Não foi possível realizar esta operação";
 
                 return $response;
             }
