@@ -301,11 +301,11 @@ class MedicalAppointmentRepository
 
             $stmt->setFetchMode(\PDO::FETCH_ASSOC);
 
-            $reports = $stmt->fetch();
+            $reports = $stmt->fetchAll();
+
+            $list = [];
 
             if ($reports != null) {
-                $list = [];
-
                 foreach ($reports as $row) {
                     $id = $row['id'];
                     $patient = $row['full_name'];
