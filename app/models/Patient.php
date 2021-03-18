@@ -9,8 +9,8 @@ class Patient
     private $naturalness;
     private $companion;
     private $address;
-    private $active;
     private $photograph;
+    private $active;
 
 
     public function getCpf()
@@ -73,8 +73,8 @@ class Patient
         $companion,
         $address,
         $naturalness,
-        $active,
-        $photograph
+        $photograph,
+        $active
     ) {
         $this->cpf = $cpf;
         $this->full_name = $full_name;
@@ -84,7 +84,7 @@ class Patient
         $this->companion = $companion;
         $this->address = $address;
         $this->naturalness = $naturalness;
-        $this->active = $active;
         $this->photograph = $photograph;
+        $this->active = $active;
     }
 }

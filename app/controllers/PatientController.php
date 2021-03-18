@@ -13,9 +13,9 @@ class PatientController
         $companion = $_POST["companion"];
         $address = $_POST["address"];
         $naturalness = $_POST["naturalness"];
-        $photograph = md5(time()) . strtolower(substr($_FILES['photograph']['name'],-4));
+        $photograph = md5(time()) . strtolower(substr($_FILES['photograph']['name'], -4));
 
-        move_uploaded_file($_FILES['photograph']['tmp_name'], 'app/pages/patient/profile_image/' . $photograph);
+        move_uploaded_file($_FILES['photograph']['tmp_name'], 'temp/patient_image/' . $photograph);
 
         if (
             !isset($cpf) || !isset($full_name)

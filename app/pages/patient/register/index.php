@@ -111,7 +111,6 @@ require_once "app/components/Base.php";
           <div class="input-block">
             <label for="photograph">Foto</label>
             <input type="file" name="photograph" required />
-
           </div>
 
           <button type="submit" class="primary-button">Confirmar</button>

@@ -60,6 +60,9 @@ require_once "app/components/Base.php";
           <h2>Dados do Paciente</h2>
           <form method="POST" action="?class=Patient&action=update">
             <div class="input-block">
+              <img src="temp/patient_image/<?php echo ($patient->getPhotograph()) ?>" alt="Imagem do paciente">
+            </div>
+            <div class="input-block">
               <label for="cpf">CPF</label>
               <input id="cpf" value="<?php echo ($patient->getCpf()) ?>" disabled />
               <input type="hidden" name="cpf" value="<?php echo ($patient->getCpf()) ?>" required />
@@ -106,8 +109,8 @@ require_once "app/components/Base.php";
                 <button data-value="Brasileiro(a)" onclick="toggle(event, 'active-naturalness', 'naturalness')" type="button" <?php
                                                                                                                               if ($patient->getNaturalness() == "Brasileiro(a)") {
                                                                                                                               ?> class="active-naturalness" <?php
-                                                                                                                                                        }
-                                                                                                                                                          ?>>
+                                                                                                                                                          }
+                                                                                                                                                            ?>>
                   Brasileiro(a)
                 </button>
                 <button data-value="Estrangeiro(a)" onclick="toggle(event, 'active-naturalness', 'naturalness')" type="button" <?php

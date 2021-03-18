@@ -25,6 +25,10 @@ form {
   max-width: 500%;
 }
 
+.input-block img{
+  width: 100%;
+}
+
 input {
   background: #f5f8fa;
   border: none;
