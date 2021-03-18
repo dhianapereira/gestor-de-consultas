@@ -117,6 +117,8 @@ class MedicalRecordsController
     $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
 
     $mpdf->Output($filename, "D");
+
+    require_once "app/pages/medical_records/search/index.php";
   }
 
   public static function allMedicalRecords($start, $total_records)

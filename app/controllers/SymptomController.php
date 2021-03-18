@@ -1,35 +1,34 @@
 <?php
 require_once "src/services/SymptomService.php";
+require_once "src/services/PatientService.php";
 
 class SymptomController
 {
 
     public static function addSymptoms()
     {
-        $patient_cpf = $_POST["patient_cpf"];
+        $cpf = $_POST["cpf"];
         $start_date = $_POST["start_date"];
         $symptoms = $_POST["symptom"];
 
-        if (!isset($patient_cpf) || !isset($start_date)) {
+        if (!isset($cpf) || !isset($start_date)) {
             $_SESSION['errorMessage'] = "Você precisa preencher os campos de CPF e data de início dos sintomas";
             require_once "app/pages/symptom/index.php";
         } else {
-            require_once "app/controllers/PatientController.php";
-
-            $patient = PatientController::fetchPatient($patient_cpf);
+            $patient = PatientService::fetchPatient($cpf);
 
             if (is_object($patient)) {
-                $result = SymptomService::addSymptoms($patient_cpf, $symptoms, $start_date);
+                $result = SymptomService::addSymptoms($cpf, $symptoms, $start_date);
 
                 if (!is_bool($result)) {
                     $_SESSION['errorMessage'] = $result;
                     require_once "app/pages/symptom/index.php";
                 } else {
-                    $_SESSION['successMessage'] = "O prontuário médico do paciente de CPF: $patient_cpf está pronto!";
+                    $_SESSION['successMessage'] = "O prontuário médico do paciente de CPF: $cpf está pronto!";
                     require_once "app/pages/symptom/index.php";
                 }
             } else {
-                $_SESSION['errorMessage'] = "O paciente de CPF: $patient_cpf não existe!";
+                $_SESSION['errorMessage'] = "O paciente de CPF: $cpf não existe!";
                 require_once "app/pages/symptom/index.php";
             }
         }
