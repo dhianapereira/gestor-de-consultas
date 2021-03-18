@@ -13,12 +13,16 @@ class PatientController
         $companion = $_POST["companion"];
         $address = $_POST["address"];
         $naturalness = $_POST["naturalness"];
+        $photograph = md5(time()) . strtolower(substr($_FILES['photograph']['name'], -4));
+
+        move_uploaded_file($_FILES['photograph']['tmp_name'], 'temp/patient_image/' . $photograph);
 
         if (
             !isset($cpf) || !isset($full_name)
             || !isset($genre) || !isset($date_of_birth)
             || !isset($mother_name) || !isset($companion)
             || !isset($address) || !isset($naturalness)
+            || !isset($photograph)
         ) {
             $_SESSION["errorMessage"]  = "Você precisa preencher todos os campos para realizar esta operação!";
             require_once "app/pages/patient/register/index.php";
@@ -32,7 +36,8 @@ class PatientController
                 $mother_name,
                 $companion,
                 $address,
-                $naturalness
+                $naturalness,
+                $photograph
             );
 
             if (!is_bool($result)) {
@@ -56,12 +61,12 @@ class PatientController
         $address = $_POST["address"];
         $naturalness = $_POST["naturalness"];
         $active = $_POST["active"];
-
+        $photograph = $_POST["photograph"];
         if (
             isset($cpf) && isset($full_name) && isset($genre) && isset($date_of_birth) && isset($mother_name)
             && isset($companion) && isset($address) && isset($naturalness)  && isset($active)
         ) {
-            $patient = new Patient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $companion, $address, $naturalness, $active);
+            $patient = new Patient($cpf, $full_name, $genre, $date_of_birth, $mother_name, $companion, $address, $naturalness, $active, $photograph);
 
             $result = PatientService::update($patient);
 
