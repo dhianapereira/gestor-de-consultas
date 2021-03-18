@@ -10,6 +10,7 @@ class Patient
     private $companion;
     private $address;
     private $active;
+    private $photograph;
 
 
     public function getCpf()
@@ -57,6 +58,11 @@ class Patient
         return $this->active;
     }
 
+    public function getPhotograph()
+    {
+        return $this->photograph;
+    }
+
 
     public function __construct(
         $cpf,
@@ -67,7 +73,8 @@ class Patient
         $companion,
         $address,
         $naturalness,
-        $active
+        $active,
+        $photograph
     ) {
         $this->cpf = $cpf;
         $this->full_name = $full_name;
@@ -78,5 +85,6 @@ class Patient
         $this->address = $address;
         $this->naturalness = $naturalness;
         $this->active = $active;
+        $this->photograph = $photograph;
     }
 }

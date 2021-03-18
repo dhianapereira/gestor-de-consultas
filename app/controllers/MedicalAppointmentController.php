@@ -3,7 +3,7 @@
 use Mpdf\Mpdf;
 
 require_once "src/services/MedicalAppointmentService.php";
-require_once  "./vendor/autoload.php";
+//require_once  "./vendor/autoload.php";
 
 class MedicalAppointmentController
 {
@@ -112,7 +112,7 @@ class MedicalAppointmentController
             require_once "app/pages/medical_appointment/update/index.php";
         }
     }
-
+/*
     public static function listOfReportsByMonth()
     {
         if (isset($_POST["months"])) {
@@ -176,5 +176,5 @@ class MedicalAppointmentController
             $_SESSION['errorMessage'] = "Você precisa escolher um mês para visualizar os prontuários .";
             require_once "app/pages/medical_appointment/reports/index.php";
         }
-    }
+    } */
 }

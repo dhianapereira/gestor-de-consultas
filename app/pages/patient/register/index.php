@@ -51,7 +51,7 @@ require_once "app/components/Base.php";
     <section class="box">
       <div class="form">
         <h2>Dados Pessoais</h2>
-        <form method="POST" action="?class=Patient&action=register">
+        <form method="POST" action="?class=Patient&action=register" enctype="multipart/form-data">
           <div class="input-block">
             <label for="full_name">Nome Completo</label>
             <input id="full_name" name="full_name" required />
@@ -106,6 +106,12 @@ require_once "app/components/Base.php";
                 Estrangeiro(a)
               </button>
             </div>
+          </div>
+
+          <div class="input-block">
+            <label for="photograph">Foto</label>
+            <input type="file" name="photograph" required />
+
           </div>
 
           <button type="submit" class="primary-button">Confirmar</button>

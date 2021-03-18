@@ -12,6 +12,7 @@ CREATE TABLE patient (
   address VARCHAR(100) NOT NULL,
   naturalness VARCHAR(50) NOT NULL,
   active  BOOLEAN DEFAULT 1,
+  photograph VARCHAR(100) NOT NULL,
   CONSTRAINT patient_pk PRIMARY KEY (cpf)
 );
 

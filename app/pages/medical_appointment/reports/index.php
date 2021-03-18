@@ -73,7 +73,9 @@ require_once "app/components/MessageContainer.php";
             <section class="box">
                 <div class="form">
                     <h2>Pesquisa por Mês</h2>
-                    <form method="POST" action="?class=MedicalAppointment&action=listOfReportsByMonth">
+                   <!-- <form method="POST" action="? class=  MedicalAppointment&action=listOfReportsByMonth"> --> 
+                        <form method="POST" action="? class= # "> 
+                        
                         <?php
                         require_once "app/utils/constants.php";
                         require_once "app/components/SelectionBox.php";

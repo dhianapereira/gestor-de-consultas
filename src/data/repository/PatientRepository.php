@@ -12,15 +12,16 @@ class PatientRepository
         $mother_name,
         $companion,
         $address,
-        $naturalness
+        $naturalness,
+        $photograph
     ) {
         try {
             $sql = "INSERT INTO patient (
                     cpf, full_name, genre, date_of_birth, 
-                    mother_name, companion, address, naturalness
+                    mother_name, companion, address, naturalness, photograph,  
                 ) VALUES (
                     :cpf, :full_name, :genre, :date_of_birth, 
-                    :mother_name, :companion, :address, :naturalness
+                    :mother_name, :companion, :address ,:naturalness, :photograph
                 )";
 
             $stmt = Connection::connect()->prepare($sql);
@@ -33,7 +34,9 @@ class PatientRepository
                 ':mother_name' => $mother_name,
                 ':companion' => $companion,
                 ':address' => $address,
-                ':naturalness' => $naturalness
+                ':naturalness' => $naturalness,
+                ':photograph' => $photograph
+                
             ));
 
 
@@ -117,6 +120,7 @@ class PatientRepository
                     $companion = $row['companion'];
                     $address = $row['address'];
                     $naturalness = $row['naturalness'];
+                    $photograph = $row['photograph'];
 
                     if ($row['active']) {
                         $active = "Ativo";
@@ -133,7 +137,8 @@ class PatientRepository
                         $companion,
                         $address,
                         $naturalness,
-                        $active
+                        $active,
+                        $photograph
                     );
 
                     array_push($list, $patient);
@@ -172,6 +177,7 @@ class PatientRepository
                 $address = $result[0]['address'];
                 $naturalness = $result[0]['naturalness'];
                 $active = $result[0]['active'];
+                $photograph = $result[0]['photograph'];
 
                 $patient = new Patient(
                     $cpf,
@@ -182,7 +188,8 @@ class PatientRepository
                     $companion,
                     $address,
                     $naturalness,
-                    $active
+                    $active,
+                    $photograph
                 );
 
                 return $patient;
