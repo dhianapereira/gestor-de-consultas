@@ -1,6 +1,6 @@
-# Health Unit
+# Gestor de consultas médicas
 
-Aplicação Web para o auxílio à unidades de saúde com o gerenciamento de consultas e prontuários médicos.
+Aplicação Web para o auxílio à unidades de saúde com o gerenciamento de consultas médicas
 
 ## Como executar
 
@@ -8,4 +8,4 @@ Aplicação Web para o auxílio à unidades de saúde com o gerenciamento de con
 - Crie um banco de dados com o script SQL que está em `src/data/database/health_unit.sql`
 - Inicie o seu servidor
 
-Agora você pode acessar http://localhost/health-unit/ do seu navegador.
+Agora você pode acessar http://localhost/gestor-de-consultas/ do seu navegador.
