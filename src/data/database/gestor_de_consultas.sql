@@ -11,7 +11,6 @@ CREATE TABLE patient (
   companion VARCHAR(100) NOT NULL,
   address VARCHAR(100) NOT NULL,
   naturalness VARCHAR(50) NOT NULL,
-  photograph VARCHAR(100) NOT NULL,
   active  BOOLEAN DEFAULT 1,
   CONSTRAINT patient_pk PRIMARY KEY (cpf)
 );
