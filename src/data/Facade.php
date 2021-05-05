@@ -4,8 +4,6 @@ require_once "src/data/repository/UserRepository.php";
 require_once "src/data/repository/MedicalAppointmentRepository.php";
 require_once "src/data/repository/PatientRepository.php";
 require_once "src/data/repository/DoctorRepository.php";
-require_once "src/data/repository/MedicalRecordsRepository.php";
-require_once "src/data/repository/SymptomRepository.php";
 require_once "src/data/repository/RoomRepository.php";
 
 class Facade
@@ -94,55 +92,6 @@ class Facade
     public static function fetchDoctor($id)
     {
         $result = DoctorRepository::fetchDoctor($id);
-
-        return $result;
-    }
-
-    // Medical Records operations
-
-    public static function addSymptoms($patient_cpf, $symptoms, $start_date)
-    {
-        $result = SymptomRepository::addSymptoms($patient_cpf, $symptoms);
-
-        if (is_bool($result)) {
-            $response = MedicalRecordsRepository::addMedicalRecords(
-                $patient_cpf,
-                count($symptoms),
-                $start_date
-            );
-
-            return $response;
-        } else {
-            return $result;
-        }
-    }
-
-    public static function allMedicalRecords($start, $total_records)
-    {
-        $result = MedicalRecordsRepository::allMedicalRecords($start, $total_records);
-
-        return $result;
-    }
-
-
-    public static function fetchMedicalRecords($cpf)
-    {
-        $result = MedicalRecordsRepository::fetchMedicalRecords($cpf);
-
-        return $result;
-    }
-
-
-    public static function listOfSymptomsByMonth($total_days, $month_in_number)
-    {
-        $result = MedicalRecordsRepository::listOfSymptomsByMonth($total_days, $month_in_number);
-
-        return $result;
-    }
-
-    public static function fetchSymptoms($cpf)
-    {
-        $result = SymptomRepository::fetchSymptoms($cpf);
 
         return $result;
     }
