@@ -37,7 +37,7 @@ if (!isset($_SESSION["loggedUser"])) {
           <img src="./public/styles/img/doctors-list.svg" alt="Imagem de lista de médicos" />
         </h3>
       </a>
-      <a href="page=home" class="home-button">
+      <a href="?page=home" class="home-button">
         <h3>
           <p>Home</p>
           <img src="./public/styles/img/home.svg" alt="Imagem de Home" />

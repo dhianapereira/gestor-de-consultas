@@ -11,8 +11,7 @@ class PatientService
         $mother_name,
         $companion,
         $address,
-        $naturalness,
-        $photograph
+        $naturalness
     ) {
 
         $result = Facade::registerPatient(
@@ -23,8 +22,7 @@ class PatientService
             $mother_name,
             $companion,
             $address,
-            $naturalness,
-            $photograph
+            $naturalness
         );
 
         return $result;

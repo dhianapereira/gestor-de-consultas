@@ -19,8 +19,7 @@ class Facade
         $mother_name,
         $companion,
         $address,
-        $naturalness,
-        $photograph
+        $naturalness
     ) {
 
         $result = PatientRepository::register(
@@ -31,8 +30,7 @@ class Facade
             $mother_name,
             $companion,
             $address,
-            $naturalness,
-            $photograph
+            $naturalness
         );
 
         return $result;

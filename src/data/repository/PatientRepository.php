@@ -12,16 +12,15 @@ class PatientRepository
         $mother_name,
         $companion,
         $address,
-        $naturalness,
-        $photograph
+        $naturalness
     ) {
         try {
             $sql = "INSERT INTO patient (
                     cpf, full_name, genre, date_of_birth, 
-                    mother_name, companion, address, naturalness, photograph  
+                    mother_name, companion, address, naturalness  
                 ) VALUES (
                     :cpf, :full_name, :genre, :date_of_birth, 
-                    :mother_name, :companion, :address, :naturalness, :photograph
+                    :mother_name, :companion, :address, :naturalness
                 )";
 
             $stmt = Connection::connect()->prepare($sql);
@@ -34,8 +33,7 @@ class PatientRepository
                 ':mother_name' => $mother_name,
                 ':companion' => $companion,
                 ':address' => $address,
-                ':naturalness' => $naturalness,
-                ':photograph' => $photograph
+                ':naturalness' => $naturalness
             ));
 
 

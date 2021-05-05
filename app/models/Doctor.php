@@ -1,11 +1,11 @@
 <?php
 class Doctor
 {
-    private $id;
-    private $name;
-    private $genre;
-    private $specialty;
-    private $active;
+    private int $id;
+    private string $name;
+    private string $genre;
+    private string $specialty;
+    private bool $active;
 
 
     public function getId()

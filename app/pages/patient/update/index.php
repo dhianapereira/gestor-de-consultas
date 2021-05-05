@@ -60,9 +60,6 @@ require_once "app/components/Base.php";
           <h2>Dados do Paciente</h2>
           <form method="POST" action="?class=Patient&action=update">
             <div class="input-block">
-              <img src="temp/patient_image/<?php echo ($patient->getPhotograph()) ?>" alt="Imagem do paciente">
-            </div>
-            <div class="input-block">
               <label for="cpf">CPF</label>
               <input id="cpf" value="<?php echo ($patient->getCpf()) ?>" disabled />
               <input type="hidden" name="cpf" value="<?php echo ($patient->getCpf()) ?>" required />

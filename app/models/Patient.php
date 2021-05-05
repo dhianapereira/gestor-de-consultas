@@ -1,16 +1,15 @@
 <?php
 class Patient
 {
-    private $cpf;
-    private $full_name;
-    private $genre;
-    private $date_of_birth;
-    private $mother_name;
-    private $naturalness;
-    private $companion;
-    private $address;
-    private $photograph;
-    private $active;
+    private string $cpf;
+    private string $full_name;
+    private string $genre;
+    private string $date_of_birth;
+    private string $mother_name;
+    private string $naturalness;
+    private string $companion;
+    private string $address;
+    private bool $active;
 
 
     public function getCpf()
@@ -58,12 +57,6 @@ class Patient
         return $this->active;
     }
 
-    public function getPhotograph()
-    {
-        return $this->photograph;
-    }
-
-
     public function __construct(
         $cpf,
         $full_name,
@@ -73,7 +66,6 @@ class Patient
         $companion,
         $address,
         $naturalness,
-        $photograph,
         $active
     ) {
         $this->cpf = $cpf;
@@ -84,7 +76,6 @@ class Patient
         $this->companion = $companion;
         $this->address = $address;
         $this->naturalness = $naturalness;
-        $this->photograph = $photograph;
         $this->active = $active;
     }
 }
