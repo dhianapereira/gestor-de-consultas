@@ -13,7 +13,7 @@ require_once "app/components/Button.php";
 <html>
 
 <head>
-  <?php Base::head("Unidade de Saúde"); ?>
+  <?php Base::head("Gestor de Consultas"); ?>
   <link rel="stylesheet" type="text/css" href="./public/styles/css/table.css" />
 </head>
 
@@ -22,6 +22,13 @@ require_once "app/components/Button.php";
   <main class="container">
     <section class="quick-access">
       <?php
+      Button::quickAccess(
+        "?page=medical_appointment/menu",
+        "Consultas",
+        "./public/styles/img/make-an-appointment.svg",
+        "Imagem de consulta"
+      );
+
       Button::quickAccess(
         "?page=patient/menu",
         "Paciente",
@@ -34,20 +41,6 @@ require_once "app/components/Button.php";
         "Médico",
         "./public/styles/img/doctor.svg",
         "Imagem de médico"
-      );
-
-      Button::quickAccess(
-        "?page=medical_appointment/menu",
-        "Consultas",
-        "./public/styles/img/make-an-appointment.svg",
-        "Imagem de consulta"
-      );
-
-      Button::quickAccess(
-        "?page=medical_records/menu",
-        "Prontuários",
-        "./public/styles/img/medical-records-list.svg",
-        "Imagem de prontuário"
       );
 
       Button::quickAccess(
