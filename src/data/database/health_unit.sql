@@ -16,27 +16,6 @@ CREATE TABLE patient (
   CONSTRAINT patient_pk PRIMARY KEY (cpf)
 );
 
-CREATE TABLE symptom (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  cpf_patient_fk VARCHAR(14) NOT NULL,
-  name VARCHAR(100) NOT NULL,
-  CONSTRAINT symptom_pk PRIMARY KEY (id),
-  CONSTRAINT symptom_fk FOREIGN KEY (cpf_patient_fk)
-  REFERENCES patient (cpf)
-);
-
-
-CREATE TABLE medical_records (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  cpf_patient_fk VARCHAR(14) NOT NULL,
-  result FLOAT NOT NULL,
-  gravity VARCHAR(50) NOT NULL,
-  start_date DATE NOT NULL,
-  CONSTRAINT medical_records_pk PRIMARY KEY (id),
-  CONSTRAINT medical_records_fk FOREIGN KEY (cpf_patient_fk)
-  REFERENCES patient (cpf)
-);
-
 CREATE TABLE doctor ( 
   id INT(11) NOT NULL AUTO_INCREMENT, 
   name VARCHAR(100) NOT NULL,
