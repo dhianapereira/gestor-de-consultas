@@ -23,7 +23,7 @@ class Base
     {
     ?>
         <header>
-            <h3 class="logo">Unidade de Saúde</h3>
+            <h3 class="logo">Gestor de Consultas</h3>
         </header>
     <?php
     }
@@ -32,7 +32,7 @@ class Base
     {
     ?>
         <footer>
-            <p>2021 - Unidade de Saúde</p>
+            <p>2021 - Gestor de Consultas</p>
         </footer>
 <?php
     }
