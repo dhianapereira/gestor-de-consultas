@@ -1,6 +1,6 @@
-CREATE DATABASE health_unit;
+CREATE DATABASE gestor_de_consultas;
 
-USE health_unit;
+USE gestor_de_consultas;
 
 CREATE TABLE patient (
   cpf VARCHAR(14) NOT NULL,
